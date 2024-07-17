@@ -23,8 +23,7 @@
 @import "pages/LoginSignup";
 
 // Components
-@import "cmps/list";
-@import "cmps/preview";
+// @import "cmps/preview";
 
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
@@ -34,5 +33,5 @@
 @import "cmps/ReviewEdit";
 @import "cmps/ReviewList";
 @import "cmps/ReviewPreview";
-// @import "cmps/StayList";
-// @import "cmps/StayPreview";
+@import "cmps/StayList";
+@import "cmps/StayPreview";

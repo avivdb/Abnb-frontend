@@ -12,15 +12,15 @@ export function StayList({ stays, onRemoveStay, onUpdateStay }) {
     }
 
     return <section>
-        <ul className="list">
+        <ul className="stay-list">
             {stays.map(stay =>
                 <li key={stay._id}>
                     {/* {console.log('stay', stay)} */}
                     <StayPreview stay={stay} />
-                    {shouldShowActionBtns(stay) && <div className="actions">
+                    {/* {shouldShowActionBtns(stay) && <div className="actions">
                         <button onClick={() => onUpdateStay(stay)}>Edit</button>
                         <button onClick={() => onRemoveStay(stay._id)}>x</button>
-                    </div>}
+                    </div>} */}
                 </li>)
             }
         </ul>

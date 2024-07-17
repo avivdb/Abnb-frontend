@@ -1,10 +1,50 @@
 .stay-preview {
-  a {
-    color: $clr4;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  max-width: 100%;
+  max-height: 100%;
+  color: $gray4;
+  
+  &:hover {
+    cursor: pointer;
   }
+  
+  img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    
+    max-width: 100%;
+    max-height: 100%;
+    
+    border-radius: 20px;
+    margin-block-end: 1rem;
+  }
+  
   p {
-    margin-block: 0 0.2rem;
-    font-size: 0.85em;
+    font-family: cereal-light;
+    margin: 0;
   }
+
+  .secondary-content {
+    color: $gray3;
+  }
+
+  .stay-preview-top {
+    max-height: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    height: 1.1rem;
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .stay-preview-price {
+    font-family: cereal-regular;
+  }
+
 }
