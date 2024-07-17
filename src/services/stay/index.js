@@ -7,18 +7,33 @@ import { stayService as remote } from './stay.service.remote'
 
 function getEmptyStay() {
     return {
-        vendor: makeId(),
-        speed: getRandomIntInclusive(80, 240),
-        msgs: [],
+            name: "",
+            type: "",
+            imgUrls: [],
+            price: 0,
+            summary: "",
+            capacity: 0,
+            amenities: [],
+            labels: [],
+            host: {
+                _id: "",
+                fullname: "",
+                imgUrl: ""
+            },
+            loc: {
+                country: "",
+                countryCode: "",
+                city: "",
+                address: "",
+                lat: 0,
+                lng: 0
+            }
     }
 }
 
 function getDefaultFilter() {
     return {
         txt: '',
-        minSpeed: '',
-        sortField: '',
-        sortDir: '',
     }
 }
 
