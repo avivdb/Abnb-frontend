@@ -22,6 +22,7 @@ export function AppHeader() {
 		<header className="app-header full">
 			<NavLink to="/" className="logo">
 				<div className='app-header-logo'>
+					{/* <FontAwesomeIcon icon={"fa-brands fa-airbnb"} /> */}
 					<img src="../../src/assets/img/logo.png" />
 					<h1>Abnb</h1>
 				</div>
