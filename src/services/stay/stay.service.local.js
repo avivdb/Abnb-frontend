@@ -3,45 +3,36 @@ import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
 import { saveToStorage } from '../../services/util.service.js'
+_createStays()
+// saveToStorage("STAY_DB", stays)
 
 
-const STORAGE_KEY = 'stay'
+const STORAGE_KEY = 'STAY_DB'
 
 export const stayService = {
     query,
     getById,
     save,
     remove,
-    addStayMsg
+    addStayMsg,
+    _createStays,
+    getDefaultFilter
 }
 window.cs = stayService
 
 
-async function query() {
+async function query(filterBy = { txt: '', checkIn: '', checkOut: '', guest: {}, labels: [] }) {
     var stays = await storageService.query(STORAGE_KEY)
-    if (!stays || !stays.length) stays = createStays()
-    saveToStorage("STAY_DB", stays)
+    const { txt } = filterBy
+    // console.log('txt', txt)
+
+    if (txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
+    }
+
+    // stays = stays.map(({ _id, name, price }) => ({ _id, name, price }))
     return stays
-
-// const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
-//     if (txt) {
-//         const regex = new RegExp(filterBy.txt, 'i')
-//         stays = stays.filter(stay => regex.test(stay.vendor) || regex.test(stay.description))
-//     }
-//     if (minSpeed) {
-//         stays = stays.filter(stay => stay.speed >= minSpeed)
-//     }
-//     if (sortField === 'vendor' || sortField === 'owner') {
-//         stays.sort((stay1, stay2) =>
-//             stay1[sortField].localeCompare(stay2[sortField]) * +sortDir)
-//     }
-//     if (sortField === 'price' || sortField === 'speed') {
-//         stays.sort((stay1, stay2) =>
-//             (stay1[sortField] - stay2[sortField]) * +sortDir)
-//     }
-
-//     stays = stays.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
-//     return stays
 }
 
 function getById(stayId) {
@@ -85,8 +76,19 @@ async function addStayMsg(stayId, txt) {
     return msg
 }
 
-export function createStays() {
-    return [
+function getDefaultFilter() {
+    return {
+        txt: '',
+        checkIn: '',
+        checkOut: '',
+        guest: { adults: 0, chidren: 0, infants: 0, pets: 0 },
+        labels: [],
+
+    }
+}
+
+function _createStays() {
+    const stays = [
         {
             "_id": "s101",
             "name": "Ribeira Charming Duplex",
@@ -298,4 +300,5 @@ export function createStays() {
             }
         }
     ]
+    saveToStorage("STAY_DB", stays)
 }

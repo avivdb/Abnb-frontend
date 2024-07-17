@@ -26,12 +26,12 @@ export function StayFilter({ filterBy, setFilterBy }) {
     }
 
     function clearFilter() {
-        setFilterToEdit({ ...filterToEdit, txt: '', minSpeed: '', maxPrice: '' })
+        setFilterToEdit({ ...filterToEdit, txt: '' })
     }
 
-    function clearSort() {
-        setFilterToEdit({ ...filterToEdit, sortField: '', sortDir: '' })
-    }
+    // function clearSort() {
+    //     setFilterToEdit({ ...filterToEdit, sortField: '', sortDir: '' })
+    // }
 
     return <section className="stay-filter">
         <h3>Filter:</h3>
@@ -41,9 +41,9 @@ export function StayFilter({ filterBy, setFilterBy }) {
             value={filterToEdit.txt}
             placeholder="Free text"
             onChange={handleChange}
-            required
+        // required
         />
-        <input
+        {/* <input
             type="number"
             min="0"
             name="minSpeed"
@@ -109,9 +109,9 @@ export function StayFilter({ filterBy, setFilterBy }) {
                     checked={filterToEdit.sortDir === -1}
                 />
             </label>
-        </div>
-        <button
+        </div> */}
+        {/* <button
             className="btn-clear"
-            onClick={clearSort}>Clear</button>
+            onClick={clearSort}>Clear</button> */}
     </section>
 }

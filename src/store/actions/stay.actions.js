@@ -3,6 +3,8 @@ import { store } from '../store'
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG } from '../reducers/stay.reducer'
 
 export async function loadStays(filterBy) {
+    // const filterBy = store.getState().toyModule.filterBy
+
     try {
         const stays = await stayService.query(filterBy)
         store.dispatch(getCmdSetStays(stays))
@@ -104,14 +106,4 @@ function getCmdAddStayMsg(msg) {
     }
 }
 
-// unitTestActions()
-async function unitTestActions() {
-    await loadStays()
-    await addStay(stayService.getEmptyStay())
-    await updateStay({
-        _id: 'm1oC7',
-        title: 'Stay-Good',
-    })
-    await removeStay('m1oC7')
-    // TODO unit test addStayMsg
-}
+
