@@ -20,7 +20,7 @@ window.cs = stayService
 async function query() {
     var stays = await storageService.query(STORAGE_KEY)
     if (!stays || !stays.length) stays = createStays()
-    saveToStorage("STAY_DB", stays)
+    saveToStorage(STORAGE_KEY, stays)
     return stays
 
     // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy

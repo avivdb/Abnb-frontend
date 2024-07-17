@@ -8,7 +8,7 @@ export const UPDATE_STAY = 'UPDATE_STAY'
 export const ADD_STAY_MSG = 'ADD_STAY_MSG'
 
 const initialState = {
-    stays: loadFromStorage("STAY_DB"),
+    stays: [],
     stay: null
 }
 
