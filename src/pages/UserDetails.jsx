@@ -14,14 +14,6 @@ export function UserDetails() {
 
   useEffect(() => {
     loadUser(params.id)
-
-    // socketService.emit(SOCKET_EMIT_USER_WATCH, params.id)
-    // socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
-
-    // return () => {
-    //   socketService.off(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
-    // }
-
   }, [params.id])
 
   function onUserUpdate(user) {

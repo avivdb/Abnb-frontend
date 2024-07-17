@@ -8,7 +8,7 @@ import { stayService } from '../services/stay/'
 import { userService } from '../services/user'
 
 import { StayList } from '../cmps/StayList'
-import { StayFilter } from '../cmps/StayFilter'
+// import { StayFilter } from '../cmps/StayFilter'
 
 export function StayIndex() {
 
@@ -58,7 +58,7 @@ export function StayIndex() {
                 <h2>Stays</h2>
                 {userService.getLoggedinUser() && <button onClick={onAddStay}>Add a Stay</button>}
             </header>
-            <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} />
+            {/* <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
             <StayList
                 stays={stays}
                 onRemoveStay={onRemoveStay}
