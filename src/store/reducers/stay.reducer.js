@@ -41,7 +41,13 @@ export function stayReducer(state = initialState, action) {
         case ADD_STAY_MSG:
             newState = { ...state, stay: { ...state.stay, msgs: [...state.stay.msgs || [], action.msg] } }
             break
-
+        case SET_FILTER_BY:
+            console.log('Updated filter criteria in state:', action.filterBy);
+            newState = {
+                ...state,
+                filterBy: { ...state.filterBy, ...action.filterBy }
+            };
+            break;
 
         default:
     }
