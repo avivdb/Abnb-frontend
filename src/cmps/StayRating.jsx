@@ -1,34 +1,13 @@
-import { getRandomIntInclusive } from '../services/util.service.js'
 
-
-// function calculateReviewAverage() {
-// // function calculateReviewAverage(reviews) {
-
-//     const reviewsLength = getRandomIntInclusive(1, 200) //
-//     const totalRating = getRandomIntInclusive(1, 1000) //
-//     const averageRating = +(totalRating / reviewsLength).toFixed(2) //
-//     console.log('averageRating:', averageRating) //
-//     // if (reviews.length === 0) return 0
-
-//     // const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0)
-//     // const averageRating = totalRating / reviews.length
-//     return averageRating
-//   }
-
-// const average = calculateReviewAverage();
-export function StayRating(stay) {
-  console.log('stay:', stay)
-  console.log('stay.rating:', stay.rating)
+export function StayRating({stay}) {
+ 
   const gfLeft = stay.rating === 5.0 ? 'gold-left.png' : 'left.svg'
   const gfRight = stay.rating === 5.0 ? 'gold-right.png' : 'right.svg'
 
   return (
     <>
       {stay.rating < 4.5 && (
-        <div>
-          <img key={idx} src="../src/assets/img/icons/star.svg" className="star" />
-          <h3>{stay.rating}</h3>
-        </div>
+          <h3>&#9733; {stay.rating}</h3>
       )}
       {stay.rating >= 4.5 && (
         <section className='stay-rating'>
