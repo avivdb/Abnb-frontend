@@ -5,7 +5,21 @@
 
   max-width: 100%;
   max-height: 100%;
+
+  margin-block-end: 1rem;
   color: $gray4;
+
+  .stay-preview-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
   
   &:hover {
     cursor: pointer;
@@ -32,13 +46,11 @@
   }
 
   .stay-preview-top {
-    max-height: 1.2rem;
     display: flex;
     justify-content: space-between;
   }
 
   h2 {
-    height: 1.1rem;
     margin: 0;
     font-size: 1.1rem;
   }
