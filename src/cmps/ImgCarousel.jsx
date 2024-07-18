@@ -1,29 +1,26 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import arrowForward from "../assets/img/icons/arrowforward.svg";
-import arrowBack from "../assets/img/icons/arrowback.svg";
-import { Link } from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import { Carousel } from "react-responsive-carousel"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import arrowForward from "../assets/img/icons/arrowforward.svg"
+import arrowBack from "../assets/img/icons/arrowback.svg"
+
 
 export function ImgCarousel({ stay }) {
 
-  const navigate = useNavigate()
   const images = stay.imgUrls;
 
   const handlePrevClick = (e, clickHandler) => {
-    e.stopPropagation(); // Stop propagation to prevent bubbling
-    clickHandler(); // Call the original click handler to navigate the carousel
-  };
+    e.stopPropagation()
+    e.preventDefault()
+    clickHandler()
+  }
 
   const handleNextClick = (e, clickHandler) => {
-    e.stopPropagation(); // Stop propagation to prevent bubbling
-    clickHandler(); // Call the original click handler to navigate the carousel
-  };
-
-  function navigateToDetails() {
-    navigate(`/stay/${stay._id}`)
+    e.stopPropagation()
+    e.preventDefault()
+    clickHandler()
   }
+
 
   return (
     <div className="img-carousel">
@@ -56,12 +53,11 @@ export function ImgCarousel({ stay }) {
         {images.map((URL, index) => (
           <div key={index} className="slide">
               <img 
-              onClick={navigateToDetails}
               alt={`Slide ${index + 1}`} 
               src={URL} />
           </div>
         ))}
       </Carousel>
     </div>
-  );
+  )
 }
