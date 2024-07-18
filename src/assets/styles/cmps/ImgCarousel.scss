@@ -1,6 +1,11 @@
 .img-carousel {
     position: relative;
 
+    .control-dots {
+        position: absolute;
+        bottom: 1rem;
+    }
+
     button {
         display: none;
         place-items: center;

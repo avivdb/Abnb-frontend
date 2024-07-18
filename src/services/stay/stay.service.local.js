@@ -3,11 +3,13 @@ import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
 import { saveToStorage } from '../../services/util.service.js'
+import { loadFromStorage } from '../../services/util.service.js'
+
+const STORAGE_KEY = 'STAY_DB'
 _createStays()
 // saveToStorage("STAY_DB", stays)
 
 
-const STORAGE_KEY = 'STAY_DB'
 
 export const stayService = {
     query,
@@ -45,16 +47,31 @@ async function remove(stayId) {
 }
 
 async function save(stay) {
+
     var savedStay
     if (stay._id) {
         const stayToSave = {
             _id: stay._id,
-            price: stay.price,
+            name: stay.name,
+            loc: {
+                city: stay.city,
+                country: stay.country
+            },
+            price: stay.price
         }
         savedStay = await storageService.put(STORAGE_KEY, stayToSave)
     } else {
         const stayToSave = {
+            name: stay.name,
+            loc: {
+                city: stay.city,
+                country: stay.country
+            },
             price: stay.price,
+            imgUrls: [
+                "https://cf.bstatic.com/xdata/images/hotel/max1280x900/407313266.jpg?k=e55ba82e1a97dc5d0df63f03453c41756099d8c657cdc82934f65d65157e9a1f&o=&hp=1",
+                "https://cf.bstatic.com/xdata/images/hotel/max1280x900/407311892.jpg?k=703ea9df4d895c99490ac4025ecb42e91a9b964c25021b73378864ab1752b9f2&o=&hp=1"
+            ]
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
@@ -88,6 +105,9 @@ function getDefaultFilter() {
 }
 
 function _createStays() {
+    let stays
+    if (loadFromStorage(STORAGE_KEY)) stays = loadFromStorage(STORAGE_KEY)
+    else {
     const stays = [
         {
             "_id": "s101",
@@ -334,6 +354,6 @@ function _createStays() {
             },
             "rating": 4.3
         }
-    ]
+    ]}
     saveToStorage("STAY_DB", stays)
 }
