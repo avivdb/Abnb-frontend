@@ -1,0 +1,72 @@
+.stay-edit {
+    max-width: 35rem;
+
+    padding: 1rem;
+    margin: auto;
+    margin-block-start: 3rem;
+
+    color: $gray4;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
+    button {
+        padding: 0;
+        margin: 0;
+        margin-block-end: 2rem;
+        background-color: #fff;
+        color: $gray3;
+        transition: 0.3s;
+
+        &:hover {
+            color: $gray4;
+            background-color: #fff;
+        }
+    }
+
+    h1 {
+        font-size: 1.2rem;
+        margin: 0.3rem;
+        margin-inline-start: 0;
+    }
+
+    h2 {
+        font-size: 0.9rem;
+        color: $gray3;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        input {
+            padding: 0.7rem;
+            border-radius: 20px;
+            border: 1px solid $gray1;
+        }
+
+        button {
+            grid-column: 1 / span 2;
+            justify-self: center;
+            width: 10rem;
+
+            padding: 1rem;
+            background-color: $clr1;
+            border-radius: 20px;
+            margin-block-start: 2rem;
+            margin-block-end: 0;
+
+            font-family: cereal-medium;
+            font-size: 1rem;
+            color: #fff;
+
+            &:hover {
+                color: #fff;
+                background-color: $clr2;
+            }
+        }
+
+
+    }
+
+
+
+}
