@@ -12,7 +12,7 @@ export const ADD_STAY_MSG = 'ADD_STAY_MSG'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 
 const initialState = {
-    stays: loadFromStorage('STAY_DB'),
+    stays: [],
     filterBy: stayService.getDefaultFilter(),
 }
 
