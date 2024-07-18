@@ -1,3 +1,5 @@
+// import { createStays } from "../../services/stay/stay.service.local.js"
+import { stayService } from "../../services/stay/stay.service.local.js"
 import { loadFromStorage } from "../../services/util.service.js"
 
 export const SET_STAYS = 'SET_STAYS'
@@ -7,9 +9,11 @@ export const ADD_STAY = 'ADD_STAY'
 export const UPDATE_STAY = 'UPDATE_STAY'
 export const ADD_STAY_MSG = 'ADD_STAY_MSG'
 
+export const SET_FILTER_BY = 'SET_FILTER_BY'
+
 const initialState = {
-    stays: [],
-    stay: null
+    stays: loadFromStorage('STAY_DB'),
+    filterBy: stayService.getDefaultFilter(),
 }
 
 export function stayReducer(state = initialState, action) {
@@ -37,6 +41,14 @@ export function stayReducer(state = initialState, action) {
         case ADD_STAY_MSG:
             newState = { ...state, stay: { ...state.stay, msgs: [...state.stay.msgs || [], action.msg] } }
             break
+        case SET_FILTER_BY:
+            console.log('Updated filter criteria in state:', action.filterBy);
+            newState = {
+                ...state,
+                filterBy: { ...state.filterBy, ...action.filterBy }
+            };
+            break;
+
         default:
     }
     return newState
