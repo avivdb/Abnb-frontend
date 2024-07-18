@@ -6,6 +6,7 @@ import { logout } from '../store/actions/user.actions'
 import { StayFilter } from './StayFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
+import { StayEdit } from '../cmps/StayEdit'
 // import { setFilterBy } from '../store/actions/stay.actions'
 
 export function AppHeader() {
@@ -23,29 +24,34 @@ export function AppHeader() {
 		}
 	}
 
+	function onAddStay() {
+		console.log('add stay')
+	}
+
 	return (
 		<header className="app-header full">
 			<section className='nav'>
 
 				<NavLink to="/" className="logo">
 					<FontAwesomeIcon icon={faAirbnb} />
-					{/* <img src="../../src/assets/img/logo.png" /> */}
 					<h1>bnb</h1>
 				</NavLink>
 
-				{/* <NavLink to="stay">Stays</NavLink> */}
+				<section>
+					<button onClick={onAddStay}>Abnb your home</button>
 
-				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+					{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-				{!user && <NavLink to="login" className="login-link">Login</NavLink>}
-				{user && (
-					<div className="user-info">
-						<Link to={`user/${user._id}`}>
-							{user.fullname}
-						</Link>
-						<button onClick={onLogout}>logout</button>
-					</div>
-				)}
+					{!user && <NavLink to="login" className="login-link">Login</NavLink>}
+					{user && (
+						<div className="user-info">
+							<Link to={`user/${user._id}`}>
+								{user.fullname}
+							</Link>
+							<button onClick={onLogout}>logout</button>
+						</div>
+					)}
+				</section>
 			</section>
 			<StayFilter />
 		</header>

@@ -9,6 +9,9 @@ import { userService } from '../services/user'
 
 import { StayList } from '../cmps/StayList'
 import { StayFilter } from '../cmps/StayFilter'
+import { StayEdit } from '../cmps/StayEdit'
+
+
 
 export function StayIndex() {
 
@@ -65,6 +68,7 @@ export function StayIndex() {
                 stays={stays}
                 onRemoveStay={onRemoveStay}
                 onUpdateStay={onUpdateStay} />
+                <StayEdit />
         </main>
     )
 }

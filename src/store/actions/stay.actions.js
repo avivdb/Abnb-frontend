@@ -4,7 +4,7 @@ import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG, 
 
 export async function loadStays() {
     const filterBy = store.getState().stayModule.filterBy
-    console.log('filterBy', filterBy)
+    // console.log('filterBy', filterBy)
 
     try {
         const stays = await stayService.query(filterBy)
