@@ -108,9 +108,8 @@ function _createStays() {
                 "Wifi",
                 "Kitchen",
                 "Smoking allowed",
-                "Pets allowed",
-                "Cooking basics",
-                "Pool"
+                "Free parking",
+                "Private pool"
             ],
             "labels": [
                 "Top of the world",
@@ -188,10 +187,10 @@ function _createStays() {
             "capacity": 4,
             "amenities": [
                 "Wifi",
-                "Fireplace",
+                "Sea view",
                 "Mountain view",
-                "Pet friendly",
-                "Ski-in/ski-out"
+                "Free parking",
+                "EV charger"
             ],
             "labels": [
                 "Mountain Escape",
@@ -230,9 +229,9 @@ function _createStays() {
                 "TV",
                 "Wifi",
                 "Kitchen",
-                "Central heating",
-                "City view",
-                "Historic charm"
+                "Free parking",
+                "Mountain view",
+                "Sea view"
             ],
             "labels": [
                 "City Center Gem",
@@ -270,9 +269,9 @@ function _createStays() {
             "amenities": [
                 "Wifi",
                 "Balcony",
-                "Ocean view",
+                "Sea view",
                 "Air conditioning",
-                "Beach access"
+                "Beachfront"
             ],
             "labels": [
                 "Island Retreat",
@@ -310,10 +309,10 @@ function _createStays() {
             "amenities": [
                 "TV",
                 "Wifi",
-                "Hot tub",
-                "Fireplace",
-                "Ski-in/ski-out",
-                "Game room"
+                "Air conditioning",
+                "Smoking allowed",
+                "Free parking",
+                "EV charger"
             ],
             "labels": [
                 "Ski Resort Retreat",

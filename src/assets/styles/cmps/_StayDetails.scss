@@ -25,10 +25,22 @@
                 font-size: rem(22px);
             }
 
-            .stay-highlights {
-                .icon {
-                    height: 24px;
-                    width: 24px;
+            .amenities{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            
+                div{
+                    display: flex;
+                    
+                    .icon {
+                        height: 24px;
+                        width: 24px;
+                        margin-inline: 8px;
+                    }
+                    h3{
+                        font-size: 1em;
+                        margin-inline-end: 60px;
+                    }
                 }
             }
         }
