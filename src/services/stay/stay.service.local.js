@@ -97,9 +97,11 @@ async function save(stay) {
                 "fullname": "Maria Sanchez",
                 "imgUrl": ""
             },
-            rating: 4.9
-
-
+            rating: 4.9,
+            guests: 2,
+            bedrooms: 1,
+            beds: 1,
+            baths: 2,
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
@@ -268,7 +270,7 @@ function _createStays() {
                     "lat": 46.0207,
                     "lng": 7.7491
                 },
-                "rating": 4.9,
+                "rating": 5.0,
                 "guests": 8,
                 "bedrooms": 6,
                 "beds": 9,

@@ -27,10 +27,10 @@ export function StayDetails() {
             <img key={idx} src={imgUrl} className={idx === 0 ? 'main-img' : ''} />))}
         </section>
 
-        <section className='details-contect'>
-          <div className='contect'>
+        <section className='details-content'>
+          <div className='detail-content-top'>
             <h2>{stay.type} in {stay.loc.city}, {stay.loc.country}</h2>
-            <h3>
+            <h3 className="stay-dry-details">
               {`${stay.guests} guests • ${stay.bedrooms} bedrooms • ${stay.beds} beds • ${stay.baths} baths`}
             </h3>
 
