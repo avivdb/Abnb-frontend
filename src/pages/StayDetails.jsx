@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { Amenities } from '../cmps/Amenities'
+import { StayRating } from '../cmps/StayRating'
 
 // import gfGoldLeft from 'src/assets/img/icons/gf-gold-left.png'
 // import gfGoldRight from 'src/assets/img/icons/gf-gold-right.png'
@@ -34,28 +35,9 @@ export function StayDetails() {
         <section className='details-contect'>
           <div className='contect'>
             <h2>{stay.summary}</h2>
-            <section className='guest-favorite'>
-              <div className='logo'>
-                <img src="../src/assets/img/icons/gf-gold-left.png" />
-                <h3>Guest favorite</h3>
-                <img src="../src/assets/img/icons/gf-gold-right.png" />
-              </div>
-              <p>One of the most loved homes on Airbnb, according to guses</p>
-              <div className="rating">
-                <h2>5.0</h2>
-                <div className='stars'>
-                  {[...Array(5)].map((_, idx) => (
-                    <img key={idx} src="../src/assets/img/icons/star.svg" className="star" />
-                  ))}
-                </div>
-              </div>
-              <span>|</span>
-              <div className='reviews'>
-                <h2>23</h2>
-                <h4>Reviews</h4>
-              </div>
-
-            </section>
+            
+            <StayRating />
+            
             <div className='host'>
               <h3>Hosted by {stay.host.fullname}</h3>
               <img src={stay.host.imgUrl} />
