@@ -6,7 +6,8 @@ import { logout } from '../store/actions/user.actions'
 import { StayFilter } from './StayFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
-import { StayEdit } from '../cmps/StayEdit'
+// import { StayEdit } from '../cmps/StayEdit'
+import { FilterFocus } from './FilterFocused'
 // import { setFilterBy } from '../store/actions/stay.actions'
 
 export function AppHeader() {
@@ -31,15 +32,14 @@ export function AppHeader() {
 	return (
 		<header className="app-header full">
 			<section className='nav'>
-
 				<NavLink to="/" className="logo">
 					<FontAwesomeIcon icon={faAirbnb} />
 					<h1>bnb</h1>
 				</NavLink>
 
+				<FilterFocus />
 				<section>
 					<button onClick={onAddStay}>Abnb your home</button>
-
 					{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
 					{!user && <NavLink to="login" className="login-link">Login</NavLink>}

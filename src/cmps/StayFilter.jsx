@@ -4,8 +4,9 @@ import { InputAdornment, TextField } from '@mui/material';
 import { useState, useEffect } from 'react'
 import { setFilterBy } from '../store/actions/stay.actions'
 import { useSelector } from 'react-redux';
-import ResponsiveDatePickers from './ResponsiveDatePickers';
-import AirbnbDateRangePicker from './AirbnbDateRangePicker';
+// import ResponsiveDatePickers from './ResponsiveDatePickers';
+// import AirbnbDateRangePicker from './AirbnbDateRangePicker';
+import DateRangePickerComponent from './DateRangePicker';
 // import { MyDateRangePicker } from './MyDateRangePicker';
 
 export function StayFilter() {
@@ -35,9 +36,9 @@ export function StayFilter() {
         setFilterToEdit({ ...filterToEdit, [field]: value })
     }
 
-    function clearFilter() {
-        setFilterToEdit({ ...filterToEdit, txt: '' })
-    }
+    // function clearFilter() {
+    //     setFilterToEdit({ ...filterToEdit, txt: '' })
+    // }
 
     // function clearSort() {
     //     setFilterToEdit({ ...filterToEdit, sortField: '', sortDir: '' })
@@ -62,8 +63,10 @@ export function StayFilter() {
                 }}
             />}
             {/* <ResponsiveDatePickers /> */}
-            <AirbnbDateRangePicker />
-            {/* <MyDateRangePicker /> */}
+            {/* <AirbnbDateRangePicker /> */}
+            <DateRangePickerComponent />
+
+
         </section>
     )
 }

@@ -1,0 +1,14 @@
+.filter-focus {
+  display: flex;
+  align-items: center;
+  border: $clr11 solid 1px;
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  hr {
+    height: 50%;
+    color: $clr11;
+    width: 0.5px;
+    opacity: 0.3;
+  }
+}
