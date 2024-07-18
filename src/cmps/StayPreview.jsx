@@ -8,7 +8,9 @@ export function StayPreview({ stay }) {
 
     return <Link to={`/stay/${_id}`}>
         <article className="stay-preview">
-        {stay.imgUrls && stay.imgUrls.length > 0 && <ImgCarousel stay={stay} />}
+            <div className="preview-img-container">
+                {stay.imgUrls && stay.imgUrls.length > 0 && <ImgCarousel stay={stay} />}
+            </div>
             <section className="stay-preview-top">
                 <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
                 <p>&#9733; {rating || "4.3"}</p>
