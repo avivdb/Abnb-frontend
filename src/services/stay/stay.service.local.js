@@ -178,7 +178,11 @@ function _createStays() {
                     "lat": -8.61308,
                     "lng": 41.1413
                 },
-                "rating": 4.6
+                "rating": 4.6,
+                "guests": 7,
+                "bedrooms": 5,
+                "beds": 3,
+                "baths": 2,
             },
             {
                 "_id": "s102",
@@ -219,7 +223,11 @@ function _createStays() {
                     "lat": 25.79065,
                     "lng": -80.13005
                 },
-                "rating": 4.8
+                "rating": 4.8,
+                "guests": 2,
+                "bedrooms": 3,
+                "beds": 2,
+                "baths": 1,
             },
             {
                 "_id": "s103",
@@ -260,7 +268,11 @@ function _createStays() {
                     "lat": 46.0207,
                     "lng": 7.7491
                 },
-                "rating": 4.9
+                "rating": 4.9,
+                "guests": 8,
+                "bedrooms": 6,
+                "beds": 9,
+                "baths": 5,
             },
             {
                 "_id": "s104",
@@ -302,7 +314,11 @@ function _createStays() {
                     "lat": 48.8566,
                     "lng": 2.3522
                 },
-                "rating": 4.3
+                "rating": 4.3,
+                "guests": 2,
+                "bedrooms": 1,
+                "beds": 3,
+                "baths": 4,
             },
             {
                 "_id": "s105",
@@ -343,7 +359,11 @@ function _createStays() {
                     "lat": 36.3932,
                     "lng": 25.4615
                 },
-                "rating": 3.8
+                "rating": 3.8,
+                "guests": 4,
+                "bedrooms": 2,
+                "beds": 7,
+                "baths": 2,
             },
             {
                 "_id": "s106",
@@ -385,9 +405,14 @@ function _createStays() {
                     "lat": 39.1911,
                     "lng": -106.8175
                 },
-                "rating": 4.3
+                "rating": 4.3,
+                "guests": 5,
+                "bedrooms": 3,
+                "beds": 5,
+                "baths": 3,
             }
         ]
     }
+
     saveToStorage("STAY_DB", stays)
 }
