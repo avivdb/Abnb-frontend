@@ -4,6 +4,7 @@ import { InputAdornment, TextField } from '@mui/material';
 import { useState, useEffect } from 'react'
 import { setFilterBy } from '../store/actions/stay.actions'
 import { useSelector } from 'react-redux';
+import ResponsiveDatePickers from './ResponsiveDatePickers';
 // import { MyDateRangePicker } from './MyDateRangePicker';
 
 export function StayFilter() {
@@ -59,7 +60,7 @@ export function StayFilter() {
                     }
                 }}
             />}
-
+            <ResponsiveDatePickers />
             {/* <MyDateRangePicker /> */}
         </section>
     )
