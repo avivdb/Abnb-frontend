@@ -1,6 +1,14 @@
+// import { InputAdornment, TextField } from '@mui/material'
+// import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment, TextField } from '@mui/material';
 import { useState, useEffect } from 'react'
+import { setFilterBy } from '../store/actions/stay.actions'
+import { useSelector } from 'react-redux';
+// import { MyDateRangePicker } from './MyDateRangePicker';
 
-export function StayFilter({ filterBy, setFilterBy }) {
+export function StayFilter() {
+    const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
+
     const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
 
     useEffect(() => {
@@ -33,85 +41,26 @@ export function StayFilter({ filterBy, setFilterBy }) {
     //     setFilterToEdit({ ...filterToEdit, sortField: '', sortDir: '' })
     // }
 
-    return <section className="stay-filter">
-        <h3>Filter:</h3>
-        <input
-            type="text"
-            name="txt"
-            value={filterToEdit.txt}
-            placeholder="Free text"
-            onChange={handleChange}
-        // required
-        />
-        {/* <input
-            type="number"
-            min="0"
-            name="minSpeed"
-            value={filterToEdit.minSpeed}
-            placeholder="min. speed"
-            onChange={handleChange}
-            required
-        />
-        <button
-            className="btn-clear"
-            onClick={clearFilter}>Clear</button>
-        <h3>Sort:</h3>
-        <div className="sort-field">
-            <label>
-                <span>Speed</span>
-                <input
-                    type="radio"
-                    name="sortField"
-                    value="speed"
-                    checked={filterToEdit.sortField === 'speed'}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                <span>Vendor</span>
-                <input
-                    type="radio"
-                    name="sortField"
-                    value="vendor"
-                    checked={filterToEdit.sortField === 'vendor'}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                <span>Owner</span>
-                <input
-                    type="radio"
-                    name="sortField"
-                    value="owner"
-                    checked={filterToEdit.sortField === 'owner'}
-                    onChange={handleChange}
-                />
-            </label>
-        </div>
-        <div className="sort-dir">
-            <label>
-                <span>Asce</span>
-                <input
-                    type="radio"
-                    name="sortDir"
-                    value="1"
-                    checked={filterToEdit.sortDir === 1}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                <span>Desc</span>
-                <input
-                    type="radio"
-                    name="sortDir"
-                    value="-1"
-                    onChange={handleChange}
-                    checked={filterToEdit.sortDir === -1}
-                />
-            </label>
-        </div> */}
-        {/* <button
-            className="btn-clear"
-            onClick={clearSort}>Clear</button> */}
-    </section>
+    return (
+        <section className="stay-filter">
+            {<TextField
+                name='txt'
+                variant="outlined"
+                placeholder="Search destinations"
+                value={filterToEdit.txt}
+                onChange={handleChange}
+
+                sx={{
+                    width: '100%',
+                    marginRight: '10px',
+                    borderRadius: '10px',
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: '32px',
+                    }
+                }}
+            />}
+
+            {/* <MyDateRangePicker /> */}
+        </section>
+    )
 }
