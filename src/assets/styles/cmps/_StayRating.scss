@@ -1,0 +1,27 @@
+.stay-rating {
+    display: flex;
+    padding: rem(22px);
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 25px;
+    height: 90px;
+
+    .logo {
+        display: flex;
+        font-size: rem(18px);
+    }
+
+    p {
+        font-size: rem(16px);
+    }
+
+    .stars {
+        display: flex;
+        width: 10px;
+        height: 10px;
+    }
+
+    h4 {
+        font-size: rem(12px);
+    }
+}

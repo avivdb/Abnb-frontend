@@ -97,7 +97,8 @@ function _createStays() {
                 "https://cf.bstatic.com/xdata/images/hotel/max1280x900/187504545.jpg?k=39d6bd96280fdf0f637baabe07c0f3d14acfdee635e907accbd15669c54ad2a4&o=&hp=1",
                 "https://cf.bstatic.com/xdata/images/hotel/max1280x900/425913783.jpg?k=5338a21d761165576794d7d61cc4e0b92d3900506fcec9d98ccbc040185e4f80&o=&hp=1",
                 "https://cf.bstatic.com/xdata/images/hotel/max1280x900/425913800.jpg?k=b9708cac4a5fbad41453bec339c9a518543898ed4ebf27b7b88c8ad6d3b15ff6&o=&hp=1",
-                "https://cf.bstatic.com/xdata/images/hotel/max1280x900/187547277.jpg?k=7ddb87226c92da609061832c93d4d558caf955fd095166bde00c23119f392eeb&o=&hp=1"
+                "https://cf.bstatic.com/xdata/images/hotel/max1280x900/187547277.jpg?k=7ddb87226c92da609061832c93d4d558caf955fd095166bde00c23119f392eeb&o=&hp=1",
+                "https://cf.bstatic.com/xdata/images/hotel/max1280x900/187547277.jpg?k=7ddb87226c92da609061832c93d4d558caf955fd095166bde00c23119f392eeb&o=&hp=1",
             ],
             "price": 80.0,
             "summary": "Fantastic duplex apartment...",
@@ -107,9 +108,8 @@ function _createStays() {
                 "Wifi",
                 "Kitchen",
                 "Smoking allowed",
-                "Pets allowed",
-                "Cooking basics",
-                "Pool"
+                "Free parking",
+                "Private pool"
             ],
             "labels": [
                 "Top of the world",
@@ -187,10 +187,10 @@ function _createStays() {
             "capacity": 4,
             "amenities": [
                 "Wifi",
-                "Fireplace",
+                "Sea view",
                 "Mountain view",
-                "Pet friendly",
-                "Ski-in/ski-out"
+                "Free parking",
+                "EV charger"
             ],
             "labels": [
                 "Mountain Escape",
@@ -229,9 +229,9 @@ function _createStays() {
                 "TV",
                 "Wifi",
                 "Kitchen",
-                "Central heating",
-                "City view",
-                "Historic charm"
+                "Free parking",
+                "Mountain view",
+                "Sea view"
             ],
             "labels": [
                 "City Center Gem",
@@ -269,9 +269,9 @@ function _createStays() {
             "amenities": [
                 "Wifi",
                 "Balcony",
-                "Ocean view",
+                "Sea view",
                 "Air conditioning",
-                "Beach access"
+                "Beachfront"
             ],
             "labels": [
                 "Island Retreat",
@@ -309,10 +309,10 @@ function _createStays() {
             "amenities": [
                 "TV",
                 "Wifi",
-                "Hot tub",
-                "Fireplace",
-                "Ski-in/ski-out",
-                "Game room"
+                "Air conditioning",
+                "Smoking allowed",
+                "Free parking",
+                "EV charger"
             ],
             "labels": [
                 "Ski Resort Retreat",
