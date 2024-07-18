@@ -38,11 +38,8 @@
         top: 50%;
         left: 1rem;
         transform: translateY(-50%);
-        padding-inline-start: 0.7rem;
 
         &:hover {
-            // width: 2.1rem;
-            // height: 2.1rem;
             scale: 1.02;
             opacity: 1;
         }
@@ -56,14 +53,8 @@
         transform: translateY(-50%);
 
         &:hover {
-            // width: 2.1rem;
-            // height: 2.1rem;
             scale: 1.02;
             opacity: 1;
-        }
-
-        img {
-            width: 0.75rem;
         }
     }
 }

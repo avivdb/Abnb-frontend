@@ -15,6 +15,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
+import { StayEdit } from './cmps/StayEdit.jsx'
 
 export function RootCmp() {
     return (
@@ -27,6 +28,8 @@ export function RootCmp() {
                 <Routes>
                     <Route path="/" element={<StayIndex />} />
                     <Route path="stay" element={<StayIndex />} />
+                    <Route path="stay/edit" element={<StayEdit />} />
+                    <Route path="stay/edit/:stayId" element={<StayDetails />} />
                     <Route path="stay/:stayId" element={<StayDetails />} />
                     <Route path="user/:id" element={<UserDetails />} />
                     <Route path="admin" element={<AdminIndex />} />
@@ -36,7 +39,7 @@ export function RootCmp() {
                     </Route>
                 </Routes>
             </main>
-            <AppFooter />
+            {/* <AppFooter /> */}
         </div>
     )
 }

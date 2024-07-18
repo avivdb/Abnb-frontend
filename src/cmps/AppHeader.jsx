@@ -8,9 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
 // import { StayEdit } from '../cmps/StayEdit'
 import { FilterFocus } from './FilterFocused'
+import { useState } from 'react'
+
+
+import menu from "../assets/img/icons/menu.svg"
+import userimg from "../assets/img/icons/user.svg"
+
 // import { setFilterBy } from '../store/actions/stay.actions'
 
 export function AppHeader() {
+
 	const user = useSelector(storeState => storeState.userModule.user)
 	const navigate = useNavigate()
 	// const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
@@ -25,10 +32,6 @@ export function AppHeader() {
 		}
 	}
 
-	function onAddStay() {
-		console.log('add stay')
-	}
-
 	return (
 		<header className="app-header full">
 			<section className='nav'>
@@ -38,11 +41,18 @@ export function AppHeader() {
 				</NavLink>
 
 				<FilterFocus />
-				<section>
-					<button onClick={onAddStay}>Abnb your home</button>
+				<section className="header-user">
+					<Link to={`stay/edit`}>
+						<button>Abnb your home</button>
+					</Link>
 					{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-					{!user && <NavLink to="login" className="login-link">Login</NavLink>}
+					{!user && <NavLink to="login" className="login-link">
+						<div className="header-login">
+							<img src={menu} />
+							<img src={userimg} />
+						</div>
+					</NavLink>}
 					{user && (
 						<div className="user-info">
 							<Link to={`user/${user._id}`}>
@@ -54,6 +64,7 @@ export function AppHeader() {
 				</section>
 			</section>
 			<StayFilter />
+			{/* {editModal && <StayEdit setEditModal={setEditModal} />} */}
 		</header>
 	)
 }

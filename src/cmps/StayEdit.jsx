@@ -1,91 +1,60 @@
-// import { useState } from "react"
-// import { addStay } from "../store/actions/stay.actions"
-// import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
-
-// export function StayEdit() {
-//     const [stayToEdit, setStayToEdit] = useState({ name: '', country: '', city: '', price: '' })
-
-//     function handleChange(ev) {
-//         const { name, value } = ev.target;
-//         if (name === "name") {
-//             setStayToEdit({ ...stayToEdit, [name]: value })
-//         } else if (name === "country") {
-//             setStayToEdit({ ...stayToEdit, [country]: value })
-//         } else if (name === "city") {
-//             setStayToEdit({ ...stayToEdit, [city]: value })
-//         } else if (name === "price") {
-//             setStayToEdit({ ...stayToEdit, [price]: value })
-//         }
-//     }
-
-//     async function onAddStay(ev) {
-//         ev.preventDefault()
-//         if (!stayToEdit.name || !stayToEdit.country || !stayToEdit.city || !stayToEdit.price) {
-//             alert('All fields are required')
-//             return
-//         }
-
-//         try {
-//             await addStay(stayToEdit);
-//             showSuccessMsg('Stay added');
-//             setStayToEdit({ name: '', country: '', city: '', price: '' })
-//         } catch (err) {
-//             showErrorMsg('Cannot add stay')
-//         }
-//     }
-
-//     return (
-//         <form className="stay-edit" onSubmit={onAddStay}>
-//             <input onChange={handleChange} name="name" value={stayToEdit.name} placeholder="Name" />
-//             <input onChange={handleChange} name="country" value={stayToEdit.country} placeholder="Country" />
-//             <input onChange={handleChange} name="city" value={stayToEdit.city} placeholder="City" />
-//             <input onChange={handleChange} type="number" name="price" value={stayToEdit.price} placeholder="Price" />
-            
-//             <button type="submit">Add</button>
-//         </form>
-//     );
-// }
+import { useState } from "react"
+import { addStay } from "../store/actions/stay.actions"
+import { Link, useNavigate } from 'react-router-dom'
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 
-import { useState } from "react";
-import { addStay } from "../store/actions/stay.actions";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+export function StayEdit({ setEditModal }) {
 
-export function StayEdit() {
-    const [stayToEdit, setStayToEdit] = useState({ name: '', country: '', city: '', price: '' });
+    const navigate = useNavigate()
+
+    const [stayToEdit, setStayToEdit] = useState({ name: '', country: '', city: '', price: '' })
 
     function handleChange(ev) {
-        const { name, value } = ev.target;
+        const { name, value } = ev.target
         setStayToEdit(prevState => ({
             ...prevState,
             [name]: value
-        }));
+        }))
     }
 
     async function onAddStay(ev) {
-        ev.preventDefault();
+        ev.preventDefault()
         if (!stayToEdit.name || !stayToEdit.country || !stayToEdit.city || !stayToEdit.price) {
-            alert('All fields are required');
-            return;
+            alert('All fields are required')
+            return
         }
 
         try {
-            await addStay(stayToEdit);
-            showSuccessMsg('Stay added');
-            setStayToEdit({ name: '', country: '', city: '', price: '' });
+            await addStay(stayToEdit)
+            showSuccessMsg('Stay added')
+            setStayToEdit({ name: '', country: '', city: '', price: '' })
         } catch (err) {
-            showErrorMsg('Cannot add stay');
+            showErrorMsg('Cannot add stay')
         }
     }
 
     return (
-        <form className="stay-edit" onSubmit={onAddStay}>
-            <input onChange={handleChange} name="name" value={stayToEdit.name} placeholder="Name" />
-            <input onChange={handleChange} name="country" value={stayToEdit.country} placeholder="Country" />
-            <input onChange={handleChange} name="city" value={stayToEdit.city} placeholder="City" />
-            <input onChange={handleChange} type="number" name="price" value={stayToEdit.price} placeholder="Price" />
-            
-            <button type="submit">Add</button>
-        </form>
-    );
+        <section className="stay-edit">
+            <Link to={`/stay`}><button>Back</button></Link>
+            <h1>Add Your Property</h1>
+            <h2>Provide important information in order to become an Abnb host</h2>
+            <form className="stay-edit-content" onSubmit={onAddStay}>
+
+                <label htmlFor="name">Your Name:</label>
+                <input onChange={handleChange} id="name" name="name" value={stayToEdit.name} placeholder="Enter name" />
+
+                <label htmlFor="country">Country of property:</label>
+                <input onChange={handleChange} id="country" name="country" value={stayToEdit.country} placeholder="Enter country" />
+
+                <label htmlFor="city">City of property:</label>
+                <input onChange={handleChange} id="city" name="city" value={stayToEdit.city} placeholder="Enter city" />
+
+                <label htmlFor="price">Property Price:</label>
+                <input onChange={handleChange} id="counpricetry" type="number" name="price" value={stayToEdit.price} placeholder="Enter price" />
+
+                <button type="submit">Add</button>
+            </form>
+        </section>
+    )
 }

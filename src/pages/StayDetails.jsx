@@ -7,10 +7,6 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
 
-// import gfGoldLeft from 'src/assets/img/icons/gf-gold-left.png'
-// import gfGoldRight from 'src/assets/img/icons/gf-gold-right.png'
-// import star from 'src/assets/img/icons/star.svg'
-
 export function StayDetails() {
 
   const { stayId } = useParams()
@@ -33,14 +29,19 @@ export function StayDetails() {
 
         <section className='details-contect'>
           <div className='contect'>
-            <h2>{stay.summary}</h2>
+            <h2>{stay.type} in {stay.loc.city}, {stay.loc.country}</h2>
+            <h3>
+              {`${stay.guests} guests • ${stay.bedrooms} bedrooms • ${stay.beds} beds • ${stay.baths} baths`}
+            </h3>
 
-            <StayRating />
+            <StayRating stay={stay} />
 
             <div className='host'>
               <h3>Hosted by {stay.host.fullname}</h3>
               <img src={stay.host.imgUrl} />
             </div>
+            <hr />
+            <h2>{stay.summary}</h2>
             <hr />
             <h2>What this place offers</h2>
             <section className="amenities">
@@ -55,10 +56,20 @@ export function StayDetails() {
                 </div>
               ))}
             </section>
-            {/* <Amenities stay={stay} /> */}
           </div>
           <article className='order-details'>
-            <h2>${stay.price}</h2>
+            <h2>₪{stay.price} <span>night</span></h2>
+            <button>Reserve</button>
+            <h4>You won't be charged yet</h4>
+            <h3>₪{stay.price} x 5 nights</h3>
+            <h3>₪{stay.price * 5}</h3>
+            <h3>Cleaning fee</h3>
+            <h3>₪129</h3>
+            
+            <hr />
+            <h3>Total</h3>
+            <h3>₪{stay.price * 5 + 129}</h3>
+          
 
           </article>
 
