@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { setFilterBy } from '../store/actions/stay.actions'
 import { useSelector } from 'react-redux';
 import ResponsiveDatePickers from './ResponsiveDatePickers';
+import AirbnbDateRangePicker from './AirbnbDateRangePicker';
 // import { MyDateRangePicker } from './MyDateRangePicker';
 
 export function StayFilter() {
@@ -60,7 +61,8 @@ export function StayFilter() {
                     }
                 }}
             />}
-            <ResponsiveDatePickers />
+            {/* <ResponsiveDatePickers /> */}
+            <AirbnbDateRangePicker />
             {/* <MyDateRangePicker /> */}
         </section>
     )
