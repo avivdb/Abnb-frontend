@@ -1,0 +1,102 @@
+.filter-expanded {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
+  align-items: center;
+  justify-self: center;
+
+  padding: 1px;
+  border: $clr11 solid 1px;
+  border-radius: em(32px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  width: 848px;
+  height: 74.5px;
+  color: $clr8;
+
+  h1,
+  h2 {
+    grid-column: 1;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: em(17.5px);
+    line-height: em(22.5px, 17.5px);
+    font-family: cereal-regular;
+    color: $clr10;
+    font-weight: 400;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: em(15px);
+    font-family: cereal-medium;
+    font-weight: 500;
+    line-height: em(20px, 15px);
+    padding-bottom: em(2px, 15px);
+  }
+
+  .field {
+    display: grid;
+    line-height: em(25.5px);
+    padding: 14px 24px;
+    position: relative;
+
+    &:first-child {
+      border-left: none;
+    }
+    &:last-child {
+      padding-right: 9px;
+    }
+
+    &:hover {
+      background-color: $clr11;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 25%;
+      bottom: 25%;
+      left: 0;
+      width: 0;
+      border-left: 0.5px solid rgba($clr8, 0.1);
+    }
+
+    &:first-child::before {
+      border-left: none;
+    }
+
+    .search-icon-container {
+      display: grid;
+      justify-content: center;
+      grid-column: 2;
+      grid-row: -1/1;
+      justify-self: end;
+
+      border-radius: 50%;
+      background-color: $clr1;
+      width: 48px;
+      aspect-ratio: 1;
+
+      .search-icon {
+        color: $clr12;
+        align-self: center;
+      }
+    }
+
+    .stay-filter {
+      border: none;
+      background-color: $clr6;
+      padding: 0;
+      outline: none;
+      width: 100%;
+
+      font-size: em(17.5px);
+      line-height: em(22.5px, 17.5px);
+      font-family: cereal-light;
+      color: $clr10;
+    }
+  }
+}
