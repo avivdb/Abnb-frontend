@@ -1,14 +1,46 @@
 .filter-focus {
   display: flex;
-  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+
+  color: $clr8;
+  font-family: cereal-medium;
+  font-size: 0.75em;
+  line-height: em(27.5px);
+
   border: $clr11 solid 1px;
   border-radius: 40px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 0.5em;
+
+  min-width: 300px;
+  max-width: 400px;
+  width: 100%;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  .field {
+    display: flex;
+  }
+  .add-dates-btn {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: space-between;
+
+    .search-icon {
+      font-size: 0.9em;
+      color: $clr12;
+      background-color: $clr1;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+  }
 
   hr {
-    height: 50%;
     color: $clr11;
     width: 0.5px;
-    opacity: 0.3;
+    opacity: 0.2;
   }
 }

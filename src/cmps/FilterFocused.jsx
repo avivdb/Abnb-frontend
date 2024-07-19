@@ -3,12 +3,15 @@ import SearchIcon from '@mui/icons-material/Search';
 export function FilterFocus() {
     return (
         <section className="filter-focus">
-            <button className="anywhere-btn">Anywhere</button>
+            <div className="anywhere-field field">Anywhere</div>
             <hr />
-            <button className="any-week-btn">Any week</button>
+            <div className="any-week-field field">Any week</div>
             <hr />
-            <button className="add-dates-btn">Add guset</button>
-            <SearchIcon />
+            <div className="add-dates-field field">
+                Add guset
+                <SearchIcon className='search-icon' />
+            </div>
+
         </section>
     )
 }
