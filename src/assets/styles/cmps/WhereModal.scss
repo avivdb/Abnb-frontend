@@ -1,0 +1,42 @@
+.where-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  color: $clr8;
+  h1 {
+    font-size: 1rem;
+  }
+
+  .search-by-region {
+    grid-column: 2;
+    .regions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(100px, 120px));
+      grid-template-rows: repeat(2, minmax(100px, 120px));
+      gap: 1em;
+      align-items: center;
+      justify-items: center;
+      font-family: cereal-light;
+      padding: 1em;
+
+      .card {
+        font-size: 0.7rem;
+        // padding: 0.5em;
+        width: "200px";
+        height: "250px";
+        margin: "10px";
+      }
+
+      div {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        img {
+          width: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+}
