@@ -2,15 +2,12 @@ import React from 'react'
 import { Routes, Route } from 'react-router'
 
 import { StayIndex } from './pages/StayIndex.jsx'
-import { ReviewIndex } from './pages/ReviewIndex.jsx'
-import { ChatApp } from './pages/Chat.jsx'
 import { AdminIndex } from './pages/AdminIndex.jsx'
 
 import { StayDetails } from './pages/StayDetails'
 import { UserDetails } from './pages/UserDetails'
 
 import { AppHeader } from './cmps/AppHeader'
-import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
@@ -39,7 +36,6 @@ export function RootCmp() {
                     </Route>
                 </Routes>
             </main>
-            {/* <AppFooter /> */}
         </div>
     )
 }
