@@ -1,17 +1,48 @@
 import { Card, CardMedia } from "@mui/material";
+import { Autocomplete } from '@react-google-maps/api';
 import image0 from '../assets/img/icons/asset 0.jpeg';
 import image1 from '../assets/img/icons/asset 1.webp';
 import image2 from '../assets/img/icons/asset 2.webp';
 import image3 from '../assets/img/icons/asset 3.webp';
 import image4 from '../assets/img/icons/asset 4.webp';
 import image5 from '../assets/img/icons/asset 5.webp';
+import { useEffect, useRef } from "react";
 
 
-export function WhereModal() {
+export function WhereModal({ filterToEdit, setFilterToEdit }) {
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if (window.google) {
+            const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
+                types: ['(cities)'],  // Restrict suggestions to cities only
+            });
+
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if (place.formatted_address) {
+                    setFilterToEdit({ ...filterToEdit, txt: place.formatted_address });
+                }
+            });
+        }
+    }, []);
+
+
+
+
     return (
         <section className="where-modal">
+
             <div className="Recent-search">
                 <h1>Recent searches</h1>
+                <input
+                    ref={inputRef}
+                    placeholder="Search destinations"
+                    className="location-filter"
+                    value={filterToEdit.txt}
+                    onChange={(e) => setFilterToEdit({ ...filterToEdit, txt: e.target.value })}
+                />
             </div>
 
             <div className="search-by-region">
@@ -72,6 +103,7 @@ export function WhereModal() {
 
 
             </div>
+
         </section >
     )
 }

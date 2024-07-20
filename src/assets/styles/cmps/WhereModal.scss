@@ -1,8 +1,14 @@
 .where-modal {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 50%;
+  justify-content: center;
+
+  width: 848px;
+  height: 366.64px;
+  padding-top: 32px;
+  padding-bottom: 24px;
   color: $clr8;
+
   h1 {
     font-size: 1rem;
   }
@@ -19,13 +25,13 @@
       font-family: cereal-light;
       padding: 1em;
 
-      .card {
-        font-size: 0.7rem;
-        // padding: 0.5em;
-        width: "200px";
-        height: "250px";
-        margin: "10px";
-      }
+      // .card {
+      //   font-size: 0.7rem;
+      //   // padding: 0.5em;
+      //   width: "200px";
+      //   height: "250px";
+      //   margin: "10px";
+      // }
 
       div {
         display: grid;
