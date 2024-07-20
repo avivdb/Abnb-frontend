@@ -8,14 +8,12 @@ import { stayService } from '../services/stay/'
 import { userService } from '../services/user'
 
 import { StayList } from '../cmps/StayList'
-import { StayFilter } from '../cmps/StayFilter'
-import { StayEdit } from '../cmps/StayEdit'
+
 
 
 
 export function StayIndex() {
 
-    // const [filterBy, setFilterBy] = useState(stayService.getDefaultFilter())
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
 
@@ -63,7 +61,6 @@ export function StayIndex() {
             <header>
                 {userService.getLoggedinUser() && <button onClick={onAddStay}>Add a Stay</button>}
             </header>
-            {/* <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
             <StayList
                 stays={stays}
                 onRemoveStay={onRemoveStay}
