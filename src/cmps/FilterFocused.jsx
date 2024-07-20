@@ -1,17 +1,21 @@
 import SearchIcon from '@mui/icons-material/Search';
 
-export function FilterFocus() {
+export function FilterFocused({ handleFilterClick, setClass }) {
+    // console.log('setClass', setClass)
     return (
-        <section className="filter-focus">
+        <section className={` ${setClass}  `} onClick={handleFilterClick}>
             <div className="anywhere-field field">Anywhere</div>
-            <hr />
+
             <div className="any-week-field field">Any week</div>
-            <hr />
+
             <div className="add-dates-field field">
-                Add guset
-                <SearchIcon className='search-icon' />
+                Add gusets
             </div>
 
-        </section>
+            <div className="search-icon-container">
+                <SearchIcon className="search-icon" />
+            </div>
+
+        </section >
     )
 }

@@ -2,56 +2,73 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
-  align-items: center;
-  justify-self: center;
+  align-content: center;
 
-  padding: 1px;
+  width: em(848px);
+  height: em(64px);
+  margin: em(-1px);
+
+  color: $clr8;
   border: $clr11 solid 1px;
   border-radius: em(32px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
-
-  width: 848px;
-  height: 74.5px;
-  color: $clr8;
-
   h1,
   h2 {
     grid-column: 1;
   }
 
   h1 {
-    margin: 0;
     font-size: em(17.5px);
-    line-height: em(22.5px, 17.5px);
     font-family: cereal-regular;
-    color: $clr10;
     font-weight: 400;
+    line-height: em(22.5px, 17.5px);
+    color: $clr10;
+    margin: 0;
   }
 
   h2 {
-    margin: 0;
     font-size: em(15px);
-    font-family: cereal-medium;
-    font-weight: 500;
+    font-family: cereal-light;
+    font-weight: 600;
     line-height: em(20px, 15px);
-    padding-bottom: em(2px, 15px);
+    padding-bottom: 2px;
+    margin: 0;
   }
 
   .field {
-    display: grid;
-    line-height: em(25.5px);
-    padding: 14px 24px;
     position: relative;
+
+    display: grid;
+    align-items: center;
+    align-content: center;
+
+    line-height: em(25.5px);
+    padding: em(14px) em(24px);
+    border-radius: em(32px);
+
+    .location-filter {
+      border: none;
+      background-color: inherit;
+      outline: none;
+      width: 100%;
+
+      line-height: em(22.5px);
+      font-family: cereal-regular;
+      color: $clr10;
+      font-weight: 400;
+      margin: 0;
+    }
 
     &:first-child {
       border-left: none;
     }
     &:last-child {
-      padding-right: 9px;
+      padding-right: em(9px);
     }
 
     &:hover {
       background-color: $clr11;
+      cursor: pointer;
     }
 
     &::before {
@@ -71,32 +88,39 @@
     .search-icon-container {
       display: grid;
       justify-content: center;
+
       grid-column: 2;
       grid-row: -1/1;
       justify-self: end;
 
-      border-radius: 50%;
       background-color: $clr1;
-      width: 48px;
+      width: em(48px);
       aspect-ratio: 1;
+      border-radius: 50%;
 
       .search-icon {
         color: $clr12;
         align-self: center;
       }
     }
+  }
 
-    .stay-filter {
-      border: none;
-      background-color: $clr6;
-      padding: 0;
-      outline: none;
-      width: 100%;
+  .filter-modal {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 100%;
 
-      font-size: em(17.5px);
-      line-height: em(22.5px, 17.5px);
-      font-family: cereal-light;
-      color: $clr10;
-    }
+    padding: 16px 32px;
+    // padding-bottom: 24px;
+
+    display: grid;
+    align-content: center;
+
+    color: $clr8;
+    background-color: $clr12;
+    border: $clr11 solid 1px;
+    border-radius: em(32px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 }
