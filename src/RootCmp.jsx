@@ -31,7 +31,8 @@ export function RootCmp() {
                 <Routes>
                     <Route path="/" element={<StayIndex />} />
                     <Route path="stay" element={<StayIndex />} />
-                    <Route path="stay/checkout/:orderId" element={<OrderCheckout />} />
+                    <Route path="stay/checkout" element={<OrderCheckout />} />
+                    {/* <Route path="stay/checkout/:orderId" element={<OrderCheckout />} /> */}
                     <Route path="stay/trips" element={<UserTrips />} />
                     <Route path="stay/wishlists" element={<UserWishlist />} />
                     <Route path="stay/edit" element={<StayEdit />} />

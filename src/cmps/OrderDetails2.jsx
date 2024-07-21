@@ -6,7 +6,7 @@ import { DateRangePickerInOrder } from "./DateRangePickerInOrder"
 import { orderService } from "../services/order"
 
 
-export function OrderDetails({ stay }) {
+export function OrderDetails2({ stay }) {
     const [checkinDate, setCheckinDate] = useState(stay.defaultCheckin)
     const [checkoutDate, setCheckoutDate] = useState(stay.defaultCheckout)
     const [numberOfNights, setNumberOfNights] = useState(0)
@@ -21,12 +21,11 @@ export function OrderDetails({ stay }) {
 
     useEffect(() => {
         setSearchParams({
-            stayId: stay._id,
             startDate: checkinDate,
             endDate: checkoutDate,
             totalPrice: orderToEdit.totalPrice
-        })
-    }, [orderToEdit])
+        });
+    }, [orderToEdit]);
 
     function handleCheckinChange(event) {
         setCheckinDate(event.target.value)
@@ -35,6 +34,7 @@ export function OrderDetails({ stay }) {
     function handleCheckoutChange(event) {
         setCheckoutDate(event.target.value)
     }
+
 
     function calculateNights(checkin, checkout) {
         const checkinDate = new Date(checkin)
@@ -45,21 +45,21 @@ export function OrderDetails({ stay }) {
     }
 
     function updateBookingDetails() {
-        if (checkinDate && checkoutDate) {
+        if (checkinDate !== '' && checkoutDate !== '') {
             const nights = calculateNights(checkinDate, checkoutDate)
             setNumberOfNights(nights)
             setOrderToEdit({
                 ...orderToEdit,
-                stayId: stay._id,
-                startDate: checkinDate,
-                endDate: checkoutDate,
+                startDate: new Date(checkinDate).getTime(),
+                endDate: new Date(checkoutDate).getTime(),
+                // startDate: checkinDate,
+                // endDate: checkoutDate,
                 totalPrice: stay.price * nights + 500 //stay.price * nights + Airbnb service fee
             })
         } else {
             setNumberOfNights(0)
             setOrderToEdit({
                 ...orderToEdit,
-                stayId: stay._id,
                 startDate: '',
                 endDate: '',
                 totalPrice: 0
@@ -67,19 +67,8 @@ export function OrderDetails({ stay }) {
         }
     }
 
-    // function handleReserve() {
-    //     navigate(`/stay/checkout?stayId=${orderToEdit.stayId}&startDate=${orderToEdit.startDate}&endDate=${orderToEdit.endDate}&totalPrice=${orderToEdit.totalPrice}`)
-    // }
-
     function handleReserve() {
-        const params = new URLSearchParams({
-            stayId: orderToEdit.stayId,
-            startDate: orderToEdit.startDate,
-            endDate: orderToEdit.endDate,
-            totalPrice: orderToEdit.totalPrice
-        }).toString()
-    
-        navigate(`/stay/checkout?${params}`)
+        navigate(`/stay/checkout?startDate=${orderToEdit.startDate}&endDate=${orderToEdit.endDate}&totalPrice=${orderToEdit.totalPrice}`)
     }
 
 
@@ -87,13 +76,12 @@ export function OrderDetails({ stay }) {
     //     if (!orderToEdit.startDate || !orderToEdit.endDate) return alert('All fields are required')
 
     //     try {
-    //         // await addOrder({ order: orderToEdit, stay: stay })
-    //         await addOrder({ order: orderToEdit })
+    //         await addOrder({ order: orderToEdit, stay: stay })
     //         showSuccessMsg('Order added')
-    //         // setOrderToEdit(orderService.getEmptyOrder())
-    //         // setCheckinDate('')
-    //         // setCheckoutDate('')
-    //         // setNumberOfNights(0)
+    //         setOrderToEdit({ startDate: '', endDate: '', totalPrice: 0 })
+    //         setCheckinDate('')
+    //         setCheckoutDate('')
+    //         setNumberOfNights(0)
     //     } catch (err) {
     //         showErrorMsg('Cannot add order')
     //     }
@@ -127,7 +115,8 @@ export function OrderDetails({ stay }) {
                 /> */}
             </div>
 
-            {/* <button className="btn-order" onClick={onAddOrder}>Reserve</button> */}
+            {/* <Link to={`/stay/checkout`} className="btn-order">Reserve</Link> */}
+            {/* <Link to={`/stay/checkout`} target='_blank'><button onClick={onAddOrder}>Reserve</button></Link> */}
             <button className="btn-order" onClick={handleReserve}>Reserve</button>
             <h4>You won't be charged yet</h4>
             <div className="payment">
@@ -143,6 +132,9 @@ export function OrderDetails({ stay }) {
                 <h3>Total</h3>
                 <h3>₪{stay.price * numberOfNights + 500}</h3>
             </div>
+
+
+
 
         </article>
     )

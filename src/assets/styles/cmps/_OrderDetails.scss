@@ -1,8 +1,75 @@
+// .order-details {
+//     // grid-column: 2 / 3;
+//     padding: rem(25px);
+//     border: 1px solid $gray1;
+//     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+//     border-radius: 20px;
+//     height: 425px;
+// }
+
 .order-details {
     // grid-column: 2 / 3;
-    padding: rem(25px);
-    border: 1px solid black;
-    border-radius: 20px;
-    height: 425px;
-}
+    margin-inline-start: rem(32px);
+    padding: rem(24px);
+    height: max-content;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 
+    .price-per-night {
+        display: flex;
+        align-items: baseline;
+        margin-block-end: rem(24px);
+
+        h2 {
+            font-size: rem(22px);
+            margin: 0;
+            padding-inline-end: rem(4px);
+        }
+
+        span {
+            font-size: rem(16px);
+        }
+    }
+
+    .suggest-me-a-name {
+        margin-block-end: rem(16px);
+    }
+
+    .btn-order {
+        display: block;
+        text-align: center;
+        padding: rem(14px) rem(24px);
+        background-color: $clr16;
+        color: $clr6;
+        line-height: rem(20px);
+        font-family: cereal-medium;
+        min-width: 200px;
+        border-radius: 8px;
+        cursor: pointer;
+
+    }
+
+    h4 {
+        margin-top: 8px;
+        font-size: rem(14px);
+        text-align: center;
+    }
+
+    .payment {
+        display: flex;
+        justify-content: space-between;
+        font-family: cereal-light;
+    }
+
+    .payment-details {
+        text-decoration: underline;
+    }
+
+    .total {
+        font-family: cereal-medium;
+    }
+
+
+
+}

@@ -1,5 +1,6 @@
 import { storageService } from '../async-storage.service'
-import { userService } from '../user'
+import { stayService } from '../stay'
+// import { userService } from '../user'
 import { saveToStorage, loadFromStorage } from '../util.service'
 
 const STORAGE_KEY = 'stay_order_db'
@@ -10,6 +11,9 @@ export const orderService = {
 	getById,
 	add,
 	remove,
+	getEmptyOrder,
+	getOrderToEditFromSearchParams,
+
 }
 
 function query() {
@@ -24,7 +28,9 @@ async function remove(orderId) {
 	await storageService.remove(STORAGE_KEY, orderId)
 }
 
-async function add({ order, stay }) {
+// async function add({ order, stay }) {
+async function add (order) {
+	const stay = await stayService.getById(order.stayId)
 	const orderToAdd = {
 		hostId: stay.host._id,
 		// guest: { //user or mini user???
@@ -52,6 +58,21 @@ async function add({ order, stay }) {
 
 	const addedOrder = await storageService.post(STORAGE_KEY, orderToAdd)
 	return addedOrder
+}
+
+function getEmptyOrder() {
+	return { stayId:'', startDate: '', endDate: '', totalPrice: 0 }
+	// return { startDate: '', endDate: '', totalPrice: 0 }
+}
+
+
+function getOrderToEditFromSearchParams(searchParams) {
+    const defaultOrderToEdit = getEmptyOrder()
+    const orderToEdit = {}
+    for (const field in defaultOrderToEdit) {
+        orderToEdit[field] = searchParams.get(field) || ''
+    }
+    return orderToEdit
 }
 
 
