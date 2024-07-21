@@ -1,6 +1,6 @@
 import { storageService } from '../async-storage.service'
 import { userService } from '../user'
-import { saveToStorage } from '../util.service'
+import { saveToStorage, loadFromStorage } from '../util.service'
 
 const STORAGE_KEY = 'stay_order_db'
 _createOrders()
@@ -56,7 +56,10 @@ async function add({ order, stay }) {
 
 
 function _createOrders() {
-	const orders = [
+	let orders
+	if (loadFromStorage(STORAGE_KEY)) orders = loadFromStorage(STORAGE_KEY)
+	else {
+		orders = [
 			{
 				_id: 'o1225',
 				hostId: { _id: 'u102', fullname: "bob", imgUrl: "..." },
@@ -81,6 +84,7 @@ function _createOrders() {
 				status: 'pending', // approved / rejected
 			},
 		]
+	}
 
 	saveToStorage(STORAGE_KEY, orders)
 }

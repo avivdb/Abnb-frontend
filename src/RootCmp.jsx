@@ -16,6 +16,7 @@ import { StayEdit } from './cmps/StayEdit.jsx'
 import { UserTrips } from './pages/UserTrips.jsx'
 import { UserWishlist } from './pages/UserWishlist.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
+import { OrderCheckout } from './pages/OrderCheckout.jsx'
 
 
 
@@ -30,6 +31,7 @@ export function RootCmp() {
                 <Routes>
                     <Route path="/" element={<StayIndex />} />
                     <Route path="stay" element={<StayIndex />} />
+                    <Route path="stay/checkout/:orderId" element={<OrderCheckout />} />
                     <Route path="stay/trips" element={<UserTrips />} />
                     <Route path="stay/wishlists" element={<UserWishlist />} />
                     <Route path="stay/edit" element={<StayEdit />} />
