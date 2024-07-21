@@ -87,7 +87,7 @@ export function OrderDetails({ stay }) {
             </label>
 
             <h2>₪{stay.price} <span>night</span></h2>
-            <Link to={`/stay/checkout/${order._id}`} target='_blank'><button onClick={onAddOrder}>Reserve</button></Link>
+            <Link to={`/stay/checkout/${orderToEdit._id}`} target='_blank'><button onClick={onAddOrder}>Reserve</button></Link>
             <h4>You won't be charged yet</h4>
             <h3>₪{stay.price} x {numberOfNights} nights</h3>
             <h3>₪{stay.price * numberOfNights}</h3>
