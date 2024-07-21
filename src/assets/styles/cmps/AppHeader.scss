@@ -57,12 +57,26 @@
     border: 1px solid $gray1;
     border-radius: 30px;
 
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
+    }
+
     img {
       width: 2rem;
 
       &:first-child {
         width: 1.5rem;
       }
+    }
+
+    &.active {
+      box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
+    }
+
+    &.active {
+      box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
     }
   }
 

@@ -5,9 +5,9 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
-
-import { FilterFocused } from './FilterFocused'
-import { FilterExpanded } from './FilterExpanded'
+// import { StayEdit } from '../cmps/StayEdit'
+import { FilterFocus } from './FilterFocused'
+import { useState } from 'react'
 
 
 import menu from "../assets/img/icons/menu.svg"
@@ -17,6 +17,8 @@ import { useEffect, useState } from 'react'
 
 
 export function AppHeader() {
+
+	const [userMenu, setUserMenu] = useState(false)
 
 	const user = useSelector(storeState => storeState.userModule.user)
 	const navigate = useNavigate()
@@ -76,22 +78,18 @@ export function AppHeader() {
 				</Link>
 				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-				{!user && <NavLink to="login" className="login-link">
-					<div className="header-login">
-						<img src={menu} />
-						<img src={userimg} />
-					</div>
-				</NavLink>}
-				{user && (
-					<div className="user-info">
-						<Link to={`user/${user._id}`}>
-							{user.fullname}
-						</Link>
-						<button onClick={onLogout}>logout</button>
-					</div>
-				)}
+				<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
+					<img src={menu} />
+					<img src={userimg} />
+				</div>
+
+				{userMenu && <UserMenu setUserMenu={setUserMenu} />}
+
 			</section>
 
-		</header >
+			// <LocationFilter />
+
+		</header>
+
 	)
 }

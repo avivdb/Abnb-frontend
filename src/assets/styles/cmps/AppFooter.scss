@@ -1,26 +1,44 @@
-.app-footer{
+.app-footer {
+    z-index: 3;
+    position: fixed;
+    bottom: 0;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    min-height: 3.5rem;
+    height: 3rem;
+    width: 100%;
 
-    padding: rem(10px) 1rem;
-    background-color: $clr4;
+    padding: 1rem;
+    padding-inline: 2.5rem;
+    background-color: #fff;
+    border-top: 1px solid rgb(224, 224, 224);
 
-    p {
-        margin: 0;
-    }
-    
-    span {
-        font-size: .8em;
-        
-        &.local-services {
-            color: $clr1;
+    font-size: 0.8rem;
+    color: #222222;
+
+    .footer-app-settings {
+        display: flex;
+        align-items: center;
+        font-family: cereal-medium;
+
+        img {
+            max-width: 1rem;
         }
-        
-        &.remote-services {
-            color: $clr5;
+
+        p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            &:first-of-type{
+                width: 8rem;
+            }
+
+            span {
+                font-size: 1rem;
+            }
         }
     }
 }
