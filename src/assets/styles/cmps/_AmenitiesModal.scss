@@ -1,0 +1,64 @@
+.amenities-modal {
+    z-index: 3;
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+
+    top: 10%;
+    left: 20%;
+
+    width: 60%;
+    height: 80%;
+
+    overflow: scroll;
+
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+
+
+    h1,
+    .amenities-modal-list,
+    button {
+        align-self: start;
+    }
+
+    h1 {
+        margin: 0;
+        margin-inline-start: 0.8rem;
+        margin-block: 1rem;
+        font-family: cereal-medium;
+        font-size: 1.3rem;
+    }
+
+    .amenities-modal-list {
+        margin-inline-start: 0.3rem;
+        width: 98%;
+
+        .amenity {
+            margin-block: 1rem;
+            width: 100%;
+
+        }
+
+        hr:last-of-type {
+            display: none;
+        }
+    }
+
+    button {
+        background-color: #fff;
+        border-radius: 50%;
+        color: black;
+        padding: 0.3rem;
+
+        &:hover {
+            background-color: rgb(246, 246, 246);
+        }
+
+        img {
+            width: 1.3rem;
+        }
+    }
+}

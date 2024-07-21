@@ -51,3 +51,13 @@ export function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
 }
+
+export function getRandomDate() {
+    const dates = ["Jan 21-25", "May 7-12", "Sep 2-6", "Jul 22-29", "Aug 10-15", "Oct 15-21", "Feb 1-7", "Jun 14-23", "Nov 22-25", "Mar 24-30", "Jul 10-17", "Jul 28-30"]
+    return dates[getRandomIntInclusive(0, dates.length)]
+}
+
+export function getRandomDistance() {
+    const randomNumber = getRandomIntInclusive(1000, 9000)
+    return [randomNumber.toLocaleString()]
+}

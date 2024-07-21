@@ -1,0 +1,26 @@
+.user-wishlist {
+    display: flex;
+    flex-direction: column;
+    margin-inline: 3rem;
+    margin-block-start: 4rem;
+    margin-block-end: 5rem;
+
+    h1 {
+        color: black;
+        font-size: 2rem;
+        margin: 0;
+        margin-inline-start: 1.2rem;
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-inline: 1.2rem;
+
+        li {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

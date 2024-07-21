@@ -1,48 +1,41 @@
 import { Link } from 'react-router-dom'
 import { ImgCarousel } from './ImgCarousel'
+import { useState } from 'react'
+
+import heartempty from "../assets/img/icons/heartempty.svg"
+import heartfull from "../assets/img/icons/heartfull.svg"
+import { stayService } from '../services/stay'
+import { getRandomDate, getRandomDistance } from '../services/util.service.js'
 
 
 export function StayPreview({ stay }) {
-    return <Link to={`/stay/${stay._id}`}>
+
+    const [wishlist, setWishlist] = useState(false)
+    const { _id, loc, rating, price } = stay
+
+    function onToggleWishlist(event, stay) {
+        event.preventDefault()
+        event.stopPropagation()
+
+        wishlist ? setWishlist(false) : setWishlist(true)
+        stayService.toggleWishlist(stay)
+    }
+
+    return <Link to={`/stay/${_id}`} target='_blank'>
         <article className="stay-preview">
-            <ImgCarousel stay={stay}/>
-            {/* <img src={stay.imgUrls[0]} /> */}
+            <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
+                <img src={stay.isWishlist ? heartfull : heartempty} />
+            </button>
+            <div className="preview-img-container">
+                {stay.imgUrls && stay.imgUrls.length > 0 && <ImgCarousel stay={stay} />}
+            </div>
             <section className="stay-preview-top">
-                <h2>{stay.loc.city}, {stay.loc.country}</h2>
-                <p>&#9733; {stay.rating}</p>
+                <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
+                <p>&#9733; {rating || "4.3"}</p>
             </section>
-            <p className="secondary-content">1000 kilometers away</p>
-            <p className="secondary-content">Jan 12-23</p>
-            <p><span className="stay-preview-price">₪{stay.price}</span> night</p>
+            <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
+            <p className="secondary-content">{getRandomDate()}</p>
+            <p><span className="stay-preview-price">₪{price || ""}</span> night</p>
         </article>
     </Link>
 }
-
-
-
-
-// TO TEST CAROUSEL WITHOUT LINK ////////////////////////////
-
-
-// import { Link } from 'react-router-dom'
-// import { ImgCarousel } from './ImgCarousel'
-
-
-// export function StayPreview({ stay }) {
-//     return <article className="stay-preview">
-//         <ImgCarousel stay={stay} />
-//         <Link to={`/stay/${stay._id}`}>
-//             <section className="stay-preview-details">
-//                 <section className="flex-column">
-//                     <section className="stay-preview-top">
-//                         <h2>{stay.loc.city}, {stay.loc.country}</h2>
-//                         <p>&#9733; {stay.rating}</p>
-//                     </section>
-//                     <p className="secondary-content">1000 kilometers away</p>
-//                     <p className="secondary-content">Jan 12-23</p>
-//                 </section>
-//                 <p><span className="stay-preview-price">₪{stay.price}</span> night</p>
-//             </section>
-//         </Link>
-//     </article>
-// }

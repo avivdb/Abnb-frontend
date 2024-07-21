@@ -1,6 +1,15 @@
 .img-carousel {
     position: relative;
 
+    .control-dots {
+        position: absolute;
+        bottom: 1rem;
+
+        .dot {
+            box-shadow: none;
+        }
+    }
+
     button {
         display: none;
         place-items: center;
@@ -14,6 +23,8 @@
         border: 0.5px solid $gray1;
         border-radius: 50%;
         margin: 0;
+
+        transition: 0.2s;
     }
 
     .carousel:hover .nav-btn {
@@ -31,15 +42,18 @@
         z-index: 1;
         position: absolute;
         top: 50%;
-        left: 1rem;
+        // left: 1rem;
         transform: translateY(-50%);
-        padding-inline-start: 0.7rem;
+        padding-inline-end: 0.2rem;
+
+        img {
+            max-width: 0.8rem;
+        }
 
         &:hover {
-            // width: 2.1rem;
-            // height: 2.1rem;
             scale: 1.02;
             opacity: 1;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
         }
     }
 
@@ -47,18 +61,17 @@
         z-index: 1;
         position: absolute;
         top: 50%;
-        right: 1rem;
+        // right: 1rem;
         transform: translateY(-50%);
 
-        &:hover {
-            // width: 2.1rem;
-            // height: 2.1rem;
-            scale: 1.02;
-            opacity: 1;
+        img {
+            max-width: 0.8rem;
         }
 
-        img {
-            width: 0.75rem;
+        &:hover {
+            scale: 1.02;
+            opacity: 1;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
         }
     }
 }
