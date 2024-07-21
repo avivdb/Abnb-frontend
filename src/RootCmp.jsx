@@ -16,6 +16,10 @@ import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { StayEdit } from './cmps/StayEdit.jsx'
+import { UserTrips } from './pages/UserTrips.jsx'
+import { UserWishlist } from './pages/UserWishlist.jsx'
+
+
 
 export function RootCmp() {
     return (
@@ -28,6 +32,8 @@ export function RootCmp() {
                 <Routes>
                     <Route path="/" element={<StayIndex />} />
                     <Route path="stay" element={<StayIndex />} />
+                    <Route path="stay/trips" element={<UserTrips />} />
+                    <Route path="stay/wishlists" element={<UserWishlist />} />
                     <Route path="stay/edit" element={<StayEdit />} />
                     <Route path="stay/edit/:stayId" element={<StayDetails />} />
                     <Route path="stay/:stayId" element={<StayDetails />} />
@@ -39,7 +45,7 @@ export function RootCmp() {
                     </Route>
                 </Routes>
             </main>
-            {/* <AppFooter /> */}
+            <AppFooter />
         </div>
     )
 }

@@ -6,7 +6,7 @@ import { logout } from '../store/actions/user.actions'
 import { StayFilter } from './StayFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
-// import { StayEdit } from '../cmps/StayEdit'
+import { UserMenu } from '../cmps/UserMenu'
 import { FilterFocus } from './FilterFocused'
 import { useState } from 'react'
 
@@ -17,6 +17,8 @@ import userimg from "../assets/img/icons/user.svg"
 // import { setFilterBy } from '../store/actions/stay.actions'
 
 export function AppHeader() {
+
+	const [userMenu, setUserMenu] = useState(false)
 
 	const user = useSelector(storeState => storeState.userModule.user)
 	const navigate = useNavigate()
@@ -47,20 +49,21 @@ export function AppHeader() {
 					</Link>
 					{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-					{!user && <NavLink to="login" className="login-link">
-						<div className="header-login">
-							<img src={menu} />
-							<img src={userimg} />
-						</div>
-					</NavLink>}
-					{user && (
+					{/* {!user && <NavLink to="login" className="login-link"> */}
+					<div className={`header-login ${userMenu? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
+						<img src={menu} />
+						<img src={userimg} />
+					</div>
+					{userMenu && <UserMenu setUserMenu={setUserMenu} />}
+					{/* </NavLink>} */}
+					{/* {user && (
 						<div className="user-info">
 							<Link to={`user/${user._id}`}>
 								{user.fullname}
 							</Link>
 							<button onClick={onLogout}>logout</button>
 						</div>
-					)}
+					)} */}
 				</section>
 			</section>
 			<StayFilter />
