@@ -15,7 +15,6 @@ export function StayList({ stays, onRemoveStay, onUpdateStay }) {
         <ul className="stay-list">
             {stays.map(stay =>
                 <li key={stay._id}>
-                    {/* {console.log('stay', stay)} */}
                     <StayPreview stay={stay} />
                     {/* {shouldShowActionBtns(stay) && <div className="actions">
                         <button onClick={() => onUpdateStay(stay)}>Edit</button>

@@ -18,7 +18,8 @@ export const stayService = {
     remove,
     addStayMsg,
     _createStays,
-    getDefaultFilter
+    getDefaultFilter,
+    toggleWishlist
 }
 window.cs = stayService
 
@@ -84,7 +85,16 @@ async function save(stay) {
                 "Kitchen",
                 "Smoking allowed",
                 "Free parking",
-                "Private pool"
+                "Private pool",
+                "Pets allowed",
+                "Garden",
+                "Bidet",
+                "Pool table",
+                "Wine glasses",
+                "Coffee",
+                "Ping pong table",
+                "Fire pit",
+                "Mountain view"
             ],
             labels: [
                 "Top of the world",
@@ -94,12 +104,12 @@ async function save(stay) {
             ],
             host: {
                 "_id": makeId(),
-                "fullname": "Maria Sanchez",
+                "fullname": stay.fullname,
                 "imgUrl": ""
             },
             rating: 4.9,
             guests: 2,
-            bedrooms: 1,
+            bedrooms: [{ beds: 1 }],
             beds: 1,
             baths: 2,
         }
@@ -134,6 +144,21 @@ function getDefaultFilter() {
     }
 }
 
+async function toggleWishlist(stay) {
+    try {
+        stay.isWishlist = !stay.isWishlist
+        if (stay._id) {
+            const stayToSave = { ...stay }
+            const savedStay = await storageService.put(STORAGE_KEY, stayToSave)
+            return savedStay
+        }
+    } catch (error) {
+        console.error('Error toggling wishlist:', error)
+        throw new Error('unable to change wishlist status')
+    }
+}
+
+
 function _createStays() {
     let stays
     if (loadFromStorage(STORAGE_KEY)) stays = loadFromStorage(STORAGE_KEY)
@@ -159,7 +184,15 @@ function _createStays() {
                     "Kitchen",
                     "Smoking allowed",
                     "Free parking",
-                    "Private pool"
+                    "Private pool",
+                    "Hair dryer",
+                    "Ping pong table",
+                    "Crib",
+                    "Wine glasses",
+                    "Coffee",
+                    "Hangers",
+                    "Pets allowed",
+                    "Bidet"
                 ],
                 "labels": [
                     "Top of the world",
@@ -181,10 +214,11 @@ function _createStays() {
                     "lng": 41.1413
                 },
                 "rating": 4.6,
-                "guests": 7,
-                "bedrooms": 5,
-                "beds": 3,
+                "guests": 12,
+                "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 1 }, { beds: 2 }],
+                "beds": 9,
                 "baths": 2,
+                "isWishlist": false,
             },
             {
                 "_id": "s102",
@@ -200,12 +234,21 @@ function _createStays() {
                 "summary": "South Beach Condo/Hotel in an unbeatable location at top of Ocean Drive and Collins Avenue. A private balcony and a second Private rooftop Balcony with views of the city. Centrally located between the famous Ocean Drive and Collins Ave, this is a desirable destination for travelers from all over the world seeking Art Events + Culture, Music, Shopping, and world famous South Beach! Beach is just 2 minutes away across the street from the Condo.",
                 "capacity": 10,
                 "amenities": [
+                    "Garden",
                     "TV",
                     "Wifi",
                     "Private pool",
                     "Air conditioning",
                     "Free parking",
-                    "Beachfront"
+                    "Beachfront",
+                    "Pets allowed",
+                    "Pool table",
+                    "Ping pong table",
+                    "Hangers",
+                    "Fire pit",
+                    "Sea view",
+                    "Bidet",
+                    "Hair Dryer"
                 ],
                 "labels": [
                     "Luxury Retreat",
@@ -226,9 +269,9 @@ function _createStays() {
                     "lng": -80.13005
                 },
                 "rating": 4.8,
-                "guests": 2,
-                "bedrooms": 3,
-                "beds": 2,
+                "guests": 17,
+                "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 2 }, { beds: 1 }],
+                "beds": 9,
                 "baths": 1,
             },
             {
@@ -250,7 +293,13 @@ function _createStays() {
                     "Sea view",
                     "Mountain view",
                     "Free parking",
-                    "EV charger"
+                    "EV charger",
+                    "Bidet",
+                    "Garden",
+                    "Crib",
+                    "Ping pong table",
+                    "Pets allowed",
+                    "Hangers"
                 ],
                 "labels": [
                     "Mountain Escape",
@@ -271,10 +320,11 @@ function _createStays() {
                     "lng": 7.7491
                 },
                 "rating": 5.0,
-                "guests": 8,
-                "bedrooms": 6,
-                "beds": 9,
+                "guests": 2,
+                "bedrooms": [{ beds: 1 }],
+                "beds": 1,
                 "baths": 5,
+                "isWishlist": true,
             },
             {
                 "_id": "s104",
@@ -296,7 +346,15 @@ function _createStays() {
                     "Kitchen",
                     "Free parking",
                     "Mountain view",
-                    "Sea view"
+                    "Sea view",
+                    "Pets allowed",
+                    "Garden",
+                    "Bidet",
+                    "Pool table",
+                    "Wine glasses",
+                    "Coffee",
+                    "Ping pong table",
+                    "Fire pit"
                 ],
                 "labels": [
                     "City Center Gem",
@@ -317,10 +375,11 @@ function _createStays() {
                     "lng": 2.3522
                 },
                 "rating": 4.3,
-                "guests": 2,
-                "bedrooms": 1,
-                "beds": 3,
+                "guests": 9,
+                "bedrooms": [{ beds: 1 }, { beds: 2 }, { beds: 1 }, { beds: 3 }],
+                "beds": 7,
                 "baths": 4,
+                "isWishlist": false,
             },
             {
                 "_id": "s105",
@@ -341,7 +400,17 @@ function _createStays() {
                     "Balcony",
                     "Sea view",
                     "Air conditioning",
-                    "Beachfront"
+                    "Beachfront",
+                    "Fire pit",
+                    "Garden",
+                    "Hair dryer",
+                    "Hangers",
+                    "Free parking",
+                    "Ping pong table",
+                    "Pool table",
+                    "Bidet",
+                    "Pets allowed",
+                    "Smoking allowed"
                 ],
                 "labels": [
                     "Island Retreat",
@@ -363,9 +432,10 @@ function _createStays() {
                 },
                 "rating": 3.8,
                 "guests": 4,
-                "bedrooms": 2,
-                "beds": 7,
+                "bedrooms": [{ beds: 1 }, { beds: 1 }],
+                "beds": 2,
                 "baths": 2,
+                "isWishlist": true,
             },
             {
                 "_id": "s106",
@@ -387,7 +457,13 @@ function _createStays() {
                     "Air conditioning",
                     "Smoking allowed",
                     "Free parking",
-                    "EV charger"
+                    "EV charger",
+                    "Mountain view",
+                    "Hair dryer",
+                    "Ping pong table",
+                    "Crib",
+                    "Fire pit",
+                    "Garden"
                 ],
                 "labels": [
                     "Ski Resort Retreat",
@@ -409,9 +485,10 @@ function _createStays() {
                 },
                 "rating": 4.3,
                 "guests": 5,
-                "bedrooms": 3,
-                "beds": 5,
+                "bedrooms": [{ beds: 1 }, { beds: 2 }, { beds: 1 }, { beds: 2 }, { beds: 3 }],
+                "beds": 9,
                 "baths": 3,
+                "isWishlist": false,
             }
         ]
     }

@@ -16,7 +16,7 @@ export function StayRating({stay}) {
             <h3>Guest favorite</h3>
             <img src={`../src/assets/img/icons/gf-${gfRight}`} />
           </div>
-          <p>One of the most loved homes on Abnb, according to guses</p>
+          <p>One of the most loved homes on Abnb, according to guests</p>
           <div className="stay-rating-rating">
             <h5>{stay.rating}</h5>
             <h5>&#9733; &#9733; &#9733; &#9733; &#9733;</h5>

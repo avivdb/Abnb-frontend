@@ -10,6 +10,7 @@
     padding-inline: 1rem;
     border: 1px solid $gray1;
     border-radius: 20px;
+    margin-block-end: 2rem;
 
     .stay-rating-icon {
         display: flex;
@@ -43,7 +44,7 @@
             margin: 0;
 
             &:first-child {
-                font-size: 1.5rem;
+                font-size: 1.378rem;
             }
         }
     }

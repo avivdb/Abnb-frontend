@@ -1,16 +1,18 @@
 .app-header {
   display: grid;
-    // justify-items: center;
+  // justify-items: center;
   align-items: center;
   gap: 0.5rem;
 
   padding: 1rem;
+  padding-inline: 2.2rem;
   border-bottom: 1px solid rgb(221, 221, 221);
   color: $clr1;
 
   .header-user {
     display: flex;
     align-items: center;
+
   }
 
   .header-login {
@@ -21,12 +23,22 @@
     border: 1px solid $gray1;
     border-radius: 30px;
 
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
+    }
+
     img {
       width: 2rem;
 
       &:first-child {
         width: 1.5rem;
       }
+    }
+
+    &.active {
+      box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
     }
   }
 
@@ -66,13 +78,13 @@
       }
     }
 
-    .login-link {
-    }
   }
+
   .stay-filter {
     justify-self: center;
   }
 }
+
 //   nav {
 //     display: flex;
 //     width: 100%;

@@ -4,6 +4,7 @@
     padding: 1rem;
     margin: auto;
     margin-block-start: 3rem;
+    margin-block-end: 5rem;
 
     color: $gray4;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
@@ -36,6 +37,7 @@
     form {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        align-items: center;
 
         input {
             padding: 0.7rem;
