@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
+import { OrderDetails } from '../cmps/OrderDetails'
 
 export function StayDetails() {
 
@@ -57,21 +58,7 @@ export function StayDetails() {
               ))}
             </section>
           </div>
-          <article className='order-details'>
-            <h2>₪{stay.price} <span>night</span></h2>
-            <button>Reserve</button>
-            <h4>You won't be charged yet</h4>
-            <h3>₪{stay.price} x 5 nights</h3>
-            <h3>₪{stay.price * 5}</h3>
-            <h3>Cleaning fee</h3>
-            <h3>₪129</h3>
-            
-            <hr />
-            <h3>Total</h3>
-            <h3>₪{stay.price * 5 + 129}</h3>
-          
-
-          </article>
+          <OrderDetails stay={stay} />
 
         </section>
       </div>
