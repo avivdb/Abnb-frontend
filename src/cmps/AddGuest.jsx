@@ -1,6 +1,7 @@
+
 import { useState } from "react"
 
-export function AddGuest() {
+export function AddGuest({ filterToEdit, setFilterToEdit }) {
     const [adultCounter, setAdultCounter] = useState(0)
     const [childrenCounter, setChildrenCounter] = useState(0)
     const [infantCounter, setInfantCounter] = useState(0)
@@ -20,17 +21,19 @@ export function AddGuest() {
             default:
                 break;
         }
+        setFilterToEdit({ ...filterToEdit, guest: { adult: adultCounter, children: childrenCounter, infant: infantCounter, pet: petCounter } })
+
     }
 
     return (
         <section className="add-guest">
 
             <div className="add-adult add-field ">
-                <div className="add-adult-txt">
+                <div className="add-adult-txt add-txt">
                     <h1>Adults</h1>
                     <h2>Ages 13 or above</h2>
                 </div>
-                <div className="add-adult-counter ">
+                <div className="add-adult-counter add-counter ">
                     <button onClick={() => handleClick('-', adultCounter, setAdultCounter)}>-</button>
                     {adultCounter}
                     <button onClick={() => handleClick('+', adultCounter, setAdultCounter)}>+</button>
@@ -39,11 +42,11 @@ export function AddGuest() {
 
 
             <div className="add-children add-field">
-                <div className="add-children-txt">
+                <div className="add-children-txt add-txt">
                     <h1>Children</h1>
                     <h2>Ages 2-12</h2>
                 </div>
-                <div className="add-children-counter">
+                <div className="add-children-counter add-counter">
                     <button onClick={() => handleClick('-', childrenCounter, setChildrenCounter)}>-</button>
                     {childrenCounter}
                     <button onClick={() => handleClick('+', childrenCounter, setChildrenCounter)}>+</button>
@@ -52,11 +55,11 @@ export function AddGuest() {
 
 
             <div className="add-infant add-field">
-                <div className="add-infant-txt">
+                <div className="add-infant-txt add-txt">
                     <h1>Infants</h1>
                     <h2>Under 2</h2>
                 </div>
-                <div className="add-infant-counter">
+                <div className="add-infant-counter add-counter">
                     <button onClick={() => handleClick('-', infantCounter, setInfantCounter)}>-</button>
                     {infantCounter}
                     <button onClick={() => handleClick('+', infantCounter, setInfantCounter)}>+</button>
@@ -65,12 +68,13 @@ export function AddGuest() {
 
 
             <div className="add-pet add-field">
-                <div className="add-pet-txt">
+                <div className="add-pet-txt add-txt">
                     <h1>Pets</h1>
                     <a href="">Bringing a service animal?</a>
                 </div>
-                <div className="add-pet-counter">
-                    <button onClick={() => handleClick('-', petCounter, setPetCounter)}>-</button>
+                <div className="add-pet-counter add-counter">
+                    <button
+                        onClick={() => handleClick('-', petCounter, setPetCounter)}>-</button>
                     {petCounter}
                     <button onClick={() => handleClick('+', petCounter, setPetCounter)}>+</button>
                 </div>

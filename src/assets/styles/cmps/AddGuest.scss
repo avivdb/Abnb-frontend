@@ -1,7 +1,53 @@
 .add-guest {
   display: grid;
+  height: 434px;
+  width: 405px;
+  padding: 16px 32px;
+  // right: 0;
   .add-field {
     display: flex;
     justify-content: space-between;
+    padding: 14px 0;
+    padding-right: 4px;
+    // height: 50px;
+
+    .add-txt {
+      display: grid;
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: em(20px);
+        font-family: cereal-medium;
+        line-height: em(25px);
+        letter-spacing: normal;
+        font-weight: 500;
+        color: $clr8;
+      }
+      h2 {
+        font-size: em(17.5px);
+        line-height: em(22.5px);
+        font-weight: 400;
+        letter-spacing: normal;
+        padding-block-start: 4px;
+      }
+    }
+
+    .add-counter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: em(20px);
+      width: 100px;
+
+      button {
+        width: 30px;
+        aspect-ratio: 1;
+        background-color: inherit;
+        border: 0.5px solid $clr9;
+        font-size: 1em;
+        font-weight: 400;
+        border-radius: 50%;
+      }
+    }
   }
 }

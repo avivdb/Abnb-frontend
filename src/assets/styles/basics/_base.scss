@@ -3,7 +3,6 @@
 }
 
 html {
-  color: $clr2;
   font-size: 16px;
 }
 
@@ -11,6 +10,7 @@ body {
   margin: 0 auto;
   font-family: "cereal-regular";
   padding-top: 100px;
+  color: $clr2;
 }
 
 a {

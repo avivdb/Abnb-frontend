@@ -26,3 +26,19 @@
   font-family: cereal-medium;
   src: url(../fonts/Cereal/AirbnbCereal_W_medium.otf);
 }
+
+@font-face {
+  font-family: fa;
+  src: url(../fonts/fa-solid-900.ttf);
+}
+
+.fa::before {
+  font-family: fa;
+}
+
+.fa.plus::before {
+  content: "\2b";
+}
+.fa.minus::before {
+  content: "\f068";
+}

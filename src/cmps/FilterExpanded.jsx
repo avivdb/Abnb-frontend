@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StayFilter } from "./LocationFilter";
+import { LocationFilter } from "./LocationFilter";
 import SearchIcon from '@mui/icons-material/Search';
 import { WhereModal } from "./WhereModal";
 import DateRangePicker from "./DateRangePicker";
@@ -90,7 +90,7 @@ export function FilterExpanded({ setClass }) {
 
                 <div className="where-field field" onClick={() => handleClick('where')}>
                     <h2>Where</h2>
-                    <StayFilter filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
+                    <LocationFilter filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
                 </div>
 
 
@@ -126,7 +126,7 @@ export function FilterExpanded({ setClass }) {
                 <section className="filter-modal">
                     {isWhere && <WhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                     {(isCheckIn || isCheckOut) && <DateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {isGuest && <AddGuest />}
+                    {isGuest && <AddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>
             }
         </section>
