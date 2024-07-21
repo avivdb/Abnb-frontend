@@ -15,6 +15,7 @@ import { Signup } from './pages/Signup.jsx'
 import { StayEdit } from './cmps/StayEdit.jsx'
 import { UserTrips } from './pages/UserTrips.jsx'
 import { UserWishlist } from './pages/UserWishlist.jsx'
+import { AppFooter } from './cmps/AppFooter.jsx'
 
 
 

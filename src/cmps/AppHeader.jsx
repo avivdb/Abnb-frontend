@@ -6,14 +6,18 @@ import { logout } from '../store/actions/user.actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
 // import { StayEdit } from '../cmps/StayEdit'
-import { FilterFocus } from './FilterFocused'
-import { useState } from 'react'
+import { FilterFocused } from './FilterFocused'
+import { FilterExpanded } from './FilterExpanded'
+import { LocationFilter } from './LocationFilter'
+
+// import { useState } from 'react'
 
 
 import menu from "../assets/img/icons/menu.svg"
 import userimg from "../assets/img/icons/user.svg"
 
 import { useEffect, useState } from 'react'
+import { UserMenu } from './UserMenu'
 
 
 export function AppHeader() {
@@ -86,8 +90,6 @@ export function AppHeader() {
 				{userMenu && <UserMenu setUserMenu={setUserMenu} />}
 
 			</section>
-
-			// <LocationFilter />
 
 		</header>
 
