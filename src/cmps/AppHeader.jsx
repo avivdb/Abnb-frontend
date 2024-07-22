@@ -78,7 +78,7 @@ export function AppHeader() {
 
 			<section className="header-user">
 				<Link to={`stay/edit`}>
-					<button>Abnb your home</button>
+					<button className='btn-add-stay'>Abnb your home</button>
 				</Link>
 				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 

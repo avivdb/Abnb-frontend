@@ -1,8 +1,9 @@
 import { StayPreview } from "../cmps/StayPreview"
+import { orderService } from "../services/order/order.service.local"
 
 
 export function UserTrips() {
-
+    
     const trips = [
         {
             "_id": "s101",

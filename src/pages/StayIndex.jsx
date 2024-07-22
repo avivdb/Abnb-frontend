@@ -32,39 +32,11 @@ export function StayIndex() {
         }
     }
 
-    async function onAddStay() {
-        const stay = stayService.getEmptyStay()
-        stay.vendor = prompt('Vendor?')
-        try {
-            const savedStay = await addStay(stay)
-            showSuccessMsg(`Stay added (id: ${savedStay._id})`)
-        } catch (err) {
-            showErrorMsg('Cannot add stay')
-        }
-    }
-
-    async function onUpdateStay(stay) {
-        const speed = +prompt('New speed?', stay.speed)
-        if (speed === 0 || speed === stay.speed) return
-
-        const stayToSave = { ...stay, speed }
-        try {
-            const savedStay = await updateStay(stayToSave)
-            showSuccessMsg(`Stay updated, new speed: ${savedStay.speed}`)
-        } catch (err) {
-            showErrorMsg('Cannot update stay')
-        }
-    }
-
     return (
         <main className="stay-index">
-            <header>
-                {userService.getLoggedinUser() && <button onClick={onAddStay}>Add a Stay</button>}
-            </header>
             <StayList
                 stays={stays}
-                onRemoveStay={onRemoveStay}
-                onUpdateStay={onUpdateStay} />
+                onRemoveStay={onRemoveStay} />
         </main>
     )
 }
