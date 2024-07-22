@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import { stayService } from "../services/stay/stay.service.local"
@@ -8,6 +8,9 @@ import { CountrySelectModal } from "../cmps/CountrySelectModal"
 
 import arrowBack from "../assets/img/icons/arrowback.svg"
 import SelectDropdown from "../cmps/SelectDropdown"
+import { addOrder } from "../store/actions/order.action"
+import { orderService } from "../services/order"
+import { showSuccessMsg } from "../services/event-bus.service"
 
 
 export function OrderCheckout() {
@@ -15,8 +18,15 @@ export function OrderCheckout() {
     const [countryModal, setCountryModal] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState(null);
     const { stayId } = useParams()
+    const [searchParams] = useSearchParams()
+    const [orderToEdit, setOrderToEdit] = useState(orderService.getEmptyOrder())
     const stay = stayService.getById(stayId)
     const navigate = useNavigate()
+    
+    useEffect(() => {
+        const order = orderService.getOrderToEditFromSearchParams(searchParams)
+        setOrderToEdit({ ...order, stayId })
+    }, [searchParams, stayId])
 
     const order = {
         _id: 'o1225',
@@ -88,6 +98,18 @@ export function OrderCheckout() {
         setCountryModal(true)
     }
 
+    async function onAddOrder() {
+        if (!orderToEdit.startDate || !orderToEdit.endDate) return alert('All fields are required')
+
+        try {
+            await addOrder(orderToEdit)
+            showSuccessMsg('Order added')
+            setOrderToEdit(orderService.getEmptyOrder())
+        } catch (err) {
+            showErrorMsg('Cannot add order')
+        }
+    }
+
     return (
         <section className="order-checkout">
             <button className="back"><img src={arrowBack} /></button>
@@ -145,7 +167,7 @@ export function OrderCheckout() {
 
                 <p className="checkout-disclaimer">By selecting the button, I agree to the booking terms. I also agree to the updated Terms of Service, Payments Terms of Service, and I acknowledge the Privacy Policy.</p>
 
-                <button className="checkout-final-book">Request to book</button>
+                <button className="checkout-final-book" onClick={onAddOrder}>Request to book</button>
 
             </section>
             <div className="checkout-stay-modal">
