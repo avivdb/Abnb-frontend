@@ -3,44 +3,130 @@
   grid-template-columns: 1fr 1fr;
   justify-content: center;
 
-  width: 848px;
-  height: 366.64px;
-  padding-top: 32px;
-  padding-bottom: 24px;
+  // padding-top: 32px;
+  // padding-bottom: 24px;
   color: $clr8;
 
-  h1 {
-    font-size: 1rem;
+  &.is-typing {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-search {
+    padding: 0 16px;
+    position: relative;
+
+    h1 {
+      font-size: 17.5px;
+      padding: 0 em(16px, 17.5px);
+      margin-bottom: em(16px, 17.5px);
+
+      line-height: em(22.5px, 17.5px);
+      font-weight: 700;
+      color: $clr8;
+    }
+
+    .prediction-list {
+      display: grid;
+      font-size: 20px;
+      line-height: (25px, 20px);
+      color: $clr8;
+      font-weight: 400;
+
+      .prediction-item {
+        display: flex;
+        align-items: center;
+        column-gap: 16px;
+        padding: em(8px, 20px) em(16px, 20px);
+
+        &:hover {
+          background-color: $clr13;
+          border-radius: 8px;
+          cursor: pointer;
+        }
+
+        .icon-location {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          border-radius: 12px;
+          aspect-ratio: 1;
+          background-color: $clr11;
+        }
+        img {
+          color: $clr8;
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
   }
 
   .search-by-region {
+    position: relative;
     grid-column: 2;
+    padding-left: 8px;
+    padding-right: 24px;
+
+    &.is-typing {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-left: 1px solid rgba($clr8, 0.1);
+      pointer-events: none;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      margin-left: 8px;
+      font-size: 17.5px;
+      line-height: em(22.5px, 17.5px);
+      font-weight: 700;
+      color: $clr8;
+    }
+
     .regions {
       display: grid;
-      grid-template-columns: repeat(3, minmax(100px, 120px));
-      grid-template-rows: repeat(2, minmax(100px, 120px));
-      gap: 1em;
-      align-items: center;
-      justify-items: center;
+      grid-template-columns: repeat(3, minmax(100px, 200px));
+      row-gap: em(6px);
       font-family: cereal-light;
-      padding: 1em;
+      // padding: em(8px);
+      z-index: 2;
 
-      // .card {
-      //   font-size: 0.7rem;
-      //   // padding: 0.5em;
-      //   width: "200px";
-      //   height: "250px";
-      //   margin: "10px";
-      // }
-
-      div {
+      .where-card {
         display: grid;
         justify-items: center;
         align-items: center;
+        row-gap: em(8px);
+        border-radius: em(16px);
+        padding: em(8px);
+
+        &:hover {
+          background-color: $clr11;
+          cursor: pointer;
+        }
         img {
+          border-radius: em(16px);
+        }
+
+        h2 {
+          justify-self: start;
+          font-family: cereal-light;
+          font-size: 17.5px;
+          color: $clr10;
+          line-height: em(22.5px, 17.5px);
+          margin: 0 2px;
           width: 100%;
-          object-fit: cover;
-          object-position: center;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
     }
