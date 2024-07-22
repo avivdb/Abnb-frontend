@@ -3,22 +3,15 @@ import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
-// import { StayEdit } from '../cmps/StayEdit'
+
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
-import { LocationFilter } from './LocationFilter'
-
-// import { useState } from 'react'
-
 
 import menu from "../assets/img/icons/menu.svg"
 import userimg from "../assets/img/icons/user.svg"
 
 import { useEffect, useState } from 'react'
 import { UserMenu } from './UserMenu'
-
 
 export function AppHeader() {
 
@@ -27,7 +20,6 @@ export function AppHeader() {
 	const user = useSelector(storeState => storeState.userModule.user)
 	const navigate = useNavigate()
 
-	// const [isScrolled, setIsScrolled] = useState(false)
 	const [isExpanded, setIsExpanded] = useState(true)
 
 	useEffect(() => {
@@ -66,15 +58,12 @@ export function AppHeader() {
 	return (
 		<header className="app-header full">
 
-			<NavLink to="/" className="logo">
-				<FontAwesomeIcon icon={faAirbnb} />
+			<NavLink to="/" className="logo fa brand airbnb">
 				<h1>bnb</h1>
 			</NavLink>
 
-
 			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
 			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
-
 
 			<section className="header-user">
 				<Link to={`stay/edit`}>
