@@ -1,7 +1,8 @@
 import { orderService } from '../../services/order'
 
 import { store } from '../store'
-import { ADD_ORDER, REMOVE_ORDER, SET_ORDERS } from '../reducers/order.reducer'
+import { ADD_ORDER, SET_ORDERS } from '../reducers/order.reducer'
+// import { ADD_ORDER, REMOVE_ORDER, SET_ORDERS } from '../reducers/order.reducer'
 
 export async function loadOrders() {
 	try {
@@ -13,9 +14,10 @@ export async function loadOrders() {
 	}
 }
 
-export async function addOrder({ order, stay}) {
+// export async function addOrder({ order, stay}) {
+export async function addOrder(order) {
 	try {
-		const addedOrder = await orderService.add({ order, stay })
+		const addedOrder = await orderService.add(order)
 		store.dispatch({ type: ADD_ORDER, order })
 	} catch (err) {
 		console.log('OrderActions: err in addOrder', err)
@@ -23,13 +25,13 @@ export async function addOrder({ order, stay}) {
 	}
 }
 
-export async function removeOrder(orderId) {
-	try {
-		await orderService.remove(orderId)
-		store.dispatch({ type: REMOVE_ORDER, orderId })
-	} catch (err) {
-		console.log('OrderActions: err in removeOrder', err)
-		throw err
-	}
-}
+// export async function removeOrder(orderId) {
+// 	try {
+// 		await orderService.remove(orderId)
+// 		store.dispatch({ type: REMOVE_ORDER, orderId })
+// 	} catch (err) {
+// 		console.log('OrderActions: err in removeOrder', err)
+// 		throw err
+// 	}
+// }
 

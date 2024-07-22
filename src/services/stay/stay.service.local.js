@@ -112,6 +112,8 @@ async function save(stay) {
             bedrooms: [{ beds: 1 }],
             beds: 1,
             baths: 2,
+            defaultCheckin: new Date('2024-08-12T12:30:00'),
+            defaultCheckout: new Date('2024-08-19T12:30:00'),
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
@@ -219,6 +221,8 @@ function _createStays() {
                 "beds": 9,
                 "baths": 2,
                 "isWishlist": false,
+                "defaultCheckin": new Date('2024-08-11T12:30:00'),
+                "defaultCheckout": new Date('2024-08-15T12:30:00'),
             },
             {
                 "_id": "s102",
@@ -273,6 +277,9 @@ function _createStays() {
                 "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 2 }, { beds: 1 }],
                 "beds": 9,
                 "baths": 1,
+                "isWishlist": false,
+                "defaultCheckin": new Date('2024-08-12T12:30:00'),
+                "defaultCheckout": new Date('2024-08-17T12:30:00'),
             },
             {
                 "_id": "s103",
@@ -325,6 +332,8 @@ function _createStays() {
                 "beds": 1,
                 "baths": 5,
                 "isWishlist": true,
+                "defaultCheckin": new Date('2024-08-10T12:30:00'),
+                "defaultCheckout": new Date('2024-08-15T12:30:00'),
             },
             {
                 "_id": "s104",
@@ -380,6 +389,8 @@ function _createStays() {
                 "beds": 7,
                 "baths": 4,
                 "isWishlist": false,
+                "defaultCheckin": new Date('2024-09-15T12:30:00'),
+                "defaultCheckout": new Date('2024-08-22T12:30:00'),
             },
             {
                 "_id": "s105",
@@ -436,6 +447,8 @@ function _createStays() {
                 "beds": 2,
                 "baths": 2,
                 "isWishlist": true,
+                "defaultCheckin": new Date('2024-08-25T12:30:00'),
+                "defaultCheckout": new Date('2024-08-28T12:30:00'),
             },
             {
                 "_id": "s106",
@@ -489,6 +502,8 @@ function _createStays() {
                 "beds": 9,
                 "baths": 3,
                 "isWishlist": false,
+                "defaultCheckin": new Date('2024-08-11T12:30:00'),
+                "defaultCheckout": new Date('2024-08-18T12:30:00'),
             }
         ]
     }

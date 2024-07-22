@@ -1,0 +1,144 @@
+.order-checkout {
+    margin-block-start: 5rem;
+    margin-block-end: 5rem;
+    margin-inline: 5rem;
+    color: black;
+
+    h2 {
+        margin: 0;
+    }
+
+    .order-checkout-title {
+        font-size: 2rem;
+        margin-block-end: 2rem;
+    }
+
+    .checkout-your-trip {
+        margin-block-end: 2rem;
+    }
+
+    .order-checkout-top-content {
+        margin-block-end: 2rem;
+    }
+
+    .back {
+        position: absolute;
+        top: 11.1rem;
+        left: 7rem;
+        width: 3rem;
+        height: 3rem;
+
+        background-color: #fff;
+        border-radius: 50%;
+
+        img {
+            margin-inline-start: 0.8rem;
+            width: 45%;
+        }
+
+        &:hover {
+            background-color: #f5f5f5;
+            cursor: text;
+        }
+    }
+
+    h3 {
+        font-family: cereal-medium;
+        font-size: 1rem;
+    }
+
+    hr {
+        border: 0.5px solid $gray1;
+    }
+
+    .checkout-payment-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-block-end: 2rem;
+        margin-block-start: 2rem;
+
+        .ZIP-code {
+            width: 100%;
+            padding: 0.7rem;
+            padding-block: 1rem;
+            font-size: 1rem;
+            font-family: cereal-light;
+            border-radius: 10px;
+            border: 1px solid #cdcdcd;
+
+            &::placeholder {
+                color: black;
+            }
+        }
+    }
+
+    .btn-checkout-country {
+        background-color: #fff;
+        padding: 0.7rem;
+        padding-block: 1rem;
+        margin-block-end: 1rem;
+
+        border-radius: 10px;
+        border: 1px solid #cdcdcd;
+
+        font-size: 1rem;
+        font-family: cereal-light;
+        text-align: start;
+    }
+
+    .checkout-cancellation-policy {
+        margin-block: 2rem;
+
+        p {
+            font-family: cereal-light;
+        }
+
+        .cancellation-policy-bold {
+            font-family: cereal-medium;
+        }
+    }
+
+    .ground-rules {
+        margin-block: 2rem;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            li {
+                &::before {
+                    content: '·';
+                    color: black;
+                    margin-inline-end: 1rem;
+                }
+            }
+        }
+    }
+
+    .checkou-host-option {
+        margin-block: 2rem;
+    }
+
+    .checkout-disclaimer {
+        margin-block: 2rem;
+        font-size: 0.8rem;
+    }
+
+    .checkout-final-book {
+        padding: 1rem;
+        padding-inline: 2rem;
+        font-size: 1rem;
+        font-family: cereal-medium;
+        background-color: $clr1;
+        color: #fff;
+        border-radius: 10px;
+
+        &:hover {
+            background-color: $clr2;
+        }
+    }
+
+
+}

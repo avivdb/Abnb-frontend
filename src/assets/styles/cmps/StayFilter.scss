@@ -1,0 +1,21 @@
+.stay-filter {
+  display: grid;
+  grid-auto-flow: column;
+  // justify-self: center;
+  align-items: center;
+  gap: 0 0.5em;
+  width: 60vw;
+  background-color: $clr6;
+  padding: 0.5em;
+  border-radius: 50%;
+
+  h3 {
+    grid-column: 1 / -1;
+    font-size: rem(14px);
+    margin: 0;
+  }
+
+  & :not(h3) {
+    cursor: pointer;
+  }
+}

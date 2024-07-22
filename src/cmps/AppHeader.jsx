@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
-
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
+// import { StayEdit } from '../cmps/StayEdit'
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
 
@@ -58,7 +60,8 @@ export function AppHeader() {
 	return (
 		<header className="app-header full">
 
-			<NavLink to="/" className="logo fa brand airbnb">
+			<NavLink to="/" className="logo">
+				{/* <FontAwesomeIcon icon={faAirbnb} /> */}
 				<h1>bnb</h1>
 			</NavLink>
 
@@ -67,7 +70,7 @@ export function AppHeader() {
 
 			<section className="header-user">
 				<Link to={`stay/edit`}>
-					<button>Abnb your home</button>
+					<button className='btn-add-stay'>Abnb your home</button>
 				</Link>
 				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 

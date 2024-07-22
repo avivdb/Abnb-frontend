@@ -34,6 +34,10 @@ export function StayEdit({ setEditModal }) {
         }
     }
 
+    function onNavHome() {
+        navigate('/stay')
+    }
+
     return (
         <section className="stay-edit">
             <Link to={`/stay`}><button>Back</button></Link>

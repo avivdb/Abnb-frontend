@@ -23,6 +23,7 @@
 @import "pages/LoginSignup";
 @import "pages/UserWishlist.scss";
 @import "pages/UserTrips.scss";
+@import "pages/OredrCheckout.scss";
 
 // Components
 
@@ -50,3 +51,5 @@
 @import "cmps/AmenitiesModal";
 
 @import "cmps/OrderDetails";
+@import "cmps/DateRangePickerInOrder";
+@import "cmps/CountrySelectModal.scss";
