@@ -80,18 +80,20 @@
     }
   }
 
-  // button {
-  //   font-family: cereal-medium;
-  //   font-size: 0.9rem;
-  //   padding: 1rem;
-  //   background-color: #fff;
-  //   border-radius: 30px;
-  //   color: $gray4;
+  .btn-add-stay {
+    font-family: cereal-medium;
+    font-size: 0.9rem;
+    color: $gray4;
+    
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 30px;
+    margin-inline: 1rem;
 
-  //   &:hover {
-  //     background-color: #f5f4f4;
-  //   }
-  // }
+    &:hover {
+      background-color: #f5f4f4;
+    }
+  }
 
   display: grid;
   align-items: center;

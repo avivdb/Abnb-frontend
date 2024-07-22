@@ -61,19 +61,19 @@ export function OrderDetails({ stay }) {
 
 
     async function onAddOrder() {
-		if (!orderToEdit.startDate || !orderToEdit.endDate) return alert('All fields are required')
-            
-		try {
-			await addOrder({ order: orderToEdit, stay: stay })
-			showSuccessMsg('Review added')
-			setOrderToEdit({ startDate: '', endDate: '', totalPrice: 0 })
+        if (!orderToEdit.startDate || !orderToEdit.endDate) return alert('All fields are required')
+
+        try {
+            await addOrder({ order: orderToEdit, stay: stay })
+            showSuccessMsg('Review added')
+            setOrderToEdit({ startDate: '', endDate: '', totalPrice: 0 })
             setCheckinDate('')
             setCheckoutDate('')
             setNumberOfNights(0)
-		} catch (err) {
-			showErrorMsg('Cannot add order')
-		}
-	}
+        } catch (err) {
+            showErrorMsg('Cannot add order')
+        }
+    }
 
     return (
         <article className='order-details'>
@@ -87,7 +87,7 @@ export function OrderDetails({ stay }) {
             </label>
 
             <h2>₪{stay.price} <span>night</span></h2>
-            <Link to={`/stay/checkout/${orderToEdit._id}`} target='_blank'><button onClick={onAddOrder}>Reserve</button></Link>
+            <Link to={`/stay/${stay._id}/checkout`}><button onClick={onAddOrder}>Reserve</button></Link>
             <h4>You won't be charged yet</h4>
             <h3>₪{stay.price} x {numberOfNights} nights</h3>
             <h3>₪{stay.price * numberOfNights}</h3>

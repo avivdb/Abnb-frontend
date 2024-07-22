@@ -5,6 +5,17 @@
     margin-block-start: 4rem;
     margin-block-end: 5rem;
 
+    .control-dots {
+        position: absolute;
+        top: 35rem;
+        left: 20%;
+        transform: rotate(90deg);
+
+        .dot {
+            box-shadow: none;
+        }
+    }
+
     h1 {
         color: black;
         font-size: 2rem;
