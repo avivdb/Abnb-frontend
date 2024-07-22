@@ -14,13 +14,13 @@ export async function loadOrders() {
 	}
 }
 
-// export async function addOrder({ order, stay}) {
+// export async function saveOrder({ order, stay}) {
 export async function addOrder(order) {
 	try {
-		const addedOrder = await orderService.add(order)
-		store.dispatch({ type: ADD_ORDER, order })
+		const savedOrder = await orderService.save(order)
+		store.dispatch({ type: ADD_ORDER, savedOrder })
 	} catch (err) {
-		console.log('OrderActions: err in addOrder', err)
+		console.log('OrderActions: err in saveOrder', err)
 		throw err
 	}
 }

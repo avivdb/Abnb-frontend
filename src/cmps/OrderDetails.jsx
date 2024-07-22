@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { addOrder } from "../store/actions/order.action"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { orderService } from "../services/order"
 import { OrderDateModel } from "./OrderDateModel"
 import { OrderGuestsModal } from "./OrderGuestsModal"
@@ -10,64 +8,44 @@ import dayjs from 'dayjs'
 // check if necessary totalPrice
 
 export function OrderDetails({ stay }) {
-    const initialCheckinDate = stay.defaultCheckin.slice(0, 10)
-    const initialCheckoutDate = stay.defaultCheckout.slice(0, 10)
-
-    const [checkinDate, setCheckinDate] = useState(initialCheckinDate)
-    const [checkoutDate, setCheckoutDate] = useState(initialCheckoutDate)
-    const [numberOfNights, setNumberOfNights] = useState(0)
+    const [numberOfNights, setNumberOfNights] = useState(1)
     const [searchParams, setSearchParams] = useSearchParams()
     const [orderToEdit, setOrderToEdit] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
-    const navigate = useNavigate()
-
     const [isDateModalOpen, setIsDateModalOpen] = useState(false)
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
-
-     // State for guests
-     const [adultCounter, setAdultCounter] = useState(orderToEdit.guestCounts.adults || 1)
-     const [childrenCounter, setChildrenCounter] = useState(orderToEdit.guestCounts.children || 0)
-     const [infantCounter, setInfantCounter] = useState(orderToEdit.guestCounts.infants || 0)
-     const [petCounter, setPetCounter] = useState(orderToEdit.guestCounts.pets || 0)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        updateBookingDetails()
-    }, [checkinDate, checkoutDate])
+        setOrderToEdit(prevOrder => {
+            const newOrder = { ...prevOrder }
+            if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin.slice(0, 10)
+                if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout.slice(0, 10)
+                    console.log('orderToEdit- new:', newOrder)
+                    return newOrder
+            })
+    }, [])
+
+    // useEffect(() => {
+    //     setSearchParams({...orderToEdit, ...guestCounts})
+    // },[orderToEdit])
 
     useEffect(() => {
         setSearchParams({
-            startDate: checkinDate,
-            endDate: checkoutDate,
+            startDate: orderToEdit.startDate,
+            endDate: orderToEdit.endDate,
             totalPrice: orderToEdit.totalPrice,
             adults: orderToEdit.guestCounts.adults,
             children: orderToEdit.guestCounts.children,
             infants: orderToEdit.guestCounts.infants,
             pets: orderToEdit.guestCounts.pets,
             guests: orderToEdit.guests,
-        
+
         })
-    }, [checkinDate, checkoutDate, orderToEdit])
-    // }, [checkinDate, checkoutDate])
+    }, [orderToEdit])
 
     useEffect(() => {
-        setOrderToEdit(prev => ({
-            ...prev,
-            guestCounts: {
-                adults: adultCounter,
-                children: childrenCounter,
-                infants: infantCounter,
-                pets: petCounter
-            }
-        }))
-    }, [adultCounter, childrenCounter, infantCounter, petCounter])
-
-    function handleCheckinChange(event) {
-        setCheckinDate(event.target.value)
-    }
-
-    function handleCheckoutChange(event) {
-        setCheckoutDate(event.target.value)
-    }
-
+        updateBookingDetails()
+    },[orderToEdit.startDate, orderToEdit.endDate])
 
     function calculateNights(checkin, checkout) {
         const checkinDate = new Date(checkin)
@@ -78,23 +56,15 @@ export function OrderDetails({ stay }) {
     }
 
     function updateBookingDetails() {
-        if (checkinDate && checkoutDate) {
-            const nights = calculateNights(checkinDate, checkoutDate)
+        if (orderToEdit.startDate && orderToEdit.startDate) {
+            const nights = calculateNights(orderToEdit.startDate, orderToEdit.endDate)
             setNumberOfNights(nights)
             setOrderToEdit({
                 ...orderToEdit,
-                startDate: checkinDate,
-                endDate: checkoutDate,
                 totalPrice: stay.price * nights + 500 //stay.price * nights + Airbnb service fee
             })
         } else {
-            setNumberOfNights(0)
-            setOrderToEdit({
-                ...orderToEdit,
-                startDate: '',
-                endDate: '',
-                totalPrice: 0
-            })
+            setNumberOfNights(1)
         }
     }
 
@@ -113,7 +83,7 @@ export function OrderDetails({ stay }) {
 
         navigate(`/stay/${stay._id}/checkout?${params}`)
     }
-    
+
     function getGuestSummary() {
         const { guestCounts } = orderToEdit
         if (!guestCounts) {
@@ -132,7 +102,7 @@ export function OrderDetails({ stay }) {
 
         return guestSummary.join(', ')
     }
-    
+
 
     return (
         <article className='order-details'>
@@ -145,11 +115,11 @@ export function OrderDetails({ stay }) {
                 <div className="od-booking-dates">
                     <div className="od-booking-date">
                         <span className="od-text">CHECK-IN</span>
-                        <span className="od-value">{dayjs(checkinDate).format('DD/MM/YYYY')}</span>
+                        <span className="od-value">{dayjs(orderToEdit.startDate).format('DD/MM/YYYY')}</span>
                     </div>
                     <div className="od-booking-date">
                         <span className="od-text">CHECK-OUT</span>
-                        <span className="od-value">{dayjs(checkoutDate).format('DD/MM/YYYY')}</span>
+                        <span className="od-value">{dayjs(orderToEdit.endDate).format('DD/MM/YYYY')}</span>
                     </div>
                 </div>
             </button>
@@ -157,21 +127,19 @@ export function OrderDetails({ stay }) {
             {isDateModalOpen && (<section className="od-date-modal">
                 <div className="date-picker-container">
                     <OrderDateModel
-                        checkin={checkinDate}
-                        checkout={checkoutDate}
-                        setCheckinDate={setCheckinDate}
-                        setCheckoutDate={setCheckoutDate}
-                        setIsDateModalOpen={setIsDateModalOpen} 
+                        orderToEdit={orderToEdit}
+                        setOrderToEdit={setOrderToEdit}
+                        setIsDateModalOpen={setIsDateModalOpen}
                     />
                 </div>
             </section>)}
 
-            
-            
+
+
             <button onClick={() => setIsGuestsModalOpen(true)}>Guests</button>
             <h5>{getGuestSummary()}</h5>
             {isGuestsModalOpen && (<section className="od-guests-modal">
-                <OrderGuestsModal orderToEdit={orderToEdit} setOrderToEdit={setOrderToEdit} stay={stay}/>
+                <OrderGuestsModal orderToEdit={orderToEdit} setOrderToEdit={setOrderToEdit} stay={stay} />
             </section>)}
 
 

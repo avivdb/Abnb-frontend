@@ -9,10 +9,11 @@ _createOrders()
 export const orderService = {
 	query,
 	getById,
-	add,
+	save,
 	remove,
 	getEmptyOrder,
 	getOrderToEditFromSearchParams,
+	setSearchParamsFromOrder,
 
 }
 
@@ -28,8 +29,8 @@ async function remove(orderId) {
 	await storageService.remove(STORAGE_KEY, orderId)
 }
 
-// async function add({ order, stay }) {
-async function add (order) {
+// async function save({ order, stay }) {
+async function save(order) {
 	const stay = await stayService.getById(order.stayId)
 	const orderToAdd = {
 		hostId: stay.host._id,
@@ -42,8 +43,8 @@ async function add (order) {
 			fullname: 'Adi Sabban',
 		},
 		totalPrice: order.totalPrice,
-		startDate: order.startDate,
-		endDate: order.endDate,
+		startDate: order.startDate || stay.defaultCheckin.slice(0, 10),
+		endDate: order.endDate || stay.defaultCheckout.slice(0, 10),
 		guests: order.guests || 1,
 		guestCounts: {
 			adults: order.guestCounts?.adults || 1,
@@ -67,8 +68,8 @@ async function add (order) {
 
 function getEmptyOrder() {
     return { 
-        startDate: '', 
-        endDate: '', 
+        // startDate: '', 
+        // endDate: '', 
         totalPrice: 0, 
         guestCounts: { 
             adults: 1, 
@@ -90,15 +91,46 @@ function getEmptyOrder() {
 //     return orderToEdit
 // }
 
+// function getOrderToEditFromSearchParams(searchParams) {
+//     const defaultOrderToEdit = getEmptyOrder()
+//     const orderToEdit = { ...defaultOrderToEdit }
+//     for (const field in defaultOrderToEdit) {
+//         orderToEdit[field] = searchParams.get(field) || defaultOrderToEdit[field]
+//     }
+//     return orderToEdit
+// }
+
 function getOrderToEditFromSearchParams(searchParams) {
-    const defaultOrderToEdit = getEmptyOrder()
-    const orderToEdit = { ...defaultOrderToEdit }
-    for (const field in defaultOrderToEdit) {
-        orderToEdit[field] = searchParams.get(field) || defaultOrderToEdit[field]
+    const orderToEdit = {
+        startDate: searchParams.get('startDate') || '',
+        endDate: searchParams.get('endDate') || '',
+        totalPrice: +searchParams.get('totalPrice') || 0,
+        guests: +searchParams.get('guests') || 1,
+        guestCounts: {
+			adults: +searchParams.get('adults') || 1,
+			children: +searchParams.get('children') || 0,
+			infants: +searchParams.get('infants') || 0,
+			pets: +searchParams.get('pets') || 0,
+		} 
     }
     return orderToEdit
 }
 
+function setSearchParamsFromOrder(orderToEdit) {
+    const searchParams = new URLSearchParams()
+
+    searchParams.set('startDate', orderToEdit.startDate)
+    searchParams.set('endDate', orderToEdit.endDate)
+    searchParams.set('totalPrice', orderToEdit.totalPrice.toString())
+    searchParams.set('guests', orderToEdit.guests.toString())
+
+    searchParams.set('adults', orderToEdit.guestCounts.adults.toString())
+    searchParams.set('children', orderToEdit.guestCounts.children.toString())
+    searchParams.set('infants', orderToEdit.guestCounts.infants.toString())
+    searchParams.set('pets', orderToEdit.guestCounts.pets.toString())
+
+    return searchParams
+}
 
 function _createOrders() {
 	let orders

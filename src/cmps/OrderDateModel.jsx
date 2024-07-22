@@ -4,17 +4,20 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
 
-export function OrderDateModel({ checkin, checkout, setCheckinDate, setCheckoutDate, setIsDateModalOpen }) {
-
-    const [startDate, setStartDate] = useState(new Date(checkin))
-    const [endDate, setEndDate] = useState(new Date(checkout))
+export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen }) {
+    const [startDate, setStartDate] = useState(new Date(orderToEdit.startDate))
+    const [endDate, setEndDate] = useState(new Date(orderToEdit.endDate))
 
     function handleSelect(dates) {
         const [start, end] = dates
         setStartDate(start)
         setEndDate(end)
-        setCheckinDate(dayjs(start).format('YYYY-MM-DD'))
-        setCheckoutDate(dayjs(end).format('YYYY-MM-DD'))
+        setOrderToEdit({
+            ...orderToEdit, 
+            startDate: dayjs(start).format('YYYY-MM-DD') , 
+            endDate: dayjs(end).format('YYYY-MM-DD')
+        })
+    
     }
 
     return (
@@ -62,4 +65,4 @@ export function OrderDateModel({ checkin, checkout, setCheckinDate, setCheckoutD
 }
 
 
-                    
+

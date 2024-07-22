@@ -7,8 +7,6 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay }) {
     const [infantCounter, setInfantCounter] = useState(0)
     const [petCounter, setPetCounter] = useState(0)
 
-
-    // function handleClick(operator, counter, setCounter) {
     function handleClick(operator, counter, setCounter, type) {
         let newCounter = counter
         const totalAdultsChildren = adultCounter + childrenCounter
