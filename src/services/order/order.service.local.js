@@ -44,8 +44,13 @@ async function add (order) {
 		totalPrice: order.totalPrice,
 		startDate: order.startDate,
 		endDate: order.endDate,
-		// guests: order.guests,
-		guests: 3,
+		guests: order.guests || 1,
+		guestCounts: {
+			adults: order.guestCounts?.adults || 1,
+			children: order.guestCounts?.children || 0,
+			infants: order.guestCounts?.infants || 0,
+			pets: order.guestCounts?.pets || 0
+		},
 		stay: {
 			// mini-stay
 			_id: stay._id,
@@ -61,16 +66,35 @@ async function add (order) {
 }
 
 function getEmptyOrder() {
-	return { startDate: '', endDate: '', totalPrice: 0 }
-	// return { stayId:'', startDate: '', endDate: '', totalPrice: 0 }
+    return { 
+        startDate: '', 
+        endDate: '', 
+        totalPrice: 0, 
+        guestCounts: { 
+            adults: 1, 
+            children: 0, 
+            infants: 0, 
+            pets: 0 
+        }, 
+        guests: 1 
+    }
 }
 
 
+// function getOrderToEditFromSearchParams(searchParams) {
+//     const defaultOrderToEdit = getEmptyOrder()
+//     const orderToEdit = {}
+//     for (const field in defaultOrderToEdit) {
+//         orderToEdit[field] = searchParams.get(field) || ''
+//     }
+//     return orderToEdit
+// }
+
 function getOrderToEditFromSearchParams(searchParams) {
     const defaultOrderToEdit = getEmptyOrder()
-    const orderToEdit = {}
+    const orderToEdit = { ...defaultOrderToEdit }
     for (const field in defaultOrderToEdit) {
-        orderToEdit[field] = searchParams.get(field) || ''
+        orderToEdit[field] = searchParams.get(field) || defaultOrderToEdit[field]
     }
     return orderToEdit
 }
@@ -91,9 +115,12 @@ function _createOrders() {
 				totalPrice: 160,
 				startDate: '2025/10/15',
 				endDate: '2025/10/17',
-				guests: {
-					adults: 1,
-					kids: 2,
+				guests: 3,
+				guestCounts: {
+					adults: 2,
+					children: 1,
+					infants: 0,
+                    pets: 0
 				},
 				stay: {
 					// mini-stay

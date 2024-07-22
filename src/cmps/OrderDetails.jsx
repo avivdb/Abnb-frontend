@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { addOrder } from "../store/actions/order.action"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
-import { DateRangePickerInOrder } from "./DateRangePickerInOrder"
 import { orderService } from "../services/order"
+import { OrderDateModel } from "./OrderDateModel"
+import { OrderGuestsModal } from "./OrderGuestsModal"
+import dayjs from 'dayjs'
 
 // check if necessary totalPrice
 
@@ -18,7 +20,14 @@ export function OrderDetails({ stay }) {
     const [orderToEdit, setOrderToEdit] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
     const navigate = useNavigate()
 
-    // const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+    const [isDateModalOpen, setIsDateModalOpen] = useState(false)
+    const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
+
+     // State for guests
+     const [adultCounter, setAdultCounter] = useState(orderToEdit.guestCounts.adults || 1)
+     const [childrenCounter, setChildrenCounter] = useState(orderToEdit.guestCounts.children || 0)
+     const [infantCounter, setInfantCounter] = useState(orderToEdit.guestCounts.infants || 0)
+     const [petCounter, setPetCounter] = useState(orderToEdit.guestCounts.pets || 0)
 
     useEffect(() => {
         updateBookingDetails()
@@ -28,9 +37,28 @@ export function OrderDetails({ stay }) {
         setSearchParams({
             startDate: checkinDate,
             endDate: checkoutDate,
-            totalPrice: orderToEdit.totalPrice
+            totalPrice: orderToEdit.totalPrice,
+            adults: orderToEdit.guestCounts.adults,
+            children: orderToEdit.guestCounts.children,
+            infants: orderToEdit.guestCounts.infants,
+            pets: orderToEdit.guestCounts.pets,
+            guests: orderToEdit.guests,
+        
         })
-    }, [checkinDate, checkoutDate])
+    }, [checkinDate, checkoutDate, orderToEdit])
+    // }, [checkinDate, checkoutDate])
+
+    useEffect(() => {
+        setOrderToEdit(prev => ({
+            ...prev,
+            guestCounts: {
+                adults: adultCounter,
+                children: childrenCounter,
+                infants: infantCounter,
+                pets: petCounter
+            }
+        }))
+    }, [adultCounter, childrenCounter, infantCounter, petCounter])
 
     function handleCheckinChange(event) {
         setCheckinDate(event.target.value)
@@ -75,12 +103,36 @@ export function OrderDetails({ stay }) {
         const params = new URLSearchParams({
             startDate: orderToEdit.startDate,
             endDate: orderToEdit.endDate,
-            totalPrice: orderToEdit.totalPrice
+            totalPrice: orderToEdit.totalPrice,
+            adults: orderToEdit.guestCounts.adults,
+            children: orderToEdit.guestCounts.children,
+            infants: orderToEdit.guestCounts.infants,
+            pets: orderToEdit.guestCounts.pets,
+            guests: orderToEdit.guests,
         }).toString()
 
         navigate(`/stay/${stay._id}/checkout?${params}`)
     }
+    
+    function getGuestSummary() {
+        const { guestCounts } = orderToEdit
+        if (!guestCounts) {
+            return '1 guest'
+        }
+        const totalGuests = guestCounts.adults + guestCounts.children
+        const guestSummary = []
 
+        guestSummary.push(`${totalGuests} ${totalGuests > 1 ? 'guest' : 'guest'}`)
+        if (guestCounts.infants > 0) {
+            guestSummary.push(`${guestCounts.infants} ${guestCounts.infants > 1 ? 'infants' : 'infant'}`)
+        }
+        if (guestCounts.pets > 0) {
+            guestSummary.push(`${guestCounts.pets} ${guestCounts.pets > 1 ? 'pets' : 'pet'}`)
+        }
+
+        return guestSummary.join(', ')
+    }
+    
 
     return (
         <article className='order-details'>
@@ -89,40 +141,41 @@ export function OrderDetails({ stay }) {
                 <span>night</span>
             </div>
 
-            {/* <div className="booking-dates">
-                <button className="booking-date">
-                    <span>CHECK-IN</span>
-                    <span>{checkinDate}</span>
-                </button>
-                <button className="booking-date">
-                    <span>CHECK-OUT</span>
-                    <span>{checkoutDate}</span>
-                </button>
-            </div> */}
+            <button className="od-btn-booking-dates" onClick={() => setIsDateModalOpen(true)}>
+                <div className="od-booking-dates">
+                    <div className="od-booking-date">
+                        <span className="od-text">CHECK-IN</span>
+                        <span className="od-value">{dayjs(checkinDate).format('DD/MM/YYYY')}</span>
+                    </div>
+                    <div className="od-booking-date">
+                        <span className="od-text">CHECK-OUT</span>
+                        <span className="od-value">{dayjs(checkoutDate).format('DD/MM/YYYY')}</span>
+                    </div>
+                </div>
+            </button>
 
-            <div className="booking-dates">
-                <div className="booking-date">
-                    <label>CHECK-IN</label>
-                    <input type="text" value={checkinDate} onChange={handleCheckinChange} />
-                </div>
-                <div className="booking-date">
-                    <label>CHECKOUT</label>
-                    <input type="text" value={checkoutDate} onChange={handleCheckoutChange} />
-                </div>
-            </div>
-            {/* {isDatePickerOpen && (
+            {isDateModalOpen && (<section className="od-date-modal">
                 <div className="date-picker-container">
-                    <DateRangePickerInOrder
-                        checkin={stay.defaultCheckin}
-                        checkout={stay.defaultCheckout}
+                    <OrderDateModel
+                        checkin={checkinDate}
+                        checkout={checkoutDate}
                         setCheckinDate={setCheckinDate}
                         setCheckoutDate={setCheckoutDate}
+                        setIsDateModalOpen={setIsDateModalOpen} 
                     />
-                    <button onClick={() => setIsDatePickerOpen(false)}>Close</button>
                 </div>
-            )} */}
+            </section>)}
 
-            <button className="btn-order" onClick={handleReserve}>Reserve</button>
+            
+            
+            <button onClick={() => setIsGuestsModalOpen(true)}>Guests</button>
+            <h5>{getGuestSummary()}</h5>
+            {isGuestsModalOpen && (<section className="od-guests-modal">
+                <OrderGuestsModal orderToEdit={orderToEdit} setOrderToEdit={setOrderToEdit} stay={stay}/>
+            </section>)}
+
+
+            <button className="od-btn-order" onClick={handleReserve}>Reserve</button>
             <h4>You won't be charged yet</h4>
             <div className="payment">
                 <h3 className="payment-details">₪{stay.price} x {numberOfNights} nights</h3>

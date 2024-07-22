@@ -32,26 +32,67 @@
         }
     }
 
-    .booking-dates {
-        margin-block-end: rem(16px);
-        // display: flex;
+    .od-btn-booking-dates {
+        position: relative;
+        display: flex;
+        width: 100%;
+        margin: 0px;
+        border: 1px solid $clr15;
+        color: black;
+        background-color: transparent;
+        border-radius: 0px;
+        box-shadow: none;
+        cursor: pointer;
+        padding: 0px;
+        text-align: left;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
 
-        .booking-date {
+        .od-booking-dates {
             display: flex;
-            flex-direction: column;
-            position: relative;
-            cursor: text;
-            min-height: 56px;
-            width: 100%;
-            margin: 0px;
-            background-color: transparent;
-            
+            margin-block-end: rem(16px);
+
+            .od-booking-date {
+                display: flex;
+                flex-direction: column;
+
+            }
         }
+
+
 
     }
 }
 
-.btn-order {
+.date-picker-container {
+    display: inline-block;
+    position: absolute;
+    margin-block-end: rem(16px);
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+    padding: 24px 32px 16px;
+    // top:-24px;
+    // right: -32px;
+    left: 0;
+    z-index: 1;
+}
+
+.od-guests-modal{
+    display: inline-block;
+    position: absolute;
+    margin-block-end: rem(16px);
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+    padding: 24px 32px 16px;
+    // top:-24px;
+    // right: -32px;
+    left: 0;
+    z-index: 1;
+}
+
+.od-btn-order {
     display: block;
     text-align: center;
     padding: rem(14px) rem(24px);
@@ -84,6 +125,3 @@ h4 {
 .total {
     font-family: cereal-medium;
 }
-
-
-
