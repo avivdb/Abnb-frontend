@@ -42,7 +42,6 @@ export function FilterExpanded({ setClass }) {
         }
     }
 
-
     function handleClick(field) {
         switch (field) {
             case 'where':
@@ -82,6 +81,15 @@ export function FilterExpanded({ setClass }) {
 
     }
 
+    function getModalClassName() {
+        let filterModalClass = 'filter-modal'
+        if (isWhere) filterModalClass += ' is-where'
+        if (isCheckIn) filterModalClass += ' is-check-in'
+        if (isCheckOut) filterModalClass += ' is-check-out'
+        if (isGuest) filterModalClass += ' is-guest'
+        return filterModalClass
+    }
+
     return (
 
         <section className={` ${setClass}`}>
@@ -118,12 +126,11 @@ export function FilterExpanded({ setClass }) {
 
                 </div>
 
-
             </section>
 
             {(isWhere || isCheckIn || isCheckOut || isGuest) &&
 
-                <section className="filter-modal">
+                <section className={getModalClassName()}>
                     {isWhere && <WhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                     {(isCheckIn || isCheckOut) && <DateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                     {isGuest && <AddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}

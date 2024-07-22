@@ -4,10 +4,9 @@
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
   align-content: center;
 
-  width: em(848px);
-  height: em(64px);
-  margin: em(-1px);
-
+  // width: em(848px);
+  // height: em(64px);
+  // margin: em(-1px);
   color: $clr8;
   border: $clr11 solid 1px;
   border-radius: em(32px);
@@ -24,6 +23,7 @@
     line-height: em(22.5px, 17.5px);
     color: $clr10;
     margin: 0;
+    text-wrap: nowrap;
   }
 
   h2 {
@@ -33,6 +33,7 @@
     line-height: em(20px, 15px);
     padding-bottom: 2px;
     margin: 0;
+    text-wrap: nowrap;
   }
 
   .field {
@@ -62,12 +63,13 @@
     &:first-child {
       border-left: none;
     }
+
     &:last-child {
       padding-right: em(9px);
     }
 
     &:hover {
-      background-color: $clr11;
+      background-color: $clr13;
       cursor: pointer;
     }
 
@@ -77,7 +79,6 @@
       top: 25%;
       bottom: 25%;
       left: 0;
-      width: 0;
       border-left: 0.5px solid rgba($clr8, 0.1);
     }
 
@@ -110,10 +111,7 @@
     transform: translateX(-50%);
     left: 50%;
     top: 100%;
-
-    // padding: 16px 32px;
-    // padding-bottom: 24px;
-
+    margin-top: 12px;
     display: grid;
     align-content: center;
 
@@ -122,5 +120,22 @@
     border: $clr11 solid 1px;
     border-radius: em(32px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    &.is-where {
+      padding-top: 32px;
+      padding-bottom: 24px;
+    }
+
+    &.is-check-in {
+      padding: 16px 32px;
+    }
+
+    &.is-check-out {
+      padding: 16px 32px;
+    }
+
+    &.is-guest {
+      padding: 16px 32px;
+    }
   }
 }
