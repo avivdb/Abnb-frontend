@@ -66,16 +66,16 @@ export function StayDetails() {
 
             <div className='stay-bedroom-display'>
               <h2 style={{ marginInlineStart: "1.5rem" }}>Where you'll sleep</h2>
-              {/* <section className='stay-bedroom-list'>
+              <section className='stay-bedroom-list'>
                 <BedroomsCarousel stay={stay} />
-              </section> */}
+              </section>
             </div>
             <hr />
 
-            <h2>What this place offers</h2>
+            <h2 className="amenities-title">What this place offers</h2>
             <section className="amenities">
               {stay.amenities.slice(0, 10).map((amenity, index) => (
-                <div key={index}>
+                <div className="amenity" key={index}>
                   <img
                     src={`../src/assets/img/icons/${amenity}.svg`}
                     alt={`${amenity} icon`}

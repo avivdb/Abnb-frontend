@@ -24,6 +24,8 @@
 @import "pages/UserWishlist.scss";
 @import "pages/UserTrips.scss";
 @import "pages/OredrCheckout.scss";
+@import "pages/UserOrders.scss";
+
 
 // Components
 
@@ -53,3 +55,5 @@
 @import "cmps/OrderDetails";
 @import "cmps/DateRangePickerInOrder";
 @import "cmps/CountrySelectModal.scss";
+@import "cmps/CheckoutStayModal.scss";
+

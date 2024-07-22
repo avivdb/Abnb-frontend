@@ -61,6 +61,115 @@ export function StayEdit({ setEditModal }) {
                 <input onChange={handleChange} id="counpricetry" type="number" name="price" value={stayToEdit.price} placeholder="Enter price" />
 
                 <button type="submit">Add</button>
+
+                <div className="btn-container">
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="content">
+                            <button type="submit" className="action-btn">
+                                <span>Add your property</span>
+                            </button>
+                        </div>
+                    </div>
+
             </form>
         </section>
     )

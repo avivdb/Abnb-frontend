@@ -1,7 +1,11 @@
 .stay-details {
     color: $clr7;
-    margin-block-start: 1.5rem;
+    margin-block-start: 2rem;
     margin-block-end: 5rem;
+
+    hr {
+        margin-block: 2rem;
+    }
 
     .gallery {
         display: grid;
@@ -32,6 +36,7 @@
 
     .stay-details-name {
         font-size: 1.7rem;
+        margin-block-end: 1rem;
     }
 
     .stay-dry-details {
@@ -90,6 +95,10 @@
         }
     }
 
+    .amenities-title {
+        margin-block-end: 2rem;
+    }
+
 
     .details-content {
         display: grid;
@@ -123,11 +132,12 @@
                     }
                 }
 
-                div {
+                .amenity {
                     display: flex;
                     align-items: center;
                     gap: 0.8rem;
                     font-family: cereal-light;
+                    margin-block-end: 1rem;
 
                     .icon {
                         height: 24px;

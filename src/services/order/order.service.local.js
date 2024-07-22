@@ -89,8 +89,8 @@ function _createOrders() {
 					fullname: 'User 1',
 				},
 				totalPrice: 160,
-				startDate: '2025/10/15',
-				endDate: '2025/10/17',
+				startDate: '2025-10-15',
+				endDate: '2025-10-17',
 				guests: {
 					adults: 1,
 					kids: 2,
