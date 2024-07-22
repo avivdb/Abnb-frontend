@@ -5,28 +5,32 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { DateRangePickerInOrder } from "./DateRangePickerInOrder"
 import { orderService } from "../services/order"
 
+// check if necessary totalPrice
 
 export function OrderDetails({ stay }) {
-    const [checkinDate, setCheckinDate] = useState(stay.defaultCheckin)
-    const [checkoutDate, setCheckoutDate] = useState(stay.defaultCheckout)
+    const initialCheckinDate = stay.defaultCheckin.slice(0, 10)
+    const initialCheckoutDate = stay.defaultCheckout.slice(0, 10)
+
+    const [checkinDate, setCheckinDate] = useState(initialCheckinDate)
+    const [checkoutDate, setCheckoutDate] = useState(initialCheckoutDate)
     const [numberOfNights, setNumberOfNights] = useState(0)
     const [searchParams, setSearchParams] = useSearchParams()
     const [orderToEdit, setOrderToEdit] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
     const navigate = useNavigate()
 
+    // const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+
     useEffect(() => {
         updateBookingDetails()
-        console.log('orderToEdit:', orderToEdit)
     }, [checkinDate, checkoutDate])
 
     useEffect(() => {
         setSearchParams({
-            stayId: stay._id,
             startDate: checkinDate,
             endDate: checkoutDate,
             totalPrice: orderToEdit.totalPrice
         })
-    }, [orderToEdit])
+    }, [checkinDate, checkoutDate])
 
     function handleCheckinChange(event) {
         setCheckinDate(event.target.value)
@@ -35,6 +39,7 @@ export function OrderDetails({ stay }) {
     function handleCheckoutChange(event) {
         setCheckoutDate(event.target.value)
     }
+
 
     function calculateNights(checkin, checkout) {
         const checkinDate = new Date(checkin)
@@ -50,7 +55,6 @@ export function OrderDetails({ stay }) {
             setNumberOfNights(nights)
             setOrderToEdit({
                 ...orderToEdit,
-                stayId: stay._id,
                 startDate: checkinDate,
                 endDate: checkoutDate,
                 totalPrice: stay.price * nights + 500 //stay.price * nights + Airbnb service fee
@@ -59,7 +63,6 @@ export function OrderDetails({ stay }) {
             setNumberOfNights(0)
             setOrderToEdit({
                 ...orderToEdit,
-                stayId: stay._id,
                 startDate: '',
                 endDate: '',
                 totalPrice: 0
@@ -67,37 +70,17 @@ export function OrderDetails({ stay }) {
         }
     }
 
-    // function handleReserve() {
-    //     navigate(`/stay/checkout?stayId=${orderToEdit.stayId}&startDate=${orderToEdit.startDate}&endDate=${orderToEdit.endDate}&totalPrice=${orderToEdit.totalPrice}`)
-    // }
 
     function handleReserve() {
         const params = new URLSearchParams({
-            stayId: orderToEdit.stayId,
             startDate: orderToEdit.startDate,
             endDate: orderToEdit.endDate,
             totalPrice: orderToEdit.totalPrice
         }).toString()
-    
-        navigate(`/stay/checkout?${params}`)
+
+        navigate(`/stay/${stay._id}/checkout?${params}`)
     }
 
-
-    // async function onAddOrder() {
-    //     if (!orderToEdit.startDate || !orderToEdit.endDate) return alert('All fields are required')
-
-    //     try {
-    //         // await addOrder({ order: orderToEdit, stay: stay })
-    //         await addOrder({ order: orderToEdit })
-    //         showSuccessMsg('Order added')
-    //         // setOrderToEdit(orderService.getEmptyOrder())
-    //         // setCheckinDate('')
-    //         // setCheckoutDate('')
-    //         // setNumberOfNights(0)
-    //     } catch (err) {
-    //         showErrorMsg('Cannot add order')
-    //     }
-    // }
 
     return (
         <article className='order-details'>
@@ -106,28 +89,39 @@ export function OrderDetails({ stay }) {
                 <span>night</span>
             </div>
 
-            <div className="suggest-me-a-name">
-                
-                <label>
-                    CHECK-IN
-                    {/* <input type="date" value={formatDate(checkinDate)} onChange={handleCheckinChange} /> */}
-                    <input type="date" value={checkinDate} onChange={handleCheckinChange} />
-                </label>
-                <label>
-                    CHECKOUT
-                    {/* <input type="date" value={formatDate(checkoutDate)} onChange={handleCheckoutChange} /> */}
-                    <input type="date" value={checkoutDate} onChange={handleCheckoutChange} />
-                </label>
-                {/* <DateRangePickerInOrder 
-                // stay={stay} 
-                checkin={stay.defaultCheckin} 
-                checkout={stay.defaultCheckout}
-                setCheckinDate={setCheckinDate}
-                setCheckoutDate={setCheckoutDate}
-                /> */}
-            </div>
+            {/* <div className="booking-dates">
+                <button className="booking-date">
+                    <span>CHECK-IN</span>
+                    <span>{checkinDate}</span>
+                </button>
+                <button className="booking-date">
+                    <span>CHECK-OUT</span>
+                    <span>{checkoutDate}</span>
+                </button>
+            </div> */}
 
-            {/* <button className="btn-order" onClick={onAddOrder}>Reserve</button> */}
+            <div className="booking-dates">
+                <div className="booking-date">
+                    <label>CHECK-IN</label>
+                    <input type="text" value={checkinDate} onChange={handleCheckinChange} />
+                </div>
+                <div className="booking-date">
+                    <label>CHECKOUT</label>
+                    <input type="text" value={checkoutDate} onChange={handleCheckoutChange} />
+                </div>
+            </div>
+            {/* {isDatePickerOpen && (
+                <div className="date-picker-container">
+                    <DateRangePickerInOrder
+                        checkin={stay.defaultCheckin}
+                        checkout={stay.defaultCheckout}
+                        setCheckinDate={setCheckinDate}
+                        setCheckoutDate={setCheckoutDate}
+                    />
+                    <button onClick={() => setIsDatePickerOpen(false)}>Close</button>
+                </div>
+            )} */}
+
             <button className="btn-order" onClick={handleReserve}>Reserve</button>
             <h4>You won't be charged yet</h4>
             <div className="payment">

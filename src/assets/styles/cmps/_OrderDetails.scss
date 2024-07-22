@@ -32,44 +32,58 @@
         }
     }
 
-    .suggest-me-a-name {
+    .booking-dates {
         margin-block-end: rem(16px);
+        // display: flex;
+
+        .booking-date {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: text;
+            min-height: 56px;
+            width: 100%;
+            margin: 0px;
+            background-color: transparent;
+            
+        }
+
     }
+}
 
-    .btn-order {
-        display: block;
-        text-align: center;
-        padding: rem(14px) rem(24px);
-        background-color: $clr16;
-        color: $clr6;
-        line-height: rem(20px);
-        font-family: cereal-medium;
-        min-width: 200px;
-        border-radius: 8px;
-        cursor: pointer;
-
-    }
-
-    h4 {
-        margin-top: 8px;
-        font-size: rem(14px);
-        text-align: center;
-    }
-
-    .payment {
-        display: flex;
-        justify-content: space-between;
-        font-family: cereal-light;
-    }
-
-    .payment-details {
-        text-decoration: underline;
-    }
-
-    .total {
-        font-family: cereal-medium;
-    }
-
-
+.btn-order {
+    display: block;
+    text-align: center;
+    padding: rem(14px) rem(24px);
+    background-color: $clr16;
+    color: $clr6;
+    line-height: rem(20px);
+    font-family: cereal-medium;
+    min-width: 200px;
+    border-radius: 8px;
+    cursor: pointer;
 
 }
+
+h4 {
+    margin-top: 8px;
+    font-size: rem(14px);
+    text-align: center;
+}
+
+.payment {
+    display: flex;
+    justify-content: space-between;
+    font-family: cereal-light;
+}
+
+.payment-details {
+    text-decoration: underline;
+}
+
+.total {
+    font-family: cereal-medium;
+}
+
+
+

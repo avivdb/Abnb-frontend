@@ -9,11 +9,6 @@ export function DateRangePickerInOrder({ checkin, checkout, setCheckinDate, setC
     const [startDate, setStartDate] = useState(checkin)
     const [endDate, setEndDate] = useState(checkout)
 
-    useEffect(() => {
-        console.log('startDate:', startDate)
-        console.log('endDate:', endDate)
-    }, [startDate, endDate])
-
     function handleSelect(dates){
         const [start, end] = dates
         setStartDate(start)
@@ -27,6 +22,8 @@ export function DateRangePickerInOrder({ checkin, checkout, setCheckinDate, setC
         
     }
 
+
+    
     return (
         <div className="date-range-wrapper">
             <DatePicker

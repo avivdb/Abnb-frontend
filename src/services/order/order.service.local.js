@@ -61,8 +61,8 @@ async function add (order) {
 }
 
 function getEmptyOrder() {
-	return { stayId:'', startDate: '', endDate: '', totalPrice: 0 }
-	// return { startDate: '', endDate: '', totalPrice: 0 }
+	return { startDate: '', endDate: '', totalPrice: 0 }
+	// return { stayId:'', startDate: '', endDate: '', totalPrice: 0 }
 }
 
 
