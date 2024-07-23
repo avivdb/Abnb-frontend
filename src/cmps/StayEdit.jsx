@@ -29,6 +29,7 @@ export function StayEdit({ setEditModal }) {
             await addStay(stayToEdit)
             showSuccessMsg('Stay added')
             setStayToEdit({ name: '', country: '', city: '', price: '', fullname: '' })
+            navigate('/')
         } catch (err) {
             showErrorMsg('Cannot add stay')
         }
@@ -60,7 +61,7 @@ export function StayEdit({ setEditModal }) {
                 <label htmlFor="price">Property Price (per night):</label>
                 <input onChange={handleChange} id="counpricetry" type="number" name="price" value={stayToEdit.price} placeholder="Enter price" />
 
-                <button type="submit" className="btn-container">
+                <button type="submit" className="btn-container" >
                         <div className="cell"></div>
                         <div className="cell"></div>
                         <div className="cell"></div>
@@ -162,7 +163,7 @@ export function StayEdit({ setEditModal }) {
                         <div className="cell"></div>
                         <div className="cell"></div>
                         <div className="content">
-                            <button type="submit" className="action-btn">
+                            <button type="submit" className="action-btn" >
                                 <span>Add your property</span>
                             </button>
                         </div>

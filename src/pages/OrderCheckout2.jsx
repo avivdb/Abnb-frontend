@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { stayService } from "../services/stay/stay.service.local"
 import { CountrySelectModal } from "../cmps/CountrySelectModal"
@@ -14,38 +15,75 @@ import { orderService } from "../services/order"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 
-export function OrderCheckout() {
+export function OrderCheckout2() {
     const [countryModal, setCountryModal] = useState(false)
-    const [selectedCountry, setSelectedCountry] = useState(null)
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const { stayId } = useParams()
     const [stay, setStay] = useState(null)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [order, setOrder] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
+    const [searchParams] = useSearchParams()
+    const [orderToEdit, setOrderToEdit] = useState(orderService.getEmptyOrder())
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchStay()
-        console.log('order:', order)
-    }, [])
-
-    
-    async function fetchStay() {
-        try {
-            const fetchedStay = await stayService.getById(stayId)
-            setStay(fetchedStay)
-            setOrder((prevOrder) => ({
-                ...prevOrder,
-                stay: {
-                    _id: fetchedStay._id,
-                    name: fetchedStay.name,
-                    price: fetchedStay.price
-                }
-            }))
-        } catch (err) {
-            console.error('Failed to fetch stay:', err)
+        async function fetchStay() {
+            try {
+                const stay = await stayService.getById(stayId)
+                setStay(stay)
+            } catch (err) {
+                console.error('Failed to fetch stay:', err)
+            }
         }
-    }
+        fetchStay()
+    }, [])
+   
+    // useEffect(() => {
+    //     const order = orderService.getOrderToEditFromSearchParams(searchParams)
+    //     setOrderToEdit({ 
+    //         ...order, 
+    //         stay: {
+	// 			_id: stay._id,
+	// 			name: stay.name,
+	// 			price: stay.price,
+	// 		}
+    //      })
+    // }, [searchParams])
 
+    useEffect(() => {
+        if (stay) {
+            const order = orderService.getOrderToEditFromSearchParams(searchParams)
+            setOrderToEdit({
+                ...order,
+                stay: {
+                    _id: stay._id,
+                    name: stay.name,
+                    price: stay.price,
+                }
+            })
+        }
+    }, [searchParams, stay])
+
+    const order = {
+        _id: 'o1225',
+        hostId: { _id: 'u102', fullname: "bob", imgUrl: "..." },
+        guest: {
+            _id: 'u101',
+            fullname: 'User 1',
+        },
+        totalPrice: 160,
+        startDate: new Date('2024-08-24T12:30:00'),
+        endDate: new Date('2024-09-10T12:30:00'),
+        guests: {
+            adults: 1,
+            kids: 2,
+        },
+        stay: {
+            _id: 'h102',
+            name: 'House Of Uncle My',
+            price: 80.0,
+        },
+        msgs: [],
+        status: 'pending',
+    }
 
     const months = [
         'Jan', 'Feb', 'Mar', 'Apr',
@@ -53,22 +91,28 @@ export function OrderCheckout() {
         'Sep', 'Oct', 'Nov', 'Dec'
     ]
 
-    const checkinDate = new Date(order.startDate).getDate()
-    const checkinMonthIndex = new Date(order.startDate).getMonth()
-   
+    const checkinDate = order.startDate.getDate()
+    const checkinMonthIndex = order.startDate.getMonth()
     const checkinMonthShort = months[checkinMonthIndex]
     const formattedCheckinDate = `${checkinMonthShort} ${checkinDate}`
 
-    const checkouDate = new Date(order.endDate).getDate()
-    const checkoutMonthIndex = new Date(order.endDate).getMonth()
-    
+    const checkouDate = order.endDate.getDate()
+    const checkoutMonthIndex = order.endDate.getMonth()
     const checkoutMonthShort = months[checkoutMonthIndex]
     const formattedCheckoutDate = `${checkoutMonthShort} ${checkouDate}`
 
     const checkoutDate =
         (checkinMonthIndex === checkoutMonthIndex) ?
-            new Date(order.endDate).getDate() : formattedCheckoutDate
-   
+            order.endDate.getDate() : formattedCheckoutDate
+
+
+    const getTotalGuests = (order) => {
+        const { guests } = order
+        const { adults, kids } = guests
+        const totalGuests = adults + kids
+        return totalGuests
+    }
+
     let dateObj = new Date(order.startDate)
     dateObj.setDate(dateObj.getDate() - 14)
     let cancallationDay = dateObj.getDate()
@@ -89,15 +133,12 @@ export function OrderCheckout() {
     }
 
     async function onAddOrder() {
-        if (!order.startDate || !order.endDate || !order.stay || !order.stay._id) {
-            return alert('All fields are required')
-        }
-        // if (!order.startDate || !order.endDate) return alert('All fields are required')
+        if (!orderToEdit.startDate || !orderToEdit.endDate) return alert('All fields are required')
+
         try {
-            await addOrder(order)
+            await addOrder(orderToEdit)
             showSuccessMsg('Order added')
-            setOrder(orderService.getEmptyOrder())
-            navigate('/stay/trips')
+            setOrderToEdit(orderService.getEmptyOrder())
         } catch (err) {
             showErrorMsg('Cannot add order')
         }
@@ -117,8 +158,7 @@ export function OrderCheckout() {
                         </section>
                         <section>
                             <h3>Guests</h3>
-                            <p>{order.guests} {(order.guests === 1) ? "guest" : "guests"}</p>
-                            {/* <p>{getTotalGuests(order)} {(getTotalGuests(order) === 1) ? "guest" : "guests"}</p> */}
+                            <p>{getTotalGuests(order)} {(getTotalGuests(order) === 1) ? "guest" : "guests"}</p>
                         </section>
                     </section>
                     <hr />
@@ -146,9 +186,9 @@ export function OrderCheckout() {
 
                     <section className="checkout-cancellation-policy">
                         <h2>Cancellation Policy</h2>
-                        <div><h1 className="cancellation-policy-bold">{`Free cancellation before 2:00 PM on ${cancellationDateFormatted2}.`}</h1>
+                        <p><span className="cancellation-policy-bold">{`Free cancellation before 2:00 PM on ${cancellationDateFormatted2}.`}</span>
                             {` Cancel before ${cancellationDateFormatted} for a partial refund.`}
-                        </div>
+                        </p>
                     </section>
                     <hr />
 
@@ -277,7 +317,7 @@ export function OrderCheckout() {
 
                 </section>
             </section>
-            <CheckoutStayModal stay={stay} order={order} />
+            <CheckoutStayModal />
         </section>
     )
 }

@@ -21,7 +21,8 @@ export function StayPreview({ stay }) {
         stayService.toggleWishlist(stay)
     }
 
-    return <Link to={`/stay/${_id}`} target='_blank'>
+    return <Link to={`/stay/${_id}`}>
+    {/* return <Link to={`/stay/${_id}`} target='_blank'> */}
         <article className="stay-preview">
             <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
                 <img src={stay.isWishlist ? heartfull : heartempty} />
