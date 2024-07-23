@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { LocationFilter } from "./LocationFilter";
 import SearchIcon from '@mui/icons-material/Search';
-import { WhereModal } from "./WhereModal";
-import DateRangePicker from "./DateRangePicker";
+import { FilterWhereModal } from "./FilterWhereModal";
 import { useSelector } from "react-redux";
 import { setFilterBy } from "../store/actions/stay.actions";
-import { AddGuest } from "./AddGuest";
+import { FilterLocation } from "./FilterLocation";
+import FilterDateRangePicker from "./FilterDateRangePicker";
+import { FilterAddGuest } from "./FilterAddGuest";
 
 export function FilterExpanded({ setClass }) {
 
@@ -98,7 +98,7 @@ export function FilterExpanded({ setClass }) {
 
                 <div className="where-field field" onClick={() => handleClick('where')}>
                     <h2>Where</h2>
-                    <LocationFilter filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
+                    <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
                 </div>
 
 
@@ -131,9 +131,9 @@ export function FilterExpanded({ setClass }) {
             {(isWhere || isCheckIn || isCheckOut || isGuest) &&
 
                 <section className={getModalClassName()}>
-                    {isWhere && <WhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {(isCheckIn || isCheckOut) && <DateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {isGuest && <AddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {isWhere && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {(isCheckIn || isCheckOut) && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {isGuest && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>
             }
         </section>

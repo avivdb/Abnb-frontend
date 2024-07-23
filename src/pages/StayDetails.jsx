@@ -88,7 +88,7 @@ export function StayDetails() {
                 <button className='show-amenities-modal' onClick={onShowAmenities}>
                   {`Show all ${stay.amenities.length} amenities`}
                 </button>}
-              {amenitiesModal && <AmenitiesModal setAmenitiesModal={setAmenitiesModal} amenities={stay.amenities}/>}
+              {amenitiesModal && <AmenitiesModal setAmenitiesModal={setAmenitiesModal} amenities={stay.amenities} />}
             </section>
           </div>
           <OrderDetails stay={stay} />

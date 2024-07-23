@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
-// import { StayEdit } from '../cmps/StayEdit'
+
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
 
@@ -14,6 +12,7 @@ import userimg from "../assets/img/icons/user.svg"
 
 import { useEffect, useState } from 'react'
 import { UserMenu } from './UserMenu'
+
 
 export function AppHeader() {
 
@@ -61,8 +60,7 @@ export function AppHeader() {
 		<header className="app-header full">
 
 			<NavLink to="/" className="logo">
-				{/* <FontAwesomeIcon icon={faAirbnb} /> */}
-				<h1>bnb</h1>
+				<h1 className='fa brand airbnb'>bnb</h1>
 			</NavLink>
 
 			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />

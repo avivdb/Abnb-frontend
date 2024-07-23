@@ -1,77 +1,76 @@
 .img-carousel {
-    position: relative;
+  position: relative;
 
-    .control-dots {
-        position: absolute;
-        bottom: 1rem;
+  .control-dots {
+    position: absolute;
+    bottom: 1rem;
 
-        .dot {
-            box-shadow: none;
-        }
+    .dot {
+      box-shadow: none;
     }
+  }
 
-    button {
-        display: none;
-        place-items: center;
+  button {
+    display: none;
+    place-items: center;
 
-        width: 2rem;
-        height: 2rem;
+    width: 2rem;
+    height: 2rem;
 
-        opacity: 0.9;
-        background-color: #fff;
-        padding: 0.5rem;
-        border: 0.5px solid $gray1;
-        border-radius: 50%;
-        margin: 0;
+    opacity: 0.9;
+    background-color: #fff;
+    padding: 0.5rem;
+    border: 0.5px solid $gray1;
+    border-radius: 50%;
+    margin: 0;
 
-        transition: 0.2s;
-    }
+    transition: 0.2s;
+  }
 
-    .carousel:hover .nav-btn {
-        display: flex;
-    }
+  .carousel:hover .nav-btn {
+    display: flex;
+  }
 
+  img {
+    padding: 0;
+    margin: 0;
+    margin: auto;
+  }
+
+  .nav-btn-left {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    // left: 1rem;
+    transform: translateY(-50%);
+    padding-inline-end: 0.2rem;
 
     img {
-        padding: 0;
-        margin: 0;
-        margin: auto;
+      max-width: 0.8rem;
     }
 
-    .nav-btn-left {
-        z-index: 1;
-        position: absolute;
-        top: 50%;
-        // left: 1rem;
-        transform: translateY(-50%);
-        padding-inline-end: 0.2rem;
+    &:hover {
+      scale: 1.02;
+      opacity: 1;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    }
+  }
 
-        img {
-            max-width: 0.8rem;
-        }
+  .nav-btn-right {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    // right: 1rem;
+    transform: translateY(-50%);
 
-        &:hover {
-            scale: 1.02;
-            opacity: 1;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-        }
+    img {
+      max-width: 0.8rem;
     }
 
-    .nav-btn-right {
-        z-index: 1;
-        position: absolute;
-        top: 50%;
-        // right: 1rem;
-        transform: translateY(-50%);
-
-        img {
-            max-width: 0.8rem;
-        }
-
-        &:hover {
-            scale: 1.02;
-            opacity: 1;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-        }
+    &:hover {
+      scale: 1.02;
+      opacity: 1;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     }
+  }
 }

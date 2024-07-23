@@ -1,13 +1,14 @@
-import image0 from '../assets/img/icons/asset 0.jpeg';
-import image1 from '../assets/img/icons/asset 1.webp';
-import image2 from '../assets/img/icons/asset 2.webp';
-import image3 from '../assets/img/icons/asset 3.webp';
-import image4 from '../assets/img/icons/asset 4.webp';
-import image5 from '../assets/img/icons/asset 5.webp';
+import image0 from '../assets/img/icons/asset0.jpeg';
+import image1 from '../assets/img/icons/asset1.webp';
+import image2 from '../assets/img/icons/asset2.webp';
+import image3 from '../assets/img/icons/asset3.webp';
+import image4 from '../assets/img/icons/asset4.webp';
+import image5 from '../assets/img/icons/asset5.webp';
+
 import { useEffect, useState } from "react";
 import iconLocation from '../assets/img/icons/location-2952.svg';
 
-export function WhereModal({ filterToEdit, setFilterToEdit }) {
+export function FilterWhereModal({ filterToEdit, setFilterToEdit }) {
 
     const [predictions, setPredictions] = useState([]);
     const [isTyping, setIsTyping] = useState(false)

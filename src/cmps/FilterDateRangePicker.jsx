@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/cmps/DateRangePicker.scss';
 import dayjs from 'dayjs';
 
-export default function DateRangePicker({ filterToEdit, setFilterToEdit }) {
+export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit }) {
     const [startDate, setStartDate] = useState(dayjs().toDate())
     const [endDate, setEndDate] = useState(dayjs().toDate())
 

@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 
-export function AddGuest({ filterToEdit, setFilterToEdit }) {
+export function FilterAddGuest({ filterToEdit, setFilterToEdit }) {
     const [adultCounter, setAdultCounter] = useState(0)
     const [childrenCounter, setChildrenCounter] = useState(0)
     const [infantCounter, setInfantCounter] = useState(0)

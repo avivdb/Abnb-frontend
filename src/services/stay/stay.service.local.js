@@ -7,7 +7,7 @@ import { loadFromStorage } from '../../services/util.service.js'
 
 const STORAGE_KEY = 'STAY_DB'
 _createStays()
-// saveToStorage("STAY_DB", stays)
+
 
 
 
@@ -27,14 +27,12 @@ window.cs = stayService
 async function query(filterBy = { txt: '', checkIn: '', checkOut: '', guest: {}, labels: [] }) {
     var stays = await storageService.query(STORAGE_KEY)
     const { txt } = filterBy
-    // console.log('txt', txt)
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
     }
 
-    // stays = stays.map(({ _id, name, price }) => ({ _id, name, price }))
     return stays
 }
 

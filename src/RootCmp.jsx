@@ -17,6 +17,8 @@ import { UserTrips } from './pages/UserTrips.jsx'
 import { UserWishlist } from './pages/UserWishlist.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
 import { OrderCheckout } from './pages/OrderCheckout.jsx'
+import { Label } from '@mui/icons-material'
+// import { FilterLabel } from './cmps/FilterLabel.jsx'
 
 
 
@@ -25,6 +27,7 @@ export function RootCmp() {
 
         <div className="main-container">
             <AppHeader />
+            {/* <FilterLabel /> */}
             <UserMsg />
 
             <main>

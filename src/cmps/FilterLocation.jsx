@@ -1,5 +1,5 @@
 
-export function LocationFilter({ filterToEdit, setFilterToEdit }) {
+export function FilterLocation({ filterToEdit, setFilterToEdit }) {
 
     function handleChange(ev) {
         const value = ev.target.value
