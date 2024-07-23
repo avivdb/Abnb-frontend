@@ -43,8 +43,6 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay }) {
                 pets: type === 'pet' ? newCounter : petCounter
             }
         })
-
-        console.log('orderToEdit:', orderToEdit)
     }
 
     return (

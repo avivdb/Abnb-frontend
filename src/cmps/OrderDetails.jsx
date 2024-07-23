@@ -20,7 +20,6 @@ export function OrderDetails({ stay }) {
             const newOrder = { ...prevOrder }
             if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin.slice(0, 10)
                 if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout.slice(0, 10)
-                    console.log('orderToEdit- new:', newOrder)
                     return newOrder
             })
     }, [])

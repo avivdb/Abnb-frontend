@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { orderService } from "../services/order/order.service.local"
+import { updateOrder } from '../store/actions/order.action';
 
 export function UserOrders() {
     const [orders, setOrders] = useState([])
@@ -17,7 +18,15 @@ export function UserOrders() {
         fetchOrders()
     }, [])
 
-    
+    async function handleStatusChange(order, newStatus) {
+        try {
+            const updatedOrder = { ...order, status: newStatus }
+            await updateOrder(updatedOrder)
+            setOrders(prevOrders => prevOrders.map(o => o._id === order._id ? updatedOrder : o))
+        } catch (error) {
+            console.error('Error updating order status:', error)
+        }
+    }
 
     return (
         <div className="user-orders">
@@ -31,6 +40,7 @@ export function UserOrders() {
                         <th>Check out</th>
                         <th>Total Price</th>
                         <th>Status</th>
+                        <th>Updat Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,9 +51,10 @@ export function UserOrders() {
                             <td>{order.startDate}</td>
                             <td>{order.endDate}</td>
                             <td>{order.totalPrice}</td>
+                            <td>{order.status}</td>
                             <td>
-                                <button>Approve</button>
-                                <button>Decline</button>
+                                <button onClick={() => handleStatusChange(order, 'approved')}>Approve</button>
+                                <button onClick={() => handleStatusChange(order, 'declined')}>Decline</button>
                             </td>
                         </tr>
                     ))}

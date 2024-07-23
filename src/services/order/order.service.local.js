@@ -29,67 +29,81 @@ async function remove(orderId) {
 	await storageService.remove(STORAGE_KEY, orderId)
 }
 
-// async function save({ order, stay }) {
 async function save(order) {
-	const stay = await stayService.getById(order.stayId)
-	const orderToAdd = {
-		hostId: stay.host._id,
-		// guest: { //user or mini user???
-		// 	_id: userService.getLoggedinUser()._id,
-		// 	fullname: userService.getLoggedinUser().fullname,
-		// },
-		guest: {
-			_id: 'g106',
-			fullname: 'Adi Sabban',
-		},
-		totalPrice: order.totalPrice,
-		startDate: order.startDate || stay.defaultCheckin.slice(0, 10),
-		endDate: order.endDate || stay.defaultCheckout.slice(0, 10),
-		guests: order.guests || 1,
-		guestCounts: {
-			adults: order.guestCounts?.adults || 1,
-			children: order.guestCounts?.children || 0,
-			infants: order.guestCounts?.infants || 0,
-			pets: order.guestCounts?.pets || 0
-		},
-		stay: {
-			// mini-stay
-			_id: stay._id,
-			name: stay.name,
-			price: stay.price,
-		},
-		msgs: [], // host - guest chat
-		status: 'pending', // approved / rejected
+	const stay = await stayService.getById(order.stay._id)
+	let savedOrder
+
+	if (order._id) {
+		const orderToSave = {
+			_id: order._id,
+			hostId: stay.host._id,
+			guest: {
+				_id: 'g106',
+				fullname: 'Adi Sabban',
+			},
+			totalPrice: order.totalPrice,
+			startDate: order.startDate,
+			endDate: order.endDate,
+			guests: order.guests || 2,
+			stay: {
+				_id: stay._id,
+				name: stay.name,
+				price: stay.price,
+			},
+			msgs: order.msgs || [], // host - guest chat
+			status: order.status || 'pending', // approved / rejected
+		}
+		savedOrder = await storageService.put(STORAGE_KEY, orderToSave)
+	} else {
+		const orderToSave = {
+			hostId: stay.host._id,
+			guest: order.guest,
+			// guest: { //user or mini user???
+			// 	_id: userService.getLoggedinUser()._id,
+			// 	fullname: userService.getLoggedinUser().fullname,
+			// },
+			guest: {
+				_id: 'g106',
+				fullname: 'Adi Sabban',
+			},
+			totalPrice: order.totalPrice,
+			startDate: order.startDate || stay.defaultCheckin.slice(0, 10),
+			endDate: order.endDate || stay.defaultCheckout.slice(0, 10),
+			guests: order.guests || 1,
+			guestCounts: {
+				adults: order.guestCounts?.adults || 1,
+				children: order.guestCounts?.children || 0,
+				infants: order.guestCounts?.infants || 0,
+				pets: order.guestCounts?.pets || 0
+			},
+			stay: {
+				// mini-stay
+				_id: stay._id,
+				name: stay.name,
+				price: stay.price,
+			},
+			msgs: [], // host - guest chat
+			status: 'pending', // approved / rejected
+		}
+		savedOrder = await storageService.post(STORAGE_KEY, orderToSave)
 	}
 
-	const addedOrder = await storageService.post(STORAGE_KEY, orderToAdd)
-	return addedOrder
+	return savedOrder
 }
 
 function getEmptyOrder() {
-    return { 
-        // startDate: '', 
-        // endDate: '', 
-        totalPrice: 0, 
-        guestCounts: { 
-            adults: 1, 
-            children: 0, 
-            infants: 0, 
-            pets: 0 
-        }, 
-        guests: 1 
-    }
+	return {
+		totalPrice: 0,
+		guestCounts: {
+			adults: 1,
+			children: 0,
+			infants: 0,
+			pets: 0
+		},
+		guests: 1
+	}
 }
 
-
-// function getOrderToEditFromSearchParams(searchParams) {
-//     const defaultOrderToEdit = getEmptyOrder()
-//     const orderToEdit = {}
-//     for (const field in defaultOrderToEdit) {
-//         orderToEdit[field] = searchParams.get(field) || ''
-//     }
-//     return orderToEdit
-// }
 
 // function getOrderToEditFromSearchParams(searchParams) {
 //     const defaultOrderToEdit = getEmptyOrder()
@@ -101,35 +115,35 @@ function getEmptyOrder() {
 // }
 
 function getOrderToEditFromSearchParams(searchParams) {
-    const orderToEdit = {
-        startDate: searchParams.get('startDate') || '',
-        endDate: searchParams.get('endDate') || '',
-        totalPrice: +searchParams.get('totalPrice') || 0,
-        guests: +searchParams.get('guests') || 1,
-        guestCounts: {
+	const orderToEdit = {
+		startDate: searchParams.get('startDate') || '',
+		endDate: searchParams.get('endDate') || '',
+		totalPrice: +searchParams.get('totalPrice') || 0,
+		guests: +searchParams.get('guests') || 1,
+		guestCounts: {
 			adults: +searchParams.get('adults') || 1,
 			children: +searchParams.get('children') || 0,
 			infants: +searchParams.get('infants') || 0,
 			pets: +searchParams.get('pets') || 0,
-		} 
-    }
-    return orderToEdit
+		}
+	}
+	return orderToEdit
 }
 
 function setSearchParamsFromOrder(orderToEdit) {
-    const searchParams = new URLSearchParams()
+	const searchParams = new URLSearchParams()
 
-    searchParams.set('startDate', orderToEdit.startDate)
-    searchParams.set('endDate', orderToEdit.endDate)
-    searchParams.set('totalPrice', orderToEdit.totalPrice.toString())
-    searchParams.set('guests', orderToEdit.guests.toString())
+	searchParams.set('startDate', orderToEdit.startDate)
+	searchParams.set('endDate', orderToEdit.endDate)
+	searchParams.set('totalPrice', orderToEdit.totalPrice.toString())
+	searchParams.set('guests', orderToEdit.guests.toString())
 
-    searchParams.set('adults', orderToEdit.guestCounts.adults.toString())
-    searchParams.set('children', orderToEdit.guestCounts.children.toString())
-    searchParams.set('infants', orderToEdit.guestCounts.infants.toString())
-    searchParams.set('pets', orderToEdit.guestCounts.pets.toString())
+	searchParams.set('adults', orderToEdit.guestCounts.adults.toString())
+	searchParams.set('children', orderToEdit.guestCounts.children.toString())
+	searchParams.set('infants', orderToEdit.guestCounts.infants.toString())
+	searchParams.set('pets', orderToEdit.guestCounts.pets.toString())
 
-    return searchParams
+	return searchParams
 }
 
 function _createOrders() {
@@ -152,7 +166,7 @@ function _createOrders() {
 					adults: 2,
 					children: 1,
 					infants: 0,
-                    pets: 0
+					pets: 0
 				},
 				stay: {
 					// mini-stay
@@ -178,7 +192,7 @@ function _createOrders() {
 					adults: 2,
 					children: 1,
 					infants: 0,
-                    pets: 0
+					pets: 0
 				},
 				stay: {
 					// mini-stay
@@ -204,7 +218,7 @@ function _createOrders() {
 					adults: 2,
 					children: 1,
 					infants: 0,
-                    pets: 0
+					pets: 0
 				},
 				stay: {
 					// mini-stay
@@ -230,7 +244,7 @@ function _createOrders() {
 					adults: 2,
 					children: 1,
 					infants: 0,
-                    pets: 0
+					pets: 0
 				},
 				stay: {
 					// mini-stay

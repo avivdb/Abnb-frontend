@@ -12,23 +12,55 @@ import arrowBack from "../assets/img/icons/arrowback.svg"
 import SelectDropdown from "../cmps/SelectDropdown"
 import { addOrder } from "../store/actions/order.action"
 import { orderService } from "../services/order"
-import { showSuccessMsg } from "../services/event-bus.service"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 
 export function OrderCheckout() {
-
     const [countryModal, setCountryModal] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState(null);
     const { stayId } = useParams()
+    const [stay, setStay] = useState(null)
     const [searchParams] = useSearchParams()
     const [orderToEdit, setOrderToEdit] = useState(orderService.getEmptyOrder())
-    const stay = stayService.getById(stayId)
     const navigate = useNavigate()
 
     useEffect(() => {
-        const order = orderService.getOrderToEditFromSearchParams(searchParams)
-        setOrderToEdit({ ...order, stayId })
-    }, [searchParams, stayId])
+        async function fetchStay() {
+            try {
+                const stay = await stayService.getById(stayId)
+                setStay(stay)
+            } catch (err) {
+                console.error('Failed to fetch stay:', err)
+            }
+        }
+        fetchStay()
+    }, [])
+   
+    // useEffect(() => {
+    //     const order = orderService.getOrderToEditFromSearchParams(searchParams)
+    //     setOrderToEdit({ 
+    //         ...order, 
+    //         stay: {
+	// 			_id: stay._id,
+	// 			name: stay.name,
+	// 			price: stay.price,
+	// 		}
+    //      })
+    // }, [searchParams])
+
+    useEffect(() => {
+        if (stay) {
+            const order = orderService.getOrderToEditFromSearchParams(searchParams)
+            setOrderToEdit({
+                ...order,
+                stay: {
+                    _id: stay._id,
+                    name: stay.name,
+                    price: stay.price,
+                }
+            })
+        }
+    }, [searchParams, stay])
 
     const order = {
         _id: 'o1225',
