@@ -5,7 +5,6 @@ import { stayService } from '../services/stay'
 export function CheckoutStayModal() {
     const { stayId } = useParams()
     const [stay, setStay] = useState(null)
-    // const [numberOfNights, setNumberOfNights] = useState(0)
 
     useEffect(() => {
         stayService.getById(stayId)

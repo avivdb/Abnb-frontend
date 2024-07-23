@@ -1,11 +1,13 @@
 .order-details {
-    // grid-column: 2 / 3;
-    margin-inline-start: rem(32px);
-    padding: rem(24px);
+    position: sticky;
+    top: 0;
     height: max-content;
+
+    padding: rem(24px);
     border: 1px solid rgb(221, 221, 221);
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    margin-inline-start: rem(32px);
 
     .price-per-night {
         display: flex;
@@ -121,8 +123,7 @@
         z-index: 1;
 
         position: absolute;
-        left: 20%;
-        top: 80%;
+        left: -180%;
 
         padding: 24px 32px 16px;
         background: rgb(255, 255, 255);
@@ -135,8 +136,8 @@
         z-index: 1;
 
         position: absolute;
-        right: 10%;
-        top: 95%;
+        right: 100%;
+        top: 0;
 
         background: rgb(255, 255, 255);
         border-radius: 10px;
@@ -151,4 +152,9 @@
 
         }
     }
+}
+
+.order-details-container {
+    position: relative;
+    height: max-content;
 }

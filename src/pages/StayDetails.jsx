@@ -91,7 +91,8 @@ export function StayDetails() {
               {amenitiesModal && <AmenitiesModal setAmenitiesModal={setAmenitiesModal} amenities={stay.amenities} />}
             </section>
           </div>
-          <OrderDetails stay={stay} />
+          
+          <div className="order-details-container"><OrderDetails stay={stay} /></div>
 
         </section>
       </div>
