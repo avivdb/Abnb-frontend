@@ -3,12 +3,13 @@
   grid-auto-flow: column;
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
   align-content: center;
-
+  width: 70%;
   color: $clr8;
   border: $clr11 solid 1px;
   border-radius: em(40px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
-
+  flex-shrink: 0.5;
+  column-gap: 1rem;
   h1,
   h2 {
     grid-column: 1;
@@ -36,13 +37,13 @@
 
   .field {
     position: relative;
-
+    flex-shrink: 1;
     display: grid;
     align-items: center;
     align-content: center;
 
     line-height: em(25.5px);
-    padding: em(14px) em(24px);
+    padding: em(8px);
     border-radius: em(32px);
 
     .location-filter {
@@ -60,6 +61,7 @@
 
     &:first-child {
       border-left: none;
+      padding-left: 1.7rem;
     }
 
     &:last-child {
@@ -129,13 +131,5 @@
     &.is-guest {
       padding: 16px 32px;
     }
-
-    // &.is-check-out {
-    //   padding: 16px 32px;
-    // }
-
-    // &.is-guest {
-    //   padding: 16px 32px;
-    // }
   }
 }

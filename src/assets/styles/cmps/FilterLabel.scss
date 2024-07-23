@@ -6,7 +6,7 @@
 
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
   text-align: center;
 
@@ -18,6 +18,11 @@
   .prev-page-btn {
     grid-column: 1;
     justify-self: end;
+  }
+  .filter-advanced-btn {
+    grid-column: 4;
+    margin-left: 15px;
+    padding: 10px;
   }
 
   .label-list {

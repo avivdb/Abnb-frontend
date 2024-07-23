@@ -62,6 +62,8 @@ import iconLake from '../assets/img/icons/asset66.jpeg';
 import iconBeach from '../assets/img/icons/asset67.jpeg';
 import arrowForward from "../assets/img/icons/arrowforward.svg"
 import arrowBack from "../assets/img/icons/arrowback.svg"
+import iconFilterAdvanced from "../assets/img/icons/filterAdvancedicon.svg"
+
 import { useSelector } from 'react-redux';
 import { setFilterBy } from "../store/actions/stay.actions";
 
@@ -173,7 +175,7 @@ export function FilterLabel() {
     } else currentItems = icons.slice(startIndex, endIndex)
 
     function handleChange(label) {
-        setFilterBy({ ...filterBy, labels: label })
+        setFilterBy({ ...filterBy, label: label })
     }
 
     return (
@@ -188,7 +190,7 @@ export function FilterLabel() {
             </ul>
             {(currentPage < totalPages - 1) && <button className="pagination next-page-btn" onClick={handleNextPage}><img src={arrowForward} alt="Next" /></button>}
             {(currentPage !== 0) && <button className="pagination prev-page-btn" onClick={handlePrevPage}><img src={arrowBack} alt="Back" /></button>}
-
+            <button className='filter-advanced-btn'><img src={iconFilterAdvanced} alt="" /> Filters</button>
         </section>
     )
 }

@@ -21,7 +21,8 @@ export function FilterAddGuest({ filterToEdit, setFilterToEdit }) {
             default:
                 break;
         }
-        setFilterToEdit({ ...filterToEdit, guest: { adult: adultCounter, children: childrenCounter, infant: infantCounter, pet: petCounter } })
+        const capacity = adultCounter + childrenCounter + infantCounter + petCounter
+        setFilterToEdit({ ...filterToEdit, guest: { adult: adultCounter, children: childrenCounter, infant: infantCounter, pet: petCounter, capacity: capacity } })
 
     }
 
