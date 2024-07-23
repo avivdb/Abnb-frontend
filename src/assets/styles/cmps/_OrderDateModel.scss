@@ -1,0 +1,83 @@
+
+.odm-btn-booking-dates {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    // border: none transparent;
+    color: black;
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: none;
+    cursor: pointer;
+    padding: 0px;
+    text-align: left;
+    border: 1 px solid $clr15;
+    border-top-left-radius: 8px;
+    border-top-right-radius:8px;
+
+    .odm-booking-dates {
+        margin-block-end: rem(16px);
+        display: flex;
+
+        .odm-booking-date {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: text;
+            min-height: 56px;
+            width: 100%;
+            margin: 0px;
+            background-color: transparent;
+
+            .odm-check {
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                margin: 0px;
+                padding: 0px;
+                pointer-events: none;
+                font-size: 0.625rem;
+                line-height: 0.75rem;
+                color: rgb(34, 34, 34);
+                text-transform: uppercase;
+                font-weight: 700;
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .odm-date {
+                min-height: 56px;
+                width: 100%;
+                border: none;
+                outline: none;
+                margin: 0px;
+                padding: 26px 12px 10px;
+                background-color: transparent;
+                color: inherit;
+                font-family: inherit;
+                font-size: 0.875rem;
+                font-weight: inherit;
+                line-height: 1.125rem;
+                appearance: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    
+    
+}
+
+.odm-close {
+    background-color: $clr8;
+    color: $clr12;
+    border-radius: 8px;
+    padding: 8px 16px;
+
+}

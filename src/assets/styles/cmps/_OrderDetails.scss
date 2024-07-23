@@ -1,20 +1,11 @@
-// .order-details {
-//     // grid-column: 2 / 3;
-//     padding: rem(25px);
-//     border: 1px solid $gray1;
-//     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-//     border-radius: 20px;
-//     height: 425px;
-// }
-
 .order-details {
     // grid-column: 2 / 3;
     margin-inline-start: rem(32px);
     padding: rem(24px);
     height: max-content;
     border: 1px solid rgb(221, 221, 221);
-    border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 
     .price-per-night {
         display: flex;
@@ -32,58 +23,132 @@
         }
     }
 
-    .booking-dates {
-        margin-block-end: rem(16px);
-        // display: flex;
 
-        .booking-date {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            cursor: text;
-            min-height: 56px;
-            width: 100%;
-            margin: 0px;
-            background-color: transparent;
-            
+    .od-btns-booking-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        overflow: hidden;
+
+        padding: 0;
+        background-color: #fff;
+        border: 1px solid rgb(171, 171, 171);
+        border-radius: 10px;
+
+        font-size: 0.9rem;
+
+        p {
+            margin: 0;
         }
 
+
+        &>* {
+            padding: 0.5rem;
+
+        }
+
+        .od-booking-date {
+            display: flex;
+            flex-direction: column;
+
+            font-size: 0.7rem;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:first-of-type {
+                border-inline-end: 1px solid rgb(171, 171, 171);
+            }
+
+            .od-text {
+                font-size: 0.6rem;
+                font-family: cereal-bold;
+            }
+        }
+
+        .od-booking-guests {
+            grid-column: 1 / span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background-color: #fff;
+            border-top: 1px solid rgb(171, 171, 171);
+            text-align: start;
+        }
+    }
+
+    .price-details-content {
+
+        h1 {
+            font-size: 0.8rem;
+            font-family: cereal-light;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: cereal-light;
+            font-size: 1rem;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            margin-block: 1rem;
+
+            h3 {
+                font-size: 0.9rem;
+
+                &:nth-of-type(odd) {
+                    text-decoration: underline;
+                }
+            }
+
+        }
+    }
+
+    .payment-total {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            font-family: cereal-regular;
+        }
+    }
+
+    .date-picker-container {
+        z-index: 1;
+
+        position: absolute;
+        left: 20%;
+        top: 80%;
+
+        padding: 24px 32px 16px;
+        background: rgb(255, 255, 255);
+        border-radius: 16px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+        margin-block-end: rem(16px);
+    }
+
+    .od-guests-modal {
+        z-index: 1;
+
+        position: absolute;
+        right: 10%;
+        top: 95%;
+
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        margin-block-end: rem(16px);
+
+        .guest-modal-close {
+            background-color: #fff;
+            text-decoration: underline;
+            text-align: end;
+            font-size: 1.1rem;
+
+        }
     }
 }
-
-.btn-order {
-    display: block;
-    text-align: center;
-    padding: rem(14px) rem(24px);
-    background-color: $clr16;
-    color: $clr6;
-    line-height: rem(20px);
-    font-family: cereal-medium;
-    min-width: 200px;
-    border-radius: 8px;
-    cursor: pointer;
-
-}
-
-h4 {
-    margin-top: 8px;
-    font-size: rem(14px);
-    text-align: center;
-}
-
-.payment {
-    display: flex;
-    justify-content: space-between;
-    font-family: cereal-light;
-}
-
-.payment-details {
-    text-decoration: underline;
-}
-
-.total {
-    font-family: cereal-medium;
-}
-
-
-

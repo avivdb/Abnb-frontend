@@ -1,32 +1,66 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import { stayService } from "../services/stay/stay.service.local"
 import { CountrySelectModal } from "../cmps/CountrySelectModal"
+import { CheckoutStayModal } from "../cmps/CheckoutStayModal"
+
 // import { PaymentForm } from "../cmps/PaymentForm"
 
 import arrowBack from "../assets/img/icons/arrowback.svg"
 import SelectDropdown from "../cmps/SelectDropdown"
 import { addOrder } from "../store/actions/order.action"
 import { orderService } from "../services/order"
-import { showSuccessMsg } from "../services/event-bus.service"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 
 export function OrderCheckout() {
-
     const [countryModal, setCountryModal] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState(null);
     const { stayId } = useParams()
+    const [stay, setStay] = useState(null)
     const [searchParams] = useSearchParams()
     const [orderToEdit, setOrderToEdit] = useState(orderService.getEmptyOrder())
-    const stay = stayService.getById(stayId)
     const navigate = useNavigate()
-    
+
     useEffect(() => {
-        const order = orderService.getOrderToEditFromSearchParams(searchParams)
-        setOrderToEdit({ ...order, stayId })
-    }, [searchParams, stayId])
+        async function fetchStay() {
+            try {
+                const stay = await stayService.getById(stayId)
+                setStay(stay)
+            } catch (err) {
+                console.error('Failed to fetch stay:', err)
+            }
+        }
+        fetchStay()
+    }, [])
+   
+    // useEffect(() => {
+    //     const order = orderService.getOrderToEditFromSearchParams(searchParams)
+    //     setOrderToEdit({ 
+    //         ...order, 
+    //         stay: {
+	// 			_id: stay._id,
+	// 			name: stay.name,
+	// 			price: stay.price,
+	// 		}
+    //      })
+    // }, [searchParams])
+
+    useEffect(() => {
+        if (stay) {
+            const order = orderService.getOrderToEditFromSearchParams(searchParams)
+            setOrderToEdit({
+                ...order,
+                stay: {
+                    _id: stay._id,
+                    name: stay.name,
+                    price: stay.price,
+                }
+            })
+        }
+    }, [searchParams, stay])
 
     const order = {
         _id: 'o1225',
@@ -113,67 +147,177 @@ export function OrderCheckout() {
     return (
         <section className="order-checkout">
             <button className="back"><img src={arrowBack} /></button>
-            <section className="checkout-your-trip">
-                <h2 className="order-checkout-title">Request to book</h2>
-                <section className="order-checkout-top-content">
-                    <h2>Your trip</h2>
-                    <section>
-                        <h3>Dates</h3>
-                        <p>{formattedCheckinDate} - {checkoutDate}</p>
+            <h2 className="order-checkout-title">Request to book</h2>
+            <section className="checkout-main-content">
+                <section className="checkout-your-trip">
+                    <section className="order-checkout-top-content">
+                        <h2>Your trip</h2>
+                        <section>
+                            <h3>Dates</h3>
+                            <p>{formattedCheckinDate} - {checkoutDate}</p>
+                        </section>
+                        <section>
+                            <h3>Guests</h3>
+                            <p>{getTotalGuests(order)} {(getTotalGuests(order) === 1) ? "guest" : "guests"}</p>
+                        </section>
                     </section>
-                    <section>
-                        <h3>Guests</h3>
-                        <p>{getTotalGuests(order)} {(getTotalGuests(order) === 1) ? "guest" : "guests"}</p>
-                    </section>
-                </section>
-                <hr />
+                    <hr />
 
-                <div className="checkout-payment-content">
-                    <h2>Pay with</h2>
-                    <div className="checkout-select-dropdown">
-                        <SelectDropdown />
+                    <div className="checkout-payment-content">
+                        <h2>Pay with</h2>
+                        <div className="checkout-select-dropdown">
+                            <SelectDropdown />
+                        </div>
+                        <div className="checkout-user-card">
+                            <input placeholder="Card number" value="1234 5678 9012 3456" readOnly={true}></input>
+                            <input placeholder="Expiration" value="11/27" readOnly={true}></input>
+                            <input placeholder="CVV" value="123" readOnly={true}></input>
+                        </div>
+                        {/* <PaymentForm /> */}
+                        <input className="ZIP-code" placeholder="ZIP code" />
+                        <button
+                            className="btn-checkout-country"
+                            onClick={onShowCountries}>
+                            {selectedCountry ? selectedCountry : "Country/region"}
+                        </button>
+                        {countryModal && <CountrySelectModal setCountryModal={setCountryModal} setSelectedCountry={setSelectedCountry} />}
                     </div>
-                    {/* <PaymentForm /> */}
-                    <input className="ZIP-code" placeholder="ZIP code" />
-                    <button
-                        className="btn-checkout-country"
-                        onClick={onShowCountries}>
-                        {selectedCountry ? selectedCountry : "Country/region"}
-                    </button>
-                    {countryModal && <CountrySelectModal setCountryModal={setCountryModal} setSelectedCountry={setSelectedCountry} />}
-                </div>
-                <hr />
+                    <hr />
 
-                <section className="checkout-cancellation-policy">
-                    <h2>Cancellation Policy</h2>
-                    <p><span className="cancellation-policy-bold">{`Free cancellation before 2:00 PM on ${cancellationDateFormatted2}.`}</span>
-                        {` Cancel before ${cancellationDateFormatted} for a partial refund.`}
-                    </p>
+                    <section className="checkout-cancellation-policy">
+                        <h2>Cancellation Policy</h2>
+                        <p><span className="cancellation-policy-bold">{`Free cancellation before 2:00 PM on ${cancellationDateFormatted2}.`}</span>
+                            {` Cancel before ${cancellationDateFormatted} for a partial refund.`}
+                        </p>
+                    </section>
+                    <hr />
+
+                    <section className="ground-rules">
+                        <h2>Ground rules</h2>
+                        <p>We ask every guest to remember a few simple things about what makes a great guest.</p>
+                        <ul>
+                            <li>Follow the house rules</li>
+                            <li>treat your Host's home like your own</li>
+                        </ul>
+                    </section>
+                    <hr />
+
+                    <p className="checkou-host-option">The Host has 24 hours to confirm your reservation. You’ll be charged when the request is accepted.</p>
+                    <hr />
+
+                    <p className="checkout-disclaimer">By selecting the button, I agree to the booking terms. I also agree to the updated Terms of Service, Payments Terms of Service, and I acknowledge the Privacy Policy.</p>
+
+                    <div onClick={onAddOrder} className="btn-container">
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="content">
+                            <button className="action-btn">
+                                <span>Request to book</span>
+                            </button>
+                        </div>
+                    </div>
+
                 </section>
-                <hr />
-
-                <section className="ground-rules">
-                    <h2>Ground rules</h2>
-                    <p>We ask every guest to remember a few simple things about what makes a great guest.</p>
-                    <ul>
-                        <li>Follow the house rules</li>
-                        <li>treat your Host's home like your own</li>
-                    </ul>
-                </section>
-                <hr />
-
-                <p className="checkou-host-option">The Host has 24 hours to confirm your reservation. You’ll be charged when the request is accepted.</p>
-                <hr />
-
-                <p className="checkout-disclaimer">By selecting the button, I agree to the booking terms. I also agree to the updated Terms of Service, Payments Terms of Service, and I acknowledge the Privacy Policy.</p>
-
-                <button className="checkout-final-book" onClick={onAddOrder}>Request to book</button>
-
             </section>
-            <div className="checkout-stay-modal">
-                <h1>{stay.name}</h1>
-
-            </div>
+            <CheckoutStayModal />
         </section>
     )
 }

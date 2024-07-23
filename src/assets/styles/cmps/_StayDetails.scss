@@ -1,7 +1,11 @@
 .stay-details {
     color: $clr7;
-    margin-block-start: 1.5rem;
+    margin-block-start: 2rem;
     margin-block-end: 5rem;
+
+    hr {
+        margin-block: 2rem;
+    }
 
     .gallery {
         display: grid;
@@ -32,6 +36,7 @@
 
     .stay-details-name {
         font-size: 1.7rem;
+        margin-block-end: 1rem;
     }
 
     .stay-dry-details {
@@ -90,6 +95,10 @@
         }
     }
 
+    .amenities-title {
+        margin-block-end: 2rem;
+    }
+
 
     .details-content {
         display: grid;
@@ -123,11 +132,12 @@
                     }
                 }
 
-                div {
+                .amenity {
                     display: flex;
                     align-items: center;
                     gap: 0.8rem;
                     font-family: cereal-light;
+                    margin-block-end: 1rem;
 
                     .icon {
                         height: 24px;
@@ -144,16 +154,19 @@
         }
 
         .stay-bedroom-display {
-            position: relative;
-            right: 1.2rem;
-            width: 105%;
+            // position: relative;
+            // right: 1.2rem;
+            // width: 105%;
 
-            h2 {
-                margin-block-end: 0.8rem;
+            h4 {
+                margin: 0;
+                margin-block-end: 1rem;
+                text-align: start;
+                font-size: 1.5rem;
             }
 
             .stay-bedroom-list {
-                margin-block-end: 2rem;
+                margin-block-end: 1rem;
             }
 
             .stay-bedroom-display-card {
@@ -162,12 +175,10 @@
                 gap: 1rem;
                 align-items: start;
 
-                max-width: 15rem;
-
                 padding: 1.5rem;
                 border: 1px solid $gray1;
                 border-radius: 20px;
-                margin: 1rem;
+                // margin-inline: 1rem;
 
                 h1 {
                     font-size: 1rem;

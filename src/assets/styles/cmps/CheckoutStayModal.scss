@@ -1,0 +1,81 @@
+.checkout-stay-modal {
+
+    justify-self: end;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #cdcdcd;
+    width: 82%;
+    height: 31%;
+
+    hr {
+        margin-block: 1.5rem;
+    }
+
+    .checkout-stay-modal-top {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        img {
+            height: 7rem;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+        }
+
+        p {
+            margin-block: 0.3rem;
+            font-family: cereal-light;
+
+            &:first-of-type {
+                font-family: cereal-regular;
+            }
+
+            &:nth-of-type(2) {
+                font-size: 0.9rem;
+            }
+
+            &:last-of-type {
+                font-size: 0.9rem;
+                font-family: cereal-regular;
+
+                span {
+                    font-size: 0.8rem;
+                    font-family: cereal-light;
+                }
+            }
+        }
+    }
+
+    .price-details-content {
+
+        h1 {
+            font-size: 1.2rem;
+        }
+
+        h3 {
+            font-family: cereal-light;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            margin-block: 1rem;
+
+            h3 {
+                font-size: 0.9rem;
+                &:nth-of-type(odd) {
+                    text-decoration: underline;
+                }
+            }
+
+        }
+    }
+
+    .payment-total {
+        display: flex;
+        justify-content: space-between;
+        h3 {
+            font-family: cereal-regular;
+        }
+    }
+}
