@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 
-export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay }) {
+export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuestsModalOpen }) {
     const [adultCounter, setAdultCounter] = useState(1)
     const [childrenCounter, setChildrenCounter] = useState(0)
     const [infantCounter, setInfantCounter] = useState(0)
@@ -100,6 +100,8 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay }) {
                     <button onClick={() => handleClick('+', petCounter, setPetCounter, 'pet')}>+</button>
                 </div>
             </div>
+
+            <button className="guest-modal-close" onClick={() => setIsGuestsModalOpen(false)}>Close</button>
 
         </section>
     )

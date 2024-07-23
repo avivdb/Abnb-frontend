@@ -55,12 +55,12 @@ export function CheckoutStayModal() {
                     <h3>Airbnb service fee</h3>
                     <h3>₪500</h3>
                 </div>
-                </section>
                 <hr />
                 <div className="payment-total">
-                    <h3>Total</h3>
-                    <h3>₪{stay.price * calculateNights(stay.defaultCheckin, stay.defaultCheckout) + 500 + 107}</h3>
+                    <p>Total</p>
+                    <p>₪{stay.price * calculateNights(stay.defaultCheckin, stay.defaultCheckout) + 500 + 107}</p>
                 </div>
+                </section>
         </section>
     );
 }

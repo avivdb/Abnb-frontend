@@ -4,6 +4,9 @@ import { orderService } from "../services/order"
 import { OrderDateModel } from "./OrderDateModel"
 import { OrderGuestsModal } from "./OrderGuestsModal"
 import dayjs from 'dayjs'
+import { AbnbGradientBtn } from "./AbnbGradientBtn"
+
+import arrowdown from "../assets/img/icons/arrowdown.svg"
 
 // check if necessary totalPrice
 
@@ -19,10 +22,10 @@ export function OrderDetails({ stay }) {
         setOrderToEdit(prevOrder => {
             const newOrder = { ...prevOrder }
             if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin.slice(0, 10)
-                if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout.slice(0, 10)
-                    console.log('orderToEdit- new:', newOrder)
-                    return newOrder
-            })
+            if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout.slice(0, 10)
+            console.log('orderToEdit- new:', newOrder)
+            return newOrder
+        })
     }, [])
 
     // useEffect(() => {
@@ -45,7 +48,7 @@ export function OrderDetails({ stay }) {
 
     useEffect(() => {
         updateBookingDetails()
-    },[orderToEdit.startDate, orderToEdit.endDate])
+    }, [orderToEdit.startDate, orderToEdit.endDate])
 
     function calculateNights(checkin, checkout) {
         const checkinDate = new Date(checkin)
@@ -111,18 +114,24 @@ export function OrderDetails({ stay }) {
                 <span>night</span>
             </div>
 
-            <button className="od-btn-booking-dates" onClick={() => setIsDateModalOpen(true)}>
-                <div className="od-booking-dates">
-                    <div className="od-booking-date">
-                        <span className="od-text">CHECK-IN</span>
-                        <span className="od-value">{dayjs(orderToEdit.startDate).format('DD/MM/YYYY')}</span>
-                    </div>
-                    <div className="od-booking-date">
-                        <span className="od-text">CHECK-OUT</span>
-                        <span className="od-value">{dayjs(orderToEdit.endDate).format('DD/MM/YYYY')}</span>
-                    </div>
+            <section className="od-btns-booking-details">
+                <div className="od-booking-date" onClick={() => setIsDateModalOpen(true)}>
+                    <p className="od-text">CHECK-IN</p>
+                    <p className="od-value">{dayjs(orderToEdit.startDate).format('DD/MM/YYYY')}</p>
                 </div>
-            </button>
+                <div className="od-booking-date" onClick={() => setIsDateModalOpen(true)}>
+                    <p className="od-text">CHECK-OUT</p>
+                    <p className="od-value">{dayjs(orderToEdit.endDate).format('DD/MM/YYYY')}</p>
+                </div>
+                <button className="od-booking-guests" onClick={() => setIsGuestsModalOpen(true)}>
+                    <section>
+                        <p>Guests</p>
+                        <h5>{getGuestSummary()}</h5>
+                    </section>
+                    <img src={arrowdown} />
+                </button>
+            </section>
+
 
             {isDateModalOpen && (<section className="od-date-modal">
                 <div className="date-picker-container">
@@ -135,29 +144,162 @@ export function OrderDetails({ stay }) {
             </section>)}
 
 
-
-            <button onClick={() => setIsGuestsModalOpen(true)}>Guests</button>
-            <h5>{getGuestSummary()}</h5>
             {isGuestsModalOpen && (<section className="od-guests-modal">
-                <OrderGuestsModal orderToEdit={orderToEdit} setOrderToEdit={setOrderToEdit} stay={stay} />
+                <OrderGuestsModal
+                    orderToEdit={orderToEdit}
+                    setOrderToEdit={setOrderToEdit}
+                    stay={stay}
+                    setIsGuestsModalOpen={setIsGuestsModalOpen} />
             </section>)}
 
+            <div className="btn-container"
+                onClick={handleReserve}>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="cell"></div>
+                <div className="content">
+                    <div>
+                        <span>Reserve</span>
+                    </div>
+                </div>
+            </div>
 
-            <button className="od-btn-order" onClick={handleReserve}>Reserve</button>
-            <h4>You won't be charged yet</h4>
+            <section className="price-details-content">
+                <h1>You won't be charged yet</h1>
+                <div>
+                    <h3>₪{stay.price} x {numberOfNights} nights</h3>
+                    <h3>₪{stay.price * numberOfNights}</h3>
+                </div>
+                <div>
+                    <h3>Cleaning fee</h3>
+                    <h3>₪107</h3>
+                </div>
+                <div>
+                    <h3>Airbnb service fee</h3>
+                    <h3>₪500</h3>
+                </div>
+                <hr />
+                <div className="payment-total">
+                    <h3>Total</h3>
+                    <h3>₪{stay.price * numberOfNights + 500 + 107}</h3>
+                </div>
+            </section>
+
+            {/* <h4>You won't be charged yet</h4>
             <div className="payment">
-                <h3 className="payment-details">₪{stay.price} x {numberOfNights} nights</h3>
-                <h3>₪{stay.price * numberOfNights}</h3>
+                <p>₪{stay.price} x {numberOfNights} nights</p>
+                <p>₪{stay.price * numberOfNights}</p>
             </div>
             <div className="payment">
-                <h3 className="payment-details">Airbnb service fee</h3>
-                <h3>₪500</h3>
+                <p className="payment-details">Cleaning fee</p>
+                <p>₪107</p>
             </div>
-            <hr />
+            <div className="payment">
+                <p className="payment-details">Airbnb service fee</p>
+                <p>₪500</p>
+            </div> */}
+            {/* <hr />
             <div className="payment total">
                 <h3>Total</h3>
-                <h3>₪{stay.price * numberOfNights + 500}</h3>
-            </div>
+                <h3>₪{stay.price * numberOfNights + 500 + 107}</h3>
+            </div> */}
 
         </article>
     )
