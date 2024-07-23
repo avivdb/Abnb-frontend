@@ -107,7 +107,7 @@ export function OrderDetails({ stay }) {
 
 
     return (
-        <article className='order-details'>
+        <div className='order-details'>
             <div className="price-per-night">
                 <h2>₪{stay.price}</h2>
                 <span>night</span>
@@ -280,27 +280,7 @@ export function OrderDetails({ stay }) {
                     <h3>₪{stay.price * numberOfNights + 500 + 107}</h3>
                 </div>
             </section>
-
-            {/* <h4>You won't be charged yet</h4>
-            <div className="payment">
-                <p>₪{stay.price} x {numberOfNights} nights</p>
-                <p>₪{stay.price * numberOfNights}</p>
-            </div>
-            <div className="payment">
-                <p className="payment-details">Cleaning fee</p>
-                <p>₪107</p>
-            </div>
-            <div className="payment">
-                <p className="payment-details">Airbnb service fee</p>
-                <p>₪500</p>
-            </div> */}
-            {/* <hr />
-            <div className="payment total">
-                <h3>Total</h3>
-                <h3>₪{stay.price * numberOfNights + 500 + 107}</h3>
-            </div> */}
-
-        </article>
+        </div>
     )
 }
 

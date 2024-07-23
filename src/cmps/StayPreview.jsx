@@ -21,7 +21,9 @@ export function StayPreview({ stay }) {
         stayService.toggleWishlist(stay)
     }
 
-    return <Link to={`/stay/${_id}`} target='_blank'>
+    console.log(price)
+
+    return <Link to={`/stay/${_id}`} target="_blank">
         <article className="stay-preview">
             <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
                 <img src={stay.isWishlist ? heartfull : heartempty} />
@@ -35,7 +37,7 @@ export function StayPreview({ stay }) {
             </section>
             <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
             <p className="secondary-content">{getRandomDate()}</p>
-            <p><span className="stay-preview-price">₪{price || ""}</span> night</p>
+            <p className="stay-preview-price" ><h1>{`₪${price || ""}`}</h1>night</p>
         </article>
     </Link>
 }
