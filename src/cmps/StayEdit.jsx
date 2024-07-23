@@ -60,9 +60,7 @@ export function StayEdit({ setEditModal }) {
                 <label htmlFor="price">Property Price (per night):</label>
                 <input onChange={handleChange} id="counpricetry" type="number" name="price" value={stayToEdit.price} placeholder="Enter price" />
 
-                <button type="submit">Add</button>
-
-                <div className="btn-container">
+                <button type="submit" className="btn-container">
                         <div className="cell"></div>
                         <div className="cell"></div>
                         <div className="cell"></div>
@@ -168,7 +166,7 @@ export function StayEdit({ setEditModal }) {
                                 <span>Add your property</span>
                             </button>
                         </div>
-                    </div>
+                    </button>
 
             </form>
         </section>

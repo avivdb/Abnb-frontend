@@ -83,12 +83,35 @@ function _createOrders() {
 		orders = [
 			{
 				_id: 'o1225',
-				hostId: { _id: 'u102', fullname: "bob", imgUrl: "..." },
+				hostId: { _id: 'u101', fullname: "Jessy Pinkman", imgUrl: "..." },
 				guest: {
 					_id: 'u101',
-					fullname: 'User 1',
+					fullname: 'Walter White',
 				},
 				totalPrice: 160,
+				startDate: '2025-09-10',
+				endDate: '2025-09-22',
+				guests: {
+					adults: 2,
+					kids: 2,
+				},
+				stay: {
+					// mini-stay
+					_id: 'h101',
+					name: 'Small Indian Treehouse',
+					price: 80.0,
+				},
+				msgs: [], // host - guest chat
+				status: 'pending', // approved / rejected
+			},
+			{
+				_id: 'o1226',
+				hostId: { _id: 'u102', fullname: "Hank Shrader", imgUrl: "..." },
+				guest: {
+					_id: 'u102',
+					fullname: 'Skyler White',
+				},
+				totalPrice: 970,
 				startDate: '2025-10-15',
 				endDate: '2025-10-17',
 				guests: {
@@ -98,7 +121,53 @@ function _createOrders() {
 				stay: {
 					// mini-stay
 					_id: 'h102',
-					name: 'House Of Uncle My',
+					name: 'Miami beach house ',
+					price: 100.0,
+				},
+				msgs: [], // host - guest chat
+				status: 'pending', // approved / rejected
+			},
+			{
+				_id: 'o1227',
+				hostId: { _id: 'u103', fullname: "Skyler White", imgUrl: "..." },
+				guest: {
+					_id: 'u103',
+					fullname: 'Hank Shrader',
+				},
+				totalPrice: 160,
+				startDate: '2025-08-21',
+				endDate: '2025-08-29',
+				guests: {
+					adults: 1,
+					kids: 2,
+				},
+				stay: {
+					// mini-stay
+					_id: 'h103',
+					name: 'French Ski cabbin',
+					price: 140.0,
+				},
+				msgs: [], // host - guest chat
+				status: 'pending', // approved / rejected
+			},
+			{
+				_id: 'o1228',
+				hostId: { _id: 'u104', fullname: "Walter white", imgUrl: "..." },
+				guest: {
+					_id: 'u104',
+					fullname: 'Jessy Pinkman',
+				},
+				totalPrice: 160,
+				startDate: '2025-08-11',
+				endDate: '2025-09-18',
+				guests: {
+					adults: 1,
+					kids: 2,
+				},
+				stay: {
+					// mini-stay
+					_id: 'h104',
+					name: 'New York loft',
 					price: 80.0,
 				},
 				msgs: [], // host - guest chat

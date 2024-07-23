@@ -215,7 +215,7 @@ function _createStays() {
                     "lat": -8.61308,
                     "lng": 41.1413
                 },
-                "rating": 4.6,
+                "rating": 4.62,
                 "guests": 12,
                 "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 1 }, { beds: 2 }],
                 "beds": 9,
@@ -272,7 +272,7 @@ function _createStays() {
                     "lat": 25.79065,
                     "lng": -80.13005
                 },
-                "rating": 4.8,
+                "rating": 4.86,
                 "guests": 17,
                 "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 2 }, { beds: 1 }],
                 "beds": 9,
@@ -326,7 +326,7 @@ function _createStays() {
                     "lat": 46.0207,
                     "lng": 7.7491
                 },
-                "rating": 5.0,
+                "rating": 5.00,
                 "guests": 2,
                 "bedrooms": [{ beds: 1 }],
                 "beds": 1,
@@ -383,7 +383,7 @@ function _createStays() {
                     "lat": 48.8566,
                     "lng": 2.3522
                 },
-                "rating": 4.3,
+                "rating": 4.56,
                 "guests": 9,
                 "bedrooms": [{ beds: 1 }, { beds: 2 }, { beds: 1 }, { beds: 3 }],
                 "beds": 7,
@@ -441,7 +441,7 @@ function _createStays() {
                     "lat": 36.3932,
                     "lng": 25.4615
                 },
-                "rating": 3.8,
+                "rating": 4.73,
                 "guests": 4,
                 "bedrooms": [{ beds: 1 }, { beds: 1 }],
                 "beds": 2,
@@ -496,7 +496,7 @@ function _createStays() {
                     "lat": 39.1911,
                     "lng": -106.8175
                 },
-                "rating": 4.3,
+                "rating": 4.31,
                 "guests": 5,
                 "bedrooms": [{ beds: 1 }, { beds: 2 }, { beds: 1 }, { beds: 2 }, { beds: 3 }],
                 "beds": 9,
@@ -504,7 +504,118 @@ function _createStays() {
                 "isWishlist": false,
                 "defaultCheckin": new Date('2024-08-11T12:30:00'),
                 "defaultCheckout": new Date('2024-08-18T12:30:00'),
+            },
+            {
+                "_id": "s107",
+                "name": "Secluded Beachfront Villa in Takaka",
+                "type": "Villa",
+                "imgUrls": [
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/531630830.jpg?k=ca827f2fc5d8a8d434e6eaf9d2ea41117ffc85d1cd2a30c814c5210ddf014e24&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/531630837.jpg?k=1355e66cf5a239a8396f8d0da5ca9c73204b5b53de3bc932a30ca8e875899e72&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/531630881.jpg?k=51f1cdf9d9efd4343f38d5f04cf5129091980f78eb98bbd80a58abd8830f0f3d&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/531630819.jpg?k=b1fba1a06b727d54239d22203b9c2630bfc348fc757a6263b7da7ec13e5d2f28&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/531630831.jpg?k=c0a26f93a14c80335f067068ea4fc3cec115e2b36ea52f213d768df3d1a76099&o=&hp=1"
+                ],
+                "price": 350.0,
+                "summary": "Private villa on Golden Bay beachfront. Stunning views, modern amenities, spacious rooms. Sleeps 8 comfortably. Ideal for families or groups. Fully equipped kitchen, outdoor BBQ area. Direct beach access. 10 minutes to Takaka town center.",
+                "capacity": 8,
+                "amenities": [
+                    "TV",
+                    "Wifi",
+                    "Air conditioning",
+                    "Smoking allowed",
+                    "Free parking",
+                    "EV charger",
+                    "Mountain view",
+                    "Hair dryer",
+                    "Ping pong table",
+                    "Crib",
+                    "Fire pit",
+                    "Garden"
+                ],
+                "labels": [
+                    "Mountain Paradise",
+                    "Island Retreat",
+                    "Sunset Views",
+                ],
+                "host": {
+                    "_id": "u107",
+                    "fullname": "Sophie Williams",
+                    "imgUrl": ""
+                },
+                "loc": {
+                    "country": "New Zealand",
+                    "countryCode": "NZ",
+                    "city": "Takaka",
+                    "address": "123 Beachfront Road",
+                    "lat": -40.863,
+                    "lng": 172.806
+                },
+                "rating": 4.82,
+                "guests": 6,
+                "bedrooms": [{ "beds": 1 }, { "beds": 2 }, { "beds": 1 }, { "beds": 2 }],
+                "beds": 6,
+                "baths": 3,
+                "isWishlist": false,
+                "defaultCheckin": new Date('2024-09-01T14:00:00'),
+                "defaultCheckout": new Date('2024-09-08T10:00:00')
+            },
+            {
+                "_id": "s108",
+                "name": "Luxury Penthouse in Tel Aviv",
+                "type": "Penthouse",
+                "imgUrls": [
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/540682364.jpg?k=5a343f1aeb515e971e6ca353cfbf33416e45785bee53ee50db9735fd531feba3&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/540682389.jpg?k=3889ea170ad6127e3ecca217d8b76c1bcb41db6feb2fb6b91954d279e3bdad96&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/540682390.jpg?k=6df1620f32de3c054d007d9790a0d5607d6694105f38079ed2b7be160b09924a&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/540682374.jpg?k=609f7113711a9a9e862bae64df8780fbf40008befc87b0d5789ab0e0f060cddf&o=&hp=1",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1280x900/540682370.jpg?k=99d5398df847000a90c9b31a3d986342325c11b9fde000b7fe20258c01f12381&o=&hp=1"
+                ],
+                "price": 600.0,
+                "summary": "Exquisite penthouse with panoramic views of Tel Aviv skyline. Modern design, high-end furnishings, and rooftop terrace. 4 bedrooms, each with ensuite bathrooms. Fully equipped kitchen, spacious living areas. Close to beach and city center.",
+                "capacity": 10,
+                "amenities": [
+                    "TV",
+                    "Wifi",
+                    "Air conditioning",
+                    "Smoking allowed",
+                    "Free parking",
+                    "EV charger",
+                    "Mountain view",
+                    "Hair dryer",
+                    "Ping pong table",
+                    "Crib",
+                    "Fire pit",
+                    "Garden"
+                ],
+                "labels": [
+                    "City Center Gem",
+                    "Cultural Experience",
+                    "Art Lover's Haven"
+                ],
+                "host": {
+                    "_id": "u108",
+                    "fullname": "Daniel Levi",
+                    "imgUrl": ""
+                },
+                "loc": {
+                    "country": "Israel",
+                    "countryCode": "IL",
+                    "city": "Tel Aviv",
+                    "address": "456 Rothschild Boulevard",
+                    "lat": 32.0853,
+                    "lng": 34.7818
+                },
+                "rating": 4.92,
+                "guests": 8,
+                "bedrooms": [{ "beds": 1 }, { "beds": 2 }, { "beds": 2 }, { "beds": 3 }],
+                "beds": 8,
+                "baths": 4,
+                "isWishlist": false,
+                "defaultCheckin": new Date('2024-07-31T15:00:00'),
+                "defaultCheckout": new Date('2024-08-07T11:00:00')
             }
+            
         ]
     }
 

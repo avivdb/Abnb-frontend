@@ -65,7 +65,7 @@ export function StayDetails() {
             <hr />
 
             <div className='stay-bedroom-display'>
-              <h2 style={{ marginInlineStart: "1.5rem" }}>Where you'll sleep</h2>
+              <h4 style={{ marginInlineStart: "1.5rem" }}>Where you'll sleep</h4>
               <section className='stay-bedroom-list'>
                 <BedroomsCarousel stay={stay} />
               </section>

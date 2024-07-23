@@ -2,20 +2,22 @@ import { useState, useEffect } from 'react'
 import { orderService } from "../services/order/order.service.local"
 
 export function UserOrders() {
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState([])
 
     useEffect(() => {
         async function fetchOrders() {
             try {
-                const fetchedOrders = await orderService.query();
-                setOrders(fetchedOrders);
+                const fetchedOrders = await orderService.query()
+                setOrders(fetchedOrders)
             } catch (error) {
-                console.error('Error fetching orders:', error);
+                console.error('Error fetching orders:', error)
             }
         }
 
-        fetchOrders();
-    }, []);
+        fetchOrders()
+    }, [])
+
+    
 
     return (
         <div className="user-orders">
