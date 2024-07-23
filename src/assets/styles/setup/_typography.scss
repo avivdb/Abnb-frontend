@@ -28,17 +28,35 @@
 }
 
 @font-face {
-  font-family: fa;
+  font-family: fa-solid;
   src: url(../fonts/fa-solid-900.ttf);
 }
 
-.fa::before {
-  font-family: fa;
+@font-face {
+  font-family: fa-brand;
+  src: url(../fonts/fa-brands-400.ttf);
 }
 
-.fa.plus::before {
+.fa.solid::before {
+  font-family: fa-solid;
+}
+
+.fa.brand::before {
+  font-family: fa-brand;
+}
+
+.fa.solid.plus::before {
   content: "\2b";
 }
-.fa.minus::before {
+
+.fa.solid.minus::before {
   content: "\f068";
+}
+
+.fa.solid.location::before {
+  content: "\f3c5";
+}
+
+.fa.brand.airbnb::before {
+  content: "\f834";
 }

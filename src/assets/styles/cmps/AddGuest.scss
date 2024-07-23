@@ -1,34 +1,61 @@
 .add-guest {
   display: grid;
-  height: 434px;
-  width: 405px;
-  padding: 16px 32px;
-  // right: 0;
+  padding: 0 6px;
+
   .add-field {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 14px 0;
+    align-items: center;
+    padding: 24px 0;
     padding-right: 4px;
-    // height: 50px;
+    gap: 20px;
+
+    &:not(:last-child):before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-bottom: 0.5px solid rgba($clr8, 0.1);
+    }
 
     .add-txt {
       display: grid;
+
+      & * {
+        justify-items: center;
+      }
+
       h1 {
         margin: 0;
         padding: 0;
         font-size: em(20px);
         font-family: cereal-medium;
-        line-height: em(25px);
+        line-height: em(25px, 20px);
         letter-spacing: normal;
         font-weight: 500;
         color: $clr8;
       }
+
       h2 {
+        display: flex;
+        align-items: center;
+        gap: 5px;
         font-size: em(17.5px);
-        line-height: em(22.5px);
+        line-height: em(22.5px, 17.5px);
         font-weight: 400;
         letter-spacing: normal;
         padding-block-start: 4px;
+        color: $clr10;
+      }
+
+      a {
+        font-family: cereal-medium;
+        text-decoration: underline;
+        font-size: em(17.5px);
+
+        color: $clr10;
       }
     }
 
@@ -40,11 +67,18 @@
       width: 100px;
 
       button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 0 10px;
         width: 30px;
         aspect-ratio: 1;
+
+        color: $clr10;
         background-color: inherit;
-        border: 0.5px solid $clr9;
-        font-size: 1em;
+        border: 0.5px solid $clr10;
+        font-size: 0.5em;
         font-weight: 400;
         border-radius: 50%;
       }

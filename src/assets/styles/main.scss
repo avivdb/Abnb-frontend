@@ -24,9 +24,10 @@
 @import "pages/UserWishlist.scss";
 @import "pages/UserTrips.scss";
 @import "pages/OredrCheckout.scss";
+@import "pages/UserOrders.scss";
+
 
 // Components
-// @import "cmps/preview";
 
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
@@ -54,8 +55,6 @@
 @import "cmps/OrderDetails";
 @import "cmps/OrderDateModel";
 @import "cmps/OrderGuestsModal";
-@import "cmps/CountrySelectModal.scss"
+@import "cmps/CountrySelectModal.scss";
+@import "cmps/CheckoutStayModal.scss";
 
-
-
-// @import "cmps/StayEdit";

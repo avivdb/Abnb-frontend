@@ -8,17 +8,12 @@ import { logout } from '../store/actions/user.actions'
 // import { StayEdit } from '../cmps/StayEdit'
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
-import { LocationFilter } from './LocationFilter'
-
-// import { useState } from 'react'
-
 
 import menu from "../assets/img/icons/menu.svg"
 import userimg from "../assets/img/icons/user.svg"
 
 import { useEffect, useState } from 'react'
 import { UserMenu } from './UserMenu'
-
 
 export function AppHeader() {
 
@@ -27,7 +22,6 @@ export function AppHeader() {
 	const user = useSelector(storeState => storeState.userModule.user)
 	const navigate = useNavigate()
 
-	// const [isScrolled, setIsScrolled] = useState(false)
 	const [isExpanded, setIsExpanded] = useState(true)
 
 	useEffect(() => {
@@ -71,10 +65,8 @@ export function AppHeader() {
 				<h1>bnb</h1>
 			</NavLink>
 
-
 			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
 			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
-
 
 			<section className="header-user">
 				<Link to={`stay/edit`}>

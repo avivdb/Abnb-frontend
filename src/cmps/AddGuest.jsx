@@ -34,9 +34,11 @@ export function AddGuest({ filterToEdit, setFilterToEdit }) {
                     <h2>Ages 13 or above</h2>
                 </div>
                 <div className="add-adult-counter add-counter ">
-                    <button onClick={() => handleClick('-', adultCounter, setAdultCounter)}>-</button>
+                    <button onClick={() => handleClick('-', adultCounter, setAdultCounter)}
+                        className="fa solid minus"></button>
                     {adultCounter}
-                    <button onClick={() => handleClick('+', adultCounter, setAdultCounter)}>+</button>
+                    <button onClick={() => handleClick('+', adultCounter, setAdultCounter)}
+                        className="fa solid plus"></button>
                 </div>
             </div>
 
@@ -44,12 +46,14 @@ export function AddGuest({ filterToEdit, setFilterToEdit }) {
             <div className="add-children add-field">
                 <div className="add-children-txt add-txt">
                     <h1>Children</h1>
-                    <h2>Ages 2-12</h2>
+                    <h2>Ages 2 <span style={{ fontSize: '10px' }} className="fa solid minus"></span> 12</h2>
                 </div>
                 <div className="add-children-counter add-counter">
-                    <button onClick={() => handleClick('-', childrenCounter, setChildrenCounter)}>-</button>
+                    <button onClick={() => handleClick('-', childrenCounter, setChildrenCounter)}
+                        className="fa solid minus"> </button>
                     {childrenCounter}
-                    <button onClick={() => handleClick('+', childrenCounter, setChildrenCounter)}>+</button>
+                    <button onClick={() => handleClick('+', childrenCounter, setChildrenCounter)}
+                        className="fa solid plus"> </button>
                 </div>
             </div>
 
@@ -60,9 +64,11 @@ export function AddGuest({ filterToEdit, setFilterToEdit }) {
                     <h2>Under 2</h2>
                 </div>
                 <div className="add-infant-counter add-counter">
-                    <button onClick={() => handleClick('-', infantCounter, setInfantCounter)}>-</button>
+                    <button onClick={() => handleClick('-', infantCounter, setInfantCounter)}
+                        className="fa solid minus"></button>
                     {infantCounter}
-                    <button onClick={() => handleClick('+', infantCounter, setInfantCounter)}>+</button>
+                    <button onClick={() => handleClick('+', infantCounter, setInfantCounter)}
+                        className="fa solid plus"></button>
                 </div>
             </div>
 
@@ -74,9 +80,11 @@ export function AddGuest({ filterToEdit, setFilterToEdit }) {
                 </div>
                 <div className="add-pet-counter add-counter">
                     <button
-                        onClick={() => handleClick('-', petCounter, setPetCounter)}>-</button>
+                        onClick={() => handleClick('-', petCounter, setPetCounter)}
+                        className="fa solid minus"></button>
                     {petCounter}
-                    <button onClick={() => handleClick('+', petCounter, setPetCounter)}>+</button>
+                    <button onClick={() => handleClick('+', petCounter, setPetCounter)}
+                        className="fa solid plus"></button>
                 </div>
             </div>
 

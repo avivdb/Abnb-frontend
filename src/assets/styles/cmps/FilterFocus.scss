@@ -3,7 +3,6 @@
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr 1fr 0.1fr;
   align-items: center;
-  // justify-content: center;
 
   font-size: rem(17.5px);
   font-family: cereal-medium;
@@ -28,7 +27,6 @@
 
   .field {
     position: relative;
-
     display: grid;
     padding: 0 em(16px);
     border-radius: em(32px);

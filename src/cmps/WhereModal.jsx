@@ -1,109 +1,100 @@
-import { Card, CardMedia } from "@mui/material";
-import { Autocomplete } from '@react-google-maps/api';
 import image0 from '../assets/img/icons/asset 0.jpeg';
 import image1 from '../assets/img/icons/asset 1.webp';
 import image2 from '../assets/img/icons/asset 2.webp';
 import image3 from '../assets/img/icons/asset 3.webp';
 import image4 from '../assets/img/icons/asset 4.webp';
 import image5 from '../assets/img/icons/asset 5.webp';
-import { useEffect, useRef } from "react";
-
+import { useEffect, useState } from "react";
+import iconLocation from '../assets/img/icons/location-2952.svg';
 
 export function WhereModal({ filterToEdit, setFilterToEdit }) {
 
-    const inputRef = useRef(null);
+    const [predictions, setPredictions] = useState([]);
+    const [isTyping, setIsTyping] = useState(false)
+    const searchQuery = filterToEdit.txt
+
 
     useEffect(() => {
-        if (window.google) {
-            const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-                types: ['(cities)'],  // Restrict suggestions to cities only
-            });
+        setIsTyping(searchQuery.length > 0);
+    }, [searchQuery]);
 
-            autocomplete.addListener('place_changed', () => {
-                const place = autocomplete.getPlace();
-                if (place.formatted_address) {
-                    setFilterToEdit({ ...filterToEdit, txt: place.formatted_address });
+    useEffect(() => {
+        if (window.google && searchQuery) {
+            const service = new window.google.maps.places.AutocompleteService();
+            service.getPlacePredictions({ input: searchQuery, language: 'en' }, (predictions, status) => {
+                if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+                    setPredictions(predictions.map(prediction => prediction.description));
+                } else {
+                    setPredictions([]);
                 }
             });
         }
-    }, []);
-
-
+    }, [searchQuery]);
 
 
     return (
-        <section className="where-modal">
+        <section className={`where-modal ${isTyping ? 'is-typing' : ''}`}>
 
-            <div className="Recent-search">
+            <div className="recent-search">
+
                 <h1>Recent searches</h1>
-                <input
-                    ref={inputRef}
-                    placeholder="Search destinations"
-                    className="location-filter"
-                    value={filterToEdit.txt}
-                    onChange={(e) => setFilterToEdit({ ...filterToEdit, txt: e.target.value })}
-                />
+
+                <ul className='prediction-list'>
+                    {predictions.map((prediction, index) => (
+                        <li className='prediction-item' key={index}
+                            onClick={() => setFilterToEdit({ ...filterToEdit, txt: prediction })}>
+                            <span className='icon-location'><img src={iconLocation} /></span>
+                            {prediction}
+                        </li>
+                    ))}
+                </ul>
+
             </div>
+            {/* {!isTyping && */}
+            <div className={`search-by-region ${isTyping ? 'is-typing' : ''}`}>
 
-            <div className="search-by-region">
                 <h1>Search by region</h1>
+
                 <div className="regions">
-                    <Card className="card">
-                        <CardMedia
-                            component="img"
-                            image={image0}
-                        />
-                        I'm flexsible
-                    </Card>
+                    <div className="where-card" onClick={() => setFilterToEdit({ ...filterToEdit, txt: prediction })}>
+                        <img src={image0} />
+                        <h2>I'm flexsible</h2>
+                    </div>
 
-                    <Card className="card">
-                        <CardMedia
-                            component="img"
-                            image={image1}
-                        />
-                        Europe
-                    </Card>
+                    <div className="where-card" onClick={() => setFilterToEdit({ ...filterToEdit, txt: 'Europe' })}>
+                        <img src={image1} />
+                        <h2> Europe</h2>
 
-                    <Card className="card">
-                        <CardMedia
-                            component="img"
-                            image={image2}
-                        />
-                        Italy
-                    </Card>
+                    </div>
 
-                    <Card className="card">
-                        <CardMedia
-                            component="img"
-                            image={image3}
-                        />
-                        United States
-                    </Card>
+                    <div className="where-card" onClick={() => setFilterToEdit({ ...filterToEdit, txt: 'Italy' })}>
+                        <img src={image2} />
+                        <h2> Italy</h2>
 
-                    <Card className="card">
-                        <CardMedia
-                            component="img"
-                            image={image4}
-                        />
-                        Greece
-                    </Card>
+                    </div>
 
-                    <Card className="card">
-                        <CardMedia
-                            component="img"
-                            image={image5}
-                        />
-                        South America
-                    </Card>
+                    <div className="where-card" onClick={() => setFilterToEdit({ ...filterToEdit, txt: 'United States' })}>
+                        <img src={image3} />
+                        <h2> United States</h2>
 
+                    </div>
+
+                    <div className="where-card" onClick={() => setFilterToEdit({ ...filterToEdit, txt: 'Greece' })}>
+                        <img src={image4} />
+                        <h2> Greece</h2>
+
+                    </div>
+
+                    <div className="where-card" onClick={() => setFilterToEdit({ ...filterToEdit, txt: 'South America' })}>
+                        <img src={image5} />
+                        <h2> South America</h2>
+
+                    </div>
 
                 </div>
 
-
-
-
             </div>
-
+            {/* } */}
         </section >
     )
 }

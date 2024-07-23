@@ -17,6 +17,7 @@ import { UserTrips } from './pages/UserTrips.jsx'
 import { UserWishlist } from './pages/UserWishlist.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
 import { OrderCheckout } from './pages/OrderCheckout.jsx'
+import { UserOrders } from './pages/UserOrders.jsx'
 
 
 
@@ -34,6 +35,7 @@ export function RootCmp() {
                     <Route path="stay/:stayId/checkout" element={<OrderCheckout />} />
                     <Route path="stay/trips" element={<UserTrips />} />
                     <Route path="stay/wishlists" element={<UserWishlist />} />
+                    <Route path="stay/orders" element={<UserOrders />} />
                     <Route path="stay/edit" element={<StayEdit />} />
                     <Route path="stay/edit/:stayId" element={<StayDetails />} />
                     <Route path="stay/:stayId" element={<StayDetails />} />
