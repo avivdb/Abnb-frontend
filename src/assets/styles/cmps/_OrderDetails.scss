@@ -1,13 +1,15 @@
 .order-details {
+    align-self: start;
     position: sticky;
-    top: 0;
-    height: max-content;
+    top: 7rem;
+    height: 30rem;
 
     padding: rem(24px);
     border: 1px solid rgb(221, 221, 221);
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     margin-inline-start: rem(32px);
+    margin-block-start: 1rem;
 
     .price-per-night {
         display: flex;
@@ -156,5 +158,5 @@
 
 .order-details-container {
     position: relative;
-    height: max-content;
+    height: 70rem;
 }

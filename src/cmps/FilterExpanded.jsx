@@ -94,7 +94,7 @@ export function FilterExpanded({ setClass }) {
 
         <section className={` ${setClass}`}>
 
-            <section className={` ${setClass}`}>
+            {/* <section className={` ${setClass}`}> */}
 
                 <div className="where-field field" onClick={() => handleClick('where')}>
                     <h2>Where</h2>
@@ -126,7 +126,7 @@ export function FilterExpanded({ setClass }) {
 
                 </div>
 
-            </section>
+            {/* </section> */}
 
             {(isWhere || isCheckIn || isCheckOut || isGuest) &&
 

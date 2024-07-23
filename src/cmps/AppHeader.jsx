@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -12,6 +12,7 @@ import userimg from "../assets/img/icons/user.svg"
 
 import { useEffect, useState } from 'react'
 import { UserMenu } from './UserMenu'
+import { FilterLabel } from './FilterLabel'
 
 
 export function AppHeader() {
@@ -22,6 +23,8 @@ export function AppHeader() {
 	const navigate = useNavigate()
 
 	const [isExpanded, setIsExpanded] = useState(true)
+
+	let location = useLocation()
 
 	useEffect(() => {
 		handleScroll()
@@ -80,6 +83,8 @@ export function AppHeader() {
 				{userMenu && <UserMenu setUserMenu={setUserMenu} />}
 
 			</section>
+
+			{(location.pathname === "/stay" ||  location.pathname === "/") && <FilterLabel className="" />}
 
 		</header>
 

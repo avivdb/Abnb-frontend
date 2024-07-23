@@ -35,16 +35,16 @@ export function OrderCheckout() {
         }
         fetchStay()
     }, [])
-   
+
     // useEffect(() => {
     //     const order = orderService.getOrderToEditFromSearchParams(searchParams)
     //     setOrderToEdit({ 
     //         ...order, 
     //         stay: {
-	// 			_id: stay._id,
-	// 			name: stay.name,
-	// 			price: stay.price,
-	// 		}
+    // 			_id: stay._id,
+    // 			name: stay.name,
+    // 			price: stay.price,
+    // 		}
     //      })
     // }, [searchParams])
 
@@ -317,7 +317,9 @@ export function OrderCheckout() {
 
                 </section>
             </section>
-            <CheckoutStayModal />
+            <div className="checkout-stay-modal-container">
+                <CheckoutStayModal />
+            </div>
         </section>
     )
 }

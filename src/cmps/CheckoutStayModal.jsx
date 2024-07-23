@@ -43,8 +43,8 @@ export function CheckoutStayModal() {
                 <section className="price-details-content">
                 <h1>Price details</h1>
                 <div>
-                    <h3>₪{stay.price} x {calculateNights(stay.defaultCheckin, stay.defaultCheckout)} nights</h3>
-                    <h3>₪{stay.price * calculateNights(stay.defaultCheckin, stay.defaultCheckout)}</h3>
+                    <h3>₪{stay.price} x {17} nights</h3>
+                    <h3>₪{stay.price * 17}</h3>
                 </div>
                 <div>
                     <h3>Cleaning fee</h3>
@@ -57,7 +57,7 @@ export function CheckoutStayModal() {
                 <hr />
                 <div className="payment-total">
                     <p>Total</p>
-                    <p>₪{stay.price * calculateNights(stay.defaultCheckin, stay.defaultCheckout) + 500 + 107}</p>
+                    <p>₪{stay.price * 17 + 500 + 107}</p>
                 </div>
                 </section>
         </section>

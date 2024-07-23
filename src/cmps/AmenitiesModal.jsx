@@ -12,7 +12,7 @@ export function AmenitiesModal({ setAmenitiesModal, amenities }) {
         <h1>What this place offers</h1>
         <section className="amenities-modal-list">
             {amenities.map((amenity, index) => (
-                <div index={index}>
+                <>
                     <div className="amenity" key={index}>
                         <img
                             src={`../src/assets/img/icons/${amenity}.svg`}
@@ -22,7 +22,7 @@ export function AmenitiesModal({ setAmenitiesModal, amenities }) {
                         <h3>{amenity}</h3>
                     </div>
                     <hr />
-                </div>
+                </>
             ))}
         </section>
     </div>
