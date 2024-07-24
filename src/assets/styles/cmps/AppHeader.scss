@@ -6,16 +6,20 @@
 
   display: grid;
   grid-template-columns: auto 1fr auto;
-  grid-auto-rows: auto auto;
+  grid-auto-rows: auto auto auto;
   align-items: center;
   padding: em(15px) em(80px);
-  // gap: 1em;
 
   width: 100%;
 
   color: $clr1;
   background-color: $clr12;
   border-bottom: 1px solid rgb(221, 221, 221);
+
+  .filter-label {
+    grid-row: 3;
+    grid-column: -1/1;
+  }
 
   .filter-expanded,
   .filter-focused {
@@ -84,7 +88,7 @@
     font-family: cereal-medium;
     font-size: 0.9rem;
     color: $gray4;
-    
+
     padding: 1rem;
     background-color: #fff;
     border-radius: 30px;

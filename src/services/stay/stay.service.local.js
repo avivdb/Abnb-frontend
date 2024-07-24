@@ -7,7 +7,7 @@ import { loadFromStorage } from '../../services/util.service.js'
 
 const STORAGE_KEY = 'STAY_DB'
 _createStays()
-// saveToStorage("STAY_DB", stays)
+
 
 
 
@@ -24,17 +24,22 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', checkIn: '', checkOut: '', guest: {}, labels: [] }) {
+async function query(filterBy = getDefaultFilter()) {
     var stays = await storageService.query(STORAGE_KEY)
-    const { txt } = filterBy
-    // console.log('txt', txt)
+    const { txt, label, guest } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
     }
+    if (label) {
+        stays = stays.filter(stay => stay.labels.includes(label))
+    }
 
-    // stays = stays.map(({ _id, name, price }) => ({ _id, name, price }))
+    if (guest) {
+        stays = stays.filter(stay => stay.capacity >= guest.capacity)
+    }
+
     return stays
 }
 
@@ -140,8 +145,8 @@ function getDefaultFilter() {
         txt: '',
         checkIn: '',
         checkOut: '',
-        guest: { adults: 0, chidren: 0, infants: 0, pets: 0 },
-        labels: [],
+        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        label: '',
 
     }
 }
@@ -615,7 +620,7 @@ function _createStays() {
                 "defaultCheckin": new Date('2024-07-31T15:00:00'),
                 "defaultCheckout": new Date('2024-08-07T11:00:00')
             }
-            
+
         ]
     }
 

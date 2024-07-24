@@ -1,6 +1,8 @@
 .main-container {
+  position: relative;
   display: grid;
   grid-template-columns: 80px 1fr 80px;
+  padding-top: 50px;
 
   > * {
     grid-column: 2;

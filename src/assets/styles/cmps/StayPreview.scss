@@ -74,4 +74,15 @@
     }
   }
 
+  .stay-preview-price {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+
+    h1 {
+      font-size: 1rem;
+      font-family: cereal-medium;
+    }
+  }
+
 }

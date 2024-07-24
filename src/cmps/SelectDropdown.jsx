@@ -36,7 +36,7 @@ class SelectDropdown extends Component {
                 boxShadow: 'none',
                 borderRadius: '10px',
                 overflow: "hidden",
-                border: this.state.isSelected? "0.5px solid #cdcdcd" : "0.5px solid #cdcdcd"
+                border: this.state.isSelected ? "0.5px solid #cdcdcd" : "0.5px solid #cdcdcd"
             }),
             option: (provided, state) => ({
                 ...provided,

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { LocationFilter } from "./LocationFilter";
 import SearchIcon from '@mui/icons-material/Search';
-import { WhereModal } from "./WhereModal";
-import DateRangePicker from "./DateRangePicker";
+import { FilterWhereModal } from "./FilterWhereModal";
 import { useSelector } from "react-redux";
 import { setFilterBy } from "../store/actions/stay.actions";
-import { AddGuest } from "./AddGuest";
+import { FilterLocation } from "./FilterLocation";
+import FilterDateRangePicker from "./FilterDateRangePicker";
+import { FilterAddGuest } from "./FilterAddGuest";
+import { getMonthName } from "../services/util.service";
 
 export function FilterExpanded({ setClass }) {
 
@@ -14,7 +15,7 @@ export function FilterExpanded({ setClass }) {
 
     useEffect(() => {
         setFilterBy(filterToEdit)
-    }, [filterToEdit])
+    }, [filterToEdit, filterToEdit.guest])
 
     const [isWhere, setIsWhere] = useState(false)
     const [isCheckIn, setIsCheckIn] = useState(false)
@@ -90,50 +91,67 @@ export function FilterExpanded({ setClass }) {
         return filterModalClass
     }
 
+    function getGuestsTitle() {
+        const { adult = 0, children = 0, infant = 0, pet = 0 } = filterToEdit.guest || {};
+        const numGuest = adult + children;
+
+        const guestStr = numGuest === 1 ? 'guest' : 'guests';
+        const infantStr = infant === 1 ? 'infant' : 'infants';
+        const petStr = pet === 1 ? 'pet' : 'pets';
+
+        let title = numGuest > 0 ? `${numGuest} ${guestStr}` : 'Add guests';
+        if (infant > 0) {
+            title += `, ${infant} ${infantStr}`;
+        }
+        if (pet > 0) {
+            title += `, ${pet} ${petStr}`;
+        }
+
+        return title || 'Add guests';
+    }
+
     return (
+
 
         <section className={` ${setClass}`}>
 
-            <section className={` ${setClass}`}>
+            <div className="where-field field" onClick={() => handleClick('where')}>
+                <h2>Where</h2>
+                <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
+            </div>
 
-                <div className="where-field field" onClick={() => handleClick('where')}>
-                    <h2>Where</h2>
-                    <LocationFilter filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
+
+            <div className="check-in-field field" onClick={() => handleClick('checkIn')}>
+                <h2>Check in</h2>
+                {filterToEdit.checkIn ? <h1>{`${getMonthName(filterToEdit.checkIn.getMonth())} ${filterToEdit.checkIn.getDate()}`}</h1> : <h1>Add dates</h1>}
+            </div>
+
+
+            <div className="check-out-field field" onClick={() => handleClick('checkOut')}>
+                <h2> Check out</h2>
+                {filterToEdit.checkOut ? <h1>{`${getMonthName(filterToEdit.checkOut.getMonth())} ${filterToEdit.checkOut.getDate()}`}</h1> : <h1>Add dates</h1>}
+            </div>
+
+
+            <div className="who-field field" onClick={() => handleClick('guest')}>
+                <div className="grid">
+                    <h2>Who</h2>
+                    <h1>{getGuestsTitle()}</h1>
                 </div>
 
-
-                <div className="check-in-field field" onClick={() => handleClick('checkIn')}>
-                    <h2>Check in</h2>
-                    <h1>Add dates</h1>
+                <div className="search-icon-container">
+                    <SearchIcon className="search-icon" />
                 </div>
 
+            </div>
 
-                <div className="check-out-field field" onClick={() => handleClick('checkOut')}>
-                    <h2> Check out</h2>
-                    <h1>Add dates</h1>
-                </div>
-
-
-                <div className="who-field field" onClick={() => handleClick('guest')}>
-                    <div className="grid">
-                        <h2>Who</h2>
-                        <h1>Add guests</h1>
-                    </div>
-
-                    <div className="search-icon-container">
-                        <SearchIcon className="search-icon" />
-                    </div>
-
-                </div>
-
-            </section>
-
-            {(isWhere || isCheckIn || isCheckOut || isGuest) &&
+            {
+                (isWhere || isCheckIn || isCheckOut || isGuest) &&
 
                 <section className={getModalClassName()}>
-                    {isWhere && <WhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {(isCheckIn || isCheckOut) && <DateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {isGuest && <AddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {isWhere && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {(isCheckIn || isCheckOut) && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {isGuest && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>
             }
         </section>

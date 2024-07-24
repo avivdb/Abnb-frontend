@@ -36,7 +36,7 @@ export function StayPreview({ stay }) {
             </section>
             <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
             <p className="secondary-content">{getRandomDate()}</p>
-            <p><span className="stay-preview-price">₪{price || ""}</span> night</p>
+            <p className="stay-preview-price" ><span>{`₪${price || ""}`}</span>night</p>
         </article>
     </Link>
 }
