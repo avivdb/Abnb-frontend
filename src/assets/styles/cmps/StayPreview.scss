@@ -21,7 +21,6 @@
     }
   }
 
-
   .stay-preview-details {
     display: flex;
     flex-direction: column;
@@ -68,7 +67,7 @@
     position: relative;
     top: 3.5rem;
     left: 82%;
-
+    width: 3rem;
     img {
       width: 2rem;
     }
@@ -84,5 +83,4 @@
       font-family: cereal-medium;
     }
   }
-
 }

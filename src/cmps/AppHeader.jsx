@@ -60,31 +60,35 @@ export function AppHeader() {
 	}
 
 	return (
-		<header className="app-header full">
+		<header className="main-container full">
 
-			<NavLink to="/" className="logo">
-				<h1 className='fa brand airbnb'>bnb</h1>
-			</NavLink>
+			<div className="app-header">
 
-			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
-			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
 
-			<section className="header-user">
-				<Link to={`stay/edit`}>
-					<button className='btn-add-stay'>Abnb your home</button>
-				</Link>
-				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+				<NavLink to="/" className="logo">
+					<h1 className='fa brand airbnb'>bnb</h1>
+				</NavLink>
 
-				<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
-					<img src={menu} />
-					<img src={userimg} />
-				</div>
+				<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
+				<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
 
-				{userMenu && <UserMenu setUserMenu={setUserMenu} />}
+				<section className="header-user">
+					<Link to={`stay/edit`}>
+						<button className='btn-add-stay'>Abnb your home</button>
+					</Link>
+					{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-			</section>
+					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
+						<img src={menu} />
+						<img src={userimg} />
+					</div>
 
-			{(location.pathname === "/stay" ||  location.pathname === "/") && <FilterLabel className="" />}
+					{userMenu && <UserMenu setUserMenu={setUserMenu} />}
+
+				</section>
+
+				{(location.pathname === "/stay" || location.pathname === "/") && <FilterLabel className="" />}
+			</div>
 
 		</header>
 

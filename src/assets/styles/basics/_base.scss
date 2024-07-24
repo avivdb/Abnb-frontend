@@ -7,10 +7,24 @@ html {
 }
 
 body {
+  // position: relative;
   margin: 0 auto;
   font-family: "cereal-regular";
   padding-top: 100px;
   color: $clr2;
+
+  @include for-mobile-layout {
+    // background-color: blue;
+  }
+  @include for-narrow-layout {
+    // background-color: green;
+  }
+  @include for-normal-layout {
+    // background-color: red;
+  }
+  @include for-wide-layout {
+    background-color: white;
+  }
 }
 
 a {

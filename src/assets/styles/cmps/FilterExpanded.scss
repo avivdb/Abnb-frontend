@@ -2,10 +2,10 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
+  grid-auto-rows: auto auto;
   // align-items: center;
 
   width: 65%;
-
 
   color: black;
   // padding-inline: 0.7rem;
@@ -51,9 +51,6 @@
     display: grid;
     grid-template-rows: 1fr 1fr;
 
-    // align-items: center;
-    // align-content: center;
-
     line-height: em(25.5px);
     padding-inline-start: 1.5rem;
     padding-block: 0.4rem;
@@ -63,15 +60,13 @@
       border: none;
       background-color: inherit;
       outline: none;
+      padding: 0;
+      margin: 0;
       width: 100%;
-      height: 100%;
-
-      // line-height: em(22.5px);
-      // padding-inline-start: 1rem;
+      height: min-content;
+      font-size: 0.8rem;
       font-family: cereal-regular;
       color: $clr10;
-      // font-weight: 400;
-      margin: 0;
 
       &:hover {
         background-color: transparent;
@@ -82,11 +77,15 @@
       padding-inline-start: 2rem;
     }
 
-    &:last-child {
+    &.who-field {
       display: flex;
       justify-content: space-between;
       padding-inline-end: 0.5rem;
       grid-row: 1;
+
+      h1 {
+        grid-row: 2;
+      }
     }
 
     &:hover {
@@ -94,6 +93,9 @@
       cursor: pointer;
 
       &::before {
+        display: none;
+      }
+      + ::before {
         display: none;
       }
     }
@@ -156,6 +158,5 @@
     &.is-guest {
       padding: 16px 32px;
     }
-
   }
 }

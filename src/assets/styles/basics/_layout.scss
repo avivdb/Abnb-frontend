@@ -1,8 +1,11 @@
 .main-container {
   position: relative;
   display: grid;
-  grid-template-columns: 80px 1fr 80px;
-  padding-top: 50px;
+  grid-template-columns:
+    minmax(20px, 1fr)
+    minmax(auto, 1200px) minmax(20px, 1fr);
+
+  // padding-top: 50px;
 
   > * {
     grid-column: 2;

@@ -115,8 +115,6 @@ export function FilterExpanded({ setClass }) {
 
         <section className={` ${setClass}`}>
 
-            {/* <section className={` ${setClass}`}> */}
-
             <div className="where-field field" onClick={() => handleClick('where')}>
                 <h2>Where</h2>
                 <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
