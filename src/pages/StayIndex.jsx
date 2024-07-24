@@ -25,7 +25,6 @@ export function StayIndex() {
 
     return (
         <main className="stay-index">
-            {/* <FilterLabel className="" /> */}
             <StayList
                 stays={stays}
                 onRemoveStay={onRemoveStay} />
