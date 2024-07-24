@@ -6,8 +6,8 @@ import '../assets/styles/cmps/DateRangePicker.scss';
 import dayjs from 'dayjs';
 
 export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit }) {
-    const [startDate, setStartDate] = useState(dayjs().toDate())
-    const [endDate, setEndDate] = useState(dayjs().toDate())
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
     useEffect(() => {
         console.log('startDate:', startDate)
@@ -21,6 +21,7 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit })
         setFilterToEdit({ ...filterToEdit, checkIn: start, checkOut: end })
         console.log('startDate', startDate)
         console.log('endDate', endDate)
+        console.log(filterToEdit)
 
     };
 
