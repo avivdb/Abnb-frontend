@@ -49,8 +49,8 @@
   .field {
     position: relative;
     display: grid;
-
     grid-template-rows: 1fr 1fr;
+
     // align-items: center;
     // align-content: center;
 
@@ -86,6 +86,7 @@
       display: flex;
       justify-content: space-between;
       padding-inline-end: 0.5rem;
+      grid-row: 1;
     }
 
     &:hover {

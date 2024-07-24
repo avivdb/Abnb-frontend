@@ -2,6 +2,7 @@ import { useState } from "react"
 import { addStay } from "../store/actions/stay.actions"
 import { Link, useNavigate } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+import { AbnbGradientBtn } from "./AbnbGradientBtn"
 
 
 export function StayEdit({ setEditModal }) {
@@ -43,7 +44,7 @@ export function StayEdit({ setEditModal }) {
             <Link to={`/stay`}><button>Back</button></Link>
             <h1>Add Your Property</h1>
             <h2>Provide important information in order to become an Abnb host</h2>
-            <form className="stay-edit-content" onSubmit={onAddStay}>
+            <form className="stay-edit-content">
 
                 <label htmlFor="fullname">Your Name:</label>
                 <input onChange={handleChange} id="fullname" name="fullname" value={stayToEdit.fullname} placeholder="Enter your full name" />
@@ -60,113 +61,7 @@ export function StayEdit({ setEditModal }) {
                 <label htmlFor="price">Property Price (per night):</label>
                 <input onChange={handleChange} id="counpricetry" type="number" name="price" value={stayToEdit.price} placeholder="Enter price" />
 
-                <button type="submit" className="btn-container">
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="content">
-                            <button type="submit" className="action-btn">
-                                <span>Add your property</span>
-                            </button>
-                        </div>
-                    </button>
+                <AbnbGradientBtn handleClick={onAddStay} text="Add your property" />
 
             </form>
         </section>

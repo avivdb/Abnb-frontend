@@ -92,7 +92,7 @@ export function FilterExpanded({ setClass }) {
 
     return (
 
-        // <section className={` ${setClass}`}>
+        <section className={` ${setClass}`}>
 
             {/* <section className={` ${setClass}`}> */}
 

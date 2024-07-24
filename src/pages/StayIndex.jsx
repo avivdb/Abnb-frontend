@@ -24,10 +24,10 @@ export function StayIndex() {
     }
 
     return (
-        <main className="stay-index">
+        <section className="stay-index">
             <StayList
                 stays={stays}
                 onRemoveStay={onRemoveStay} />
-        </main>
+        </section>
     )
 }

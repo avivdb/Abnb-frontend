@@ -14,6 +14,10 @@ import { addOrder } from "../store/actions/order.action"
 import { orderService } from "../services/order"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
+import "../assets/styles/cmps/AbnbGradientBtn.scss"
+import { AbnbGradientBtn } from "../cmps/AbnbGradientBtn"
+
+
 
 export function OrderCheckout() {
     const [countryModal, setCountryModal] = useState(false)
@@ -207,113 +211,7 @@ export function OrderCheckout() {
 
                     <p className="checkout-disclaimer">By selecting the button, I agree to the booking terms. I also agree to the updated Terms of Service, Payments Terms of Service, and I acknowledge the Privacy Policy.</p>
 
-                    <div onClick={onAddOrder} className="btn-container">
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="cell"></div>
-                        <div className="content">
-                            <button className="action-btn">
-                                <span>Request to book</span>
-                            </button>
-                        </div>
-                    </div>
+                    <AbnbGradientBtn handleClick={onAddOrder} text="Request to book"/>
 
                 </section>
             </section>
