@@ -92,43 +92,44 @@ export function FilterExpanded({ setClass }) {
 
     return (
 
-        <section className={` ${setClass}`}>
+        // <section className={` ${setClass}`}>
 
             {/* <section className={` ${setClass}`}> */}
 
-                <div className="where-field field" onClick={() => handleClick('where')}>
-                    <h2>Where</h2>
-                    <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
+            <div className="where-field field" onClick={() => handleClick('where')}>
+                <h2>Where</h2>
+                <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
+            </div>
+
+
+            <div className="check-in-field field" onClick={() => handleClick('checkIn')}>
+                <h2>Check in</h2>
+                <h1>Add dates</h1>
+            </div>
+
+
+            <div className="check-out-field field" onClick={() => handleClick('checkOut')}>
+                <h2> Check out</h2>
+                <h1>Add dates</h1>
+            </div>
+
+
+            <div className="who-field field" onClick={() => handleClick('guest')}>
+                <div className="grid">
+                    <h2>Who</h2>
+                    <h1>Add guests</h1>
                 </div>
 
-
-                <div className="check-in-field field" onClick={() => handleClick('checkIn')}>
-                    <h2>Check in</h2>
-                    <h1>Add dates</h1>
+                <div className="search-icon-container">
+                    <SearchIcon className="search-icon" />
                 </div>
 
-
-                <div className="check-out-field field" onClick={() => handleClick('checkOut')}>
-                    <h2> Check out</h2>
-                    <h1>Add dates</h1>
-                </div>
-
-
-                <div className="who-field field" onClick={() => handleClick('guest')}>
-                    <div className="grid">
-                        <h2>Who</h2>
-                        <h1>Add guests</h1>
-                    </div>
-
-                    <div className="search-icon-container">
-                        <SearchIcon className="search-icon" />
-                    </div>
-
-                </div>
+            </div>
 
             {/* </section> */}
 
-            {(isWhere || isCheckIn || isCheckOut || isGuest) &&
+            {
+                (isWhere || isCheckIn || isCheckOut || isGuest) &&
 
                 <section className={getModalClassName()}>
                     {isWhere && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}

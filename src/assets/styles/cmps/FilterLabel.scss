@@ -4,7 +4,7 @@
   // width: 100vw;
 
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
   text-align: center;
 
@@ -20,6 +20,11 @@
     align-self: center;
     grid-column: 1;
     grid-row: 1;
+  }
+  .filter-advanced-btn {
+    grid-column: 4;
+    margin-left: 15px;
+    padding: 10px;
   }
 
   .label-list {
