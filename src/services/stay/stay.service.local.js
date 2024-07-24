@@ -145,7 +145,7 @@ function getDefaultFilter() {
         txt: '',
         checkIn: '',
         checkOut: '',
-        guest: { adults: 0, chidren: 0, infants: 0, pets: 0, capacity: 0 },
+        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
         label: '',
 
     }

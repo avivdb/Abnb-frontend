@@ -107,9 +107,15 @@
     }
   }
 
-  .react-datepicker__day-name {
-    color: #484848;
+  // .react-datepicker__day-name {
+  // color: #ff2e2e;
+  .react-datepicker__day-names {
+    display: flex;
+    white-space: nowrap;
+    margin-bottom: -8px;
+    justify-content: space-evenly;
   }
+  // }
 
   .react-datepicker__day--selected {
     background-color: #222222 !important;

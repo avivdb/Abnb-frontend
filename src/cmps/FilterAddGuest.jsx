@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function FilterAddGuest({ filterToEdit, setFilterToEdit }) {
     const [adultCounter, setAdultCounter] = useState(0)
@@ -7,6 +7,10 @@ export function FilterAddGuest({ filterToEdit, setFilterToEdit }) {
     const [infantCounter, setInfantCounter] = useState(0)
     const [petCounter, setPetCounter] = useState(0)
 
+    useEffect(() => {
+        const capacity = adultCounter + childrenCounter + infantCounter + petCounter;
+        setFilterToEdit({ ...filterToEdit, guest: { adult: adultCounter, children: childrenCounter, infant: infantCounter, pet: petCounter, capacity: capacity } });
+    }, [adultCounter, childrenCounter, infantCounter, petCounter]);
 
     function handleClick(operator, counter, setCounter) {
         switch (operator) {
@@ -21,8 +25,6 @@ export function FilterAddGuest({ filterToEdit, setFilterToEdit }) {
             default:
                 break;
         }
-        const capacity = adultCounter + childrenCounter + infantCounter + petCounter
-        setFilterToEdit({ ...filterToEdit, guest: { adult: adultCounter, children: childrenCounter, infant: infantCounter, pet: petCounter, capacity: capacity } })
 
     }
 

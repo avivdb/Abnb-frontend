@@ -63,7 +63,7 @@ export function OrderDetails({ stay }) {
             setNumberOfNights(nights)
             setOrderToEdit({
                 ...orderToEdit,
-                totalPrice: stay.price * nights + 500 //stay.price * nights + Airbnb service fee
+                totalPrice: stay.price * nights + 500 + 107//stay.price * nights + Airbnb service fee + Cleaning fee
             })
         } else {
             setNumberOfNights(1)

@@ -1,21 +1,6 @@
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { stayService } from '../services/stay'
 
-export function CheckoutStayModal() {
-    const { stayId } = useParams()
-    const [stay, setStay] = useState(null)
 
-    useEffect(() => {
-        stayService.getById(stayId)
-            .then(data => {
-                setStay(data)
-            })
-            .catch(error => {
-                console.error('Error fetching stay:', error)
-                setStay(null)
-            })
-    }, [stayId])
+export function CheckoutStayModal({ stay, order }) {
 
     function calculateNights(checkin, checkout) {
         const checkinDate = new Date(checkin)
@@ -43,8 +28,8 @@ export function CheckoutStayModal() {
                 <section className="price-details-content">
                 <h1>Price details</h1>
                 <div>
-                    <h3>₪{stay.price} x {17} nights</h3>
-                    <h3>₪{stay.price * 17}</h3>
+                    <h3>₪{stay.price} x {calculateNights(order.startDate, order.endDate)} nights</h3>
+                    <h3>₪{stay.price * calculateNights(order.startDate, order.endDate)}</h3>
                 </div>
                 <div>
                     <h3>Cleaning fee</h3>
@@ -57,7 +42,7 @@ export function CheckoutStayModal() {
                 <hr />
                 <div className="payment-total">
                     <p>Total</p>
-                    <p>₪{stay.price * 17 + 500 + 107}</p>
+                    <p>₪{order.totalPrice}</p>
                 </div>
                 </section>
         </section>

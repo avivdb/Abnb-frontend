@@ -30,6 +30,7 @@ export function StayEdit({ setEditModal }) {
             await addStay(stayToEdit)
             showSuccessMsg('Stay added')
             setStayToEdit({ name: '', country: '', city: '', price: '', fullname: '' })
+            navigate('/')
         } catch (err) {
             showErrorMsg('Cannot add stay')
         }

@@ -14,6 +14,7 @@ export async function loadOrders() {
 }
 
 export async function addOrder(order) {
+	console.log('addOrder- action:', order)
 	try {
 		const savedOrder = await orderService.save(order)
 		store.dispatch({ type: ADD_ORDER, savedOrder })
@@ -24,9 +25,12 @@ export async function addOrder(order) {
 }
 
 export async function updateOrder(order) {
-    try {
-        const savedOrder = await orderService.save(order)
-        store.dispatch({type: UPDATE_ORDER, savedOrder})
+	console.log('updateOrder- action:', order)
+	try {
+		const savedOrder = await orderService.save(order)
+		console.log('updateOrder-before dispatch:', savedOrder)
+        store.dispatch({type: UPDATE_ORDER, order: savedOrder})
+		console.log('updateOrder-after dispatch:', savedOrder)
         return savedOrder
     } catch (err) {
         console.log('Cannot save order', err)
