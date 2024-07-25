@@ -67,3 +67,22 @@ export function getMonthName(month) {
     return monthNames[month]
 
 }
+
+export function getGuestsTitle(filterToEdit) {
+    const { adult = 0, children = 0, infant = 0, pet = 0 } = filterToEdit.guest || {};
+    const numGuest = adult + children;
+
+    const guestStr = numGuest === 1 ? 'guest' : 'guests';
+    const infantStr = infant === 1 ? 'infant' : 'infants';
+    const petStr = pet === 1 ? 'pet' : 'pets';
+
+    let title = numGuest > 0 ? `${numGuest} ${guestStr}` : 'Add guests';
+    if (infant > 0) {
+        title += `, ${infant} ${infantStr}`;
+    }
+    if (pet > 0) {
+        title += `, ${pet} ${petStr}`;
+    }
+
+    return title || 'Add guests';
+}
