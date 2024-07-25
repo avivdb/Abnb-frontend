@@ -17,12 +17,12 @@ export const orderService = {
 
 }
 
-function query() {
-	return storageService.query(STORAGE_KEY)
+async function query() {
+	return await storageService.query(STORAGE_KEY)
 }
 
-function getById(orderId) {
-	return storageService.get(STORAGE_KEY, orderId)
+async function getById(orderId) {
+	return await storageService.get(STORAGE_KEY, orderId)
 }
 
 async function remove(orderId) {
@@ -39,17 +39,16 @@ async function save(order) {
 
 	if (order._id) {
 		const orderToSave = {
-			...order,
-			// _id: order._id,
+			_id: order._id,
 			hostId: stay.host._id,
 			guest: order.guest || {
 				_id: 'g106',
 				fullname: 'Adi Sabban',
 			},
-			// totalPrice: order.totalPrice,
-			// startDate: order.startDate,
-			// endDate: order.endDate,
-			// guests: order.guests || 2,
+			totalPrice: order.totalPrice,
+			startDate: order.startDate,
+			endDate: order.endDate,
+			guests: order.guests || 2,
 			stay: {
 				_id: stay._id,
 				name: stay.name,
@@ -61,9 +60,7 @@ async function save(order) {
 		savedOrder = await storageService.put(STORAGE_KEY, orderToSave)
 	} else {
 		const orderToSave = {
-			...order, 
 			hostId: stay.host._id,
-			guest: order.guest,
 			// guest: { //user or mini user???
 			// 	_id: userService.getLoggedinUser()._id,
 			// 	fullname: userService.getLoggedinUser().fullname,
@@ -72,16 +69,16 @@ async function save(order) {
 				_id: 'g106',
 				fullname: 'Adi Sabban',
 			},
-			// totalPrice: order.totalPrice,
-			// startDate: order.startDate || stay.defaultCheckin.slice(0, 10),
-			// endDate: order.endDate || stay.defaultCheckout.slice(0, 10),
-			// guests: order.guests || 1,
-			// guestCounts: {
-			// 	adults: order.guestCounts?.adults || 1,
-			// 	children: order.guestCounts?.children || 0,
-			// 	infants: order.guestCounts?.infants || 0,
-			// 	pets: order.guestCounts?.pets || 0
-			// },
+			totalPrice: order.totalPrice,
+			startDate: order.startDate || stay.defaultCheckin.slice(0, 10),
+			endDate: order.endDate || stay.defaultCheckout.slice(0, 10),
+			guests: order.guests || 1,
+			guestCounts: {
+				adults: order.guestCounts?.adults || 1,
+				children: order.guestCounts?.children || 0,
+				infants: order.guestCounts?.infants || 0,
+				pets: order.guestCounts?.pets || 0
+			},
 			stay: {
 				// mini-stay
 				_id: stay._id,
@@ -96,6 +93,72 @@ async function save(order) {
 	console.log('order- service:', savedOrder)
 	return savedOrder
 }
+// async function save(order) {
+// 	if (!order.stay || !order.stay._id) {
+//         throw new Error('Order must have a valid stay');
+//     }
+
+// 	const stay = await stayService.getById(order.stay._id)
+// 	let savedOrder
+
+// 	if (order._id) {
+// 		const orderToSave = {
+// 			...order,
+// 			// _id: order._id,
+// 			hostId: stay.host._id,
+// 			guest: order.guest || {
+// 				_id: 'g106',
+// 				fullname: 'Adi Sabban',
+// 			},
+// 			// totalPrice: order.totalPrice,
+// 			// startDate: order.startDate,
+// 			// endDate: order.endDate,
+// 			// guests: order.guests || 2,
+// 			stay: {
+// 				_id: stay._id,
+// 				name: stay.name,
+// 				price: stay.price,
+// 			},
+// 			msgs: order.msgs || [], // host - guest chat
+// 			status: order.status || 'pending', // approved / rejected
+// 		}
+// 		savedOrder = await storageService.put(STORAGE_KEY, orderToSave)
+// 	} else {
+// 		const orderToSave = {
+// 			...order, 
+// 			hostId: stay.host._id,
+// 			// guest: { //user or mini user???
+// 			// 	_id: userService.getLoggedinUser()._id,
+// 			// 	fullname: userService.getLoggedinUser().fullname,
+// 			// },
+// 			guest: order.guest || {
+// 				_id: 'g106',
+// 				fullname: 'Adi Sabban',
+// 			},
+// 			// totalPrice: order.totalPrice,
+// 			// startDate: order.startDate || stay.defaultCheckin.slice(0, 10),
+// 			// endDate: order.endDate || stay.defaultCheckout.slice(0, 10),
+// 			// guests: order.guests || 1,
+// 			// guestCounts: {
+// 			// 	adults: order.guestCounts?.adults || 1,
+// 			// 	children: order.guestCounts?.children || 0,
+// 			// 	infants: order.guestCounts?.infants || 0,
+// 			// 	pets: order.guestCounts?.pets || 0
+// 			// },
+// 			stay: {
+// 				// mini-stay
+// 				_id: stay._id,
+// 				name: stay.name,
+// 				price: stay.price,
+// 			},
+// 			msgs: [], // host - guest chat
+// 			status: 'pending', // approved / rejected
+// 		}
+// 		savedOrder = await storageService.post(STORAGE_KEY, orderToSave)
+// 	}
+// 	console.log('order- service:', savedOrder)
+// 	return savedOrder
+// }
 
 function getEmptyOrder() {
 	return {

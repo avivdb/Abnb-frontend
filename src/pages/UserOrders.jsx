@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 import { orderService } from "../services/order/order.service.local"
-import { updateOrder } from '../store/actions/order.action'
+import { loadOrders, updateOrder } from '../store/actions/order.action'
 
 export function UserOrders() {
+    // const orders = useSelector(storeState => storeState.orderModule.orders)
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
-
+        // loadOrders()
+        // console.log('orders:', orders)
         fetchOrders()
     }, [])
 
