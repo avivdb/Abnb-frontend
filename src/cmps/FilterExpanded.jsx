@@ -6,154 +6,77 @@ import { setFilterBy } from "../store/actions/stay.actions";
 import { FilterLocation } from "./FilterLocation";
 import FilterDateRangePicker from "./FilterDateRangePicker";
 import { FilterAddGuest } from "./FilterAddGuest";
-import { getMonthName } from "../services/util.service";
+import { getGuestsTitle, getMonthName } from "../services/util.service";
 
 export function FilterExpanded({ setClass }) {
-
-    const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
-    const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
-
-    useEffect(() => {
-        setFilterBy(filterToEdit)
-    }, [filterToEdit, filterToEdit.guest])
-
-    const [isWhere, setIsWhere] = useState(false)
-    const [isCheckIn, setIsCheckIn] = useState(false)
-    const [isCheckOut, setIsCheckOut] = useState(false)
-    const [isGuest, setIsGuest] = useState(false)
+    const filterBy = useSelector(storeState => storeState.stayModule.filterBy);
+    const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy));
+    const [activeField, setActiveField] = useState(null);
 
     useEffect(() => {
-        handleScroll()
+        setFilterBy(filterToEdit);
+    }, [filterToEdit]);
 
-        window.addEventListener('scroll', handleScroll)
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setActiveField(null);
+            }
+        };
 
+        window.addEventListener('scroll', handleScroll);
         return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-
-    }, [])
-
-    function handleScroll() {
-
-        if (window.scrollY > 50) {
-            setIsCheckIn(false)
-            setIsCheckOut(false)
-            setIsGuest(false)
-            setIsWhere(false)
-        }
-    }
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     function handleClick(field) {
-        switch (field) {
-            case 'where':
-                setIsCheckIn(false)
-                setIsCheckOut(false)
-                setIsGuest(false)
-
-                setIsWhere(true)
-                break;
-
-            case 'checkIn':
-                setIsCheckOut(false)
-                setIsGuest(false)
-                setIsWhere(false)
-
-                setIsCheckIn(true)
-                break;
-
-            case 'checkOut':
-                setIsCheckIn(false)
-                setIsGuest(false)
-                setIsWhere(false)
-
-                setIsCheckOut(true)
-                break;
-
-            case 'guest':
-                setIsCheckIn(false)
-                setIsCheckOut(false)
-                setIsWhere(false)
-
-                setIsGuest(true)
-                break;
-            default:
-                break;
-        }
-
+        setActiveField(prevField => (prevField === field ? null : field));
     }
 
     function getModalClassName() {
-        let filterModalClass = 'filter-modal'
-        if (isWhere) filterModalClass += ' is-where'
-        if (isCheckIn) filterModalClass += ' is-check-in'
-        if (isCheckOut) filterModalClass += ' is-check-out'
-        if (isGuest) filterModalClass += ' is-guest'
-        return filterModalClass
+        let filterModalClass = 'filter-modal';
+        if (activeField) filterModalClass += ` is-${activeField}`;
+        return filterModalClass;
     }
 
-    function getGuestsTitle() {
-        const { adult = 0, children = 0, infant = 0, pet = 0 } = filterToEdit.guest || {};
-        const numGuest = adult + children;
 
-        const guestStr = numGuest === 1 ? 'guest' : 'guests';
-        const infantStr = infant === 1 ? 'infant' : 'infants';
-        const petStr = pet === 1 ? 'pet' : 'pets';
-
-        let title = numGuest > 0 ? `${numGuest} ${guestStr}` : 'Add guests';
-        if (infant > 0) {
-            title += `, ${infant} ${infantStr}`;
-        }
-        if (pet > 0) {
-            title += `, ${pet} ${petStr}`;
-        }
-
-        return title || 'Add guests';
-    }
 
     return (
-
-
         <section className={` ${setClass}`}>
-
             <div className="where-field field" onClick={() => handleClick('where')}>
                 <h2>Where</h2>
                 <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
             </div>
-
 
             <div className="check-in-field field" onClick={() => handleClick('checkIn')}>
                 <h2>Check in</h2>
                 {filterToEdit.checkIn ? <h1>{`${getMonthName(filterToEdit.checkIn.getMonth())} ${filterToEdit.checkIn.getDate()}`}</h1> : <h1>Add dates</h1>}
             </div>
 
-
             <div className="check-out-field field" onClick={() => handleClick('checkOut')}>
-                <h2> Check out</h2>
+                <h2>Check out</h2>
                 {filterToEdit.checkOut ? <h1>{`${getMonthName(filterToEdit.checkOut.getMonth())} ${filterToEdit.checkOut.getDate()}`}</h1> : <h1>Add dates</h1>}
             </div>
-
 
             <div className="who-field field" onClick={() => handleClick('guest')}>
                 <div className="grid">
                     <h2>Who</h2>
-                    <h1>{getGuestsTitle()}</h1>
+                    <h1>{getGuestsTitle(filterToEdit)}</h1>
                 </div>
 
                 <div className="search-icon-container">
                     <SearchIcon className="search-icon" />
                 </div>
-
             </div>
 
-            {
-                (isWhere || isCheckIn || isCheckOut || isGuest) &&
-
+            {(activeField) &&
                 <section className={getModalClassName()}>
-                    {isWhere && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {(isCheckIn || isCheckOut) && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {isGuest && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {activeField === 'where' && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {(activeField === 'checkIn' || activeField === 'checkOut') && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {activeField === 'guest' && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>
             }
         </section>
-    )
+    );
 }
