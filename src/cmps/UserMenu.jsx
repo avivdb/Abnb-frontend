@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { logout } from '../store/actions/user.actions'
 
-export function UserMenu({ setUserMenu }) {
+export function UserMenu({ setUserMenu, user }) {
     const menuRef = useRef(null)
 
     useEffect(() => {
@@ -17,11 +18,33 @@ export function UserMenu({ setUserMenu }) {
         }
     }, [setUserMenu])
 
+    async function onLogout() {
+        setUserMenu(false)
+        try {
+            await logout()
+            navigate('/')
+            showSuccessMsg(`Bye now`)
+        } catch (err) {
+            showErrorMsg('Cannot logout')
+        }
+    }
+
+
     return (
         <div className="user-menu" ref={menuRef}>
-            <Link to={`stay/trips`}><button onClick={() => setUserMenu(false)}>Trips</button></Link>
-            <Link to={`stay/wishlists`}><button onClick={() => setUserMenu(false)}>Wishlist</button></Link>
-            <Link to={`stay/orders`}><button onClick={() => setUserMenu(false)}>Orders</button></Link>
+            {user ?
+                <>
+                    <Link to={`stay/trips`}><button onClick={() => setUserMenu(false)}>Trips</button></Link>
+                    <Link to={`stay/wishlists`}><button onClick={() => setUserMenu(false)}>Wishlist</button></Link>
+                    <Link to={`stay/orders`}><button onClick={() => setUserMenu(false)}>Orders</button></Link>
+                    <button className="btn-log-out" onClick={onLogout}>Log out</button>
+                </> :
+                <>
+                    <Link to={`/login`}><button onClick={() => setUserMenu(false)}>Log in</button></Link>
+                    <Link to={`login/signup`}><button onClick={() => setUserMenu(false)}>Sign up</button></Link>
+                    <Link to={`stay/edit`}><button onClick={() => setUserMenu(false)}>Abnb your home</button></Link>
+                </>
+            }
         </div>
     )
 }

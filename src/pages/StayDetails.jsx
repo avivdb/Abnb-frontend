@@ -11,6 +11,7 @@ import { BedroomsCarousel } from '../cmps/BedroomsCarousel'
 import { AmenitiesModal } from '../cmps/AmenitiesModal'
 
 import { OrderDetails } from '../cmps/OrderDetails'
+import { StayReviews } from '../cmps/StayReviews.jsx'
 
 export function StayDetails() {
 
@@ -90,8 +91,11 @@ export function StayDetails() {
                 </button>}
               {amenitiesModal && <AmenitiesModal setAmenitiesModal={setAmenitiesModal} amenities={stay.amenities} />}
             </section>
+            <hr />
+
+            <StayReviews stay={stay}/>
           </div>
-          
+
           <div className="order-details-container"><OrderDetails stay={stay} /></div>
 
         </section>

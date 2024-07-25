@@ -4,13 +4,10 @@
   grid-template-columns: 1fr 1fr 1fr 0.1fr;
   align-items: center;
 
-  font-size: rem(17.5px);
+  font-size: 0.9rem;
   font-family: cereal-medium;
   color: $clr8;
   line-height: em(27.5px);
-
-  width: em(403.391px);
-  height: em(48px);
 
   position: absolute;
   transform: translateX(-50%);
@@ -33,18 +30,16 @@
 
     &:nth-child(3) {
       font-family: cereal-regular;
-      font-weight: 400;
       color: $clr10;
     }
 
     &::before {
       content: "";
       position: absolute;
-      top: 25%;
-      bottom: 25%;
       left: 0;
       width: 0;
-      border-left: 0.5px solid rgba($clr8, 0.1);
+      height: 100%;
+      border-left: 0.5px solid rgb(184, 184, 184);
     }
 
     &:first-child::before {
