@@ -95,13 +95,14 @@ export function StayDetails() {
             </section>
             <hr />
 
-            <StayReviews stay={stay} />
 
           </div>
 
           <div className="order-details-container"><OrderDetails stay={stay} /></div>
 
         </section>
+
+        <StayReviews stay={stay} />
 
         <h2 className="google-map-title">Where you'll be</h2>
         <section>
