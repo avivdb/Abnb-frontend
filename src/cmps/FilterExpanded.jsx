@@ -10,9 +10,9 @@ import { getMonthName } from "../services/util.service";
 import { AbnbGradientBtn } from "./AbnbGradientBtn";
 
 export function FilterExpanded({ setClass }) {
-
-    const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
-    const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
+    const filterBy = useSelector(storeState => storeState.stayModule.filterBy);
+    const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy));
+    // const [activeField, setActiveField] = useState(null);
 
     useEffect(() => {
         setFilterBy(filterToEdit)
@@ -29,9 +29,7 @@ export function FilterExpanded({ setClass }) {
 
     useEffect(() => {
         handleScroll()
-
-        window.addEventListener('scroll', handleScroll)
-
+        window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
@@ -106,11 +104,9 @@ export function FilterExpanded({ setClass }) {
     function getGuestsTitle() {
         const { adult = 0, children = 0, infant = 0, pet = 0 } = filterToEdit.guest || {};
         const numGuest = adult + children;
-
         const guestStr = numGuest === 1 ? 'guest' : 'guests';
         const infantStr = infant === 1 ? 'infant' : 'infants';
         const petStr = pet === 1 ? 'pet' : 'pets';
-
         let title = numGuest > 0 ? `${numGuest} ${guestStr}` : 'Add guests';
         if (infant > 0) {
             title += `, ${infant} ${infantStr}`;
@@ -118,7 +114,6 @@ export function FilterExpanded({ setClass }) {
         if (pet > 0) {
             title += `, ${pet} ${petStr}`;
         }
-
         return title || 'Add guests';
     }
 
@@ -136,8 +131,6 @@ export function FilterExpanded({ setClass }) {
     }
 
 
-
-
     return (
 
 
@@ -149,13 +142,11 @@ export function FilterExpanded({ setClass }) {
                 <FilterLocation filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />
             </div>
 
-
             <div className={`check-in-field field ${ModalActive && selectedModal !== 'checkIn' ? "active" : ""} ${selectedModal === 'checkIn' ? "selected-active" : ""}`}
                 onClick={() => handleClick('checkIn')}>
                 <h2>Check in</h2>
                 {filterToEdit.checkIn ? <h1>{`${getMonthName(filterToEdit.checkIn.getMonth())} ${filterToEdit.checkIn.getDate()}`}</h1> : <h1>Add dates</h1>}
             </div>
-
 
             <div className={`check-out-field field ${ModalActive && selectedModal !== 'checkOut' ? "active" : ""} ${selectedModal === 'checkOut' ? "selected-active" : ""}`}
                 onClick={() => handleClick('checkOut')}>
@@ -163,12 +154,11 @@ export function FilterExpanded({ setClass }) {
                 {filterToEdit.checkOut ? <h1>{`${getMonthName(filterToEdit.checkOut.getMonth())} ${filterToEdit.checkOut.getDate()}`}</h1> : <h1>Add dates</h1>}
             </div>
 
-
             <div className={`who-field field ${ModalActive && selectedModal !== 'guest' ? "active" : ""} ${selectedModal === 'guest' ? "selected-active" : ""}`}
                 onClick={() => handleClick('guest')}>
                 <div className="grid">
                     <h2>Who</h2>
-                    <h1>{getGuestsTitle()}</h1>
+                    <h1>{getGuestsTitle(filterToEdit)}</h1>
                 </div>
 
                 {ModalActive ?
@@ -183,7 +173,6 @@ export function FilterExpanded({ setClass }) {
 
             {
                 (isWhere || isCheckIn || isCheckOut || isGuest) &&
-
                 <section className={getModalClassName()}>
                     {isWhere && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                     {(isCheckIn || isCheckOut) && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
@@ -191,5 +180,5 @@ export function FilterExpanded({ setClass }) {
                 </section>
             }
         </section>
-    )
+    );
 }

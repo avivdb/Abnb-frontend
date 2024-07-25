@@ -10,10 +10,13 @@ export const UPDATE_STAY = 'UPDATE_STAY'
 export const ADD_STAY_MSG = 'ADD_STAY_MSG'
 
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
     stays: [],
     filterBy: stayService.getDefaultFilter(),
+    isLoading: false,
+
 }
 
 export function stayReducer(state = initialState, action) {
@@ -48,7 +51,12 @@ export function stayReducer(state = initialState, action) {
                 filterBy: { ...state.filterBy, ...action.filterBy }
             };
             break;
-
+        case SET_IS_LOADING:
+            newState = {
+                ...state,
+                isLoading: action.isLoading
+            }
+            break
         default:
     }
     return newState

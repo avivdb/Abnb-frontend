@@ -12,6 +12,8 @@ import { AmenitiesModal } from '../cmps/AmenitiesModal'
 
 import { OrderDetails } from '../cmps/OrderDetails'
 import { StayReviews } from '../cmps/StayReviews.jsx'
+import { Google } from '@mui/icons-material'
+import { GoogleMap } from '../cmps/GoogleMap.jsx'
 
 export function StayDetails() {
 
@@ -28,9 +30,9 @@ export function StayDetails() {
   }
 
   return (
-    <section className="stay-details">
+    <section className="stay-details ">
 
-      {stay && <div className='stay-details-content'>
+      {stay && <div className='stay-details-content stay-details-layout'>
         <h1 className='stay-details-name'>{stay.name}</h1>
 
         <section className='gallery'>
@@ -93,12 +95,19 @@ export function StayDetails() {
             </section>
             <hr />
 
-            <StayReviews stay={stay}/>
+            <StayReviews stay={stay} />
+
           </div>
 
           <div className="order-details-container"><OrderDetails stay={stay} /></div>
 
         </section>
+
+        <h2 className="google-map-title">Where you'll be</h2>
+        <section>
+          <GoogleMap stay={stay} />
+        </section>
+
       </div>
       }
 

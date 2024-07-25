@@ -1,23 +1,15 @@
 .app-header {
-  position: fixed;
+  position: sticky;
   z-index: 100;
-  top: 0;
-  left: 0;
+  // transform: translateX(-50%);
+  // left: 50%;
+  // top: 0;
 
   display: grid;
   grid-template-columns: auto 1fr auto;
-  grid-auto-rows: auto auto auto;
   align-items: center;
-  // padding: em(15px) em(80px);
-
-  width: 100%;
-  // > * {
-  //   grid-column: 2;
-
-  //   &.full {
-  //     grid-column: 1 / -1;
-  //   }
-  // }
+  padding: 1rem 0;
+  // margin: 0 auto;
   color: $clr1;
   background-color: $clr12;
   // border-bottom: 1px solid rgb(221, 221, 221);
@@ -32,6 +24,36 @@
   .filter-label {
     grid-row: 3;
     grid-column: -1/1;
+  }
+
+  // @include for-mobile-layout {
+  //   width: $mobile-breakpoint;
+  // }
+  // @include for-narrow-layout {
+  //   width: $narrow-breakpoint;
+  // }
+  // @include for-normal-layout {
+  //   width: $normal-breakpoint;
+  // }
+  // @include for-wide-layout {
+  //   width: $wide-breakpoint;
+  // }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 2.3rem;
+    &:hover {
+      cursor: pointer;
+    }
+
+    h1 {
+      padding: 0;
+      margin: 0;
+      color: $clr1;
+      font-family: cereal-bold;
+      font-size: 1.5rem;
+    }
   }
 
   .filter-expanded,
@@ -83,7 +105,7 @@
 
     img {
       width: rem;
-      
+
       &:first-of-type {
         height: 1.5rem;
       }
@@ -95,7 +117,7 @@
       object-fit: cover;
       border-radius: 50%;
     }
-    
+
     .div-user-img {
       display: flex;
       place-content: center;
@@ -134,46 +156,25 @@
     }
   }
 
-  display: grid;
-  align-items: center;
-  grid-auto-flow: column;
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 2rem;
-    justify-self: start;
-    &:hover {
-      cursor: pointer;
-    }
-
-    h1 {
-      padding: 0;
-      margin: 0;
-      color: $clr1;
-      font-family: cereal-bold;
-      font-size: 1.4rem;
-    }
-  }
-
   .header-user {
     justify-self: end;
   }
-}
-header {
-  display: grid;
-  grid-template-columns:
-    minmax(20px, 1fr)
-    minmax(auto, 1200px) minmax(20px, 1fr);
 
-  // padding-top: 50px;
+  .filter-label {
+    grid-row: 3;
+    grid-column: -1/1;
+  }
 
-  > * {
-    grid-column: 2;
+  &::after {
+    content: "";
+    position: fixed;
 
-    &.full {
-      grid-column: 1 / -1;
-    }
+    // bottom: 25%
+    left: -100%;
+    right: -100%;
+    bottom: 0;
+    height: 0.5px;
+    // background-color: rgba($clr8, 0.1);
+    border-bottom: 0.5px solid rgba($clr8, 0.1);
   }
 }
