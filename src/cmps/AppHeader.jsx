@@ -60,37 +60,34 @@ export function AppHeader() {
 	}
 
 	return (
-		<header className="main-container full">
-
-			<div className="app-header">
+		<div className="app-header">
 
 
-				<NavLink to="/" className="logo">
-					<h1 className='fa brand airbnb'>bnb</h1>
-				</NavLink>
+			<NavLink to="/" className="logo fa brand airbnb ">
+				<h1>bnb</h1>
+			</NavLink>
 
-				<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
-				<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
+			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
 
-				<section className="header-user">
-					<Link to={`stay/edit`}>
-						<button className='btn-add-stay'>Abnb your home</button>
-					</Link>
-					{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+			<section className="header-user">
+				<Link to={`stay/edit`}>
+					<button className='btn-add-stay'>Abnb your home</button>
+				</Link>
+				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
-						<img src={menu} />
-						<img src={userimg} />
-					</div>
+				<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
+					<img src={menu} />
+					<img src={userimg} />
+				</div>
 
-					{userMenu && <UserMenu setUserMenu={setUserMenu} />}
+				{userMenu && <UserMenu setUserMenu={setUserMenu} />}
 
-				</section>
+			</section>
 
-				{(location.pathname === "/stay" || location.pathname === "/") && <FilterLabel className="" />}
-			</div>
+			{(location.pathname === "/stay" || location.pathname === "/") && <FilterLabel className="" />}
+		</div>
 
-		</header>
 
 	)
 }

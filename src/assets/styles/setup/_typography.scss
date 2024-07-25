@@ -40,11 +40,6 @@
 .fa.solid::before {
   font-family: fa-solid;
 }
-
-.fa.brand::before {
-  font-family: fa-brand;
-}
-
 .fa.solid.plus::before {
   content: "\2b";
 }
@@ -55,6 +50,14 @@
 
 .fa.solid.location::before {
   content: "\f3c5";
+}
+
+.fa.solid.house::before {
+  content: "\f015";
+}
+
+.fa.brand::before {
+  font-family: fa-brand;
 }
 
 .fa.brand.airbnb::before {
