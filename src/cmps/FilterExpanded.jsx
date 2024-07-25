@@ -6,13 +6,13 @@ import { setFilterBy } from "../store/actions/stay.actions";
 import { FilterLocation } from "./FilterLocation";
 import FilterDateRangePicker from "./FilterDateRangePicker";
 import { FilterAddGuest } from "./FilterAddGuest";
-import { getGuestsTitle, getMonthName } from "../services/util.service";
+import { getMonthName } from "../services/util.service";
 import { AbnbGradientBtn } from "./AbnbGradientBtn";
 
 export function FilterExpanded({ setClass }) {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy);
     const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy));
-    const [activeField, setActiveField] = useState(null);
+    // const [activeField, setActiveField] = useState(null);
 
     useEffect(() => {
         setFilterBy(filterToEdit)
@@ -28,12 +28,7 @@ export function FilterExpanded({ setClass }) {
 
 
     useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setActiveField(null);
-            }
-        };
-
+        handleScroll()
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll)
@@ -98,9 +93,28 @@ export function FilterExpanded({ setClass }) {
     }
 
     function getModalClassName() {
-        let filterModalClass = 'filter-modal';
-        if (activeField) filterModalClass += ` is-${activeField}`;
-        return filterModalClass;
+        let filterModalClass = 'filter-modal'
+        if (isWhere) filterModalClass += ' is-where'
+        if (isCheckIn) filterModalClass += ' is-check-in'
+        if (isCheckOut) filterModalClass += ' is-check-out'
+        if (isGuest) filterModalClass += ' is-guest'
+        return filterModalClass
+    }
+
+    function getGuestsTitle() {
+        const { adult = 0, children = 0, infant = 0, pet = 0 } = filterToEdit.guest || {};
+        const numGuest = adult + children;
+        const guestStr = numGuest === 1 ? 'guest' : 'guests';
+        const infantStr = infant === 1 ? 'infant' : 'infants';
+        const petStr = pet === 1 ? 'pet' : 'pets';
+        let title = numGuest > 0 ? `${numGuest} ${guestStr}` : 'Add guests';
+        if (infant > 0) {
+            title += `, ${infant} ${infantStr}`;
+        }
+        if (pet > 0) {
+            title += `, ${pet} ${petStr}`;
+        }
+        return title || 'Add guests';
     }
 
     function onSerach(ev) {
@@ -115,8 +129,6 @@ export function FilterExpanded({ setClass }) {
         setModalActive(false)
         setSelectedModal(null)
     }
-
-
 
 
     return (
@@ -159,11 +171,12 @@ export function FilterExpanded({ setClass }) {
 
             </div>
 
-            {(activeField) &&
+            {
+                (isWhere || isCheckIn || isCheckOut || isGuest) &&
                 <section className={getModalClassName()}>
-                    {activeField === 'where' && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {(activeField === 'checkIn' || activeField === 'checkOut') && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
-                    {activeField === 'guest' && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {isWhere && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {(isCheckIn || isCheckOut) && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {isGuest && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>
             }
         </section>
