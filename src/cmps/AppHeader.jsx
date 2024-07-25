@@ -27,8 +27,6 @@ export function AppHeader() {
 
 	let location = useLocation()
 
-	console.log(user)
-
 	useEffect(() => {
 		handleScroll()
 

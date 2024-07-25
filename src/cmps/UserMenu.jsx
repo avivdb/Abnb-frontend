@@ -37,11 +37,13 @@ export function UserMenu({ setUserMenu, user }) {
                     <Link to={`stay/trips`}><button onClick={() => setUserMenu(false)}>Trips</button></Link>
                     <Link to={`stay/wishlists`}><button onClick={() => setUserMenu(false)}>Wishlist</button></Link>
                     <Link to={`stay/orders`}><button onClick={() => setUserMenu(false)}>Orders</button></Link>
+                    <hr />
                     <button className="btn-log-out" onClick={onLogout}>Log out</button>
                 </> :
                 <>
                     <Link to={`/login`}><button onClick={() => setUserMenu(false)}>Log in</button></Link>
                     <Link to={`login/signup`}><button onClick={() => setUserMenu(false)}>Sign up</button></Link>
+                    <hr />
                     <Link to={`stay/edit`}><button onClick={() => setUserMenu(false)}>Abnb your home</button></Link>
                 </>
             }
