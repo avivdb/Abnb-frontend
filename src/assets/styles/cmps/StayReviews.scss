@@ -1,0 +1,35 @@
+.stay-reviews {
+    .stay-reviews-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .review {
+
+            .review-user-info {
+                display: flex;
+                align-items: center;
+                
+                img {
+                    height: 3rem;
+                    width: 3rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            .text {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+        }
+    }
+}

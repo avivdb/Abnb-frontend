@@ -11,6 +11,7 @@ import { BedroomsCarousel } from '../cmps/BedroomsCarousel'
 import { AmenitiesModal } from '../cmps/AmenitiesModal'
 
 import { OrderDetails } from '../cmps/OrderDetails'
+import { StayReviews } from '../cmps/StayReviews.jsx'
 import { Google } from '@mui/icons-material'
 import { GoogleMap } from '../cmps/GoogleMap.jsx'
 
@@ -92,6 +93,9 @@ export function StayDetails() {
                 </button>}
               {amenitiesModal && <AmenitiesModal setAmenitiesModal={setAmenitiesModal} amenities={stay.amenities} />}
             </section>
+            <hr />
+
+            <StayReviews stay={stay} />
 
           </div>
 

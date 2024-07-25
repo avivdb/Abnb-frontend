@@ -1,12 +1,14 @@
 .date-range-wrapper {
   display: grid;
+  gap: 2rem;
   justify-items: center;
-  padding: 18px 28px;
-  padding-bottom: 10px;
+  padding-inline: 2rem;
+  padding-block-end: 2.5rem;
+  padding-block-start: 1rem;
 
   .date-range-btns {
     font-family: cereal-regular;
-    font-size: 17.5px;
+    font-size: 1rem;
     font-weight: 500;
     background-color: #ebebeb;
     border-radius: 100px;
@@ -15,7 +17,7 @@
     button {
       padding: 8px 12px;
       font-family: cereal-regular;
-      font-size: 17.5px;
+      font-size: 0.9rem;
       font-weight: 700;
       margin: 4px;
       border: 1px solid #ebebeb;
@@ -29,7 +31,7 @@
     justify-content: center;
 
     font-family: cereal-regular;
-    font-size: 17.5px;
+    font-size: 0.8rem;
     line-height: em(22.5px, 17.5px);
     border-radius: 10px;
     border: none;
@@ -103,7 +105,8 @@
     }
 
     .react-datepicker__current-month {
-      font-size: em(20px, 17.5px);
+      font-size: 1rem;
+      margin-block-end: 1rem;
     }
   }
 
