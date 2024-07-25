@@ -3,14 +3,19 @@ import { reviewService } from '../../services/review'
 import { store } from '../store'
 import { ADD_REVIEW, REMOVE_REVIEW, SET_REVIEWS } from '../reducers/review.reducer'
 import { SET_SCORE } from '../reducers/user.reducer'
+import { SET_IS_LOADING } from '../reducers/system.reducer'
+
 
 export async function loadReviews() {
+	store.dispatch({ type: SET_IS_LOADING, isLoading: true })
 	try {
 		const reviews = await reviewService.query()
 		store.dispatch({ type: SET_REVIEWS, reviews })
 	} catch (err) {
 		console.log('ReviewActions: err in loadReviews', err)
 		throw err
+	} finally {
+		store.dispatch({ type: SET_IS_LOADING, isLoading: false })
 	}
 }
 

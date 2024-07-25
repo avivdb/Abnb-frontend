@@ -5,6 +5,7 @@ import { signup } from '../store/actions/user.actions'
 
 import { ImgUploader } from '../cmps/ImgUploader'
 import { userService } from '../services/user'
+import { AbnbGradientBtn } from '../cmps/AbnbGradientBtn'
 
 export function Signup() {
     const [credentials, setCredentials] = useState(userService.getEmptyUser())
@@ -21,7 +22,7 @@ export function Signup() {
         const value = ev.target.value
         setCredentials({ ...credentials, [field]: value })
     }
-    
+
     async function onSignup(ev = null) {
         if (ev) ev.preventDefault()
 
@@ -36,7 +37,9 @@ export function Signup() {
     }
 
     return (
-        <form className="signup-form" onSubmit={onSignup}>
+        <section className="signup-form">
+            <h1>Sign up</h1>
+            <h2>Welcome to Abnb</h2>
             <input
                 type="text"
                 name="fullname"
@@ -62,7 +65,8 @@ export function Signup() {
                 required
             />
             <ImgUploader onUploaded={onUploaded} />
-            <button>Signup</button>
-        </form>
+
+            <AbnbGradientBtn handleClick={onSignup} text={"Sign up"} />
+        </section>
     )
 }

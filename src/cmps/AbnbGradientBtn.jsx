@@ -1,7 +1,9 @@
-export function AbnbGradientBtn({ handleClick, text, btnType = "" }) {
+import "../assets/styles/cmps/AbnbGradientBtn.scss"
+
+export function AbnbGradientBtn({ handleClick, text, btnType = "button" }) {
 
     return (
-        <div className="btn-container"
+        <button className="btn-container"
             type={btnType}
             onClick={handleClick}>
             <div className="cell"></div>
@@ -105,10 +107,10 @@ export function AbnbGradientBtn({ handleClick, text, btnType = "" }) {
             <div className="cell"></div>
             <div className="cell"></div>
             <div className="content">
-                <button>
+                <div>
                     <span>{text}</span>
-                </button>
+                </div>
             </div>
-        </div>
+        </button>
     )
 }

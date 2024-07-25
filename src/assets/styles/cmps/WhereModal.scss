@@ -16,7 +16,7 @@
     position: relative;
 
     h1 {
-      font-size: 17.5px;
+      font-size: 1rem;
       padding: 0 em(16px, 17.5px);
       margin-bottom: em(16px, 17.5px);
 
@@ -119,8 +119,8 @@
         h2 {
           justify-self: start;
           font-family: cereal-light;
-          font-size: 17.5px;
-          color: $clr10;
+          font-size: 0.8rem;
+          color: black;
           line-height: em(22.5px, 17.5px);
           margin: 0 2px;
           width: 100%;

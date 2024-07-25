@@ -1,5 +1,5 @@
 .user-menu {
-    z-index: 1;
+    z-index: 1000;
     position: fixed;
     top: 5.3rem;
     right: 5rem;
@@ -8,7 +8,7 @@
 
     width: 10rem;
 
-    padding-block: 1rem;
+    padding-block: 0.5rem;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
@@ -30,5 +30,22 @@
 
     a:hover {
         background-color: #f5f4f4;
+    }
+
+    .btn-log-out {
+        background-color: #fff;
+        padding-block: 0.5rem;
+        padding-inline-start: 1rem;
+        text-align: start;
+
+        &:hover {
+            background-color: #f5f4f4;
+        }
+    }
+
+    hr {
+        width: 100%;
+        border: 0.5px solid #e5e4e4;
+        margin-block: 0.5rem;
     }
 }

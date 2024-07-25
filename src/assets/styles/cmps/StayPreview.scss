@@ -21,7 +21,6 @@
     }
   }
 
-
   .stay-preview-details {
     display: flex;
     flex-direction: column;
@@ -41,6 +40,7 @@
   p {
     font-family: cereal-light;
     margin: 0;
+    font-size: 0.9rem;
   }
 
   .secondary-content {
@@ -55,7 +55,7 @@
 
   h2 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 
   .stay-preview-price {
@@ -68,7 +68,7 @@
     position: relative;
     top: 3.5rem;
     left: 82%;
-
+    width: 3rem;
     img {
       width: 2rem;
     }
@@ -79,10 +79,9 @@
     gap: 0.2rem;
     align-items: center;
 
-    h1 {
-      font-size: 1rem;
+    span {
+      font-size: 0.9rem;
       font-family: cereal-medium;
     }
   }
-
 }

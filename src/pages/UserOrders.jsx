@@ -1,37 +1,46 @@
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-
-import { orderService } from "../services/order/order.service.local"
-import { loadOrders, updateOrder } from '../store/actions/order.action'
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { updateOrder, loadOrders } from '../store/actions/order.action';
 
 export function UserOrders() {
-    // const orders = useSelector(storeState => storeState.orderModule.orders)
-    const [orders, setOrders] = useState([])
+
+    const orders = useSelector(storeState => storeState.orderModule.orders);
+    const [isLoading, setIsLoading] = useState(true);
+    // const isLoading = useSelector(storeState => storeState.systemModule.isLoading)
 
     useEffect(() => {
-        // loadOrders()
-        // console.log('orders:', orders)
-        fetchOrders()
+
+        fetchOrders();
     }, [])
 
     async function fetchOrders() {
         try {
-            const fetchedOrders = await orderService.query()
-            setOrders(fetchedOrders)
-        } catch (error) {
-            console.error('Error fetching orders:', error)
+            console.log('isLoading', isLoading)
+            await loadOrders()
+            setIsLoading(false)
+        } catch (err) {
+            console.log('err', err)
+            setIsLoading(false)
+        }
+        finally {
+            console.log('isLoading', isLoading)
+
         }
     }
 
     async function handleStatusChange(order, newStatus) {
         try {
-            const updatedOrder = { ...order, status: newStatus }
-            await updateOrder(updatedOrder)
-            setOrders(prevOrders => prevOrders.map(o => o._id === order._id ? updatedOrder : o))
+            const updatedOrder = { ...order, status: newStatus };
+            await updateOrder(updatedOrder);
         } catch (error) {
-            console.error('Error updating order status:', error)
+            console.error('Error updating order status:', error);
         }
     }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
 
     return (
         <div className="user-orders">
@@ -45,26 +54,32 @@ export function UserOrders() {
                         <th>Check out</th>
                         <th>Total Price</th>
                         <th>Status</th>
-                        <th>Updat Status</th>
+                        <th>Update Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map((order, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{order.guest.fullname}</td>
-                            <td>{order.startDate}</td>
-                            <td>{order.endDate}</td>
-                            <td>{order.totalPrice}</td>
-                            <td>{order.status}</td>
-                            <td>
-                                <button onClick={() => handleStatusChange(order, 'approved')}>Approve</button>
-                                <button onClick={() => handleStatusChange(order, 'declined')}>Decline</button>
-                            </td>
+                    {orders && orders.length > 0 ? (
+                        orders.map((order, index) => (
+                            <tr key={order._id || index}>
+                                <td>{index + 1}</td>
+                                <td>{order.guest?.fullname || 'N/A'}</td>
+                                <td>{order.startDate || 'N/A'}</td>
+                                <td>{order.endDate || 'N/A'}</td>
+                                <td>{order.totalPrice || 'N/A'}</td>
+                                <td>{order.status || 'N/A'}</td>
+                                <td>
+                                    <button onClick={() => handleStatusChange(order, 'approved')}>Approve</button>
+                                    <button onClick={() => handleStatusChange(order, 'declined')}>Decline</button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="7">No orders available</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>
-    )
+    );
 }

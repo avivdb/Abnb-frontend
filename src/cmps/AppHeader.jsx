@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -12,6 +12,8 @@ import userimg from "../assets/img/icons/user.svg"
 
 import { useEffect, useState } from 'react'
 import { UserMenu } from './UserMenu'
+import { FilterLabel } from './FilterLabel'
+
 
 
 export function AppHeader() {
@@ -22,6 +24,8 @@ export function AppHeader() {
 	const navigate = useNavigate()
 
 	const [isExpanded, setIsExpanded] = useState(true)
+
+	let location = useLocation()
 
 	useEffect(() => {
 		handleScroll()
@@ -57,12 +61,14 @@ export function AppHeader() {
 	}
 
 	return (
-		<header className="app-header full">
+		<div className="app-header">
 
-			<NavLink to="/" className="logo">
-				<h1 className='fa brand airbnb'>bnb</h1>
+
+			<NavLink to="/" className="logo fa brand airbnb ">
+				<h1>bnb</h1>
 			</NavLink>
 
+			{isExpanded && <h1 className="header-stay-title">Stays</h1>}
 			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
 			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
 
@@ -72,16 +78,29 @@ export function AppHeader() {
 				</Link>
 				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-				<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
-					<img src={menu} />
-					<img src={userimg} />
-				</div>
+				{!user ?
+					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
+						<img className="user-menu-img" src={menu} />
+						<img className="user-img" src={userimg} />
+					</div> :
+					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
+						<img src={menu} />
+						{user.imgUrl ?
+							<img src={user.imgUrl} /> :
+							<div className="div-user-img">{user.fullname.charAt(0)}<div />
+							</div>
+						}
+					</div>
+				}
 
-				{userMenu && <UserMenu setUserMenu={setUserMenu} />}
+
+				{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
 
 			</section>
 
-		</header>
+			{(location.pathname === "/stay" || location.pathname === "/") && <FilterLabel className="" />}
+		</div>
+
 
 	)
 }

@@ -144,7 +144,7 @@ export function FilterLabel() {
 
     const handleResize = () => {
         const width = window.innerWidth;
-        const itemWidth = 110;
+        const itemWidth = 90;
         const calculatedItemsPerPage = Math.floor(width / itemWidth) - 2
         setItemsPerPage(calculatedItemsPerPage > 0 ? calculatedItemsPerPage : 10)
     }

@@ -1,11 +1,14 @@
 .checkout-stay-modal {
+    align-self: start;
+    position: sticky;
+    top: 7rem;
+    height: 31%;
 
     justify-self: end;
     padding: 1.5rem;
     border-radius: 12px;
     border: 1px solid #cdcdcd;
     width: 82%;
-    height: 31%;
 
     hr {
         margin-block: 1.5rem;
@@ -63,6 +66,7 @@
 
             h3 {
                 font-size: 0.9rem;
+
                 &:nth-of-type(odd) {
                     text-decoration: underline;
                 }
@@ -74,8 +78,21 @@
     .payment-total {
         display: flex;
         justify-content: space-between;
+        justify-items: start;
+
+        p{
+            margin: 0;
+        }
+
         h3 {
             font-family: cereal-regular;
         }
     }
+}
+
+.checkout-stay-modal-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: end;
 }
