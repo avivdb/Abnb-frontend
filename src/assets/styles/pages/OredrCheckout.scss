@@ -121,12 +121,17 @@
     .checkout-cancellation-policy {
         margin-block: 2rem;
 
-        p {
-            font-family: cereal-light;
+        h2 {
+            margin-block-end: 1rem;
         }
 
-        .cancellation-policy-bold {
+        h1 {
             font-family: cereal-medium;
+
+            span {
+                font-family: cereal-light;
+
+            }
         }
     }
 

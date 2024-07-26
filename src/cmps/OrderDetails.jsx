@@ -5,6 +5,8 @@ import { OrderDateModel } from "./OrderDateModel"
 import { OrderGuestsModal } from "./OrderGuestsModal"
 import dayjs from 'dayjs'
 import { AbnbGradientBtn } from "./AbnbGradientBtn"
+import { calculateNights } from '../services/util.service.js'
+
 
 import arrowdown from "../assets/img/icons/arrowdown.svg"
 
@@ -17,10 +19,10 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
     useEffect(() => {
         setOrderToEdit(prevOrder => {
             const newOrder = { ...prevOrder }
-            if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin.slice(0, 10)
-                if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout.slice(0, 10)
-                    return newOrder
-            })
+            if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin
+            if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout
+            return newOrder
+        })
     }, [])
 
 
@@ -41,14 +43,6 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
     useEffect(() => {
         updateBookingDetails()
     }, [orderToEdit.startDate, orderToEdit.endDate])
-
-    function calculateNights(checkin, checkout) {
-        const checkinDate = new Date(checkin)
-        const checkoutDate = new Date(checkout)
-        const differenceInTime = checkoutDate - checkinDate
-        const differenceInDays = differenceInTime / (1000 * 3600 * 24)
-        return differenceInDays
-    }
 
     function updateBookingDetails() {
         if (orderToEdit.startDate && orderToEdit.startDate) {
@@ -82,6 +76,19 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
         return guestSummary.join(', ')
     }
 
+    function transformDate(dateStr) {
+        // Check if the input is in the expected format
+        const regex = /^\d{2}-\d{2}-\d{4}$/;
+        if (!regex.test(dateStr)) {
+            throw new Error("Input date string must be in 'dd-mm-yyyy' format");
+        }
+    
+        // Replace '-' with '/'
+        const transformedDate = dateStr.replace(/-/g, '/');
+    
+        return transformedDate;
+    }
+
 
     return (
         <div className='order-details'>
@@ -93,15 +100,15 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
             <section className="od-btns-booking-details">
                 <div className="od-booking-date" onClick={() => setIsDateModalOpen(true)}>
                     <p className="od-text">CHECK-IN</p>
-                    <p className="od-value">{dayjs(orderToEdit.startDate).format('DD/MM/YYYY')}</p>
+                    <p className="od-value">{transformDate(orderToEdit.startDate)}</p>
                 </div>
                 <div className="od-booking-date" onClick={() => setIsDateModalOpen(true)}>
                     <p className="od-text">CHECK-OUT</p>
-                    <p className="od-value">{dayjs(orderToEdit.endDate).format('DD/MM/YYYY')}</p>
+                    <p className="od-value">{transformDate(orderToEdit.endDate)}</p>
                 </div>
                 <button className="od-booking-guests" onClick={() => setIsGuestsModalOpen(true)}>
                     <section>
-                        <p>Guests</p>
+                        <p>GUESTS</p>
                         <h5>{getGuestSummary()}</h5>
                     </section>
                     <img src={arrowdown} />
@@ -128,7 +135,7 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
                     setIsGuestsModalOpen={setIsGuestsModalOpen} />
             </section>)}
 
-            <AbnbGradientBtn handleClick={handleReserve} text="Reserve"/>
+            <AbnbGradientBtn handleClick={handleReserve} text="Reserve" />
 
             <section className="price-details-content">
                 <h1>You won't be charged yet</h1>

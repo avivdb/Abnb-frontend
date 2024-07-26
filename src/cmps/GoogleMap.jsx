@@ -174,7 +174,7 @@ export function GoogleMap({ stay }) {
     const initialCoords = stay ? { lat: stay.loc.lat, lng: stay.loc.lng } : { lat: 32.109333, lng: 34.855499 };
     const [coords, setCoords] = useState(initialCoords)
     const zoom = 11
-    console.log(stay)
+    // console.log(stay)
 
     // function onHandleClick(coords) {
     //     setCoords(coords)

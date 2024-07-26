@@ -1,23 +1,51 @@
-
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import dayjs from 'dayjs'
+
+function parseDate(dateStr) {
+    if (!dateStr) return null
+    const [day, month, year] = dateStr.split('-').map(Number)
+    return new Date(year, month - 1, day)
+}
+
+function formatDate(date) {
+    if (!date) return ''
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+}
+
+function displayDate(date) {
+    if (!date) return ''
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}/${month}/${year}`
+}
 
 export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen }) {
-    const [startDate, setStartDate] = useState(new Date(orderToEdit.startDate))
-    const [endDate, setEndDate] = useState(new Date(orderToEdit.endDate))
+    const [startDate, setStartDate] = useState(() => {
+        const parsedDate = parseDate(orderToEdit.startDate)
+        return parsedDate instanceof Date && !isNaN(parsedDate) ? parsedDate : null
+    })
+    const [endDate, setEndDate] = useState(() => {
+        const parsedDate = parseDate(orderToEdit.endDate)
+        return parsedDate instanceof Date && !isNaN(parsedDate) ? parsedDate : null
+    })
 
     function handleSelect(dates) {
-        const [start, end] = dates
+        const [start, end] = dates;
         setStartDate(start)
         setEndDate(end)
-        setOrderToEdit({
-            ...orderToEdit, 
-            startDate: dayjs(start).format('YYYY-MM-DD') , 
-            endDate: dayjs(end).format('YYYY-MM-DD')
-        })
-    
+
+        if (start && end) {
+            setOrderToEdit({
+                ...orderToEdit,
+                startDate: formatDate(start),
+                endDate: formatDate(end)
+            })
+        }
     }
 
     return (
@@ -30,7 +58,7 @@ export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen
                             className="odm-date"
                             type="text"
                             placeholder="DD/MM/YYYY"
-                            value={dayjs(startDate).format('DD/MM/YYYY')}
+                            value={displayDate(startDate)}
                             readOnly
                         />
                     </div>
@@ -40,7 +68,7 @@ export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen
                             className="odm-date"
                             type="text"
                             placeholder="DD/MM/YYYY"
-                            value={dayjs(endDate).format('DD/MM/YYYY')}
+                            value={displayDate(endDate)}
                             readOnly
                         />
                     </div>
@@ -53,16 +81,13 @@ export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen
                     startDate={startDate}
                     endDate={endDate}
                     selectsRange
-                    minDate={dayjs().toDate()}
+                    minDate={new Date()}
                     inline
                     monthsShown={2}
-                    highlightDates={[{ "react-datepicker__day--selected": [startDate, endDate] }]}
+                    highlightDates={[startDate, endDate].filter(Boolean)}
                 />
             </div>
-            <button className="odm-close" onClick={() => setIsDateModalOpen(false)}>Close</button>
+            {setIsDateModalOpen && <button className="odm-close" onClick={() => setIsDateModalOpen(false)}>Close</button>}
         </>
     )
 }
-
-
-

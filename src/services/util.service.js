@@ -65,8 +65,65 @@ export function getRandomDistance() {
 export function getMonthName(month) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return monthNames[month]
-
 }
+
+export function formatDateRange(date1, date2) {
+    const [day1, month1, year1] = date1.split('-').map(Number);
+    const [day2, month2, year2] = date2.split('-').map(Number);
+
+    const dateObj1 = new Date(year1 + 2000, month1 - 1, day1); // year adjustment if needed
+    const dateObj2 = new Date(year2 + 2000, month2 - 1, day2); // year adjustment if needed
+
+    const monthName1 = getMonthName(dateObj1.getMonth());
+    const monthName2 = getMonthName(dateObj2.getMonth());
+
+    if (month1 === month2) {
+        return `${monthName1} ${day1}-${day2}`;
+    } else {
+        return `${monthName1} ${day1} - ${monthName2} ${day2}`;
+    }
+}
+
+export function calculateNights(checkIn, checkOut) {
+    function parseDate(dateString) {
+        const [day, month, year] = dateString.split('-').map(Number)
+        return new Date(year, month - 1, day)
+    }
+
+    const checkInDate = parseDate(checkIn)
+    const checkOutDate = parseDate(checkOut)
+
+    const differenceInMilliseconds = checkOutDate - checkInDate
+
+    const millisecondsPerDay = 24 * 60 * 60 * 1000
+    const nights = differenceInMilliseconds / millisecondsPerDay
+
+    return Math.floor(nights)
+}
+
+export function getDateTwoWeeksBefore(dateString, weeks) {
+    // Helper function to parse the date string "DD-MM-YYYY"
+    function parseDate(dateString) {
+        const [day, month, year] = dateString.split('-').map(Number);
+        return new Date(year, month - 1, day); // month is 0-based
+    }
+
+    // Parse the input date
+    const inputDate = parseDate(dateString);
+
+    // Subtract two weeks (14 days)
+    const twoWeeksBefore = new Date(inputDate);
+    twoWeeksBefore.setDate(inputDate.getDate() - (weeks) * 7);
+
+    // Get month name and day
+    const monthName = getMonthName(twoWeeksBefore.getMonth());
+    const day = twoWeeksBefore.getDate();
+
+    // Format and return the result
+    return `${monthName} ${day}`;
+}
+
+
 
 export function getGuestsTitle(filterToEdit) {
     const { adult = 0, children = 0, infant = 0, pet = 0 } = filterToEdit.guest || {};

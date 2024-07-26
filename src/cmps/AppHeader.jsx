@@ -50,7 +50,7 @@ export function AppHeader() {
 	}
 
 	const headerClass = (location.pathname === "/stay" || location.pathname === "/") ? "style" : "";
-	const headerStyle = (location.pathname === "/stay" || location.pathname === "/") ? { position: "fixed" } : { position: "relative" }
+	const headerStyle = (location.pathname === "/stay" || location.pathname === "/") ? { position: "sticky" } : { position: "relative" }
 
 	return (
 		<div className={`app-header ${headerClass}`} style={headerStyle}>
@@ -67,7 +67,7 @@ export function AppHeader() {
 				<Link to={`stay/edit`}>
 					<button className='btn-add-stay'>Abnb your home</button>
 				</Link>
-				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+				{/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>} */}
 
 				{!user ?
 					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>

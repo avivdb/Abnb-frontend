@@ -8,12 +8,13 @@
 
   display: grid;
   grid-template-columns: auto 1fr auto;
+  row-gap: 1rem;
   align-items: center;
-  padding: 1rem 0;
+  // padding: 1rem 0;
   // margin: 0 auto;
   color: $clr1;
   background-color: $clr12;
-  // border-bottom: 1px solid rgb(221, 221, 221);
+  padding-top: 1rem;
 
   .header-stay-title {
     text-align: center;

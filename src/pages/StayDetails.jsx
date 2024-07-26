@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { orderService } from "../services/order"
 
 
-import { getRandomIntInclusive } from '../services/util.service.js'
+import { getRandomIntInclusive, calculateNights } from '../services/util.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
@@ -17,6 +17,7 @@ import { StayReviews } from '../cmps/StayReviews.jsx'
 import { Google } from '@mui/icons-material'
 import { GoogleMap } from '../cmps/GoogleMap.jsx'
 import { StayDetailsHeader } from '../cmps/StayDetailsHeader.jsx'
+import { OrderDateModel } from '../cmps/OrderDateModel.jsx'
 
 export function StayDetails() {
 
@@ -116,7 +117,7 @@ export function StayDetails() {
             <hr />
 
             <div className='stay-bedroom-display'>
-              <h4 style={{ marginInlineStart: "1.5rem" }}>Where you'll sleep</h4>
+              <h4>Where you'll sleep</h4>
               <section className='stay-bedroom-list'>
                 <BedroomsCarousel stay={stay} />
               </section>
@@ -143,6 +144,15 @@ export function StayDetails() {
             </section>
             <hr />
 
+            <h2 className="details-dates-picker-title">{calculateNights(orderToEdit.startDate, orderToEdit.endDate)} nights in {stay.loc.city}</h2>
+            <section className="details-dates-picker">
+            <OrderDateModel
+                        orderToEdit={orderToEdit}
+                        setOrderToEdit={setOrderToEdit}
+                        setIsDateModalOpen={null}
+                    />
+            </section>
+
 
           </div>
 
@@ -157,6 +167,7 @@ export function StayDetails() {
 
         </section>
 
+        <hr />
         <section id="reviews">
           <StayReviews stay={stay} />
         </section>

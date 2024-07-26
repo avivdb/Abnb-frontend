@@ -156,8 +156,8 @@ function _createOrders() {
 					fullname: 'Walter White',
 				},
 				totalPrice: 2767,
-				startDate: '2025-09-10',
-				endDate: '2025-09-22',
+				startDate: '12-09-2024',
+				endDate: '15-09-2024',
 				guests: 3,
 				guestCounts: {
 					adults: 2,
@@ -182,8 +182,8 @@ function _createOrders() {
 					fullname: 'Skyler White',
 				},
 				totalPrice: 1407,
-				startDate: '2025-10-15',
-				endDate: '2025-10-17',
+				startDate: '10-08-2024',
+				endDate: '17-09-2024',
 				guests: 3,
 				guestCounts: {
 					adults: 2,
@@ -208,8 +208,8 @@ function _createOrders() {
 					fullname: 'Hank Shrader',
 				},
 				totalPrice: 3407,
-				startDate: '2025-08-21',
-				endDate: '2025-08-29',
+				startDate: '21-08-2024',
+				endDate: '29-08-2024',
 				guests: 3,
 				guestCounts: {
 					adults: 2,
@@ -234,8 +234,8 @@ function _createOrders() {
 					fullname: 'Jessy Pinkman',
 				},
 				totalPrice: 4807,
-				startDate: '2025-08-11',
-				endDate: '2025-09-18',
+				startDate: '11-08-2024',
+				endDate: '18-09-2024',
 				guests: 3,
 				guestCounts: {
 					adults: 2,
