@@ -76,7 +76,7 @@ export function AppHeader() {
 				<Link to={`stay/edit`}>
 					<button className='btn-add-stay'>Abnb your home</button>
 				</Link>
-				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+				{/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>} */}
 
 				{!user ?
 					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>

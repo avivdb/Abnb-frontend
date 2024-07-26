@@ -40,7 +40,7 @@ export function OrderDetails({ stay }) {
             children: orderToEdit.guestCounts.children,
             infants: orderToEdit.guestCounts.infants,
             pets: orderToEdit.guestCounts.pets,
-            guests: orderToEdit.guests,
+            capacity: orderToEdit.capacity,
 
         })
     }, [orderToEdit])
@@ -80,7 +80,7 @@ export function OrderDetails({ stay }) {
             children: orderToEdit.guestCounts.children,
             infants: orderToEdit.guestCounts.infants,
             pets: orderToEdit.guestCounts.pets,
-            guests: orderToEdit.guests,
+            capacity: orderToEdit.capacity,
         }).toString()
 
         navigate(`/stay/${stay._id}/checkout?${params}`)

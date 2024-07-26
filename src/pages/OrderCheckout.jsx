@@ -17,18 +17,18 @@ import { AbnbGradientBtn } from "../cmps/AbnbGradientBtn";
 import { loadStay } from "../store/actions/stay.actions";
 
 export function OrderCheckout() {
-    const [countryModal, setCountryModal] = useState(false);
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const { stayId } = useParams();
-    const [searchParams] = useSearchParams();
-    const [order, setOrder] = useState(orderService.getOrderToEditFromSearchParams(searchParams));
-    const navigate = useNavigate();
+    const [countryModal, setCountryModal] = useState(false)
+    const [selectedCountry, setSelectedCountry] = useState(null)
+    const { stayId } = useParams()
+    const [searchParams] = useSearchParams()
+    const [order, setOrder] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
+    const navigate = useNavigate()
 
-    const stay = useSelector(storeState => storeState.stayModule.stay);
+    const stay = useSelector(storeState => storeState.stayModule.stay)
 
     useEffect(() => {
-        loadStay(stayId);
-    }, [stayId]);
+        loadStay(stayId)
+    }, [stayId])
 
     useEffect(() => {
         if (stay) {
@@ -39,9 +39,9 @@ export function OrderCheckout() {
                     name: stay.name,
                     price: stay.price
                 }
-            }));
+            }))
         }
-    }, [stay]);
+    }, [stay])
 
     const months = [
         'Jan', 'Feb', 'Mar', 'Apr',
@@ -110,7 +110,7 @@ export function OrderCheckout() {
                         </section>
                         <section>
                             <h3>Guests</h3>
-                            <p>{order.guests} {(order.guests === 1) ? "guest" : "guests"}</p>
+                            <p>{order.capacity} {(order.capacity === 1) ? "guest" : "guests"}</p>
                         </section>
                     </section>
                     <hr />

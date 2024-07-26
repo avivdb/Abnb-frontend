@@ -14,11 +14,12 @@ export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen
         setEndDate(end)
         setOrderToEdit({
             ...orderToEdit, 
-            startDate: dayjs(start).format('YYYY-MM-DD') , 
+            startDate: dayjs(start).format('YYYY-MM-DD'), 
             endDate: dayjs(end).format('YYYY-MM-DD')
         })
     
     }
+
 
     return (
         <>

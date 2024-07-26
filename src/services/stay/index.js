@@ -26,7 +26,7 @@ function getEmptyStay() {
                 city: "",
                 address: "",
                 lat: 0,
-                lng: 0
+                lan: 0
             }
     }
 }
@@ -34,6 +34,11 @@ function getEmptyStay() {
 function getDefaultFilter() {
     return {
         txt: '',
+        checkIn: '',
+        checkOut: '',
+        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        label: '',
+
     }
 }
 

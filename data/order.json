@@ -1,7 +1,7 @@
 [
     {
         "_id": "o1225",
-        "hostId": {
+        "host": {
             "_id": "u101",
             "fullname": "Jessy Pinkman",
             "imgUrl": "..."
@@ -13,7 +13,7 @@
         "totalPrice": 2767,
         "startDate": "2025-09-10",
         "endDate": "2025-09-22",
-        "guests": 3,
+        "capacity": 3,
         "guestCounts": {
             "adults": 2,
             "children": 1,
@@ -30,7 +30,7 @@
     },
     {
         "_id": "o1226",
-        "hostId": {
+        "host": {
             "_id": "u102",
             "fullname": "Hank Shrader",
             "imgUrl": "..."
@@ -42,7 +42,7 @@
         "totalPrice": 1407,
         "startDate": "2025-10-15",
         "endDate": "2025-10-17",
-        "guests": 3,
+        "capacity": 3,
         "guestCounts": {
             "adults": 2,
             "children": 1,
@@ -59,7 +59,7 @@
     },
     {
         "_id": "o1227",
-        "hostId": {
+        "host": {
             "_id": "u103",
             "fullname": "Skyler White",
             "imgUrl": "..."
@@ -71,7 +71,7 @@
         "totalPrice": 3407,
         "startDate": "2025-08-21",
         "endDate": "2025-08-29",
-        "guests": 3,
+        "capacity": 3,
         "guestCounts": {
             "adults": 2,
             "children": 1,
@@ -88,7 +88,7 @@
     },
     {
         "_id": "o1228",
-        "hostId": {
+        "host": {
             "_id": "u104",
             "fullname": "Walter White",
             "imgUrl": "..."
@@ -100,7 +100,7 @@
         "totalPrice": 4807,
         "startDate": "2025-08-11",
         "endDate": "2025-09-18",
-        "guests": 3,
+        "capacity": 3,
         "guestCounts": {
             "adults": 2,
             "children": 1,
