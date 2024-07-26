@@ -77,18 +77,12 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
     }
 
     function transformDate(dateStr) {
-        // Check if the input is in the expected format
-        const regex = /^\d{2}-\d{2}-\d{4}$/;
-        if (!regex.test(dateStr)) {
-            throw new Error("Input date string must be in 'dd-mm-yyyy' format");
-        }
-    
-        // Replace '-' with '/'
-        const transformedDate = dateStr.replace(/-/g, '/');
-    
-        return transformedDate;
-    }
 
+        const [day, month, year] = dateStr.split('-');
+        const newDateStr = `${day}/${month}/${year}`;
+        
+        return newDateStr;
+    }
 
     return (
         <div className='order-details'>
