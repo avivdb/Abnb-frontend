@@ -5,10 +5,10 @@ export const stayService = {
     getById,
     save,
     remove,
-    addStayMsg
+    // addStayMsg
 }
 
-async function query(filterBy = { txt: '', price: 0 }) {
+async function query(filterBy = {}) {
     return httpService.get(`stay`, filterBy)
 }
 
@@ -29,7 +29,7 @@ async function save(stay) {
     return savedStay
 }
 
-async function addStayMsg(stayId, txt) {
-    const savedMsg = await httpService.post(`stay/${stayId}/msg`, { txt })
-    return savedMsg
-}
+// async function addStayMsg(stayId, txt) {
+//     const savedMsg = await httpService.post(`stay/${stayId}/msg`, { txt })
+//     return savedMsg
+// }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import GoogleMapReact from 'google-map-react';
 
 function AnyReactComponent({ text, lat, lng, onClick, element }) {
@@ -171,7 +171,7 @@ const mapStyle = [
 ]
 
 export function GoogleMap({ stay }) {
-    const initialCoords = stay ? { lat: stay.loc.lat, lng: stay.loc.lng } : { lat: 32.109333, lng: 34.855499 };
+    const initialCoords = stay ? { lat: stay.loc.lat, lng: stay.loc.lan } : { lat: 32.109333, lng: 34.855499 };
     const [coords, setCoords] = useState(initialCoords)
     const zoom = 11
     // console.log(stay)

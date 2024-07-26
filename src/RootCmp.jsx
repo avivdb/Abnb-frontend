@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router'
 
 import { StayIndex } from './pages/StayIndex.jsx'
-import { AdminIndex } from './pages/AdminIndex.jsx'
+// import { AdminIndex } from './pages/AdminIndex.jsx'
 
 import { StayDetails } from './pages/StayDetails'
 import { UserDetails } from './pages/UserDetails'
@@ -40,7 +40,7 @@ export function RootCmp() {
                     <Route path="stay/edit/:stayId" element={<StayDetails />} />
                     <Route path="stay/:stayId" element={<StayDetails />} />
                     <Route path="user/:id" element={<UserDetails />} />
-                    <Route path="admin" element={<AdminIndex />} />
+                    {/* <Route path="admin" element={<AdminIndex />} /> */}
                     <Route path="login" element={<LoginSignup />}>
                         <Route index element={<Login />} />
                         <Route path="signup" element={<Signup />} />

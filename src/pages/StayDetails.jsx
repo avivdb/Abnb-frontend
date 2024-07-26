@@ -94,7 +94,7 @@ export function StayDetails() {
             <h3 className='stay-location-des'>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
             <h3 className="stay-dry-details">
               {
-                `${stay.guests} ${stay.guests === 1 ? "guest" : "guests"} • 
+                `${stay.capacity} ${stay.capacity === 1 ? "guest" : "guests"} • 
               ${stay.bedrooms.length} ${stay.bedrooms.length === 1 ? "bedroom" : "bedrooms"} • 
               ${stay.beds} ${(stay.beds) === 1 ? "bed" : "beds"} •
               ${stay.baths} ${stay.baths === 1 ? "bath" : "baths"}`
