@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { orderService } from "../services/order"
+
 
 import { getRandomIntInclusive } from '../services/util.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
@@ -14,16 +16,60 @@ import { OrderDetails } from '../cmps/OrderDetails'
 import { StayReviews } from '../cmps/StayReviews.jsx'
 import { Google } from '@mui/icons-material'
 import { GoogleMap } from '../cmps/GoogleMap.jsx'
+import { StayDetailsHeader } from '../cmps/StayDetailsHeader.jsx'
 
 export function StayDetails() {
 
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
+  const navigate = useNavigate()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [orderToEdit, setOrderToEdit] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
+
   const [amenitiesModal, setAmenitiesModal] = useState(false)
+  const [header, setHeader] = useState(false)
+
+
 
   useEffect(() => {
     loadStay(stayId)
   }, [stayId])
+
+  useEffect(() => {
+    handleScroll()
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+
+  }, [])
+
+  function handleReserve() {
+    const params = new URLSearchParams({
+      startDate: orderToEdit.startDate,
+      endDate: orderToEdit.endDate,
+      totalPrice: orderToEdit.totalPrice,
+      adults: orderToEdit.guestCounts.adults,
+      children: orderToEdit.guestCounts.children,
+      infants: orderToEdit.guestCounts.infants,
+      pets: orderToEdit.guestCounts.pets,
+      guests: orderToEdit.guests,
+    }).toString()
+
+    navigate(`/stay/${stay._id}/checkout?${params}`)
+  }
+
+
+  function handleScroll() {
+    if (window.scrollY > 545) {
+      setHeader(true)
+    } else {
+      setHeader(false)
+    }
+  }
 
   function onShowAmenities() {
     setAmenitiesModal(true)
@@ -32,10 +78,12 @@ export function StayDetails() {
   return (
     <section className="stay-details ">
 
+      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve}/>}
+
       {stay && <div className='stay-details-content stay-details-layout'>
         <h1 className='stay-details-name'>{stay.name}</h1>
 
-        <section className='gallery'>
+        <section id="photos" className='gallery'>
           {stay.imgUrls.map((imgUrl, idx) => (
             <img key={idx} src={imgUrl} className={idx === 0 ? 'main-img' : ''} />))}
         </section>
@@ -75,7 +123,7 @@ export function StayDetails() {
             </div>
             <hr />
 
-            <h2 className="amenities-title">What this place offers</h2>
+            <h2 id="amenities" className="amenities-title">What this place offers</h2>
             <section className="amenities">
               {stay.amenities.slice(0, 10).map((amenity, index) => (
                 <div className="amenity" key={index}>
@@ -98,13 +146,23 @@ export function StayDetails() {
 
           </div>
 
-          <div className="order-details-container"><OrderDetails stay={stay} /></div>
+          <div className="order-details-container">
+            <OrderDetails
+              stay={stay}
+              orderToEdit={orderToEdit}
+              setOrderToEdit={setOrderToEdit}
+              setSearchParams={setSearchParams}
+              handleReserve={handleReserve} />
+          </div>
 
         </section>
 
-        <StayReviews stay={stay} />
+        <section id="reviews">
+          <StayReviews stay={stay} />
+        </section>
 
-        <h2 className="google-map-title">Where you'll be</h2>
+        <hr />
+        <h2 id="location" className="google-map-title">Where you'll be</h2>
         <section>
           <GoogleMap stay={stay} />
         </section>

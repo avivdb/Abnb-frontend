@@ -1,8 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
 
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
@@ -21,7 +19,6 @@ export function AppHeader() {
 	const [userMenu, setUserMenu] = useState(false)
 
 	const user = useSelector(storeState => storeState.userModule.user)
-	const navigate = useNavigate()
 
 	const [isExpanded, setIsExpanded] = useState(true)
 
@@ -39,10 +36,12 @@ export function AppHeader() {
 	}, [])
 
 	function handleScroll() {
-		if (window.scrollY > 50) {
-			setIsExpanded(false)
-		} else {
-			setIsExpanded(true)
+		if (location.pathname === "/stay" || location.pathname === "/") {
+			if (window.scrollY > 50) {
+				setIsExpanded(false)
+			} else {
+				setIsExpanded(true)
+			}
 		}
 	}
 
@@ -50,19 +49,11 @@ export function AppHeader() {
 		setIsExpanded(true)
 	}
 
-	async function onLogout() {
-		try {
-			await logout()
-			navigate('/')
-			showSuccessMsg(`Bye now`)
-		} catch (err) {
-			showErrorMsg('Cannot logout')
-		}
-	}
+	const headerClass = (location.pathname === "/stay" || location.pathname === "/") ? "style" : "";
+	const headerStyle = (location.pathname === "/stay" || location.pathname === "/") ? { position: "fixed" } : { position: "relative" }
 
 	return (
-		<div className="app-header">
-
+		<div className={`app-header ${headerClass}`} style={headerStyle}>
 
 			<NavLink to="/" className="logo fa brand airbnb ">
 				<h1>bnb</h1>

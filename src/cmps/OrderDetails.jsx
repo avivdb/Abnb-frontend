@@ -8,12 +8,8 @@ import { AbnbGradientBtn } from "./AbnbGradientBtn"
 
 import arrowdown from "../assets/img/icons/arrowdown.svg"
 
-// check if necessary totalPrice
-
-export function OrderDetails({ stay }) {
+export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParams, handleReserve }) {
     const [numberOfNights, setNumberOfNights] = useState(1)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [orderToEdit, setOrderToEdit] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
     const [isDateModalOpen, setIsDateModalOpen] = useState(false)
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const navigate = useNavigate()
@@ -27,9 +23,6 @@ export function OrderDetails({ stay }) {
             })
     }, [])
 
-    // useEffect(() => {
-    //     setSearchParams({...orderToEdit, ...guestCounts})
-    // },[orderToEdit])
 
     useEffect(() => {
         setSearchParams({
@@ -63,27 +56,11 @@ export function OrderDetails({ stay }) {
             setNumberOfNights(nights)
             setOrderToEdit({
                 ...orderToEdit,
-                totalPrice: stay.price * nights + 500 + 107//stay.price * nights + Airbnb service fee + Cleaning fee
+                totalPrice: stay.price * nights + 500 + 107 //stay.price * nights + Airbnb service fee + Cleaning fee
             })
         } else {
             setNumberOfNights(1)
         }
-    }
-
-
-    function handleReserve() {
-        const params = new URLSearchParams({
-            startDate: orderToEdit.startDate,
-            endDate: orderToEdit.endDate,
-            totalPrice: orderToEdit.totalPrice,
-            adults: orderToEdit.guestCounts.adults,
-            children: orderToEdit.guestCounts.children,
-            infants: orderToEdit.guestCounts.infants,
-            pets: orderToEdit.guestCounts.pets,
-            guests: orderToEdit.guests,
-        }).toString()
-
-        navigate(`/stay/${stay._id}/checkout?${params}`)
     }
 
     function getGuestSummary() {
