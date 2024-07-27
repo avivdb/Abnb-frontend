@@ -9,7 +9,8 @@ import { setFilterBy } from "../store/actions/stay.actions";
 import menu from "../assets/img/icons/menu.svg"
 import userimg from "../assets/img/icons/user.svg"
 import { debounce } from '../services/util.service'
-
+import { stayService } from '../services/stay/index';
+const { getDefaultFilter } = stayService;
 export function AppHeader() {
 
 	const [userMenu, setUserMenu] = useState(false)
@@ -33,12 +34,10 @@ export function AppHeader() {
 	}, [])
 
 	function handleScroll() {
-		if (location.pathname === "/stay" || location.pathname === "/") {
-			if (window.scrollY > 50) {
-				setIsExpanded(false)
-			} else {
-				setIsExpanded(true)
-			}
+		if (window.scrollY > 50) {
+			setIsExpanded(false)
+		} else {
+			setIsExpanded(true)
 		}
 	}
 
@@ -48,7 +47,7 @@ export function AppHeader() {
 
 	function handleLogoClick() {
 		console.log('filterBy', filterBy)
-		setFilterBy({})
+		setFilterBy(getDefaultFilter())
 		navigate('/')
 		console.log('filterBy', filterBy)
 

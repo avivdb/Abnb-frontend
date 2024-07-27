@@ -1,10 +1,8 @@
 //AppHeader
 .app-header {
-  // position: sticky;
+  position: sticky;
   z-index: 100;
   top: 0;
-  // transform: translateX(-50%);
-  // left: 50%;
 
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -14,6 +12,7 @@
   color: $clr1;
   background-color: $clr12;
   transition: grid-template-rows 0.3s ease-in-out;
+
   &.expanded {
     grid-template-rows: auto auto auto;
   }
