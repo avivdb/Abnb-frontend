@@ -4,6 +4,8 @@ import { setFilterBy, loadStays } from '../store/actions/stay.actions';
 import { FilterPriceRange } from './FilterPriceRange';
 import PriceChart from './PriceChart';
 import { debounce } from '../services/util.service';
+import { stayService } from '../services/stay/index';
+const { getDefaultFilter } = stayService;
 
 export function FilterAdvanced() {
     const stays = useSelector(storeState => storeState.stayModule.stays)
@@ -43,15 +45,17 @@ export function FilterAdvanced() {
         setPlaceType(type)
     }
 
-    function handleClearAll() {
+    function handleClearAll(ev) {
+        ev.preventDefault()
         setFilterToEdit({ txt: '', minPrice: 40, maxPrice: 13000, type: '' })
         setPlaceType('Any Type')
         setMinPrice(40)
         setMaxPrice(13000)
-        setFilterBy(filterToEdit)
+        setFilterBy(getDefaultFilter())
     }
 
-    function handleShowStays() {
+    function handleShowStays(ev) {
+        ev.preventDefault()
         setFilterBy(filterToEdit)
         // loadStays(filterToEdit)
     }
