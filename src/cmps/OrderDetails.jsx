@@ -5,15 +5,13 @@ import { OrderDateModel } from "./OrderDateModel"
 import { OrderGuestsModal } from "./OrderGuestsModal"
 import dayjs from 'dayjs'
 import { AbnbGradientBtn } from "./AbnbGradientBtn"
+import { calculateNights } from '../services/util.service.js'
+
 
 import arrowdown from "../assets/img/icons/arrowdown.svg"
 
-// check if necessary totalPrice
-
-export function OrderDetails({ stay }) {
+export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParams, handleReserve }) {
     const [numberOfNights, setNumberOfNights] = useState(1)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [orderToEdit, setOrderToEdit] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
     const [isDateModalOpen, setIsDateModalOpen] = useState(false)
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const navigate = useNavigate()
@@ -21,15 +19,12 @@ export function OrderDetails({ stay }) {
     useEffect(() => {
         setOrderToEdit(prevOrder => {
             const newOrder = { ...prevOrder }
-            if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin.slice(0, 10)
-                if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout.slice(0, 10)
-                    return newOrder
-            })
+            if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin
+            if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout
+            return newOrder
+        })
     }, [])
 
-    // useEffect(() => {
-    //     setSearchParams({...orderToEdit, ...guestCounts})
-    // },[orderToEdit])
 
     useEffect(() => {
         setSearchParams({
@@ -49,21 +44,13 @@ export function OrderDetails({ stay }) {
         updateBookingDetails()
     }, [orderToEdit.startDate, orderToEdit.endDate])
 
-    function calculateNights(checkin, checkout) {
-        const checkinDate = new Date(checkin)
-        const checkoutDate = new Date(checkout)
-        const differenceInTime = checkoutDate - checkinDate
-        const differenceInDays = differenceInTime / (1000 * 3600 * 24)
-        return differenceInDays
-    }
-
     function updateBookingDetails() {
         if (orderToEdit.startDate && orderToEdit.startDate) {
             const nights = calculateNights(orderToEdit.startDate, orderToEdit.endDate)
             setNumberOfNights(nights)
             setOrderToEdit({
                 ...orderToEdit,
-                totalPrice: stay.price * nights + 500 + 107//stay.price * nights + Airbnb service fee + Cleaning fee
+                totalPrice: stay.price * nights + 500 + 107 //stay.price * nights + Airbnb service fee + Cleaning fee
             })
         } else {
             setNumberOfNights(1)
@@ -105,6 +92,13 @@ export function OrderDetails({ stay }) {
         return guestSummary.join(', ')
     }
 
+    function transformDate(dateStr) {
+
+        const [day, month, year] = dateStr.split('-');
+        const newDateStr = `${day}/${month}/${year}`;
+        
+        return newDateStr;
+    }
 
     return (
         <div className='order-details'>
@@ -116,15 +110,15 @@ export function OrderDetails({ stay }) {
             <section className="od-btns-booking-details">
                 <div className="od-booking-date" onClick={() => setIsDateModalOpen(true)}>
                     <p className="od-text">CHECK-IN</p>
-                    <p className="od-value">{dayjs(orderToEdit.startDate).format('DD/MM/YYYY')}</p>
+                    <p className="od-value">{transformDate(orderToEdit.startDate)}</p>
                 </div>
                 <div className="od-booking-date" onClick={() => setIsDateModalOpen(true)}>
                     <p className="od-text">CHECK-OUT</p>
-                    <p className="od-value">{dayjs(orderToEdit.endDate).format('DD/MM/YYYY')}</p>
+                    <p className="od-value">{transformDate(orderToEdit.endDate)}</p>
                 </div>
                 <button className="od-booking-guests" onClick={() => setIsGuestsModalOpen(true)}>
                     <section>
-                        <p>Guests</p>
+                        <p>GUESTS</p>
                         <h5>{getGuestSummary()}</h5>
                     </section>
                     <img src={arrowdown} />
@@ -151,7 +145,7 @@ export function OrderDetails({ stay }) {
                     setIsGuestsModalOpen={setIsGuestsModalOpen} />
             </section>)}
 
-            <AbnbGradientBtn handleClick={handleReserve} text="Reserve"/>
+            <AbnbGradientBtn handleClick={handleReserve} text="Reserve" />
 
             <section className="price-details-content">
                 <h1>You won't be charged yet</h1>

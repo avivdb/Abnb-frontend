@@ -18,7 +18,7 @@ export const stayService = {
     remove,
     addStayMsg,
     _createStays,
-    // getDefaultFilter,
+    getDefaultFilter,
     toggleWishlist
 }
 window.cs = stayService
@@ -26,7 +26,7 @@ window.cs = stayService
 
 async function query(filterBy = getDefaultFilter()) {
     var stays = await storageService.query(STORAGE_KEY)
-    const { txt, label, guest } = filterBy
+    const { txt, label, guest, type, minPrice, maxPrice } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -40,6 +40,13 @@ async function query(filterBy = getDefaultFilter()) {
         stays = stays.filter(stay => stay.capacity >= guest.capacity)
     }
 
+    if (type) {
+        stays = stays.filter(stay => stay.type === type)
+    }
+    if (minPrice || maxPrice) {
+        stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice)
+
+    }
     return stays
 }
 
@@ -116,8 +123,8 @@ async function save(stay) {
             bedrooms: [{ beds: 1 }],
             beds: 1,
             baths: 2,
-            defaultCheckin: '12-08-2024',
-            defaultCheckout: '19-08-2024',
+            defaultCheckin: "12-08-2024",
+            defaultCheckout: "19-08-2024",
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
@@ -139,16 +146,19 @@ async function addStayMsg(stayId, txt) {
     return msg
 }
 
-// function getDefaultFilter() {
-//     return {
-//         txt: '',
-//         checkIn: '',
-//         checkOut: '',
-//         guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
-//         label: '',
+function getDefaultFilter() {
+    return {
+        txt: '',
+        checkIn: '',
+        checkOut: '',
+        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        label: '',
+        type: '',
+        minPrice: 40,
+        maxPrice: 13000,
 
-//     }
-// }
+    }
+}
 
 async function toggleWishlist(stay) {
     try {
@@ -224,8 +234,8 @@ function _createStays() {
                 "beds": 9,
                 "baths": 2,
                 "isWishlist": false,
-                "defaultCheckin": new Date('2024-08-11T12:30:00'),
-                "defaultCheckout": new Date('2024-08-15T12:30:00'),
+                "defaultCheckin": '11-08-2024',
+                "defaultCheckout": '15-08-2024',
             },
             {
                 "_id": "s102",
@@ -280,8 +290,8 @@ function _createStays() {
                 "beds": 9,
                 "baths": 1,
                 "isWishlist": false,
-                "defaultCheckin": new Date('2024-08-12T12:30:00'),
-                "defaultCheckout": new Date('2024-08-17T12:30:00'),
+                "defaultCheckin": '12-08-2024',
+                "defaultCheckout": '17-08-2024',
             },
             {
                 "_id": "s103",
@@ -333,8 +343,8 @@ function _createStays() {
                 "beds": 1,
                 "baths": 5,
                 "isWishlist": true,
-                "defaultCheckin": new Date('2024-08-10T12:30:00'),
-                "defaultCheckout": new Date('2024-08-15T12:30:00'),
+                "defaultCheckin": '10-08-2024',
+                "defaultCheckout": '15-08-2024',
             },
             {
                 "_id": "s104",
@@ -389,8 +399,8 @@ function _createStays() {
                 "beds": 7,
                 "baths": 4,
                 "isWishlist": false,
-                "defaultCheckin": new Date('2024-09-15T12:30:00'),
-                "defaultCheckout": new Date('2024-08-22T12:30:00'),
+                "defaultCheckin": '22-08-2024',
+                "defaultCheckout": '15-09-2024',
             },
             {
                 "_id": "s105",
@@ -446,8 +456,8 @@ function _createStays() {
                 "beds": 2,
                 "baths": 2,
                 "isWishlist": true,
-                "defaultCheckin": new Date('2024-08-25T12:30:00'),
-                "defaultCheckout": new Date('2024-08-28T12:30:00'),
+                "defaultCheckin": '25-08-2024',
+                "defaultCheckout": '28-08-2024',
             },
             {
                 "_id": "s106",
@@ -500,8 +510,8 @@ function _createStays() {
                 "beds": 9,
                 "baths": 3,
                 "isWishlist": false,
-                "defaultCheckin": new Date('2024-08-11T12:30:00'),
-                "defaultCheckout": new Date('2024-08-18T12:30:00'),
+                "defaultCheckin": '11-08-2024',
+                "defaultCheckout": '18-08-2024',
             },
             {
                 "_id": "s107",
@@ -554,8 +564,8 @@ function _createStays() {
                 "beds": 6,
                 "baths": 3,
                 "isWishlist": false,
-                "defaultCheckin": new Date('2024-09-01T14:00:00'),
-                "defaultCheckout": new Date('2024-09-08T10:00:00')
+                "defaultCheckin": '01-09-2024',
+                "defaultCheckout": '08-09-2024'
             },
             {
                 "_id": "s108",
@@ -608,8 +618,8 @@ function _createStays() {
                 "beds": 8,
                 "baths": 4,
                 "isWishlist": false,
-                "defaultCheckin": new Date('2024-07-31T15:00:00'),
-                "defaultCheckout": new Date('2024-08-07T11:00:00')
+                "defaultCheckin": '09-09-2024',
+                "defaultCheckout": '20-09-2024'
             }
 
         ]

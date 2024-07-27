@@ -119,7 +119,7 @@ export function StayReviews({ stay }) {
                         <img
                             src={curReview.by.imgUrl}
                             alt={curReview.by.fullname}
-                            onError={(e) => e.target.src = defaultImageUrl}
+                            onError={(e) => e.target.src = userimg}
                         />
                         <section>
                             <p>{curReview.by.fullname}</p>

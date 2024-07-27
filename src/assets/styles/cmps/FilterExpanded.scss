@@ -4,12 +4,12 @@
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
   grid-auto-rows: auto auto;
 
-  width: 59%;
+  width: 70%;
   color: black;
 
   border: $clr11 solid 1px;
   border-radius: em(40px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.05);
   margin-block-end: 1rem;
   background-color: #fff;
 
@@ -23,7 +23,6 @@
     font-size: 0.8rem;
     font-family: cereal-regular;
     font-weight: 400;
-    // line-height: em(22.5px, 17.5px);
     line-height: 1.5;
     color: $clr10;
     margin: 0;
@@ -33,8 +32,6 @@
   h2 {
     font-size: 0.8rem;
     font-family: cereal-regular;
-    // font-weight: 600;
-    // line-height: em(20px, 15px);
     margin: 0;
     text-wrap: nowrap;
     align-self: end;
@@ -52,7 +49,6 @@
     line-height: em(25.5px);
     padding-inline-start: 1.5rem;
     padding-block: 0.4rem;
-    background-color: #fff;
 
     .location-filter {
       border: none;
@@ -74,6 +70,9 @@
 
     &:first-child {
       padding-inline-start: 2rem;
+      &::before {
+        border-left: none;
+      }
     }
 
     &.who-field {
@@ -120,19 +119,6 @@
       }
     }
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 25%;
-      bottom: 25%;
-      left: 0;
-      border-left: 0.5px solid rgb(193, 193, 193);
-    }
-
-    &:first-child::before {
-      border-left: none;
-    }
-
     .search-icon-container {
       display: grid;
       justify-content: center;
@@ -152,24 +138,6 @@
       }
     }
 
-    &:hover {
-      background-color: $clr13;
-      cursor: pointer;
-      border-radius: em(32px);
-
-      &::before {
-        display: none;
-      }
-
-      + ::before {
-        display: none;
-      }
-    }
-
-    &:focus,
-    &:visited {
-      background-color: green;
-    }
     &::before {
       content: "";
       position: absolute;
@@ -178,24 +146,19 @@
       left: 0;
       border-left: 0.5px solid rgb(193, 193, 193);
     }
-
-    &:first-child::before {
-      border-left: none;
-    }
   }
 
   .filter-modal {
     z-index: 101;
     position: absolute;
+
     transform: translateX(-50%);
     left: 50%;
-    top: 60%;
-    z-index: 2000;
-    top: 7.2rem;
-    margin-top: 12px;
+    top: 100%;
+
     display: grid;
     align-content: center;
-    width: 59%;
+    // width: 59%;
 
     color: $clr8;
     background-color: $clr12;
@@ -228,7 +191,7 @@
     box-shadow: none;
 
     &.field {
-      border-radius: 0;
+      border-radius: em(32px);
 
       &:hover {
         border-radius: em(32px);

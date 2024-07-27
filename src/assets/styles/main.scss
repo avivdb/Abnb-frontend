@@ -25,7 +25,7 @@
 @import "pages/UserTrips.scss";
 @import "pages/OredrCheckout.scss";
 @import "pages/UserOrders.scss";
-
+@import "pages/SearchPage.scss";
 
 // Components
 
@@ -39,6 +39,8 @@
 @import "cmps/WhereModal.scss";
 @import "cmps/AddGuest.scss";
 @import "cmps/FilterLabel.scss";
+@import "cmps/FilterAdvanced.scss";
+@import "cmps/FilterPriceRange.scss";
 
 @import "cmps/ReviewEdit";
 @import "cmps/ReviewList";
@@ -59,9 +61,11 @@
 @import "cmps/CountrySelectModal.scss";
 @import "cmps/CheckoutStayModal.scss";
 @import "cmps/StayReviews.scss";
+@import "cmps/StayDetailsHeader.scss";
+
+
+@import "cmps/GoogleMap.scss";
+@import "cmps/ModalComponent.css";
+@import "cmps/PriceChart.css";
 
 // @import "cmps/AbnbGradientBtn.scss";
-
-
-
-

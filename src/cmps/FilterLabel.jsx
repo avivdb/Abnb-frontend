@@ -66,6 +66,10 @@ import iconFilterAdvanced from "../assets/img/icons/filterAdvancedicon.svg"
 
 import { useSelector } from 'react-redux';
 import { setFilterBy } from "../store/actions/stay.actions";
+import { getParams } from '../services/util.service';
+import { useLocation, useNavigate } from 'react-router';
+import ModalComponent from './ModalComponent';
+import { FilterAdvanced } from './FilterAdvanced';
 
 const icons = [
     { src: iconAmazingView, label: 'Amazing Views' },
@@ -136,6 +140,9 @@ export function FilterLabel() {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
     const [currentPage, setCurrentPage] = useState(0)
     const [itemsPerPage, setItemsPerPage] = useState(10)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
         handleResize()
@@ -176,6 +183,17 @@ export function FilterLabel() {
 
     function handleChange(label) {
         setFilterBy({ ...filterBy, label: label })
+        const params = getParams(filterBy)
+        console.log('params', params)
+        navigate(`/s/${params}`);
+    }
+
+    const openModal = () => {
+        setIsModalOpen(true)
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false)
     }
 
     return (
@@ -190,8 +208,10 @@ export function FilterLabel() {
             </ul>
             {(currentPage < totalPages - 1) && <button className="pagination next-page-btn" onClick={handleNextPage}><img src={arrowForward} alt="Next" /></button>}
             {(currentPage !== 0) && <button className="pagination prev-page-btn" onClick={handlePrevPage}><img src={arrowBack} alt="Back" /></button>}
-            <button className='filter-advanced-btn'><img src={iconFilterAdvanced} alt="" /> Filters</button>
+            {location.pathname.startsWith('/s/') && <button className='filter-advanced-btn' onClick={openModal}><img src={iconFilterAdvanced} alt="" /> Filters</button>}
+            <ModalComponent isOpen={isModalOpen} onRequestClose={closeModal}>
+                <FilterAdvanced />
+            </ModalComponent>
         </section>
     )
 }
-

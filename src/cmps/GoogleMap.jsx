@@ -1,208 +1,101 @@
-import React, { useRef, useState } from "react";
-import GoogleMapReact from 'google-map-react';
+import React, { useEffect, useState, useRef } from "react";
+import { Loader } from "@googlemaps/js-api-loader";
+import { useLocation } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
+import StayPreviewMap from './StayPreviewMap';
+import iconHouse from '../assets/img/icons/house.svg';
+import iconTransparent from '../assets/img/icons/transparent.svg'
 
-function AnyReactComponent({ text, lat, lng, onClick, element }) {
-    return (
-
-        <div style={{ fontSize: "2em" }}
-            onClick={() => onClick({ lat, lng })}>
-            {text}
-            {element}
-        </div>
-    )
-}
 const mapStyle = [
-    {
-        "featureType": "administrative",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "lightness": "0"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.medical",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "lightness": "-5"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#a7ce95"
-            },
-            {
-                "lightness": "45"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.school",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#be9b7b"
-            },
-            {
-                "lightness": "70"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.sports_complex",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#5d4b46"
-            },
-            {
-                "lightness": "60"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "saturation": "23"
-            },
-            {
-                "lightness": "10"
-            },
-            {
-                "gamma": "0.8"
-            },
-            {
-                "hue": "#b000ff"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#a2daf2"
-            }
-        ]
-    }
-]
+    // Your map style configuration here
+];
 
-export function GoogleMap({ stay }) {
-    const initialCoords = stay ? { lat: stay.loc.lat, lng: stay.loc.lan } : { lat: 32.109333, lng: 34.855499 };
-    const [coords, setCoords] = useState(initialCoords)
-    const zoom = 11
-    console.log(stay)
+export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
+    const location = useLocation();
+    const initialCoords = stays[0] ? { lat: stays[0].loc.lat, lng: stays[0].loc.lng } : { lat: 32.109333, lng: 34.855499 };
+    const [coords, setCoords] = useState(initialCoords);
+    const mapRef = useRef(null);
+    const googleMapRef = useRef(null);
+    const markersRef = useRef([]);
+    const zoom = 11;
+    const infoWindowRef = useRef(null);
 
-    // function onHandleClick(coords) {
-    //     setCoords(coords)
-    // }
+    useEffect(() => {
+        setCoords(initialCoords);
+    }, [stays]);
+
+    useEffect(() => {
+        const loader = new Loader({
+            apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
+            version: "weekly",
+            libraries: ["places"],
+        });
+
+        loader.load().then(() => {
+            if (!googleMapRef.current) {
+                googleMapRef.current = new window.google.maps.Map(mapRef.current, {
+                    center: coords,
+                    zoom: zoom,
+                    styles: mapStyle,
+                });
+            } else {
+                googleMapRef.current.setCenter(coords);
+            }
+
+            // Clear existing markers
+            markersRef.current.forEach(marker => marker.setMap(null));
+            markersRef.current = [];
+
+            // Add new markers
+            stays.forEach((stay, index) => {
+                const marker = new window.google.maps.Marker({
+                    position: { lat: stay.loc.lat, lng: stay.loc.lan },
+                    map: googleMapRef.current,
+                    icon: location.pathname.startsWith('/stay/') && index === 0 ? {
+                        url: iconHouse,
+                    } : {
+                        url: iconTransparent,
+                    },
+                    label: !location.pathname.startsWith('/stay') ? {
+                        text: `₪${stay.price}`,
+                        className: location.pathname.startsWith('/s/') ? 'price-marker' : 'location-marker'
+                    } : null,
+                });
+
+                if (location.pathname.startsWith('/stay/') && index === 0) {
+                    marker.addListener('click', () => {
+                        if (!infoWindowRef.current) {
+                            infoWindowRef.current = new window.google.maps.InfoWindow();
+                        }
+
+                        infoWindowRef.current.setContent('<div>Exact location provided after booking</div>');
+                        infoWindowRef.current.open(googleMapRef.current, marker);
+                    });
+                }
+
+                if (location.pathname.startsWith('/s/')) {
+                    marker.addListener('click', () => {
+                        const contentElement = document.createElement('div');
+                        const root = createRoot(contentElement); // create a root
+                        root.render(<StayPreviewMap stay={stay} />);
+
+                        if (!infoWindowRef.current) {
+                            infoWindowRef.current = new window.google.maps.InfoWindow();
+                        }
+
+                        infoWindowRef.current.setContent(contentElement);
+                        infoWindowRef.current.open(googleMapRef.current, marker);
+                    });
+                }
+
+                markersRef.current.push(marker);
+            });
+        }).catch(e => {
+            console.error('Error loading Google Maps API:', e);
+        });
+    }, [coords, stays, zoom, location.pathname]);
 
     return (
-        // Important! Always set the container height explicitly
-        <div style={{ height: '50vh', width: '100%' }}>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE" }}
-                center={coords}
-                defaultZoom={zoom}
-                options={{ styles: mapStyle }}
-            >
-                <AnyReactComponent {...coords}
-                    element={
-                        <div className="map-marker-wrapper">
-                            <div className="map-marker">
-                                <span className="fa solid house"></span>
-                            </div>
-                        </div>} >
-
-                </AnyReactComponent >
-            </GoogleMapReact>
-
-
-        </div>
+        <div style={{ height: mapHeight, width: '100%', overflow: "none", borderRadius: mapBorderRadius }} ref={mapRef}></div>
     );
 }
-
-

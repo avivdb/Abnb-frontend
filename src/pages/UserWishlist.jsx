@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { stayService } from "../services/stay"
-import { StayPreview } from "../cmps/StayPreview"
+import StayPreview from "../cmps/StayPreview"
 
 export function UserWishlist() {
     const [wishlist, setWishlist] = useState([])
@@ -15,7 +15,7 @@ export function UserWishlist() {
                 console.error('Error loading wishlist:', error)
             }
         }
-        
+
         fetchWishlist()
     }, [])
 

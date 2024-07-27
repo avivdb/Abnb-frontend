@@ -2,14 +2,13 @@
   top: 0;
   z-index: 100;
   position: relative;
-  // width: 100vw;
 
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  text-align: center;
 
   background-color: $clr12;
+  text-align: center;
   margin-block: 1.5rem;
 
   &::after {
@@ -18,24 +17,7 @@
     top: -1rem;
     width: 100%;
     height: 1px;
-    background-color:rgb(236, 236, 236);
-  }
-
-  .next-page-btn {
-    align-self: center;
-    grid-column: 3;
-    grid-row: 1;
-  }
-
-  .prev-page-btn {
-    align-self: center;
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .filter-advanced-btn {
-    grid-column: 4;
-    margin-left: 15px;
-    padding: 10px;
+    background-color: rgb(236, 236, 236);
   }
 
   .label-list {
@@ -53,7 +35,7 @@
       content: "";
       position: absolute;
       top: 0;
-      width: 50px;
+      width: 20px;
       height: 100%;
       // background: #fff;
       z-index: 1;
@@ -96,7 +78,8 @@
     }
   }
 
-  button {
+  .next-page-btn,
+  .prev-page-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,6 +99,37 @@
       scale: 1.02;
       opacity: 1;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .next-page-btn {
+    align-self: center;
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .prev-page-btn {
+    align-self: center;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .filter-advanced-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    grid-column: 4;
+
+    font-size: 1rem;
+    margin-left: 15px;
+    padding: 10px;
+    background-color: $clr12;
+    border: 1px solid $clr11;
+    border-radius: rem(10px);
+
+    img {
+      width: 1rem;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { userService } from '../services/user'
-import { StayPreview } from './StayPreview'
+import StayPreview from './StayPreview'
 
 export function StayList({ stays, onRemoveStay, onUpdateStay }) {
 
@@ -16,10 +16,6 @@ export function StayList({ stays, onRemoveStay, onUpdateStay }) {
             {stays.map(stay =>
                 <li key={stay._id}>
                     <StayPreview stay={stay} />
-                    {/* {shouldShowActionBtns(stay) && <div className="actions">
-                        <button onClick={() => onUpdateStay(stay)}>Edit</button>
-                        <button onClick={() => onRemoveStay(stay._id)}>x</button>
-                    </div>} */}
                 </li>)
             }
         </ul>

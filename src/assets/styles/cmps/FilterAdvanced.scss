@@ -1,0 +1,117 @@
+.filter-advanced {
+  display: grid;
+  // justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  overflow-x: hidden;
+  height: 90vh;
+
+  > * {
+    padding: 1.5rem;
+    padding-block-end: 0;
+  }
+
+  header {
+    justify-self: center;
+    font-size: rem(20px);
+    line-height: rem(25px);
+    font-family: cereal-bold;
+    color: $clr8;
+  }
+
+  .filters {
+    display: grid;
+    overflow-y: scroll;
+    gap: 1rem;
+
+    .filter {
+      display: grid;
+      padding-block: 1rem;
+
+      h1 {
+        font-size: rem(27.5px);
+        line-height: rem(32.5px);
+        letter-spacing: rem(-0.275px);
+        font-family: cereal-regular;
+        color: $clr8;
+      }
+
+      p {
+        font-size: rem(17.5px);
+        line-height: rem(22.5px);
+        color: $clr8;
+      }
+
+      .filter-by-type-btns {
+        display: flex;
+        justify-self: center;
+
+        font-size: rem(20px);
+        font-family: cereal-medium;
+        color: $clr8;
+
+        border: 1px solid $clr15;
+        border-radius: rem(12px);
+
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem 2.5rem;
+          cursor: pointer;
+
+          &:not(:last-child) {
+            border-right: 0.5px solid $clr15;
+          }
+
+          &:hover,
+          &.selected {
+            border: 1px solid $clr8;
+            &:first-child {
+              border-top-left-radius: rem(12px);
+              border-bottom-left-radius: rem(12px);
+            }
+            &:last-child {
+              border-top-right-radius: rem(12px);
+              border-bottom-right-radius: rem(12px);
+            }
+          }
+
+          &.selected {
+            color: $clr12;
+            background-color: $clr8;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+
+    .clear-btn,
+    .show-places-btn {
+      font-family: cereal-medium;
+      font-size: rem(20px);
+      line-height: rem(25px);
+      border-radius: rem(8px);
+    }
+    .clear-btn {
+      background-color: $clr12;
+      color: $clr9;
+      padding: 0 0.8rem;
+
+      &:hover {
+        background-color: $clr14;
+      }
+    }
+
+    .show-places-btn {
+      padding: 1rem 1.8rem;
+      background-color: $clr8;
+      color: $clr12;
+    }
+  }
+}

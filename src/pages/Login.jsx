@@ -29,25 +29,6 @@ export function Login() {
         navigate('/')
     }
 
-    // async function onLogin(ev = null) {
-    //     if (ev) ev.preventDefault()
-    //     console.log(users)
-    
-    //     if (!credentials.username || !credentials.password) {
-    //         alert('Please enter both username and password.')
-    //         return
-    //     }
-    
-    //     const user = users.find(user => user.username === credentials.username && user.password === credentials.password)
-    //     if (!user) {
-    //         alert('Username or password is incorrect.')
-    //         return
-    //     }
-    
-    //     await login(credentials)
-    //     navigate('/')
-    // }
-
     function handleChange(ev) {
         const field = ev.target.name
         const value = ev.target.value
