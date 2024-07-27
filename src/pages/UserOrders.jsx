@@ -1,85 +1,90 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { updateOrder, loadOrders } from '../store/actions/order.action';
+import { useState, useEffect } from 'react'
+import { updateOrder } from '../store/actions/order.action'
+import { formatDateRange, capitalize } from "../services/util.service"
 
 export function UserOrders() {
 
-    const orders = useSelector(storeState => storeState.orderModule.orders);
-    const [isLoading, setIsLoading] = useState(true);
-    // const isLoading = useSelector(storeState => storeState.systemModule.isLoading)
+    const [orders, setOrders] = useState([])
+    const [stays, setStays] = useState({})
 
     useEffect(() => {
+        async function fetchOrders() {
+            try {
+                const fetchedOrders = await orderService.query()
 
-        fetchOrders();
+                const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
+                const fetchedStays = await Promise.all(stayPromises)
+
+                const staysLookup = fetchedStays.reduce((acc, stay) => {
+                    acc[stay._id] = stay
+                    return acc
+                }, {})
+
+                setOrders(fetchedOrders)
+                setStays(staysLookup)
+            } catch (error) {
+                console.error('Error fetching orders or stays:', error)
+            }
+        }
+
+        fetchOrders()
     }, [])
-
-    async function fetchOrders() {
-        try {
-            console.log('isLoading', isLoading)
-            await loadOrders()
-            setIsLoading(false)
-        } catch (err) {
-            console.log('err', err)
-            setIsLoading(false)
-        }
-        finally {
-            console.log('isLoading', isLoading)
-
-        }
-    }
 
     async function handleStatusChange(order, newStatus) {
         try {
-            const updatedOrder = { ...order, status: newStatus };
-            await updateOrder(updatedOrder);
+            const updatedOrder = { ...order, status: newStatus }
+
+            await updateOrder(updatedOrder)
+
+            setOrders(prevOrders => 
+                prevOrders.map(o => o._id === order._id ? { ...o, status: newStatus } : o)
+            )
         } catch (error) {
-            console.error('Error updating order status:', error);
+            console.error('Error updating order status:', error)
         }
     }
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-
     return (
-        <div className="user-orders">
+        <section className="user-orders">
             <h2>Incoming orders</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Guest Name</th>
-                        <th>Check in</th>
-                        <th>Check out</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                        <th>Update Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders && orders.length > 0 ? (
-                        orders.map((order, index) => (
-                            <tr key={order._id || index}>
-                                <td>{index + 1}</td>
-                                <td>{order.guest?.fullname || 'N/A'}</td>
-                                <td>{order.startDate || 'N/A'}</td>
-                                <td>{order.endDate || 'N/A'}</td>
-                                <td>{order.totalPrice || 'N/A'}</td>
-                                <td>{order.status || 'N/A'}</td>
-                                <td>
-                                    <button onClick={() => handleStatusChange(order, 'approved')}>Approve</button>
-                                    <button onClick={() => handleStatusChange(order, 'declined')}>Decline</button>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="7">No orders available</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-    );
+            <ul className="user-orders-list">
+                {orders.map(order => {
+                    const stay = stays[order.stay._id];
+                    return (
+                        <li className="user-order" key={order._id}>
+                            {stay ? (
+                                <>
+                                    <img src={stay.imgUrls[0]} alt={stay.name} />
+
+                                    <section>
+                                        <p>{stay.name}</p>
+                                        <p>{order.guests} guests</p>
+                                    </section>
+
+                                    <section>
+                                        <p>{formatDateRange(order.startDate, order.endDate)}</p>
+                                        <p>{order.startDate.slice(-4)}</p>
+                                    </section>
+
+                                    <p>₪{order.totalPrice}</p>
+
+                                    {order.status !== "pending" && <p>{order.status}</p>}
+
+                                    {order.status === "pending" &&
+                                        <section className="order-btns-container">
+                                            <button onClick={() => handleStatusChange(order, 'approved')}>Approve</button>
+                                            <button onClick={() => handleStatusChange(order, 'declined')}>Decline</button>
+                                        </section>
+                                    }
+                                </>
+                            ) : (
+                                <p>Order information not available</p>
+                            )}
+                        </li>
+                    )
+                })}
+            </ul>
+        </section>
+    )
 }
+

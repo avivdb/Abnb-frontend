@@ -19,10 +19,10 @@ export function AppHeader() {
 	const [userMenu, setUserMenu] = useState(false)
 
 	const user = useSelector(storeState => storeState.userModule.user)
-
-	const [isExpanded, setIsExpanded] = useState(true)
-
 	let location = useLocation()
+
+	const [isExpanded, setIsExpanded] = useState((location.pathname === "/stay" || location.pathname === "/")? true : false)
+
 
 	useEffect(() => {
 		handleScroll()

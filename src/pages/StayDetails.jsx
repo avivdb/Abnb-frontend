@@ -60,6 +60,11 @@ export function StayDetails() {
       guests: orderToEdit.guests,
     }).toString()
 
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
+
     navigate(`/stay/${stay._id}/checkout?${params}`)
   }
 
@@ -79,7 +84,7 @@ export function StayDetails() {
   return (
     <section className="stay-details ">
 
-      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve}/>}
+      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
       {stay && <div className='stay-details-content stay-details-layout'>
         <h1 className='stay-details-name'>{stay.name}</h1>
@@ -146,11 +151,11 @@ export function StayDetails() {
 
             <h2 className="details-dates-picker-title">{calculateNights(orderToEdit.startDate, orderToEdit.endDate)} nights in {stay.loc.city}</h2>
             <section className="details-dates-picker">
-            <OrderDateModel
-                        orderToEdit={orderToEdit}
-                        setOrderToEdit={setOrderToEdit}
-                        setIsDateModalOpen={null}
-                    />
+              <OrderDateModel
+                orderToEdit={orderToEdit}
+                setOrderToEdit={setOrderToEdit}
+                setIsDateModalOpen={null}
+              />
             </section>
 
 
@@ -176,6 +181,7 @@ export function StayDetails() {
         <h2 id="location" className="google-map-title">Where you'll be</h2>
         <section>
           <GoogleMap stay={stay} />
+          <p>{stay.loc.city}, {stay.loc.country}</p>
         </section>
 
       </div>

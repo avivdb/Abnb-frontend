@@ -1,53 +1,90 @@
 .user-trips {
-
+    color: black;
     margin-block-end: 5rem;
-    margin-block-start: 5rem;
 
     h2 {
-        margin-block: 2rem;
-        color: black;
+        margin-block-end: 2rem;
     }
 
-    table {
-        width: 100%;
-        border: none;
-        border-collapse: collapse;
+    hr {
+        border: 0.7px solid rgb(221, 221, 221);
+    }
 
-        td {
-            border: none;
-            color: black;
-            padding: 1rem;
-            padding-inline-start: 0;
+    p {
+        margin: 0;
+    }
+
+    .user-trips-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .user-trip {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
+        .trip-order-status {
+            position: absolute;
+
+            padding-inline: 0.5rem;
+            padding-bottom: 0.2rem;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+            margin: 0.3rem;
+
+            font-size: 0.9rem;
             font-family: cereal-light;
+        }
 
-            &:first-of-type {
-                padding-inline-start: 1rem;
-                font-family: cereal-regular;
+        .trip-top-info {
+            padding: 1rem;
+
+            p:first-of-type {
+                font-size: 1.3rem;
+                font-family: cereal-medium;
             }
+
+            p:last-of-type {
+                font-size: 0.8rem;
+                margin-block-end: 1rem;
+            }
+
         }
 
-        th {
-            text-align: start;
-            font-size: 1.2rem;
-        }
+        .trip-main-info {
+            display: flex;
+            padding: 1rem;
+            padding-top: 0;
 
-        tr:nth-child(even) {
-            background-color: #f7f7f7;
-        }
-    }
+            &>*:first-child {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
 
-    button {
-        background-color: transparent;
-        width: 5rem;
-        color: grey;
+                font-family: cereal-light;
+                padding-inline-end: 1rem;
+                border-right: 1px solid rgb(221, 221, 221);
 
-        &:nth-of-type(even) {
-            padding-inline-start: 1rem;
-            font-family: cereal-regular;
-        }
+                &>*:last-child {
+                    font-size: 0.9rem;
+                }
+            }
 
-        &:hover {
-            color: black;
+            &>*:last-child {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                font-family: cereal-light;
+                padding-inline-start: 1rem;
+
+                &>*:last-child {
+                    font-size: 0.9rem;
+                }
+            }
         }
 
     }

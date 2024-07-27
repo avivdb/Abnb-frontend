@@ -93,9 +93,10 @@
   .header-login {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 
-    padding: 0.6rem;
+    padding: 0.5rem;
+    padding-block: 0.3rem;
     border: 1px solid $gray1;
     border-radius: 30px;
 
@@ -106,10 +107,9 @@
     }
 
     img {
-      width: rem;
-
+      max-height: 2.3rem;
       &:first-of-type {
-        height: 1.5rem;
+        height: 1.2rem;
       }
     }
 

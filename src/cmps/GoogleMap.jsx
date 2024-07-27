@@ -182,7 +182,7 @@ export function GoogleMap({ stay }) {
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '50vh', width: '100%' }}>
+        <div style={{ height: '50vh', width: '100%', borderRadius: '10px', overflow: 'hidden'}}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE" }}
                 center={coords}

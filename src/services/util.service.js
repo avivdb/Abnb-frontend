@@ -84,6 +84,30 @@ export function formatDateRange(date1, date2) {
     }
 }
 
+export function formatDateRangeObject(date1, date2) {
+    const [day1, month1, year1] = date1.split('-').map(Number);
+    const [day2, month2, year2] = date2.split('-').map(Number);
+
+    const dateObj1 = new Date(year1 + 2000, month1 - 1, day1); // Adjust year if needed
+    const dateObj2 = new Date(year2 + 2000, month2 - 1, day2); // Adjust year if needed
+
+    const monthName1 = getMonthName(dateObj1.getMonth());
+    const monthName2 = getMonthName(dateObj2.getMonth());
+
+    // Construct the output object
+    if (month1 === month2) {
+        return {
+            month: [monthName1],
+            dates: `${day1} - ${day2}`
+        }
+    } else {
+        return {
+            month: `${monthName1} - ${monthName2}`,
+            dates: `${day1} - ${day2}`
+        };
+    }
+}
+
 export function calculateNights(checkIn, checkOut) {
     function parseDate(dateString) {
         const [day, month, year] = dateString.split('-').map(Number)
@@ -142,4 +166,8 @@ export function getGuestsTitle(filterToEdit) {
     }
 
     return title || 'Add guests';
+}
+
+export function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

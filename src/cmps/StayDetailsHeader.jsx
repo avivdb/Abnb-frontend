@@ -18,7 +18,7 @@ export function StayDetailsHeader({ stay, handleReserve }) {
 
 
     function handleScroll() {
-        if (window.scrollY > 1350) {
+        if (window.scrollY > 1850) {
             setReserveBtn(true)
         } else {
             setReserveBtn(false)

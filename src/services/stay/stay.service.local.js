@@ -117,8 +117,8 @@ async function save(stay) {
             bedrooms: [{ beds: 1 }],
             beds: 1,
             baths: 2,
-            defaultCheckin: new Date('2024-08-12T12:30:00'),
-            defaultCheckout: new Date('2024-08-19T12:30:00'),
+            defaultCheckin: "12-08-2024",
+            defaultCheckout: "19-08-2024",
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
