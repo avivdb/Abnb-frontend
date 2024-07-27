@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { getRandomIntInclusive } from "../services/util.service.js"
+import userimg from "../assets/img/icons/user.svg"
 
 export function StayReviews({ stay }) {
     const [curReview, setCurReview] = useState(null)
     const [showModal, setShowModal] = useState(false)
-    
+
     let reviews = stay.reviews ? stay.reviews :
         [
             {
@@ -85,7 +86,11 @@ export function StayReviews({ stay }) {
                 {reviews.map((review, index) => (
                     <div key={index} className="review">
                         <section className="review-user-info">
-                            <img src={review.by.imgUrl} alt={review.by.fullname} />
+                            <img
+                                src={review.by.imgUrl}
+                                alt={review.by.fullname}
+                                onError={(e) => e.target.src = userimg}
+                            />
                             <section>
                                 <p>{review.by.fullname}</p>
                                 <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
@@ -105,7 +110,11 @@ export function StayReviews({ stay }) {
                 <div className="stay-reviews-modal">
                     <span className="stay-reviews-modal-close" onClick={onCloseModal}>&times;</span>
                     <section className="review-user-info">
-                        <img src={curReview.by.imgUrl} alt={curReview.by.fullname} />
+                        <img
+                            src={curReview.by.imgUrl}
+                            alt={curReview.by.fullname}
+                            onError={(e) => e.target.src = userimg}
+                        />
                         <section>
                             <p>{curReview.by.fullname}</p>
                             <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
