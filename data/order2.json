@@ -1,0 +1,114 @@
+[
+    {
+        "host": {
+            "_id": "u101",
+            "fullname": "Jessy Pinkman",
+            "imgUrl": "..."
+        },
+        "guest": {
+            "_id": "u101",
+            "fullname": "Walter White"
+        },
+        "totalPrice": 2767,
+        "startDate": "2025-09-10",
+        "endDate": "2025-09-22",
+        "capacity": 3,
+        "guestCounts": {
+            "adults": 2,
+            "children": 1,
+            "infants": 0,
+            "pets": 0
+        },
+        "stay": {
+            "_id": "s105",
+            "name": "Seaside Cottage in Santorini",
+            "price": 180.0
+        },
+        "msgs": [],
+        "status": "pending"
+    },
+    {
+        "host": {
+            "_id": "u102",
+            "fullname": "Hank Shrader",
+            "imgUrl": "..."
+        },
+        "guest": {
+            "_id": "u102",
+            "fullname": "Skyler White"
+        },
+        "totalPrice": 1407,
+        "startDate": "2025-10-15",
+        "endDate": "2025-10-17",
+        "capacity": 3,
+        "guestCounts": {
+            "adults": 2,
+            "children": 1,
+            "infants": 0,
+            "pets": 0
+        },
+        "stay": {
+            "_id": "s106",
+            "name": "Mountain Chalet in Aspen",
+            "price": 400.0
+        },
+        "msgs": [],
+        "status": "pending"
+    },
+    {
+        "host": {
+            "_id": "u103",
+            "fullname": "Skyler White",
+            "imgUrl": "..."
+        },
+        "guest": {
+            "_id": "u103",
+            "fullname": "Hank Shrader"
+        },
+        "totalPrice": 3407,
+        "startDate": "2025-08-21",
+        "endDate": "2025-08-29",
+        "capacity": 3,
+        "guestCounts": {
+            "adults": 2,
+            "children": 1,
+            "infants": 0,
+            "pets": 0
+        },
+        "stay": {
+            "_id": "s107",
+            "name": "Secluded Beachfront Villa in Takaka",
+            "price": 350.0
+        },
+        "msgs": [],
+        "status": "pending"
+    },
+    {
+        "host": {
+            "_id": "u104",
+            "fullname": "Walter White",
+            "imgUrl": "..."
+        },
+        "guest": {
+            "_id": "u104",
+            "fullname": "Jessy Pinkman"
+        },
+        "totalPrice": 4807,
+        "startDate": "2025-08-11",
+        "endDate": "2025-09-18",
+        "capacity": 3,
+        "guestCounts": {
+            "adults": 2,
+            "children": 1,
+            "infants": 0,
+            "pets": 0
+        },
+        "stay": {
+            "_id": "s108",
+            "name": "Luxury Penthouse in Tel Aviv",
+            "price": 600.0
+        },
+        "msgs": [],
+        "status": "pending"
+    }
+]

@@ -4,12 +4,12 @@
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
   grid-auto-rows: auto auto;
 
-  width: 59%;
+  width: 70%;
   color: black;
 
   border: $clr11 solid 1px;
   border-radius: em(40px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.05);
   margin-block-end: 1rem;
   background-color: #fff;
 
@@ -147,12 +147,11 @@
   .filter-modal {
     z-index: 101;
     position: absolute;
+
     transform: translateX(-50%);
     left: 50%;
-    top: 60%;
-    z-index: 2000;
-    top: 7.2rem;
-    margin-top: 12px;
+    top: 100%;
+
     display: grid;
     align-content: center;
     // width: 59%;
@@ -178,7 +177,7 @@
       width: 27rem;
       position: absolute;
       transform: translateX(-50%);
-      // top: 100%;
+      font-size: 0.8rem;
     }
   }
 

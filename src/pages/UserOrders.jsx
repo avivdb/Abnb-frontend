@@ -4,7 +4,7 @@ import { updateOrder, loadOrders } from '../store/actions/order.action';
 
 export function UserOrders() {
 
-    const orders = useSelector(storeState => storeState.orderModule.orders);
+    const orders = useSelector(storeState => storeState.orderModule.orders)
     const [isLoading, setIsLoading] = useState(true);
     // const isLoading = useSelector(storeState => storeState.systemModule.isLoading)
 
@@ -23,7 +23,7 @@ export function UserOrders() {
             setIsLoading(false)
         }
         finally {
-            console.log('isLoading', isLoading)
+            // console.log('isLoading', isLoading)
 
         }
     }

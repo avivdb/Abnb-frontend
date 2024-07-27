@@ -1,14 +1,14 @@
-
+import { calculateNights } from '../services/util.service.js'
 
 export function CheckoutStayModal({ stay, order }) {
 
-    function calculateNights(checkin, checkout) {
-        const checkinDate = new Date(checkin)
-        const checkoutDate = new Date(checkout)
-        const differenceInTime = checkoutDate - checkinDate
-        const differenceInDays = differenceInTime / (1000 * 3600 * 24)
-        return differenceInDays
-    }
+    // function calculateNights(checkin, checkout) {
+    //     const checkinDate = new Date(checkin)
+    //     const checkoutDate = new Date(checkout)
+    //     const differenceInTime = checkoutDate - checkinDate
+    //     const differenceInDays = differenceInTime / (1000 * 3600 * 24)
+    //     return differenceInDays
+    // }
 
     if (!stay) {
         return null

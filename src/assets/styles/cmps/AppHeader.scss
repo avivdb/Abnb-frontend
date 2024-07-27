@@ -1,11 +1,14 @@
 //AppHeader
 .app-header {
-  position: sticky;
+  // position: sticky;
   z-index: 100;
   top: 0;
+  // transform: translateX(-50%);
+  // left: 50%;
 
   display: grid;
   grid-template-columns: auto 1fr auto;
+  row-gap: 1rem;
   align-items: center;
   padding: 1rem 0;
   color: $clr1;

@@ -3,6 +3,8 @@ import { Link, useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 
 import { stayService } from "../services/stay/stay.service.local";
+import { formatDateRange, getDateTwoWeeksBefore } from '../services/util.service.js'
+
 import { CountrySelectModal } from "../cmps/CountrySelectModal";
 import { CheckoutStayModal } from "../cmps/CheckoutStayModal";
 
@@ -17,18 +19,18 @@ import { AbnbGradientBtn } from "../cmps/AbnbGradientBtn";
 import { loadStay } from "../store/actions/stay.actions";
 
 export function OrderCheckout() {
-    const [countryModal, setCountryModal] = useState(false);
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const { stayId } = useParams();
-    const [searchParams] = useSearchParams();
-    const [order, setOrder] = useState(orderService.getOrderToEditFromSearchParams(searchParams));
-    const navigate = useNavigate();
+    const [countryModal, setCountryModal] = useState(false)
+    const [selectedCountry, setSelectedCountry] = useState(null)
+    const { stayId } = useParams()
+    const [searchParams] = useSearchParams()
+    const [order, setOrder] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
+    const navigate = useNavigate()
 
-    const stay = useSelector(storeState => storeState.stayModule.stay);
+    const stay = useSelector(storeState => storeState.stayModule.stay)
 
     useEffect(() => {
-        loadStay(stayId);
-    }, [stayId]);
+        loadStay(stayId)
+    }, [stayId])
 
     useEffect(() => {
         if (stay) {
@@ -39,45 +41,9 @@ export function OrderCheckout() {
                     name: stay.name,
                     price: stay.price
                 }
-            }));
+            }))
         }
-    }, [stay]);
-
-    const months = [
-        'Jan', 'Feb', 'Mar', 'Apr',
-        'May', 'Jun', 'Jul', 'Aug',
-        'Sep', 'Oct', 'Nov', 'Dec'
-    ];
-
-    const checkinDate = new Date(order.startDate).getDate();
-    const checkinMonthIndex = new Date(order.startDate).getMonth();
-
-    const checkinMonthShort = months[checkinMonthIndex];
-    const formattedCheckinDate = `${checkinMonthShort} ${checkinDate}`;
-
-    const checkouDate = new Date(order.endDate).getDate();
-    const checkoutMonthIndex = new Date(order.endDate).getMonth();
-
-    const checkoutMonthShort = months[checkoutMonthIndex];
-    const formattedCheckoutDate = `${checkoutMonthShort} ${checkouDate}`;
-
-    const checkoutDate =
-        (checkinMonthIndex === checkoutMonthIndex) ?
-            new Date(order.endDate).getDate() : formattedCheckoutDate;
-
-    let dateObj = new Date(order.startDate);
-    dateObj.setDate(dateObj.getDate() - 14);
-    let cancallationDay = dateObj.getDate();
-    const cancelMonthIndex = dateObj.getMonth();
-    const cancelMonthShort = months[cancelMonthIndex];
-    const cancellationDateFormatted = `${cancelMonthShort} ${cancallationDay}`;
-
-    let dateObj2 = new Date(order.startDate);
-    dateObj2.setDate(dateObj2.getDate() - 7);
-    let cancallationDay2 = dateObj2.getDate();
-    const cancelMonthIndex2 = dateObj2.getMonth();
-    const cancelMonthShort2 = months[cancelMonthIndex2];
-    const cancellationDateFormatted2 = `${cancelMonthShort2} ${cancallationDay2}`;
+    }, [stay])
 
     function onShowCountries() {
         setCountryModal(true);
@@ -106,11 +72,11 @@ export function OrderCheckout() {
                         <h2>Your trip</h2>
                         <section>
                             <h3>Dates</h3>
-                            <p>{formattedCheckinDate} - {checkoutDate}</p>
+                            <p>{formatDateRange(order.startDate, order.endDate)}</p>
                         </section>
                         <section>
                             <h3>Guests</h3>
-                            <p>{order.guests} {(order.guests === 1) ? "guest" : "guests"}</p>
+                            <p>{order.capacity} {(order.capacity === 1) ? "guest" : "guests"}</p>
                         </section>
                     </section>
                     <hr />
@@ -137,8 +103,8 @@ export function OrderCheckout() {
 
                     <section className="checkout-cancellation-policy">
                         <h2>Cancellation Policy</h2>
-                        <div><h1 className="cancellation-policy-bold">{`Free cancellation before 2:00 PM on ${cancellationDateFormatted2}.`}</h1>
-                            {` Cancel before ${cancellationDateFormatted} for a partial refund.`}
+                        <div><h1 className="cancellation-policy-bold">{`Free cancellation before 2:00 PM on ${getDateTwoWeeksBefore(order.startDate, 3)}.`}
+                            <span>{` Cancel before ${getDateTwoWeeksBefore(order.startDate, 2)} for a partial refund.`} </span></h1>
                         </div>
                     </section>
                     <hr />

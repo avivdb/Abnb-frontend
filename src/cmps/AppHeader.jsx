@@ -1,5 +1,4 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
@@ -34,10 +33,12 @@ export function AppHeader() {
 	}, [])
 
 	function handleScroll() {
-		if (window.scrollY > 50) {
-			setIsExpanded(false)
-		} else {
-			setIsExpanded(true)
+		if (location.pathname === "/stay" || location.pathname === "/") {
+			if (window.scrollY > 50) {
+				setIsExpanded(false)
+			} else {
+				setIsExpanded(true)
+			}
 		}
 	}
 
@@ -68,7 +69,7 @@ export function AppHeader() {
 				<Link to={`stay/edit`}>
 					<button className='btn-add-stay'>Abnb your home</button>
 				</Link>
-				{user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+				{/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>} */}
 
 				{!user ?
 					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>

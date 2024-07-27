@@ -5,6 +5,7 @@
 
   hr {
     margin-block: 2rem;
+    width: 100%;
   }
 
   .gallery {
@@ -102,7 +103,7 @@
   .details-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 2rem;
+    gap: 7rem;
     margin-block-start: 2rem;
 
     .detail-content-top {
@@ -210,11 +211,15 @@
 
     .order-details {
       grid-column: 2 / 3;
-      // padding: rem(25px);
-      // border: 1px solid $gray1;
-      // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      // border-radius: 20px;
-      // height: 425px;
+    }
+
+    .details-dates-picker {
+      .date-range-wrapper {
+        padding: 0;
+      }
+    }
+    .google-map-title {
+      margin-block-end: 2rem;
     }
   }
 

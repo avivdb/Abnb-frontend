@@ -8,8 +8,18 @@ import { AbnbGradientBtn } from '../cmps/AbnbGradientBtn'
 export function Login() {
 
     const [credentials, setCredentials] = useState({ username: '', password: '', fullname: '' })
+    const [users, setUsers] = useState([])
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+    async function loadUsers() {
+        const users = await userService.getUsers()
+        setUsers(users)
+    }
 
     async function onLogin(ev = null) {
         if (ev) ev.preventDefault()
