@@ -157,11 +157,6 @@ export function StayDetails() {
                 setOrderToEdit={setOrderToEdit}
                 setIsDateModalOpen={null}
               />
-              <OrderDateModel
-                orderToEdit={orderToEdit}
-                setOrderToEdit={setOrderToEdit}
-                setIsDateModalOpen={null}
-              />
             </section>
 
 
