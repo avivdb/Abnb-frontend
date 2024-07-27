@@ -217,27 +217,28 @@
       // height: 425px;
     }
   }
-  .map-marker-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 4rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: rgba($clr1, 0.2);
 
-    .map-marker {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 2rem;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background-color: $clr1;
-      color: $clr12;
-      font-size: 1rem;
-    }
-  }
+  // .map-marker-wrapper {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 4rem;
+  //   aspect-ratio: 1;
+  //   border-radius: 50%;
+  //   background-color: rgba($clr1, 0.2);
+
+  // .map-marker {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 2rem;
+  //   aspect-ratio: 1;
+  //   border-radius: 50%;
+  //   background-color: $clr1;
+  //   color: $clr12;
+  //   font-size: 1rem;
+  // }
+  // }
 }
 
 // @media (max-width: 1200px) {

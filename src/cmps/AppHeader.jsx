@@ -1,42 +1,35 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
-
 import { FilterFocused } from './FilterFocused'
 import { FilterExpanded } from './FilterExpanded'
-
-import menu from "../assets/img/icons/menu.svg"
-import userimg from "../assets/img/icons/user.svg"
-
 import { useEffect, useState } from 'react'
 import { UserMenu } from './UserMenu'
 import { FilterLabel } from './FilterLabel'
-
-
+import { setFilterBy } from "../store/actions/stay.actions";
+import menu from "../assets/img/icons/menu.svg"
+import userimg from "../assets/img/icons/user.svg"
+import { debounce } from '../services/util.service'
 
 export function AppHeader() {
 
 	const [userMenu, setUserMenu] = useState(false)
+	const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
 	const user = useSelector(storeState => storeState.userModule.user)
-	const navigate = useNavigate()
-
 	const [isExpanded, setIsExpanded] = useState(true)
-
 	let location = useLocation()
-
-	console.log(user)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		handleScroll()
+		const debouncedHandleScroll = debounce(handleScroll, 100);
 
-		window.addEventListener('scroll', handleScroll)
-
+		window.addEventListener('scroll', debouncedHandleScroll);
 		return () => {
-			window.removeEventListener('scroll', handleScroll)
-		}
+			window.removeEventListener('scroll', debouncedHandleScroll);
+		};
+
 
 	}, [])
 
@@ -52,25 +45,22 @@ export function AppHeader() {
 		setIsExpanded(true)
 	}
 
-	async function onLogout() {
-		try {
-			await logout()
-			navigate('/')
-			showSuccessMsg(`Bye now`)
-		} catch (err) {
-			showErrorMsg('Cannot logout')
-		}
+	function handleLogoClick() {
+		console.log('filterBy', filterBy)
+		setFilterBy({})
+		navigate('/')
+		console.log('filterBy', filterBy)
+
 	}
 
 	return (
-		<div className="app-header">
+		<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`} >
 
-
-			<NavLink to="/" className="logo fa brand airbnb ">
+			<NavLink to="/" onClick={() => handleLogoClick()} className="logo fa brand airbnb ">
 				<h1>bnb</h1>
 			</NavLink>
 
-			{isExpanded && <h1 className="header-stay-title">Stays</h1>}
+			<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`} >Stays</h1>
 			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
 			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
 
@@ -95,12 +85,11 @@ export function AppHeader() {
 					</div>
 				}
 
-
 				{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
 
 			</section>
 
-			{(location.pathname === "/stay" || location.pathname === "/") && <FilterLabel className="" />}
+			{(location.pathname === "/stay" || location.pathname === "/" || location.pathname.startsWith("/s/")) && <FilterLabel />}
 		</div>
 
 

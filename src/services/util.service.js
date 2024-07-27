@@ -39,7 +39,7 @@ export function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
         clearTimeout(timer)
-        timer = setTimeout(() => { func.apply(this, args) }, timeout)
+        timer = setTimeout(() => { func(...args) }, timeout)
     }
 }
 
@@ -85,4 +85,26 @@ export function getGuestsTitle(filterToEdit) {
     }
 
     return title || 'Add guests';
+}
+
+
+export function getParams(obj) {
+    const params = new URLSearchParams(
+        Object.keys(obj).reduce((acc, key) => {
+            const value = obj[key];
+            if (typeof value === 'object' && value !== null) {
+                Object.keys(value).forEach(subKey => {
+                    acc[subKey] = value[subKey] || '';
+                });
+            } else if (value instanceof Date) {
+                acc[key] = value.toDateString() || '';
+            } else {
+                acc[key] = value || '';
+            }
+            return acc;
+        }, {})
+    ).toString();
+
+    return params;
+
 }

@@ -104,8 +104,9 @@ export function StayDetails() {
         </section>
 
         <h2 className="google-map-title">Where you'll be</h2>
-        <section>
-          <GoogleMap stay={stay} />
+        <section className='google-map'>
+          {console.log('stay', stay)}
+          <GoogleMap stays={[stay]} />
         </section>
 
       </div>

@@ -26,7 +26,7 @@ window.cs = stayService
 
 async function query(filterBy = getDefaultFilter()) {
     var stays = await storageService.query(STORAGE_KEY)
-    const { txt, label, guest } = filterBy
+    const { txt, label, guest, type, minPrice, maxPrice } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -40,6 +40,13 @@ async function query(filterBy = getDefaultFilter()) {
         stays = stays.filter(stay => stay.capacity >= guest.capacity)
     }
 
+    if (type) {
+        stays = stays.filter(stay => stay.type === type)
+    }
+    if (minPrice || maxPrice) {
+        stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice)
+
+    }
     return stays
 }
 
@@ -147,6 +154,9 @@ function getDefaultFilter() {
         checkOut: '',
         guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
         label: '',
+        type: '',
+        minPrice: 40,
+        maxPrice: 13000,
 
     }
 }

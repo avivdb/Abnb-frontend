@@ -18,6 +18,7 @@ import { UserWishlist } from './pages/UserWishlist.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
 import { OrderCheckout } from './pages/OrderCheckout.jsx'
 import { UserOrders } from './pages/UserOrders.jsx'
+import { SearchPage } from './pages/SearchPage.jsx'
 
 
 
@@ -31,6 +32,7 @@ export function RootCmp() {
             <main>
                 <Routes>
                     <Route path="/" element={<StayIndex />} />
+                    <Route path="/s/:params" element={<SearchPage />} />
                     <Route path="stay" element={<StayIndex />} />
                     <Route path="stay/:stayId/checkout" element={<OrderCheckout />} />
                     <Route path="stay/trips" element={<UserTrips />} />
