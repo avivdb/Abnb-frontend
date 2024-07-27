@@ -123,8 +123,8 @@ async function save(stay) {
             bedrooms: [{ beds: 1 }],
             beds: 1,
             baths: 2,
-            defaultCheckin: '12-08-2024',
-            defaultCheckout: '19-08-2024',
+            defaultCheckin: "12-08-2024",
+            defaultCheckout: "19-08-2024",
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }

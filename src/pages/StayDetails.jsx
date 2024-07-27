@@ -60,6 +60,11 @@ export function StayDetails() {
       guests: orderToEdit.guests,
     }).toString()
 
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
+
     navigate(`/stay/${stay._id}/checkout?${params}`)
   }
 
@@ -79,6 +84,7 @@ export function StayDetails() {
   return (
     <section className="stay-details ">
 
+      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
       {stay && <div className='stay-details-content stay-details-layout'>
@@ -151,6 +157,11 @@ export function StayDetails() {
                 setOrderToEdit={setOrderToEdit}
                 setIsDateModalOpen={null}
               />
+              <OrderDateModel
+                orderToEdit={orderToEdit}
+                setOrderToEdit={setOrderToEdit}
+                setIsDateModalOpen={null}
+              />
             </section>
 
 
@@ -176,7 +187,8 @@ export function StayDetails() {
         <h2 id="location" className="google-map-title">Where you'll be</h2>
         <section className='google-map'>
           {console.log('stay', stay)}
-          <GoogleMap stays={[stay]} />
+          <GoogleMap stays={[stay]} mapHeight={"400px"} mapBorderRadius={"10px"}/>
+          <p>{stay.loc.city}, {stay.loc.country}</p>
         </section>
 
       </div>

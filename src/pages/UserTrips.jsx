@@ -1,55 +1,83 @@
 import { useState, useEffect } from 'react'
-import { orderService } from "../services/order/order.service.local"
+import { orderService } from "../services/order/"
+import { stayService } from '../services/stay/'
+import { formatDateRangeObject, capitalize } from "../services/util.service"
 
 
 export function UserTrips() {
-
     const [orders, setOrders] = useState([])
+    const [stays, setStays] = useState({})
 
     useEffect(() => {
         async function fetchOrders() {
             try {
                 const fetchedOrders = await orderService.query()
+
+                const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
+                const fetchedStays = await Promise.all(stayPromises)
+
+                const staysLookup = fetchedStays.reduce((acc, stay) => {
+                    acc[stay._id] = stay
+                    return acc
+                }, {})
+
                 setOrders(fetchedOrders)
+                setStays(staysLookup)
             } catch (error) {
-                console.error('Error fetching orders:', error)
+                console.error('Error fetching orders or stays:', error)
             }
         }
 
         fetchOrders()
     }, [])
 
-    function capitalize(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
 
     return (
-        <div className="user-trips">
+        <section className="user-trips">
             <h2>Trips</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Property name</th>
-                        <th>Check in</th>
-                        <th>Check out</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders.map((order, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{order.stay.name}</td>
-                            <td>{order.startDate}</td>
-                            <td>{order.endDate}</td>
-                            <td>{order.totalPrice}</td>
-                            <td>{capitalize(order.status)}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    )
+            <ul className="user-trips-list">
+                {orders.map(order => {
+                    const stay = stays[order.stay._id]
+                    return (
+                        <li className="user-trip" key={order._id}>
+                            {stay ? (
+                                <>
+                                    <div
+                                        className="trip-order-status"
+                                        style={{
+                                            backgroundColor: order.status === 'approved'
+                                                ? '#c8e6c9'
+                                                : order.status === 'declined'
+                                                ? '#ef9a9a'
+                                                : '#fff'
+                                        }}>
+                                        {capitalize(order.status)}</div>
+                                    <img src={stay.imgUrls[0]} alt={stay.name} />
+                                    <section className="trip-top-info">
+                                        <p>{stay.loc.city}</p>
+                                        <p>{stay.type} hosted by {stay.host.fullname.split(" ")[0]}</p>
+                                        <hr />
+                                    </section>
+                                    <section className="trip-main-info">
+                                        <section>
+                                            <p>{formatDateRangeObject(order.startDate, order.endDate).month}</p>
+                                            <p>{formatDateRangeObject(order.startDate, order.endDate).dates}</p>
+                                            <p>{order.startDate.slice(-4)}</p>
+                                        </section>
+                                        <section>
+                                            <p>{stay.loc.address}</p>
+                                            <p>{stay.loc.city}</p>
+                                            <p>{stay.loc.country}</p>
+                                        </section>
+                                    </section>
+                                </>
+                            ) : (
+                                <p>Trip information not available</p>
+                            )}
+                        </li>
+                    )
+                })}
+            </ul>
+        </section>
+    );
 }

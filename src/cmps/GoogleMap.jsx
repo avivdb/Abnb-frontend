@@ -10,7 +10,7 @@ const mapStyle = [
     // Your map style configuration here
 ];
 
-export function GoogleMap({ stays }) {
+export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
     const location = useLocation();
     const initialCoords = stays[0] ? { lat: stays[0].loc.lat, lng: stays[0].loc.lan } : { lat: 32.109333, lng: 34.855499 };
     const [coords, setCoords] = useState(initialCoords);
@@ -96,6 +96,6 @@ export function GoogleMap({ stays }) {
     }, [coords, stays, zoom, location.pathname]);
 
     return (
-        <div style={{ height: '100vh', width: '100%' }} ref={mapRef}></div>
+        <div style={{ height: mapHeight, width: '100%', overflow: "none", borderRadius: mapBorderRadius }} ref={mapRef}></div>
     );
 }
