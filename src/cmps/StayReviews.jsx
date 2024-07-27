@@ -8,7 +8,7 @@ export function StayReviews({ stay }) {
     let reviews = stay.reviews ? stay.reviews :
         [
             {
-                "at": "2016-06-12",
+                "at": "2018-02-24T05:00:00.000Z",
                 "by": {
                     "_id": "622f3407e36c59e6164fc004",
                     "fullname": "Jesse",
@@ -19,7 +19,7 @@ export function StayReviews({ stay }) {
                 "txt": "I had a great experience working with Patty and Peter.  Both were very attentive in sorting out the booking details and following up directly when I had questions.  I rented a unit at the Westin Villas  in Maui and both the unit and property was absolutely amazing.  I think we had the best unit on the resort complete with 2 outdoor patios with direct access  to  the  beach.  I would HIGHLY recommend renting with Patty and Peter."
             },
             {
-                "at": "2016-07-28",
+                "at": "2017-01-07T05:00:00.000Z",
                 "by": {
                     "_id": "622f3403e36c59e6164fb204",
                     "fullname": "Mike",
@@ -30,7 +30,7 @@ export function StayReviews({ stay }) {
                 "txt": "Peter quickly responded to any questions I had before, and during the trip. Will use again, highly recommend. "
             },
             {
-                "at": "2016-09-11",
+                "at": "2016-09-11T04:00:00.000Z",
                 "by": {
                     "_id": "622f3405e36c59e6164fb703",
                     "fullname": "Skyler",
@@ -41,7 +41,7 @@ export function StayReviews({ stay }) {
                 "txt": "We had the perfect location for a room, first floor right in front of the pool. The resort is beautiful, and the staff is so friendly! I enjoyed it so much, we talked about buying a timeshare ourselves."
             },
             {
-                "at": "2017-01-07",
+                "at": "2016-07-28T04:00:00.000Z",
                 "by": {
                     "_id": "622f3404e36c59e6164fb37f",
                     "fullname": "Hank",
@@ -61,17 +61,11 @@ export function StayReviews({ stay }) {
         return stars
     }
 
-    function formatDate(inputDate) {
-        let parts = inputDate.split('-')
-        let day = parts[0]
-        let month = parts[1]
-        let year = parts[2]
-
-        let dateObj = new Date(year, month - 1, day)
-
-        let monthName = dateObj.toLocaleString('en-US', { month: 'long' })
-        let formattedDate = `${monthName} ${day}`
-
+    function formatDate(dateStr) {
+        const date = new Date(dateStr)
+        const options = { month: 'long', day: 'numeric' }
+        const formattedDate = date.toLocaleDateString('en-US', options)
+        
         return formattedDate
     }
 
