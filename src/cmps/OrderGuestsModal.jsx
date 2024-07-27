@@ -15,7 +15,7 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuest
             case '+':
                 if (type === 'infant' && counter < 5) {
                     newCounter = counter + 1
-                } else if ((type === 'adult' || type === 'children') && totalAdultsChildren < stay.guests) {
+                } else if ((type === 'adult' || type === 'children') && totalAdultsChildren < stay.capacity) {
                     newCounter = counter + 1
                 } else if (type === 'pet') {
                     newCounter = counter + 1
@@ -35,7 +35,7 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuest
         setCounter(newCounter)
         setOrderToEdit({
             ...orderToEdit,
-            guests: adultCounter + childrenCounter,
+            capacity: adultCounter + childrenCounter,
             guestCounts: {
                 adults: type === 'adult' ? newCounter : adultCounter,
                 children: type === 'children' ? newCounter : childrenCounter,

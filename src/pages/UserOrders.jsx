@@ -6,6 +6,8 @@ export function UserOrders() {
 
     const [orders, setOrders] = useState([])
     const [stays, setStays] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         async function fetchOrders() {
@@ -42,6 +44,10 @@ export function UserOrders() {
         } catch (error) {
             console.error('Error updating order status:', error)
         }
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
     }
 
     return (
@@ -87,4 +93,29 @@ export function UserOrders() {
         </section>
     )
 }
+
+// const orders = useSelector(storeState => storeState.orderModule.orders)
+//     const [isLoading, setIsLoading] = useState(true);
+//     // const isLoading = useSelector(storeState => storeState.systemModule.isLoading)
+
+//     useEffect(() => {
+
+//         fetchOrders();
+//     }, [])
+
+//     async function fetchOrders() {
+//         try {
+//             console.log('isLoading', isLoading)
+//             await loadOrders()
+//             setIsLoading(false)
+//         } catch (err) {
+//             console.log('err', err)
+//             setIsLoading(false)
+//         }
+//         finally {
+//             // console.log('isLoading', isLoading)
+
+//         }
+//     }
+
 

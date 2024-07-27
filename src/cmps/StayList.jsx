@@ -1,5 +1,5 @@
 import { userService } from '../services/user'
-import { StayPreview } from './StayPreview'
+import StayPreview from './StayPreview'
 
 export function StayList({ stays, onRemoveStay, onUpdateStay }) {
 

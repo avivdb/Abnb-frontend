@@ -85,6 +85,7 @@ export function StayDetails() {
     <section className="stay-details ">
 
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
+      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
       {stay && <div className='stay-details-content stay-details-layout'>
         <h1 className='stay-details-name'>{stay.name}</h1>
@@ -99,7 +100,7 @@ export function StayDetails() {
             <h3 className='stay-location-des'>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
             <h3 className="stay-dry-details">
               {
-                `${stay.guests} ${stay.guests === 1 ? "guest" : "guests"} • 
+                `${stay.capacity} ${stay.capacity === 1 ? "guest" : "guests"} • 
               ${stay.bedrooms.length} ${stay.bedrooms.length === 1 ? "bedroom" : "bedrooms"} • 
               ${stay.beds} ${(stay.beds) === 1 ? "bed" : "beds"} •
               ${stay.baths} ${stay.baths === 1 ? "bath" : "baths"}`
@@ -156,6 +157,11 @@ export function StayDetails() {
                 setOrderToEdit={setOrderToEdit}
                 setIsDateModalOpen={null}
               />
+              <OrderDateModel
+                orderToEdit={orderToEdit}
+                setOrderToEdit={setOrderToEdit}
+                setIsDateModalOpen={null}
+              />
             </section>
 
 
@@ -179,8 +185,9 @@ export function StayDetails() {
 
         <hr />
         <h2 id="location" className="google-map-title">Where you'll be</h2>
-        <section>
-          <GoogleMap stay={stay} />
+        <section className='google-map'>
+          {console.log('stay', stay)}
+          <GoogleMap stays={[stay]} />
           <p>{stay.loc.city}, {stay.loc.country}</p>
         </section>
 

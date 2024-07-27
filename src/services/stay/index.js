@@ -7,33 +7,41 @@ import { stayService as remote } from './stay.service.remote'
 
 function getEmptyStay() {
     return {
-            name: "",
-            type: "",
-            imgUrls: [],
-            price: 0,
-            summary: "",
-            capacity: 0,
-            amenities: [],
-            labels: [],
-            host: {
-                _id: "",
-                fullname: "",
-                imgUrl: ""
-            },
-            loc: {
-                country: "",
-                countryCode: "",
-                city: "",
-                address: "",
-                lat: 0,
-                lng: 0
-            }
+        name: "",
+        type: "",
+        imgUrls: [],
+        price: 0,
+        summary: "",
+        capacity: 0,
+        amenities: [],
+        labels: [],
+        host: {
+            _id: "",
+            fullname: "",
+            imgUrl: ""
+        },
+        loc: {
+            country: "",
+            countryCode: "",
+            city: "",
+            address: "",
+            lat: 0,
+            lan: 0
+        }
     }
 }
 
 function getDefaultFilter() {
     return {
         txt: '',
+        checkIn: '',
+        checkOut: '',
+        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        label: '',
+        type: '',
+        minPrice: 40,
+        maxPrice: 13000,
+
     }
 }
 

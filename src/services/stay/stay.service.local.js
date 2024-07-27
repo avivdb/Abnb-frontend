@@ -26,7 +26,7 @@ window.cs = stayService
 
 async function query(filterBy = getDefaultFilter()) {
     var stays = await storageService.query(STORAGE_KEY)
-    const { txt, label, guest } = filterBy
+    const { txt, label, guest, type, minPrice, maxPrice } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -40,6 +40,13 @@ async function query(filterBy = getDefaultFilter()) {
         stays = stays.filter(stay => stay.capacity >= guest.capacity)
     }
 
+    if (type) {
+        stays = stays.filter(stay => stay.type === type)
+    }
+    if (minPrice || maxPrice) {
+        stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice)
+
+    }
     return stays
 }
 
@@ -113,7 +120,6 @@ async function save(stay) {
                 "imgUrl": ""
             },
             rating: 4.9,
-            guests: 2,
             bedrooms: [{ beds: 1 }],
             beds: 1,
             baths: 2,
@@ -147,6 +153,9 @@ function getDefaultFilter() {
         checkOut: '',
         guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
         label: '',
+        type: '',
+        minPrice: 40,
+        maxPrice: 13000,
 
     }
 }
@@ -218,10 +227,9 @@ function _createStays() {
                     "city": "Lisbon",
                     "address": "17 Kombo st",
                     "lat": -8.61308,
-                    "lng": 41.1413
+                    "lan": 41.1413
                 },
                 "rating": 4.62,
-                "guests": 12,
                 "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 1 }, { beds: 2 }],
                 "beds": 9,
                 "baths": 2,
@@ -275,10 +283,9 @@ function _createStays() {
                     "city": "Miami Beach",
                     "address": "123 Ocean Drive",
                     "lat": 25.79065,
-                    "lng": -80.13005
+                    "lan": -80.13005
                 },
                 "rating": 4.86,
-                "guests": 17,
                 "bedrooms": [{ beds: 1 }, { beds: 3 }, { beds: 2 }, { beds: 2 }, { beds: 1 }],
                 "beds": 9,
                 "baths": 1,
@@ -329,10 +336,9 @@ function _createStays() {
                     "city": "Zermatt",
                     "address": "456 Alpine Way",
                     "lat": 46.0207,
-                    "lng": 7.7491
+                    "lan": 7.7491
                 },
                 "rating": 5.00,
-                "guests": 2,
                 "bedrooms": [{ beds: 1 }],
                 "beds": 1,
                 "baths": 5,
@@ -386,10 +392,9 @@ function _createStays() {
                     "city": "Paris",
                     "address": "789 Rue de la Révolution",
                     "lat": 48.8566,
-                    "lng": 2.3522
+                    "lan": 2.3522
                 },
                 "rating": 4.56,
-                "guests": 9,
                 "bedrooms": [{ beds: 1 }, { beds: 2 }, { beds: 1 }, { beds: 3 }],
                 "beds": 7,
                 "baths": 4,
@@ -444,10 +449,9 @@ function _createStays() {
                     "city": "Santorini",
                     "address": "567 Cliffside Path",
                     "lat": 36.3932,
-                    "lng": 25.4615
+                    "lan": 25.4615
                 },
                 "rating": 4.73,
-                "guests": 4,
                 "bedrooms": [{ beds: 1 }, { beds: 1 }],
                 "beds": 2,
                 "baths": 2,
@@ -499,10 +503,9 @@ function _createStays() {
                     "city": "Aspen",
                     "address": "345 Mountain View Drive",
                     "lat": 39.1911,
-                    "lng": -106.8175
+                    "lan": -106.8175
                 },
                 "rating": 4.31,
-                "guests": 5,
                 "bedrooms": [{ beds: 1 }, { beds: 2 }, { beds: 1 }, { beds: 2 }, { beds: 3 }],
                 "beds": 9,
                 "baths": 3,
@@ -554,10 +557,9 @@ function _createStays() {
                     "city": "Takaka",
                     "address": "123 Beachfront Road",
                     "lat": -40.863,
-                    "lng": 172.806
+                    "lan": 172.806
                 },
                 "rating": 4.82,
-                "guests": 6,
                 "bedrooms": [{ "beds": 1 }, { "beds": 2 }, { "beds": 1 }, { "beds": 2 }],
                 "beds": 6,
                 "baths": 3,
@@ -609,10 +611,9 @@ function _createStays() {
                     "city": "Tel Aviv",
                     "address": "456 Rothschild Boulevard",
                     "lat": 32.0853,
-                    "lng": 34.7818
+                    "lan": 34.7818
                 },
                 "rating": 4.92,
-                "guests": 8,
                 "bedrooms": [{ "beds": 1 }, { "beds": 2 }, { "beds": 2 }, { "beds": 3 }],
                 "beds": 8,
                 "baths": 4,

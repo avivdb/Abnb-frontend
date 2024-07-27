@@ -5,10 +5,10 @@ import { useState } from 'react'
 import heartempty from "../assets/img/icons/heartempty.svg"
 import heartfull from "../assets/img/icons/heartfull.svg"
 import { stayService } from '../services/stay'
-import { getRandomDistance, formatDateRange} from '../services/util.service.js'
+import { getRandomDistance, formatDateRange } from '../services/util.service.js'
 
 
-export function StayPreview({ stay }) {
+export default function StayPreview({ stay }) {
 
     const [wishlist, setWishlist] = useState(false)
     const { _id, loc, rating, price } = stay
