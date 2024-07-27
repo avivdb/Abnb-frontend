@@ -110,6 +110,10 @@
       cursor: pointer;
       border-radius: em(32px);
 
+      &::before {
+        display: none;
+      }
+
       + ::before {
         display: none;
       }

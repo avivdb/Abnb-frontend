@@ -15,7 +15,7 @@ export function SearchPage() {
     return (
         <section className="search-page">
             <StayList stays={stays} />
-            <GoogleMap stays={stays} />
+            <GoogleMap stays={stays} mapBorderRadius={0} mapHeight={"100vh"} />
         </section>
     )
 }

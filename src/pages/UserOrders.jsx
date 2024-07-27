@@ -6,7 +6,7 @@ export function UserOrders() {
 
     const [orders, setOrders] = useState([])
     const [stays, setStays] = useState({})
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
 
 
     useEffect(() => {
@@ -46,9 +46,9 @@ export function UserOrders() {
         }
     }
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    // if (isLoading) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <section className="user-orders">
