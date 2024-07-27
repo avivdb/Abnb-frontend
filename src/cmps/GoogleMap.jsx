@@ -12,7 +12,7 @@ const mapStyle = [
 
 export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
     const location = useLocation();
-    const initialCoords = stays[0] ? { lat: stays[0].loc.lat, lng: stays[0].loc.lng } : { lat: 32.109333, lng: 34.855499 };
+    const initialCoords = stays[0] ? { lat: stays[0].loc.lat, lng: stays[0].loc.lan } : { lat: 32.109333, lng: 34.855499 };
     const [coords, setCoords] = useState(initialCoords);
     const mapRef = useRef(null);
     const googleMapRef = useRef(null);

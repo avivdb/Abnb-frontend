@@ -17,6 +17,7 @@ import "../assets/styles/cmps/AbnbGradientBtn.scss";
 import { AbnbGradientBtn } from "../cmps/AbnbGradientBtn";
 
 import { loadStay } from "../store/actions/stay.actions";
+import { userService } from "../services/user";
 
 export function OrderCheckout() {
     const [countryModal, setCountryModal] = useState(false)
@@ -40,7 +41,18 @@ export function OrderCheckout() {
                     _id: stay._id,
                     name: stay.name,
                     price: stay.price
-                }
+                },
+                host: {
+                    _id: stay.host._id,
+                    fullname: stay.host.fullname,
+                    imgUrl: stay.host.pictureUrl
+                },
+                guest: { 
+                    _id: userService.getLoggedinUser()._id,
+                    fullname: userService.getLoggedinUser().fullname,
+                },
+                msgs: [],
+			    status: 'pending' 
             }))
         }
     }, [stay])
