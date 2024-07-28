@@ -35,7 +35,7 @@ function getDefaultFilter() {
         txt: '',
         checkIn: '',
         checkOut: '',
-        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        // guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
         label: '',
         type: '',
         minPrice: 40,

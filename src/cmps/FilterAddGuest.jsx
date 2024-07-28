@@ -8,7 +8,8 @@ export function FilterAddGuest({ filterToEdit, setFilterToEdit }) {
     const [petCounter, setPetCounter] = useState(0)
 
     useEffect(() => {
-        const capacity = adultCounter + childrenCounter + infantCounter + petCounter;
+        const capacity = adultCounter + childrenCounter;
+        // const capacity = adultCounter + childrenCounter + infantCounter + petCounter;
         setFilterToEdit({ ...filterToEdit, guest: { adult: adultCounter, children: childrenCounter, infant: infantCounter, pet: petCounter, capacity: capacity } });
     }, [adultCounter, childrenCounter, infantCounter, petCounter]);
 
