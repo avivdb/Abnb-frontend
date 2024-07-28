@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import { FilterWhereModal } from "./FilterWhereModal";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,14 +15,24 @@ export function FilterExpanded({ setClass }) {
     const [filterToEdit, setFilterToEdit] = useState({ ...filterBy })
     const [activeModal, setActiveModal] = useState(null)
     const navigate = useNavigate()
+    const isFirstRender = useRef(true);
+    const defaultFilter = useRef(getParams({ txt: '', checkIn: '', checkOut: '', adult: '', chidren: '', infant: '', pet: '', capacity: '', label: '' }));
 
-    useEffect(() => {
-        const params = getParams(filterBy)
-        if (params && params !== 'txt=&checkIn=&checkOut=&adult=&chidren=&infant=&pet=&capacity=&label=') {
-            navigate(`/s/${params}`)
-        }
 
-    }, [filterBy]);
+
+    // useEffect(() => {
+
+    //     if (isFirstRender.current) {
+    //         isFirstRender.current = false;
+    //         return;
+    //     }
+
+    //     const params = getParams(filterBy);
+    //     if (params && params !== defaultFilter.current) {
+    //         // navigate(`/s/${params}`);
+    //     }
+
+    // }, [filterBy, navigate]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,6 +64,10 @@ export function FilterExpanded({ setClass }) {
         ev.stopPropagation()
         setActiveModal(null)
         setFilterBy(filterToEdit)
+        const params = getParams(filterToEdit);
+        if (params) {
+            navigate(`/s/${params}`);
+        }
     }
 
     return (
