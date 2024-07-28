@@ -126,7 +126,6 @@ export function calculateNights(checkIn, checkOut) {
 }
 
 export function getDateTwoWeeksBefore(dateString, weeks) {
-    // Helper function to parse the date string "DD-MM-YYYY"
     function parseDate(dateString) {
         const [day, month, year] = dateString.split('-').map(Number);
         return new Date(year, month - 1, day); // month is 0-based
@@ -146,6 +145,14 @@ export function getDateTwoWeeksBefore(dateString, weeks) {
     // Format and return the result
     return `${monthName} ${day}`;
 }
+
+export function formatDate(inputDate) {
+
+    const parts = inputDate.split('-')
+    const [day, month, year] = parts
+    return `${day}/${month}/${year}`
+}
+
 
 
 

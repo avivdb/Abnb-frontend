@@ -81,6 +81,10 @@ export function StayDetails() {
     setAmenitiesModal(true)
   }
 
+  if (!stay) {
+    return <div className="loader"></div>
+  }
+
   return (
     <section className="stay-details ">
 
@@ -182,7 +186,7 @@ export function StayDetails() {
         <h2 id="location" className="google-map-title">Where you'll be</h2>
         <section className='google-map'>
           {console.log('stay', stay)}
-          <GoogleMap stays={[stay]} mapHeight={"400px"} mapBorderRadius={"10px"}/>
+          <GoogleMap stays={[stay]} mapHeight={"400px"} mapBorderRadius={"10px"} />
           <p>{stay.loc.city}, {stay.loc.country}</p>
         </section>
 

@@ -5,24 +5,32 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/cmps/DateRangePicker.scss';
 import dayjs from 'dayjs';
 
-export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit }) {
+export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, setActiveModal }) {
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
 
     useEffect(() => {
         console.log('startDate:', startDate)
         console.log('endDate:', endDate)
-    }, [startDate, endDate])
 
-    const handleSelect = (dates) => {
+        if (startDate && endDate) {
+            setActiveModal("guest");  // Or whatever modal you want to activate
+        }
+
+    }, [startDate, endDate, setActiveModal])
+
+    function handleSelect(dates) {
         const [start, end] = dates
+        setActiveModal("checkOut")
+
         setStartDate(start)
+
         setEndDate(end)
         setFilterToEdit({ ...filterToEdit, checkIn: start, checkOut: end })
         console.log('startDate', startDate)
         console.log('endDate', endDate)
         console.log(filterToEdit)
-
+        // if(end !== null) setActiveModal("guest")
     };
 
     return (

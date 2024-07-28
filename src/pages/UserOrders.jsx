@@ -38,7 +38,7 @@ export function UserOrders() {
 
             await updateOrder(updatedOrder)
 
-            setOrders(prevOrders => 
+            setOrders(prevOrders =>
                 prevOrders.map(o => o._id === order._id ? { ...o, status: newStatus } : o)
             )
         } catch (error) {
@@ -46,9 +46,9 @@ export function UserOrders() {
         }
     }
 
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
+    if (orders === null || orders === undefined || orders.length === 0) {
+        return <div className="loader"></div>
+    }
 
     return (
         <section className="user-orders">

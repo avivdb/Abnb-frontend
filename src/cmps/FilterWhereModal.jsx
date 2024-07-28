@@ -8,7 +8,7 @@ import image5 from '../assets/img/icons/asset5.webp';
 import { useEffect, useState } from "react";
 import iconLocation from '../assets/img/icons/location-2952.svg';
 
-export function FilterWhereModal({ filterToEdit, setFilterToEdit }) {
+export function FilterWhereModal({ filterToEdit, setFilterToEdit, setActiveModal }) {
 
     const [predictions, setPredictions] = useState([]);
     const [isTyping, setIsTyping] = useState(false)
@@ -32,6 +32,11 @@ export function FilterWhereModal({ filterToEdit, setFilterToEdit }) {
         }
     }, [searchQuery]);
 
+    function handleClick({ filterToEdit, txt: prediction }) {
+        setFilterToEdit({ ...filterToEdit, txt: prediction })
+        setActiveModal("checkIn")
+    }
+
 
     return (
         <section className={`where-modal ${isTyping ? 'is-typing' : ''}`}>
@@ -43,7 +48,7 @@ export function FilterWhereModal({ filterToEdit, setFilterToEdit }) {
                 <ul className='prediction-list'>
                     {predictions.map((prediction, index) => (
                         <li className='prediction-item' key={index}
-                            onClick={() => setFilterToEdit({ ...filterToEdit, txt: prediction })}>
+                            onClick={() => handleClick({ ...filterToEdit, txt: prediction })}>
                             <span className='icon-location'><img src={iconLocation} /></span>
                             {prediction}
                         </li>
