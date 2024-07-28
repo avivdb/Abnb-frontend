@@ -46,7 +46,8 @@ export function UserOrders() {
         }
     }
 
-    if (orders === null || orders === undefined || orders.length === 0) {
+    if (stays === null || stays === undefined || stays.length === 0 ||
+        orders === null || orders === undefined || orders.length === 0) {
         return <div className="loader"></div>
     }
 

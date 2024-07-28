@@ -13,15 +13,15 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, s
         console.log('startDate:', startDate)
         console.log('endDate:', endDate)
 
-        if (startDate && endDate) {
-            setActiveModal("guest");  // Or whatever modal you want to activate
-        }
+        // if (startDate && endDate) {
+        //     setActiveModal("guest");  // Or whatever modal you want to activate
+        // }
 
-    }, [startDate, endDate, setActiveModal])
+    }, [startDate, endDate])
 
     function handleSelect(dates) {
         const [start, end] = dates
-        setActiveModal("checkOut")
+        // setActiveModal("checkOut")
 
         setStartDate(start)
 

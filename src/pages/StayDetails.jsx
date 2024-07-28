@@ -18,6 +18,7 @@ import { Google } from '@mui/icons-material'
 import { GoogleMap } from '../cmps/GoogleMap.jsx'
 import { StayDetailsHeader } from '../cmps/StayDetailsHeader.jsx'
 import { OrderDateModel } from '../cmps/OrderDateModel.jsx'
+import ModalComponent from '../cmps/ModalComponent.jsx'
 
 export function StayDetails() {
 
@@ -30,6 +31,8 @@ export function StayDetails() {
 
   const [amenitiesModal, setAmenitiesModal] = useState(false)
   const [header, setHeader] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
 
 
 
@@ -82,6 +85,14 @@ export function StayDetails() {
   function onShowAmenities() {
     setAmenitiesModal(true)
   }
+
+  const openModal = () => {
+    setIsModalOpen(true)
+}
+
+const closeModal = () => {
+    setIsModalOpen(false)
+}
 
   if (!stay) {
     return <div className="loader"></div>

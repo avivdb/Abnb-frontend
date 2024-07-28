@@ -9,9 +9,11 @@ export function AmenitiesModal({ setAmenitiesModal, amenities }) {
 
     return (
         <div className="amenities-modal">
+            <section className="amenities-modal-header">
             <button onClick={onHideAmenities}>
                 <img src={close} />
             </button>
+            </section>
             <h1>What this place offers</h1>
             <section className="amenities-modal-list">
 

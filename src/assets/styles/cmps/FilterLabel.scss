@@ -9,7 +9,8 @@
 
   background-color: $clr12;
   text-align: center;
-  margin-block: 1.5rem;
+  margin-block-start: 1rem;
+  margin-block-end: 0.7rem;
 
   &::after {
     content: "";
@@ -28,7 +29,6 @@
     grid-column: 2;
     color: $clr11;
     margin: 0;
-    // margin-block-start: 1rem;
 
     &::before,
     &::after {
@@ -37,7 +37,6 @@
       top: 0;
       width: 20px;
       height: 100%;
-      // background: #fff;
       z-index: 1;
     }
 
@@ -52,22 +51,40 @@
     }
 
     .label {
+      position: relative;
       display: grid;
       gap: 0.5rem;
       justify-items: center;
       filter: invert(45%);
       transition: 0.3s;
 
+      &::after {
+        content: "";
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background-color: transparent;
+      }
+
       &:hover {
         filter: invert(0%);
         cursor: pointer;
+      }
+      
+      &.selected {
+        filter: invert(0%);
+        &::after {
+          display: block;
+        }
+
+        &::after {
+          background-color: black;
+        }
       }
     }
 
     .label-img {
       width: rem(24px);
-      // filter: grayscale(100%);
-      // height: 25px;
     }
 
     .label-name {
