@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { updateOrder } from '../store/actions/order.action'
 import { formatDateRange, capitalize } from "../services/util.service"
 
 export function UserOrders() {
-
+    const user = useSelector(storeState => storeState.userModule.user)
     const [orders, setOrders] = useState([])
     const [stays, setStays] = useState({})
-    // const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() => {
         async function fetchOrders() {
             try {
-                const fetchedOrders = await orderService.query()
+                // const fetchedOrders = await orderService.query()
+                const filterBy = { hostId: user._id }
+                const fetchedOrders = await orderService.query(filterBy)
+
 
                 const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
                 const fetchedStays = await Promise.all(stayPromises)
@@ -43,11 +47,11 @@ export function UserOrders() {
             )
         } catch (error) {
             console.error('Error updating order status:', error)
-        }
+        } 
     }
 
     // if (isLoading) {
-    //     return <div>Loading...</div>;
+    //     return <div>Loading...</div>
     // }
 
     return (
@@ -64,7 +68,7 @@ export function UserOrders() {
 
                                     <section>
                                         <p>{stay.name}</p>
-                                        <p>{order.guests} guests</p>
+                                        <p>{order.capacity} guests</p>
                                     </section>
 
                                     <section>

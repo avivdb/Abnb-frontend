@@ -2,16 +2,20 @@ import { useState, useEffect } from 'react'
 import { orderService } from "../services/order/"
 import { stayService } from '../services/stay/'
 import { formatDateRangeObject, capitalize } from "../services/util.service"
+import { useSelector } from 'react-redux'
 
 
 export function UserTrips() {
+    const user = useSelector(storeState => storeState.userModule.user)
     const [orders, setOrders] = useState([])
     const [stays, setStays] = useState({})
 
     useEffect(() => {
         async function fetchOrders() {
             try {
-                const fetchedOrders = await orderService.query()
+                // const fetchedOrders = await orderService.query()
+                const filterBy = { guestId: user._id }
+                const fetchedOrders = await orderService.query(filterBy)
 
                 const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
                 const fetchedStays = await Promise.all(stayPromises)

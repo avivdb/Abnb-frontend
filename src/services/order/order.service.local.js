@@ -17,8 +17,18 @@ export const orderService = {
 
 }
 
-async function query() {
-	return await storageService.query(STORAGE_KEY)
+// async function query() {
+// 	return await storageService.query(STORAGE_KEY)
+// }
+async function query(filterBy = {}) {
+    const orders = await storageService.query(STORAGE_KEY)
+    if (filterBy.guestId) {
+        return orders.filter(order => order.guest._id === filterBy.guestId)
+    }
+    if (filterBy.hostId) {
+        return orders.filter(order => order.host._id === filterBy.hostId)
+    }
+    return orders
 }
 
 async function getById(orderId) {
