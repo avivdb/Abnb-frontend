@@ -39,8 +39,8 @@ function getDefaultFilter() {
         guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
         label: '',
         type: '',
-        minPrice: 40,
-        maxPrice: 13000,
+        minPrice: 0,
+        maxPrice: 200000,
 
     }
 }
