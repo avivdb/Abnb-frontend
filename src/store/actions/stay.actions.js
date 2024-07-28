@@ -3,14 +3,12 @@ import { store } from '../store'
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG, SET_FILTER_BY } from '../reducers/stay.reducer'
 import { SET_IS_LOADING } from '../reducers/system.reducer'
 
-export async function loadStays() {
+export async function loadStays(filterBy, page) {
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
-    const filterBy = store.getState().stayModule.filterBy
-    // console.log('filterBy', filterBy)
 
     try {
-        const stays = await stayService.query(filterBy)
-        store.dispatch(getCmdSetStays(stays))
+        const stays = await stayService.query(filterBy, page)
+        store.dispatch(getCmdSetStays(stays, page))
     } catch (err) {
         console.log('Cannot load stays', err)
         throw err
@@ -18,6 +16,7 @@ export async function loadStays() {
         store.dispatch({ type: SET_IS_LOADING, isLoading: false })
     }
 }
+
 
 export async function loadStay(stayId) {
     try {
@@ -78,11 +77,14 @@ export function setFilterBy(filterBy) {
 }
 
 // Command Creators:
-function getCmdSetStays(stays) {
+function getCmdSetStays(stays, page) {
+    const currentState = store.getState().stayModule.stays;
+    const updatedStays = page === 0 ? stays : [...currentState, ...stays]
+
     return {
         type: SET_STAYS,
-        stays
-    }
+        stays: updatedStays,
+    };
 }
 function getCmdSetStay(stay) {
     return {
