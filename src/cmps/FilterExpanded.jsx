@@ -98,7 +98,7 @@ export function FilterExpanded({ setClass }) {
             {activeModal && (
                 <section className={getModalClassName()}>
                     {activeModal === 'where' && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} setActiveModal={setActiveModal}/>}
-                    {(activeModal === 'checkIn' || activeModal === 'checkOut') && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
+                    {(activeModal === 'checkIn' || activeModal === 'checkOut') && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} setActiveModal={setActiveModal} />}
                     {activeModal === 'guest' && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>
             )}

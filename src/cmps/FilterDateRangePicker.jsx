@@ -12,25 +12,20 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, s
     useEffect(() => {
         console.log('startDate:', startDate)
         console.log('endDate:', endDate)
-
-        // if (startDate && endDate) {
-        //     setActiveModal("guest");  // Or whatever modal you want to activate
-        // }
-
     }, [startDate, endDate])
 
     function handleSelect(dates) {
         const [start, end] = dates
-        // setActiveModal("checkOut")
 
         setStartDate(start)
+        if(start !== null) setActiveModal("checkOut")
 
         setEndDate(end)
         setFilterToEdit({ ...filterToEdit, checkIn: start, checkOut: end })
         console.log('startDate', startDate)
         console.log('endDate', endDate)
         console.log(filterToEdit)
-        // if(end !== null) setActiveModal("guest")
+        if(end !== null) setActiveModal("guest")
     };
 
     return (
