@@ -9,7 +9,7 @@ export function StayEdit({ setEditModal }) {
 
     const navigate = useNavigate()
 
-    const [stayToEdit, setStayToEdit] = useState({ name: '', country: '', city: '', price: '', fullname: '' })
+    const [stayToEdit, setStayToEdit] = useState({ name: '', country: '', city: '', price: 0, fullname: '' })
 
     function handleChange(ev) {
         const { name, value } = ev.target
@@ -33,7 +33,7 @@ export function StayEdit({ setEditModal }) {
                 lat: 31.771959,
                 lan: 35.217018
             },
-            price: stayToEdit.price,
+            price: +stayToEdit.price,
             imgUrls: [
                 "https://cf.bstatic.com/xdata/images/hotel/max1280x900/407313266.jpg?k=e55ba82e1a97dc5d0df63f03453c41756099d8c657cdc82934f65d65157e9a1f&o=&hp=1",
                 "https://cf.bstatic.com/xdata/images/hotel/max1280x900/407311892.jpg?k=703ea9df4d895c99490ac4025ecb42e91a9b964c25021b73378864ab1752b9f2&o=&hp=1",
@@ -84,7 +84,7 @@ export function StayEdit({ setEditModal }) {
             await addStay(stayToSave)
             // await addStay(stayToEdit)
             showSuccessMsg('Stay added')
-            setStayToEdit({ name: '', country: '', city: '', price: '', fullname: '' })
+            setStayToEdit({ name: '', country: '', city: '', price: 0, fullname: '' })
             navigate('/')
         } catch (err) {
             showErrorMsg('Cannot add stay')

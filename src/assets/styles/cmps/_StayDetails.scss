@@ -65,6 +65,20 @@
       border-radius: 50%;
     }
 
+    .div-user-img {
+      display: flex;
+      place-content: center;
+      align-items: center;
+
+      width: 3rem;
+      height: 3rem;
+
+      background-color: black;
+      border-radius: 50%;
+      color: #fff;
+      // font-size: 0.7rem;
+    }
+
     section {
       display: flex;
       flex-direction: column;
@@ -167,6 +181,7 @@
 
       .stay-bedroom-list {
         margin-block-end: 1rem;
+
         ul {
           gap: 1rem;
         }
@@ -222,6 +237,7 @@
         padding: 0;
       }
     }
+
     .google-map-title {
       margin-block-end: 2rem;
     }

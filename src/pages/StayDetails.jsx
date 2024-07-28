@@ -30,7 +30,7 @@ export function StayDetails() {
 
   const [amenitiesModal, setAmenitiesModal] = useState(false)
   const [header, setHeader] = useState(false)
-
+  const [imgError, setImgError] = useState(false)
 
 
   useEffect(() => {
@@ -83,6 +83,10 @@ export function StayDetails() {
     setAmenitiesModal(true)
   }
 
+  function handleImageError() {
+    setImgError(true)
+  }
+
   return (
     <section className="stay-details ">
 
@@ -113,8 +117,15 @@ export function StayDetails() {
             <hr />
 
             <div className='stay-details-host'>
-              {/* <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png" /> */}
-              <img src={stay.host.pictureUrl} />
+              {imgError ? (
+                <div className="div-user-img">{stay.host.fullname.charAt(0)}</div>
+              ) : (
+                <img
+                  src={stay.host.pictureUrl}
+                  alt={stay.host.fullname}
+                  onError={handleImageError}
+                />
+              )}
               <section>
                 <h3>Hosted by {stay.host.fullname}</h3>
                 <p>{getRandomIntInclusive(2, 12)} years hosting</p>

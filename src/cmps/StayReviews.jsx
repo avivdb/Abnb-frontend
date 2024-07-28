@@ -5,6 +5,7 @@ import userimg from "../assets/img/icons/user.svg"
 export function StayReviews({ stay }) {
     const [curReview, setCurReview] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const [imgError, setImgError] = useState({})
 
     let reviews = stay.reviews ? stay.reviews :
         [
@@ -66,17 +67,21 @@ export function StayReviews({ stay }) {
         const date = new Date(dateStr)
         const options = { month: 'long', day: 'numeric' }
         const formattedDate = date.toLocaleDateString('en-US', options)
-        
+
         return formattedDate
     }
 
-    const onShowReview = (review) => {
+    function onShowReview(review) {
         setCurReview(review)
         setShowModal(true)
     }
 
-    const onCloseModal = () => {
+    function onCloseModal() {
         setShowModal(false)
+    }
+
+    function handleImageError(id) {
+        setImgError(prev => ({ ...prev, [id]: true }))
     }
 
     return (
@@ -86,11 +91,15 @@ export function StayReviews({ stay }) {
                 {reviews.map((review, index) => (
                     <div key={index} className="review">
                         <section className="review-user-info">
-                            <img
-                                src={review.by.imgUrl}
-                                alt={review.by.fullname}
-                                onError={(e) => e.target.src = userimg}
-                            />
+                            {imgError[review.by._id] ? (
+                                <div className="div-user-img">{review.by.fullname.charAt(0)}</div>
+                            ) : (
+                                <img
+                                    src={review.by.imgUrl}
+                                    alt={review.by.fullname}
+                                    onError={() => handleImageError(review.by._id)}
+                                />
+                            )}
                             <section>
                                 <p>{review.by.fullname}</p>
                                 <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
@@ -110,11 +119,15 @@ export function StayReviews({ stay }) {
                 <div className="stay-reviews-modal">
                     <span className="stay-reviews-modal-close" onClick={onCloseModal}>&times;</span>
                     <section className="review-user-info">
-                        <img
-                            src={curReview.by.imgUrl}
-                            alt={curReview.by.fullname}
-                            onError={(e) => e.target.src = userimg}
-                        />
+                        {imgError[curReview.by._id] ? (
+                            <div className="div-user-img">{curReview.by.fullname.charAt(0)}</div>
+                        ) : (
+                            <img
+                                src={curReview.by.imgUrl}
+                                alt={curReview.by.fullname}
+                                onError={() => handleImageError(curReview.by._id)}
+                            />
+                        )}
                         <section>
                             <p>{curReview.by.fullname}</p>
                             <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
