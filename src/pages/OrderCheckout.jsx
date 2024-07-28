@@ -47,10 +47,10 @@ export function OrderCheckout() {
                     fullname: stay.host.fullname,
                     imgUrl: stay.host.pictureUrl
                 },
-                // guest: { 
-                //     _id: userService.getLoggedinUser()._id,
-                //     fullname: userService.getLoggedinUser().fullname,
-                // },
+                guest: { 
+                    _id: userService.getLoggedinUser()._id,
+                    fullname: userService.getLoggedinUser().fullname,
+                },
                 msgs: [],
 			    status: 'pending' 
             }))
