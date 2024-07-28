@@ -200,3 +200,7 @@ export function getParams(obj) {
 export function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export function removeSpaces(str) {
+    return str.replace(/ /g, ''); // Removes all space characters from the string
+}

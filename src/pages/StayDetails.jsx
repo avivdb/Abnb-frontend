@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { orderService } from "../services/order"
 
 
-import { getRandomIntInclusive, calculateNights } from '../services/util.service.js'
+import { getRandomIntInclusive, calculateNights, removeSpaces } from '../services/util.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
@@ -153,7 +153,7 @@ const closeModal = () => {
               {stay.amenities.slice(0, 10).map((amenity, index) => (
                 <div className="amenity" key={index}>
                   <img
-                    src={`../src/assets/img/icons/${amenity}.svg`}
+                    src={`../src/assets/img/icons/${removeSpaces(amenity)}.svg`}
                     alt={`${amenity} icon`}
                     className="icon"
                   />
