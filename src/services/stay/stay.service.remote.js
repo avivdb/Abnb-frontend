@@ -25,6 +25,7 @@ async function save(stay) {
     if (stay._id) {
         savedStay = await httpService.put(`stay/${stay._id}`, stay)
     } else {
+        console.log('stay-in service:', stay)
         savedStay = await httpService.post('stay', stay)
     }
     return savedStay

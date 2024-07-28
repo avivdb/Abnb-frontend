@@ -111,7 +111,8 @@ export function StayDetails() {
             <hr />
 
             <div className='stay-details-host'>
-              <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png" />
+              {/* <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png" /> */}
+              <img src={stay.host.pictureUrl} />
               <section>
                 <h3>Hosted by {stay.host.fullname}</h3>
                 <p>{getRandomIntInclusive(2, 12)} years hosting</p>

@@ -69,10 +69,8 @@ export function StayEdit({ setEditModal }) {
             ],
             host: {
                 _id: userService.getLoggedinUser()._id,
-                    // fullname: userService.getLoggedinUser().fullname,
-                // "_id": makeId(),
-                "fullname": stayToEdit.fullname,
-                "imgUrl": userService.getLoggedinUser().imgUrl
+                fullname: userService.getLoggedinUser().fullname,
+                pictureUrl: userService.getLoggedinUser().imgUrl
             },
             rating: 4.9,
             bedrooms: [{ beds: 1 }],
