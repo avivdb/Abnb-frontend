@@ -35,7 +35,8 @@ export function StayDetails() {
 
   useEffect(() => {
     loadStay(stayId)
-  }, [stayId])
+    console.log('searchparams', searchParams)
+  }, [stayId, searchParams])
 
   useEffect(() => {
     handleScroll()
@@ -49,6 +50,7 @@ export function StayDetails() {
   }, [])
 
   function handleReserve() {
+    console.log('handleReserve called');
     const params = new URLSearchParams({
       startDate: orderToEdit.startDate,
       endDate: orderToEdit.endDate,
@@ -64,7 +66,7 @@ export function StayDetails() {
       top: 0,
       behavior: 'instant'
     });
-
+    console.log('Navigating with params:', params);
     navigate(`/stay/${stay._id}/checkout?${params}`)
   }
 
@@ -182,7 +184,7 @@ export function StayDetails() {
         <h2 id="location" className="google-map-title">Where you'll be</h2>
         <section className='google-map'>
           {console.log('stay', stay)}
-          <GoogleMap stays={[stay]} mapHeight={"400px"} mapBorderRadius={"10px"}/>
+          <GoogleMap stays={[stay]} mapHeight={"400px"} mapBorderRadius={"10px"} />
           <p>{stay.loc.city}, {stay.loc.country}</p>
         </section>
 
