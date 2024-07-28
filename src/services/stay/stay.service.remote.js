@@ -5,7 +5,7 @@ export const stayService = {
     getById,
     save,
     remove,
-    getDefaultFilter
+    getDefaultFilter,
     // addStayMsg
 }
 
@@ -43,6 +43,7 @@ function getDefaultFilter() {
 
     }
 }
+
 
 // async function addStayMsg(stayId, txt) {
 //     const savedMsg = await httpService.post(`stay/${stayId}/msg`, { txt })

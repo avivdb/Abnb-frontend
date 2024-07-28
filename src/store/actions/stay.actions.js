@@ -6,7 +6,7 @@ import { SET_IS_LOADING } from '../reducers/system.reducer'
 export async function loadStays() {
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
     const filterBy = store.getState().stayModule.filterBy
-    // console.log('filterBy', filterBy)
+    console.log('filterBy', filterBy)
 
     try {
         const stays = await stayService.query(filterBy)
