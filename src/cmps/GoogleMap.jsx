@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import StayPreviewMap from './StayPreviewMap';
 import iconHouse from '../assets/img/icons/house.svg';
-import iconTransparent from '../assets/img/icons/transparent.svg'
+import iconTransparent from '../assets/img/icons/transparent.svg';
+import axios from "axios";
 
 const mapStyle = [
     // Your map style configuration here
@@ -12,42 +13,62 @@ const mapStyle = [
 
 export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
     const location = useLocation();
-    const initialCoords = stays[0] ? { lat: stays[0].loc.lat, lng: stays[0].loc.lan } : { lat: 32.109333, lng: 34.855499 };
-    const [coords, setCoords] = useState(initialCoords);
     const mapRef = useRef(null);
     const googleMapRef = useRef(null);
     const markersRef = useRef([]);
-    const zoom = 9;
     const infoWindowRef = useRef(null);
 
     useEffect(() => {
-        setCoords(initialCoords);
-    }, [stays]);
+        const fetchAllCoords = async () => {
+            const updatedStays = await Promise.all(stays.map(async (stay) => {
+                const address = stay.loc.address ? stay.loc.address : `${stay.loc.city}, ${stay.loc.country}`;
+                const geocodeData = await fetchCoordsFromAddress(address);
+                if (geocodeData) {
+                    stay.loc.lat = geocodeData.lat;
+                    stay.loc.lan = geocodeData.lng;
+                }
+                return stay;
+            }));
+            return updatedStays;
+        };
 
-    useEffect(() => {
-        const loader = new Loader({
-            apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
-            version: "weekly",
-            libraries: ["places"],
-        });
+        const initializeMap = async () => {
+            const loader = new Loader({
+                apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
+                version: "weekly",
+                libraries: ["places"],
+            });
 
-        loader.load().then(() => {
+            await loader.load();
+
             if (!googleMapRef.current) {
                 googleMapRef.current = new window.google.maps.Map(mapRef.current, {
-                    center: coords,
-                    zoom: zoom,
+                    center: { lat: 32.109333, lng: 34.855499 }, // Default center
+                    zoom: 9,
                     styles: mapStyle,
                 });
-            } else {
-                googleMapRef.current.setCenter(coords);
             }
+
+            const updatedStays = await fetchAllCoords();
 
             // Clear existing markers
             markersRef.current.forEach(marker => marker.setMap(null));
             markersRef.current = [];
 
+            // Set new center and zoom based on the first stay
+            if (updatedStays.length > 0) {
+                const firstStay = updatedStays[0];
+                googleMapRef.current.setCenter({ lat: firstStay.loc.lat, lng: firstStay.loc.lan });
+
+                // Calculate zoom level to show only 10% of the markers
+                const totalMarkers = updatedStays.length;
+                const markersToShow = Math.ceil(totalMarkers * 1);
+                const zoomLevel = calculateZoomLevel(markersToShow);
+                googleMapRef.current.setZoom(zoomLevel);
+            }
+
             // Add new markers
-            stays.forEach((stay, index) => {
+            updatedStays.forEach((stay, index) => {
                 const marker = new window.google.maps.Marker({
                     position: { lat: stay.loc.lat, lng: stay.loc.lan },
                     map: googleMapRef.current,
@@ -76,6 +97,7 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
                 if (location.pathname.startsWith('/s/')) {
                     marker.addListener('click', () => {
                         const contentElement = document.createElement('div');
+                        contentElement.className = 'stay-preview-map'; // Add a custom class
                         const root = createRoot(contentElement); // create a root
                         root.render(<StayPreviewMap stay={stay} />);
 
@@ -90,10 +112,36 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
 
                 markersRef.current.push(marker);
             });
-        }).catch(e => {
-            console.error('Error loading Google Maps API:', e);
-        });
-    }, [coords, stays, zoom, location.pathname]);
+        };
+
+        initializeMap();
+    }, [stays, location.pathname]);
+
+    async function fetchCoordsFromAddress(address) {
+        try {
+            const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    address: address,
+                    key: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
+                }
+            });
+            if (response.data.status === 'OK') {
+                return response.data.results[0].geometry.location;
+            } else {
+                console.error('Geocoding error:', response.data.status);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error fetching geocoding data:', error);
+            return null;
+        }
+    }
+
+    function calculateZoomLevel(markersToShow) {
+        // Adjust this function to set the desired zoom level based on the number of markers to show
+        // For simplicity, we're returning a static value
+        return 12; // Adjust this value as needed to control the zoom level
+    }
 
     return (
         <div style={{ height: mapHeight, width: '100%', overflow: "none", borderRadius: mapBorderRadius }} ref={mapRef}></div>
