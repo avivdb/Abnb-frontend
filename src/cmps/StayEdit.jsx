@@ -30,8 +30,8 @@ export function StayEdit({ setEditModal }) {
             loc: {
                 city: stayToEdit.city,
                 country: stayToEdit.country,
-                "lat": 36.3932,
-                "lan": 25.4615
+                lat: 31.771959,
+                lan: 35.217018
             },
             price: stayToEdit.price,
             imgUrls: [

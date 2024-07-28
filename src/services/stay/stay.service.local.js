@@ -78,7 +78,9 @@ async function save(stay) {
             name: stay.name,
             loc: {
                 city: stay.city,
-                country: stay.country
+                country: stay.country,
+                lat: 31.771959,
+                lan: 35.217018
             },
             price: stay.price,
             imgUrls: [
