@@ -5,7 +5,7 @@ export const stayService = {
     getById,
     save,
     remove,
-    getDefaultFilter
+    getDefaultFilter,
     // addStayMsg
 }
 
@@ -25,6 +25,7 @@ async function save(stay) {
     if (stay._id) {
         savedStay = await httpService.put(`stay/${stay._id}`, stay)
     } else {
+        console.log('stay-in service:', stay)
         savedStay = await httpService.post('stay', stay)
     }
     return savedStay
@@ -35,7 +36,7 @@ function getDefaultFilter() {
         txt: '',
         checkIn: '',
         checkOut: '',
-        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        // guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
         label: '',
         type: '',
         minPrice: 40,
@@ -43,6 +44,7 @@ function getDefaultFilter() {
 
     }
 }
+
 
 // async function addStayMsg(stayId, txt) {
 //     const savedMsg = await httpService.post(`stay/${stayId}/msg`, { txt })

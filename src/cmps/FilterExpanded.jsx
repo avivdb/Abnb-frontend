@@ -15,24 +15,6 @@ export function FilterExpanded({ setClass }) {
     const [filterToEdit, setFilterToEdit] = useState({ ...filterBy })
     const [activeModal, setActiveModal] = useState(null)
     const navigate = useNavigate()
-    const isFirstRender = useRef(true);
-    const defaultFilter = useRef(getParams({ txt: '', checkIn: '', checkOut: '', adult: '', chidren: '', infant: '', pet: '', capacity: '', label: '' }));
-
-
-
-    // useEffect(() => {
-
-    //     if (isFirstRender.current) {
-    //         isFirstRender.current = false;
-    //         return;
-    //     }
-
-    //     const params = getParams(filterBy);
-    //     if (params && params !== defaultFilter.current) {
-    //         // navigate(`/s/${params}`);
-    //     }
-
-    // }, [filterBy, navigate]);
 
     useEffect(() => {
         const handleScroll = () => {

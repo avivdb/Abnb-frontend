@@ -17,7 +17,7 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
     const mapRef = useRef(null);
     const googleMapRef = useRef(null);
     const markersRef = useRef([]);
-    const zoom = 11;
+    const zoom = 9;
     const infoWindowRef = useRef(null);
 
     useEffect(() => {

@@ -35,7 +35,8 @@ export function StayDetails() {
 
   useEffect(() => {
     loadStay(stayId)
-  }, [stayId])
+    console.log('searchparams', searchParams)
+  }, [stayId, searchParams])
 
   useEffect(() => {
     handleScroll()
@@ -49,6 +50,7 @@ export function StayDetails() {
   }, [])
 
   function handleReserve() {
+    console.log('handleReserve called');
     const params = new URLSearchParams({
       startDate: orderToEdit.startDate,
       endDate: orderToEdit.endDate,
@@ -64,7 +66,7 @@ export function StayDetails() {
       top: 0,
       behavior: 'instant'
     });
-
+    console.log('Navigating with params:', params);
     navigate(`/stay/${stay._id}/checkout?${params}`)
   }
 
@@ -115,7 +117,8 @@ export function StayDetails() {
             <hr />
 
             <div className='stay-details-host'>
-              <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png" />
+              {/* <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png" /> */}
+              <img src={stay.host.pictureUrl} />
               <section>
                 <h3>Hosted by {stay.host.fullname}</h3>
                 <p>{getRandomIntInclusive(2, 12)} years hosting</p>
