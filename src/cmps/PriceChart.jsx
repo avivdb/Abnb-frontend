@@ -13,7 +13,7 @@ const PriceChart = () => {
     const prices = stays.map(stay => stay.price)
 
     useEffect(() => {
-        loadStays(filterBy)
+        loadStays(filterBy, 0, false)
     }, [filterBy])
 
     const data = {

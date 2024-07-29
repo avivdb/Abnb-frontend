@@ -9,7 +9,7 @@ export function SearchPage() {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
     useEffect(() => {
-        loadStays(filterBy, 0)
+        loadStays(filterBy, 0, true)
     }, [filterBy])
 
     return (

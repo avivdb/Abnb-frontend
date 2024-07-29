@@ -63,10 +63,6 @@ export function getRandomDistance() {
 }
 
 export function getDistanceBetweenLocations(lat1, lon1, lat2, lon2) {
-    console.log('lat1', lat1)
-    console.log('lon1', lon1)
-    console.log('lat2', lat2)
-    console.log('lon2', lon2)
     const R = 6371;
     const dLat = toRadians(lat2 - lat1)
     const dLon = toRadians(lon2 - lon1)

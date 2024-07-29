@@ -5,13 +5,14 @@ export const stayService = {
     getById,
     save,
     remove,
-    getDefaultFilter
+    getDefaultFilter,
 };
 
-async function query(filterBy = getDefaultFilter(), page = 0) {
-    const params = { ...filterBy, page };
+async function query(filterBy = getDefaultFilter(), page = 0, paginate = true) {
+    const params = { ...filterBy, page, paginate };
     return httpService.get('stay', params);
 }
+
 
 function getById(stayId) {
     return httpService.get(`stay/${stayId}`);
