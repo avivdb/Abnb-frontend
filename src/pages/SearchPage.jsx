@@ -9,13 +9,19 @@ export function SearchPage() {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
     useEffect(() => {
-        loadStays(filterBy)
+        loadStays(filterBy, 0)
     }, [filterBy])
 
     return (
         <section className="search-page">
-            <StayList stays={stays} />
-            <GoogleMap stays={stays} mapBorderRadius={0} mapHeight={"100vh"} />
+            <section className="searc-page-list">
+
+                <StayList stays={stays} />
+            </section>
+            <section className="search-page-map">
+
+                <GoogleMap stays={stays} mapBorderRadius={0} mapHeight={"100vh"} />
+            </section>
         </section>
     )
 }

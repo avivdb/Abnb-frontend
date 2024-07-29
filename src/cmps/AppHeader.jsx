@@ -60,9 +60,10 @@ export function AppHeader() {
 				<h1>bnb</h1>
 			</NavLink>
 
-			<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`} >Stays</h1>
-			<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
-			<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+			{location.pathname === ('/') && <h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`} >Stays</h1>}
+			{location.pathname === ('/') && <FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />}
+			{location.pathname === ('/') && <FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />}
+			{location.pathname !== ('/') && <FilterFocused setClass={`filter-focused visible`} handleFilterClick={handleFilterClick} />}
 
 			<section className="header-user">
 				<Link to={`stay/edit`}>

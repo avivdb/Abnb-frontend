@@ -9,8 +9,8 @@
 
   background-color: $clr12;
   text-align: center;
-  margin-block-start: 1rem;
-  margin-block-end: 0.7rem;
+  // margin-block: 1rem;
+  margin-block: 0.5rem;
 
   &::after {
     content: "";
@@ -40,15 +40,15 @@
       z-index: 1;
     }
 
-    &::before {
-      right: 0;
-      background-image: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
-    }
+    // &::before {
+    //   right: 0;
+    //   background-image: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
+    // }
 
-    &::after {
-      left: 0;
-      background-image: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
-    }
+    // &::after {
+    //   left: 0;
+    //   background-image: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+    // }
 
     .label {
       position: relative;
