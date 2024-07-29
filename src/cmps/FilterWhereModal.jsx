@@ -8,7 +8,7 @@ import image5 from '../assets/img/icons/asset5.webp';
 import { useEffect, useState } from "react";
 import iconLocation from '../assets/img/icons/location-2952.svg';
 
-export function FilterWhereModal({ filterToEdit, setFilterToEdit }) {
+export function FilterWhereModal({ filterToEdit, setFilterToEdit, setActiveModal }) {
 
     const [predictions, setPredictions] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
@@ -40,6 +40,7 @@ export function FilterWhereModal({ filterToEdit, setFilterToEdit }) {
         }
 
         setFilterToEdit({ ...filterToEdit, txt: searchText });
+        setActiveModal("checkIn")
         setRecentSearches(prev => {
             const updatedSearches = [searchText, ...prev.filter(item => item !== searchText)].slice(0, 5);
             localStorage.setItem('recentSearches', JSON.stringify(updatedSearches));

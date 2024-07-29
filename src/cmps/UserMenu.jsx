@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import { logout } from '../store/actions/user.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function UserMenu({ setUserMenu, user }) {
     const menuRef = useRef(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -24,9 +25,9 @@ export function UserMenu({ setUserMenu, user }) {
         try {
             await logout()
             navigate('/')
-            showSuccessMsg(`Bye now`)
+            // showSuccessMsg(`Bye now`)
         } catch (err) {
-            showErrorMsg('Cannot logout')
+            // showErrorMsg('Cannot logout')
         }
     }
 

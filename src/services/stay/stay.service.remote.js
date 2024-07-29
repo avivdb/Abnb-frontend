@@ -43,3 +43,4 @@ function getDefaultFilter() {
         maxPrice: 200000
     };
 }
+

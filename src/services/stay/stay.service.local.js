@@ -78,7 +78,9 @@ async function save(stay) {
             name: stay.name,
             loc: {
                 city: stay.city,
-                country: stay.country
+                country: stay.country,
+                lat: 31.771959,
+                lan: 35.217018
             },
             price: stay.price,
             imgUrls: [
@@ -115,9 +117,9 @@ async function save(stay) {
                 "Tropical"
             ],
             host: {
-                "_id": makeId(),
-                "fullname": stay.fullname,
-                "imgUrl": ""
+                "_id": userService.getLoggedinUser()._id,
+                "fullname": userService.getLoggedinUser().fullname,
+                "pictureUrl": userService.getLoggedinUser().imgUrl
             },
             rating: 4.9,
             bedrooms: [{ beds: 1 }],
@@ -219,7 +221,7 @@ function _createStays() {
                 "host": {
                     "_id": "u101",
                     "fullname": "Davit Pok",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "Portugal",
@@ -275,7 +277,7 @@ function _createStays() {
                 "host": {
                     "_id": "u102",
                     "fullname": "Maria Sanchez",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "United States",
@@ -328,7 +330,7 @@ function _createStays() {
                 "host": {
                     "_id": "u103",
                     "fullname": "Hans Müller",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "Switzerland",
@@ -384,7 +386,7 @@ function _createStays() {
                 "host": {
                     "_id": "u104",
                     "fullname": "Sophie Dubois",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "France",
@@ -441,7 +443,7 @@ function _createStays() {
                 "host": {
                     "_id": "u105",
                     "fullname": "Nikos Papadopoulos",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "Greece",
@@ -495,7 +497,7 @@ function _createStays() {
                 "host": {
                     "_id": "u106",
                     "fullname": "Emily Johnson",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "United States",
@@ -549,7 +551,7 @@ function _createStays() {
                 "host": {
                     "_id": "u107",
                     "fullname": "Sophie Williams",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "New Zealand",
@@ -603,7 +605,7 @@ function _createStays() {
                 "host": {
                     "_id": "u108",
                     "fullname": "Daniel Levi",
-                    "imgUrl": ""
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
                 },
                 "loc": {
                     "country": "Israel",

@@ -21,6 +21,10 @@ export function StayList() {
     // Remove duplicates based on _id
     const uniqueStays = [...new Map(stays.map(stay => [stay._id, stay])).values()]
 
+    if (stays === null || stays === undefined || stays.length === 0) {
+        return <div className="loader"></div>
+    }
+
     return (
         <InfiniteScroll
             dataLength={uniqueStays.length}

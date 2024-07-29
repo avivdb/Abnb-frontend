@@ -17,7 +17,6 @@
 @import "pages/AboutUs";
 @import "pages/HomePage";
 @import "pages/StayIndex";
-@import "pages/ReviewIndex";
 @import "pages/UserDetails";
 @import "pages/TaskDetails";
 @import "pages/LoginSignup";
@@ -43,8 +42,6 @@
 @import "cmps/FilterPriceRange.scss";
 
 @import "cmps/ReviewEdit";
-@import "cmps/ReviewList";
-@import "cmps/ReviewPreview";
 @import "cmps/StayList";
 @import "cmps/StayPreview";
 @import "cmps/ImgCarousel";
@@ -67,5 +64,8 @@
 @import "cmps/GoogleMap.scss";
 @import "cmps/ModalComponent.css";
 @import "cmps/PriceChart.css";
+@import "cmps/LoadingDiv.scss";
+@import "cmps/ReservedSuccessfullyModal.scss";
 
-// @import "cmps/AbnbGradientBtn.scss";
+
+

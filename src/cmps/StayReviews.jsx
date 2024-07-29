@@ -5,6 +5,22 @@ import userimg from "../assets/img/icons/user.svg"
 export function StayReviews({ stay }) {
     const [curReview, setCurReview] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const [visibleReviews, setVisibleReviews] = useState(6);
+
+    const imgUrls = [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStvtniRWswauECJGmrYfc4xt4Ifer55q_J6w&s",
+        "https://upload.wikimedia.org/wikipedia/en/e/ea/Mike_Ehrmantraut_BCS_S3.png",
+        "https://upload.wikimedia.org/wikipedia/en/c/c6/Jesse_Pinkman_S5B.png",
+        "https://www.indiewire.com/wp-content/uploads/2019/07/BreakingBad_Hank.png",
+        "https://plus.unsplash.com/premium_photo-1689551670902-19b441a6afde?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww",
+        "https://static.boredpanda.com/blog/wp-content/uploads/2017/04/JAY_0572-2-2-58f798a00c4da__880.jpg",
+        "https://pbs.twimg.com/media/D8dDZukXUAAXLdY.jpg",
+        "https://www.ellwoodcityledger.com/gcdn/presto/2022/05/04/NECL/31766c5e-852f-49d9-aab0-38f7a7d18b39-ezgif-4-7526b52a77.jpg?width=1200&disable=upscale&format=pjpg&auto=webp",
+        "https://i.dailymail.co.uk/i/pix/2013/08/29/article-2405475-1B8389EE000005DC-718_634x550.jpg",
+        "https://xsgames.co/randomusers/assets/avatars/male/74.jpg",
+        "https://img.freepik.com/free-photo/front-view-smiley-woman-with-earbuds_23-2148613052.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGa8nbA4_Y8eEKDf7xiwty91QSKdjt77_UwQ&s"
+    ]
 
     let reviews = stay.reviews ? stay.reviews :
         [
@@ -66,7 +82,7 @@ export function StayReviews({ stay }) {
         const date = new Date(dateStr)
         const options = { month: 'long', day: 'numeric' }
         const formattedDate = date.toLocaleDateString('en-US', options)
-        
+
         return formattedDate
     }
 
@@ -79,17 +95,22 @@ export function StayReviews({ stay }) {
         setShowModal(false)
     }
 
+
+    const handleShowMore = () => {
+        visibleReviews === reviews.length ? setVisibleReviews(6) : setVisibleReviews(reviews.length)
+    }
+
     return (
         <section className="stay-reviews">
             <h2 className="stay-reviews-title">&#9733; {stay.rating} · {reviews.length} reviews</h2>
             <section className="stay-reviews-list">
-                {reviews.map((review, index) => (
+                {reviews.slice(0, visibleReviews).map((review, index) => (
                     <div key={index} className="review">
                         <section className="review-user-info">
                             <img
                                 src={review.by.imgUrl}
                                 alt={review.by.fullname}
-                                onError={(e) => e.target.src = userimg}
+                                onError={(e) => e.target.src = imgUrls[getRandomIntInclusive(0, imgUrls.length)]}
                             />
                             <section>
                                 <p>{review.by.fullname}</p>
@@ -106,6 +127,11 @@ export function StayReviews({ stay }) {
                     </div>
                 ))}
             </section>
+            {/* {visibleReviews < reviews.length && ( */}
+            <button className="show-all-reviews-btn" onClick={handleShowMore}>
+                {visibleReviews === reviews.length ? `Show less` : `Show all ${reviews.length} reviews`}
+            </button>
+            {/* )} */}
             {showModal && (
                 <div className="stay-reviews-modal">
                     <span className="stay-reviews-modal-close" onClick={onCloseModal}>&times;</span>
@@ -113,7 +139,7 @@ export function StayReviews({ stay }) {
                         <img
                             src={curReview.by.imgUrl}
                             alt={curReview.by.fullname}
-                            onError={(e) => e.target.src = userimg}
+                            onError={(e) => e.target.src = imgUrls[getRandomIntInclusive(0, imgUrls.length)]}
                         />
                         <section>
                             <p>{curReview.by.fullname}</p>
@@ -129,5 +155,5 @@ export function StayReviews({ stay }) {
                 </div>
             )}
         </section>
-    )
+    );
 }
