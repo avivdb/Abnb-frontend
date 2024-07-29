@@ -38,5 +38,5 @@ export default function StayPreviewMap({ stay }) {
                 </section>
             </section>
         </article>
-    );
+    )
 }

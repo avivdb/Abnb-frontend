@@ -105,9 +105,9 @@
   max-width: 300px;
 
   .stay-preview-top {
-     h2 {
+    h2 {
       font-size: 1rem;
-     }
+    }
 
   }
 
@@ -162,4 +162,14 @@ button.gm-ui-hover-effect {
 .gm-style-iw-c {
   padding: 0 !important;
   overflow: hidden !important;
+}
+
+.gm-style {
+  &>*:first-child {
+    &>*:first-child {
+      filter: grayscale(52%) sepia(4%) brightness(110%) hue-rotate(332deg) saturate(193%) contrast(112%) invert(6%);
+      -webkit-filter: grayscale(52%) sepia(4%) brightness(110%) hue-rotate(332deg) saturate(193%) contrast(112%) invert(6%);
+      -moz-filter: grayscale(52%) sepia(4%) brightness(110%) hue-rotate(332deg) saturate(193%) contrast(112%) invert(6%);
+    }
+  }
 }

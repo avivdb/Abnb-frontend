@@ -12,7 +12,7 @@ export function AppFooter() {
 
 			{import.meta.env.VITE_LOCAL ?
 				<span className="local-services">Local Services</span> :
-				<span className="remote-services">Remote Services</span>}
+				<span className="remote-services"></span>}
 
 			<section className="footer-app-settings">
 				<p><img src={globe} />English (US)</p>
