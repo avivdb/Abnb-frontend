@@ -141,6 +141,9 @@ export function FilterLabel() {
     const [currentPage, setCurrentPage] = useState(0)
     const [itemsPerPage, setItemsPerPage] = useState(10)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [selectedLabel, setSelectedlabel] = useState(null)
+
+
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -182,6 +185,7 @@ export function FilterLabel() {
     } else currentItems = icons.slice(startIndex, endIndex)
 
     function handleChange(label) {
+        setSelectedlabel(label)
         setFilterBy({ ...filterBy, label: label })
         const params = getParams(filterBy)
         console.log('params', params)
@@ -200,7 +204,7 @@ export function FilterLabel() {
         <section className="filter-label full">
             <ul className="label-list">
                 {currentItems.map((icon, index) => (
-                    <li className="label" key={index} onClick={() => handleChange(icon.label)}>
+                    <li className={`label ${selectedLabel === icon.label ? "selected" : ""}`} key={index} onClick={() => handleChange(icon.label)}>
                         <img className="label-img" src={icon.src} alt={icon.label} />
                         <p className="label-name">{icon.label}</p>
                     </li>

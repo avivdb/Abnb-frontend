@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 
 import { stayService } from "../services/stay/stay.service.local";
-import { formatDateRange, getDateTwoWeeksBefore } from '../services/util.service.js'
+import { formatDate, formatDateRange, getDateTwoWeeksBefore, calculateNights } from '../services/util.service.js'
 
 import { CountrySelectModal } from "../cmps/CountrySelectModal";
 import { CheckoutStayModal } from "../cmps/CheckoutStayModal";
@@ -17,11 +17,15 @@ import "../assets/styles/cmps/AbnbGradientBtn.scss";
 import { AbnbGradientBtn } from "../cmps/AbnbGradientBtn";
 
 import { loadStay } from "../store/actions/stay.actions";
+import { ReservedSuccessfullyModal } from "../cmps/ReservedSuccessfullyModal.jsx";
 import { userService } from "../services/user";
 
 export function OrderCheckout() {
     const [countryModal, setCountryModal] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState(null)
+    const [reservedModal, setReservedModal] = useState(false)
+
+
     const { stayId } = useParams()
     const [searchParams] = useSearchParams()
     const [order, setOrder] = useState(orderService.getOrderToEditFromSearchParams(searchParams))
@@ -68,10 +72,16 @@ export function OrderCheckout() {
         try {
             await addOrder(order);
             showSuccessMsg('Order added');
-            navigate('/stay/trips');
+            setReservedModal(true)
+            // navigate('/stay/trips');
         } catch (err) {
             showErrorMsg('Cannot add order');
         }
+    }
+
+    function onCloseReservedModal() {
+        navigate('/stay/trips')
+        setReservedModal(false)
     }
 
     return (
@@ -142,6 +152,8 @@ export function OrderCheckout() {
             <div className="checkout-stay-modal-container">
                 <CheckoutStayModal stay={stay} order={order} />
             </div>
+
+            {reservedModal && <ReservedSuccessfullyModal order={order} stay={stay} onCloseReservedModal={onCloseReservedModal} />}
         </section>
     );
 }

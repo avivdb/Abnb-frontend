@@ -6,6 +6,7 @@ export function StayReviews({ stay }) {
     const [curReview, setCurReview] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [imgError, setImgError] = useState({})
+    const [visibleReviews, setVisibleReviews] = useState(6);
 
     let reviews = stay.reviews ? stay.reviews :
         [
@@ -68,6 +69,7 @@ export function StayReviews({ stay }) {
         const options = { month: 'long', day: 'numeric' }
         const formattedDate = date.toLocaleDateString('en-US', options)
 
+
         return formattedDate
     }
 
@@ -84,11 +86,16 @@ export function StayReviews({ stay }) {
         setImgError(prev => ({ ...prev, [id]: true }))
     }
 
+
+    const handleShowMore = () => {
+        visibleReviews === reviews.length ? setVisibleReviews(6) : setVisibleReviews(reviews.length)
+    }
+
     return (
         <section className="stay-reviews">
             <h2 className="stay-reviews-title">&#9733; {stay.rating} · {reviews.length} reviews</h2>
             <section className="stay-reviews-list">
-                {reviews.map((review, index) => (
+                {reviews.slice(0, visibleReviews).map((review, index) => (
                     <div key={index} className="review">
                         <section className="review-user-info">
                             {imgError[review.by._id] ? (
@@ -115,6 +122,11 @@ export function StayReviews({ stay }) {
                     </div>
                 ))}
             </section>
+            {/* {visibleReviews < reviews.length && ( */}
+            <button className="show-all-reviews-btn" onClick={handleShowMore}>
+                {visibleReviews === reviews.length ? `Show less` : `Show all ${reviews.length} reviews`}
+            </button>
+            {/* )} */}
             {showModal && (
                 <div className="stay-reviews-modal">
                     <span className="stay-reviews-modal-close" onClick={onCloseModal}>&times;</span>
@@ -142,5 +154,5 @@ export function StayReviews({ stay }) {
                 </div>
             )}
         </section>
-    )
+    );
 }

@@ -31,24 +31,24 @@ function getEmptyStay() {
     }
 }
 
-// function getDefaultFilter() {
-//     return {
-//         txt: '',
-//         checkIn: '',
-//         checkOut: '',
-//         guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
-//         label: '',
-//         type: '',
-//         minPrice: 40,
-//         maxPrice: 13000,
+function getDefaultFilter() {
+    return {
+        txt: '',
+        checkIn: '',
+        checkOut: '',
+        guest: { adult: 0, chidren: 0, infant: 0, pet: 0, capacity: 0 },
+        label: '',
+        type: '',
+        minPrice: 0,
+        maxPrice: 200000,
 
-//     }
-// }
+    }
+}
 
 
 const service = VITE_LOCAL === 'true' ? local : remote
-export const stayService = { getEmptyStay, ...service }
-// export const stayService = { getEmptyStay, getDefaultFilter, ...service }
+// export const stayService = { getEmptyStay, ...service }
+export const stayService = { getEmptyStay, getDefaultFilter, ...service }
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local

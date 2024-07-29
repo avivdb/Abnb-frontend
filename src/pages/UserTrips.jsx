@@ -36,6 +36,12 @@ export function UserTrips() {
     }, [])
 
 
+    if (stays === null || stays === undefined || stays.length === 0 ||
+        orders === null || orders === undefined || orders.length === 0) {
+        return <div className="loader"></div>
+    }
+
+
     return (
         <section className="user-trips">
             <h2>Trips</h2>
@@ -52,8 +58,8 @@ export function UserTrips() {
                                             backgroundColor: order.status === 'approved'
                                                 ? '#c8e6c9'
                                                 : order.status === 'declined'
-                                                ? '#ef9a9a'
-                                                : '#fff'
+                                                    ? '#ef9a9a'
+                                                    : '#fff'
                                         }}>
                                         {capitalize(order.status)}</div>
                                     <img src={stay.imgUrls[0]} alt={stay.name} />

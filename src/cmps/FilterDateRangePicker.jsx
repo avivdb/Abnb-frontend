@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/cmps/DateRangePicker.scss';
 import dayjs from 'dayjs';
 
-export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit }) {
+export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, setActiveModal }) {
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
 
@@ -14,15 +14,18 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit })
         console.log('endDate:', endDate)
     }, [startDate, endDate])
 
-    const handleSelect = (dates) => {
+    function handleSelect(dates) {
         const [start, end] = dates
+
         setStartDate(start)
+        if(start !== null) setActiveModal("checkOut")
+
         setEndDate(end)
         setFilterToEdit({ ...filterToEdit, checkIn: start, checkOut: end })
         console.log('startDate', startDate)
         console.log('endDate', endDate)
         console.log(filterToEdit)
-
+        if(end !== null) setActiveModal("guest")
     };
 
     return (

@@ -1,4 +1,5 @@
 import close from "../assets/img/icons/close.png"
+import { removeSpaces } from "../services/util.service"
 
 export function AmenitiesModal({ setAmenitiesModal, amenities }) {
 
@@ -9,9 +10,11 @@ export function AmenitiesModal({ setAmenitiesModal, amenities }) {
 
     return (
         <div className="amenities-modal">
+            <section className="amenities-modal-header">
             <button onClick={onHideAmenities}>
                 <img src={close} />
             </button>
+            </section>
             <h1>What this place offers</h1>
             <section className="amenities-modal-list">
 
@@ -19,7 +22,7 @@ export function AmenitiesModal({ setAmenitiesModal, amenities }) {
                     <>
                         <div className="amenity" key={index}>
                             <img
-                                src={`../src/assets/img/icons/${amenity}.svg`}
+                                src={`../src/assets/img/icons/${removeSpaces(amenity)}.svg`}
                                 alt={`${amenity} icon`}
                                 className="icon"
                             />

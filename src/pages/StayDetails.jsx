@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { orderService } from "../services/order"
 
 
-import { getRandomIntInclusive, calculateNights } from '../services/util.service.js'
+import { getRandomIntInclusive, calculateNights, removeSpaces } from '../services/util.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
@@ -18,6 +18,7 @@ import { Google } from '@mui/icons-material'
 import { GoogleMap } from '../cmps/GoogleMap.jsx'
 import { StayDetailsHeader } from '../cmps/StayDetailsHeader.jsx'
 import { OrderDateModel } from '../cmps/OrderDateModel.jsx'
+import ModalComponent from '../cmps/ModalComponent.jsx'
 
 export function StayDetails() {
 
@@ -30,7 +31,9 @@ export function StayDetails() {
 
   const [amenitiesModal, setAmenitiesModal] = useState(false)
   const [header, setHeader] = useState(false)
-  const [imgError, setImgError] = useState(false)
+  const [imgError, setImgError] = useState(false)  const [isModalOpen, setIsModalOpen] = useState(false)
+
+
 
 
   useEffect(() => {
@@ -85,6 +88,18 @@ export function StayDetails() {
 
   function handleImageError() {
     setImgError(true)
+  }
+
+  const openModal = () => {
+    setIsModalOpen(true)
+}
+
+const closeModal = () => {
+    setIsModalOpen(false)
+}
+
+  if (!stay) {
+    return <div className="loader"></div>
   }
 
   return (
@@ -149,7 +164,7 @@ export function StayDetails() {
               {stay.amenities.slice(0, 10).map((amenity, index) => (
                 <div className="amenity" key={index}>
                   <img
-                    src={`../src/assets/img/icons/${amenity}.svg`}
+                    src={`../src/assets/img/icons/${removeSpaces(amenity)}.svg`}
                     alt={`${amenity} icon`}
                     className="icon"
                   />

@@ -177,4 +177,19 @@
         }
 
     }
+
+    .show-all-reviews-btn {
+        padding: 1rem;
+        background-color: #fff;
+        border: 1px solid black;
+        border-radius: 10px;
+        color: black;
+        font-size: 1rem;
+        font-family: cereal-medium;
+        margin-block-start: 2rem;
+
+        &:hover {
+        background-color: #f4f4f4;
+        }
+    }
 }
