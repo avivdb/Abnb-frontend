@@ -31,7 +31,8 @@ export function StayDetails() {
 
   const [amenitiesModal, setAmenitiesModal] = useState(false)
   const [header, setHeader] = useState(false)
-  const [imgError, setImgError] = useState(false)  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [imgError, setImgError] = useState(false)  
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
 
 
