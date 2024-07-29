@@ -5,7 +5,7 @@ import heartfull from "../assets/img/icons/heartfull.svg";
 import { stayService } from '../services/stay';
 import { getRandomDate, getRandomDistance } from '../services/util.service.js';
 
-export default function StayPreviewMap({ stay }) {
+export default function StayPreviewMap({ stay, onClick }) {
     const [wishlist, setWishlist] = useState(false);
     const { _id, loc, rating, price } = stay;
 
@@ -18,7 +18,7 @@ export default function StayPreviewMap({ stay }) {
     }
 
     return (
-        <article className="stay-preview">
+        <article className="stay-preview" onClick={onClick} >
             {/* <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
                 <img src={stay.isWishlist ? heartfull : heartempty} />
             </button> */}
