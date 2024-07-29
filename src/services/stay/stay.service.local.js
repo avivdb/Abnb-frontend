@@ -117,9 +117,10 @@ async function save(stay) {
                 "Tropical"
             ],
             host: {
-                "_id": userService.getLoggedinUser()._id,
-                "fullname": userService.getLoggedinUser().fullname,
-                "pictureUrl": userService.getLoggedinUser().imgUrl
+                _id: userService.getLoggedinUser()._id,
+                fullname: userService.getLoggedinUser().fullname,
+                pictureUrl: userService.getLoggedinUser().imgUrl,
+                years: 3
             },
             rating: 4.9,
             bedrooms: [{ beds: 1 }],
@@ -127,6 +128,7 @@ async function save(stay) {
             baths: 2,
             defaultCheckin: "12-08-2024",
             defaultCheckout: "19-08-2024",
+            distance: 10
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
@@ -221,7 +223,8 @@ function _createStays() {
                 "host": {
                     "_id": "u101",
                     "fullname": "Davit Pok",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 5
                 },
                 "loc": {
                     "country": "Portugal",
@@ -238,6 +241,7 @@ function _createStays() {
                 "isWishlist": false,
                 "defaultCheckin": '11-08-2024',
                 "defaultCheckout": '15-08-2024',
+                "distance": 10000
             },
             {
                 "_id": "s102",
@@ -277,7 +281,8 @@ function _createStays() {
                 "host": {
                     "_id": "u102",
                     "fullname": "Maria Sanchez",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 2
                 },
                 "loc": {
                     "country": "United States",
@@ -294,6 +299,7 @@ function _createStays() {
                 "isWishlist": false,
                 "defaultCheckin": '12-08-2024',
                 "defaultCheckout": '17-08-2024',
+                "distance": 9234
             },
             {
                 "_id": "s103",
@@ -330,7 +336,8 @@ function _createStays() {
                 "host": {
                     "_id": "u103",
                     "fullname": "Hans Müller",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 2
                 },
                 "loc": {
                     "country": "Switzerland",
@@ -347,6 +354,7 @@ function _createStays() {
                 "isWishlist": true,
                 "defaultCheckin": '10-08-2024',
                 "defaultCheckout": '15-08-2024',
+                "distance": 8765
             },
             {
                 "_id": "s104",
@@ -386,7 +394,8 @@ function _createStays() {
                 "host": {
                     "_id": "u104",
                     "fullname": "Sophie Dubois",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 3
                 },
                 "loc": {
                     "country": "France",
@@ -403,6 +412,7 @@ function _createStays() {
                 "isWishlist": false,
                 "defaultCheckin": '22-08-2024',
                 "defaultCheckout": '15-09-2024',
+                "distance": 7456
             },
             {
                 "_id": "s105",
@@ -443,7 +453,8 @@ function _createStays() {
                 "host": {
                     "_id": "u105",
                     "fullname": "Nikos Papadopoulos",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 5
                 },
                 "loc": {
                     "country": "Greece",
@@ -460,6 +471,7 @@ function _createStays() {
                 "isWishlist": true,
                 "defaultCheckin": '25-08-2024',
                 "defaultCheckout": '28-08-2024',
+                "distance": 6767
             },
             {
                 "_id": "s106",
@@ -497,7 +509,8 @@ function _createStays() {
                 "host": {
                     "_id": "u106",
                     "fullname": "Emily Johnson",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 4
                 },
                 "loc": {
                     "country": "United States",
@@ -514,6 +527,7 @@ function _createStays() {
                 "isWishlist": false,
                 "defaultCheckin": '11-08-2024',
                 "defaultCheckout": '18-08-2024',
+                "distance": 3456
             },
             {
                 "_id": "s107",
@@ -551,7 +565,8 @@ function _createStays() {
                 "host": {
                     "_id": "u107",
                     "fullname": "Sophie Williams",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 3
                 },
                 "loc": {
                     "country": "New Zealand",
@@ -567,7 +582,8 @@ function _createStays() {
                 "baths": 3,
                 "isWishlist": false,
                 "defaultCheckin": '01-09-2024',
-                "defaultCheckout": '08-09-2024'
+                "defaultCheckout": '08-09-2024',
+                "distance": 11987
             },
             {
                 "_id": "s108",
@@ -605,7 +621,8 @@ function _createStays() {
                 "host": {
                     "_id": "u108",
                     "fullname": "Daniel Levi",
-                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png"
+                    "pictureUrl": "https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png",
+                    "years": 5
                 },
                 "loc": {
                     "country": "Israel",
@@ -621,7 +638,8 @@ function _createStays() {
                 "baths": 4,
                 "isWishlist": false,
                 "defaultCheckin": '09-09-2024',
-                "defaultCheckout": '20-09-2024'
+                "defaultCheckout": '20-09-2024',
+                "distance": 4537
             }
 
         ]

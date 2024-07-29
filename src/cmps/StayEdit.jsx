@@ -3,6 +3,7 @@ import { addStay } from "../store/actions/stay.actions"
 import { Link, useNavigate } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { AbnbGradientBtn } from "./AbnbGradientBtn"
+import { userService } from "../services/user"
 
 
 export function StayEdit({ setEditModal }) {
@@ -70,7 +71,8 @@ export function StayEdit({ setEditModal }) {
             host: {
                 _id: userService.getLoggedinUser()._id,
                 fullname: userService.getLoggedinUser().fullname,
-                pictureUrl: userService.getLoggedinUser().imgUrl
+                pictureUrl: userService.getLoggedinUser().imgUrl,
+                years: 3
             },
             rating: 4.9,
             bedrooms: [{ beds: 1 }],
@@ -78,6 +80,7 @@ export function StayEdit({ setEditModal }) {
             baths: 2,
             defaultCheckin: "12-08-2024",
             defaultCheckout: "19-08-2024",
+            distance: 10
         }
 
         try {

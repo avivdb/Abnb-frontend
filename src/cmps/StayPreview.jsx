@@ -5,7 +5,7 @@ import { useState } from 'react'
 import heartempty from "../assets/img/icons/heartempty.svg"
 import heartfull from "../assets/img/icons/heartfull.svg"
 import { stayService } from '../services/stay'
-import { getRandomDistance, formatDateRange } from '../services/util.service.js'
+import { formatDateRange } from '../services/util.service.js'
 
 
 export default function StayPreview({ stay }) {
@@ -35,7 +35,7 @@ export default function StayPreview({ stay }) {
                     <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
                     <p>&#9733; {(rating || 4.3).toFixed(1)}</p>
                 </section>
-                <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
+                <p className="secondary-content">{`${stay.distance.toLocaleString()} kilometers away`}</p>
                 <p className="secondary-content">{formatDateRange(stay.defaultCheckin, stay.defaultCheckout)}</p>
                 <p className="stay-preview-price" ><span>{`₪${price || ""}`}</span>night</p>
             </article>

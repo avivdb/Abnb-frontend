@@ -49,7 +49,8 @@ export function OrderCheckout() {
                 host: {
                     _id: stay.host._id,
                     fullname: stay.host.fullname,
-                    imgUrl: stay.host.pictureUrl
+                    pictureUrl: stay.host.pictureUrl,
+                    years: stay.host.years
                 },
                 guest: { 
                     _id: userService.getLoggedinUser()._id,

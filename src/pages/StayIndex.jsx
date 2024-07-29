@@ -16,9 +16,9 @@ export function StayIndex() {
     async function onRemoveStay(stayId) {
         try {
             await removeStay(stayId)
-            showSuccessMsg('Stay removed')
+            // showSuccessMsg('Stay removed')
         } catch (err) {
-            showErrorMsg('Cannot remove stay')
+            // showErrorMsg('Cannot remove stay')
         }
     }
 

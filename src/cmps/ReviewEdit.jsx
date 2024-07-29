@@ -20,10 +20,10 @@ export function ReviewEdit() {
             
 		try {
 			await addReview(reviewToEdit)
-			showSuccessMsg('Review added')
+			// showSuccessMsg('Review added')
 			setReviewToEdit({ txt: '', aboutUserId: '' })
 		} catch (err) {
-			showErrorMsg('Cannot add review')
+			// showErrorMsg('Cannot add review')
 		}
 	}
 
