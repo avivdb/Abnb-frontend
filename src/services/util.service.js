@@ -204,3 +204,22 @@ export function capitalize(string) {
 export function removeSpaces(str) {
     return str.replace(/ /g, ''); // Removes all space characters from the string
 }
+
+
+export function timeSince(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
+
+    if (diffYears >= 1) {
+        return `${diffYears} year${diffYears > 1 ? 's' : ''}`;
+    } else if (diffMonths >= 1) {
+        return `${diffMonths} month${diffMonths > 1 ? 's' : ''}`;
+    } else {
+        return `${diffDays} day${diffDays > 1 ? 's' : ''}`;
+    }
+}

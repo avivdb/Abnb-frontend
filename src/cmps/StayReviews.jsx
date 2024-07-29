@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { getRandomIntInclusive } from "../services/util.service.js"
+import { getRandomIntInclusive, timeSince } from "../services/util.service.js"
 import userimg from "../assets/img/icons/user.svg"
 
 export function StayReviews({ stay }) {
@@ -93,7 +93,7 @@ export function StayReviews({ stay }) {
 
     return (
         <section className="stay-reviews">
-            <h2 className="stay-reviews-title">&#9733; {stay.rating} · {reviews.length} reviews</h2>
+            <h2 className="stay-reviews-title">&#9733; {stay.rating.toFixed(1)} · {reviews.length} reviews</h2>
             <section className="stay-reviews-list">
                 {reviews.slice(0, visibleReviews).map((review, index) => (
                     <div key={index} className="review">
@@ -109,7 +109,8 @@ export function StayReviews({ stay }) {
                             )}
                             <section>
                                 <p>{review.by.fullname}</p>
-                                <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
+                                <p>{timeSince(review.at)} on Abnb</p>
+                                {/* <p>{getRandomIntInclusive(2, 15)} years on Abnb</p> */}
                             </section>
                         </section>
                         <p className="stay-reviews-sum">
@@ -142,11 +143,12 @@ export function StayReviews({ stay }) {
                         )}
                         <section>
                             <p>{curReview.by.fullname}</p>
-                            <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
+                            <p>{timeSince(curReview.at)} on Abnb</p>
+                            {/* <p>{getRandomIntInclusive(2, 15)} years on Abnb</p> */}
                         </section>
                     </section>
                     <p className="stay-reviews-sum">
-                        <span className="stay-review-stars">{renderRatingStars(curReview.rating)}</span>
+                        <span className="stay-review-stars">{renderRatingStars(curReview.rating.toFixed(1))}</span>
                         <span>·</span>
                         {formatDate(curReview.at)}
                     </p>

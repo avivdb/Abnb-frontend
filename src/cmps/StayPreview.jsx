@@ -33,7 +33,7 @@ export default function StayPreview({ stay }) {
                 </div>
                 <section className="stay-preview-top">
                     <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
-                    <p>&#9733; {rating || "4.3"}</p>
+                    <p>&#9733; {(rating || 4.3).toFixed(1)}</p>
                 </section>
                 <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
                 <p className="secondary-content">{formatDateRange(stay.defaultCheckin, stay.defaultCheckout)}</p>
