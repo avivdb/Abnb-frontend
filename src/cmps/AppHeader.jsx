@@ -1,15 +1,15 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { FilterFocused } from './FilterFocused';
 import { FilterExpanded } from './FilterExpanded';
-import { useEffect, useState } from 'react';
 import { UserMenu } from './UserMenu';
 import { FilterLabel } from './FilterLabel';
 import { setFilterBy } from "../store/actions/stay.actions";
 import menu from "../assets/img/icons/menu.svg";
 import userimg from "../assets/img/icons/user.svg";
-import { debounce } from '../services/util.service';
-import { stayService } from '../services/stay/index';
+import { stayService } from '../services/stay';
+
 
 const { getDefaultFilter } = stayService;
 
@@ -18,52 +18,50 @@ export function AppHeader() {
 	const filterBy = useSelector(storeState => storeState.stayModule.filterBy);
 	const user = useSelector(storeState => storeState.userModule.user);
 	const [isExpanded, setIsExpanded] = useState(false);
-	const [isClicked, setIsClicked] = useState(false);
-	const [initialScrollPos, setInitialScrollPos] = useState(0);
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	const [allowScroll, setAllowScroll] = useState(true);
+
 	useEffect(() => {
-		const handleScroll = debounce(() => {
-			const currentScrollPos = window.scrollY;
-			if (location.pathname === '/') {
-				if (isClicked && Math.abs(currentScrollPos - initialScrollPos) > 50) {
-					setIsClicked(false);
-					setIsExpanded(false);
-				} else if (!isClicked && currentScrollPos <= 50) {
-					setIsExpanded(true);
-				} else if (!isClicked && currentScrollPos > 50) {
-					setIsExpanded(false);
-				}
-			} else {
+		let lastScrollTop = 0;
+		const handleScroll = () => {
+			if (!allowScroll) return;
+			const scrollTop = window.scrollY;
+
+			if (scrollTop === 0 && location.pathname === '/') {
+				setIsExpanded(true);
+			} else if (scrollTop > lastScrollTop) {
 				setIsExpanded(false);
 			}
-		}, 100);
+			lastScrollTop = scrollTop;
+		};
 
-		if (location.pathname === '/' && window.scrollY <= 50) {
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, [allowScroll, location]);
+
+	useEffect(() => {
+		if (location.pathname === '/' && window.scrollY === 0) {
 			setIsExpanded(true);
 		} else {
 			setIsExpanded(false);
 		}
+	}, [location]);
 
-		window.addEventListener('scroll', handleScroll);
-
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, [location, isClicked, initialScrollPos]);
-
-	function handleFilterClick() {
-		setIsClicked(true);
-		setInitialScrollPos(window.scrollY);
+	const handleFilterClick = () => {
+		setAllowScroll(false);
 		setIsExpanded(state => !state);
-	}
+		setTimeout(() => {
+			setAllowScroll(true);
+		}, 500); // Adjust timeout duration as needed
+	};
 
-	function handleLogoClick() {
-		setIsClicked(false);
-		setFilterBy(getDefaultFilter());
+	const handleLogoClick = () => {
+		setIsExpanded(false);
+		setFilterBy(getDefaultFilter())
 		navigate('/');
-	}
+	};
 
 	return (
 		<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
@@ -81,7 +79,7 @@ export function AppHeader() {
 
 			{location.pathname !== '/' && (
 				<>
-					<FilterFocused setClass="filter-focused visible" handleFilterClick={handleFilterClick} />
+					<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
 					{isExpanded && <FilterExpanded setClass="filter-expanded visible" />}
 				</>
 			)}
@@ -99,7 +97,6 @@ export function AppHeader() {
 						) : (
 							<div className="div-user-img">
 								{user.fullname.charAt(0)}
-								<div />
 							</div>
 						)
 					) : (
