@@ -17,42 +17,41 @@ export function AppHeader() {
 	const [userMenu, setUserMenu] = useState(false);
 	const filterBy = useSelector(storeState => storeState.stayModule.filterBy);
 	const user = useSelector(storeState => storeState.userModule.user);
-	const [isExpanded, setIsExpanded] = useState(false); // Start with not expanded
+	const [isExpanded, setIsExpanded] = useState(false);
 	const [isClicked, setIsClicked] = useState(false);
 	const [initialScrollPos, setInitialScrollPos] = useState(0);
 	const location = useLocation();
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		const handleScroll = debounce(() => {
+			const currentScrollPos = window.scrollY;
+			if (location.pathname === '/') {
+				if (isClicked && Math.abs(currentScrollPos - initialScrollPos) > 50) {
+					setIsClicked(false);
+					setIsExpanded(false);
+				} else if (!isClicked && currentScrollPos <= 50) {
+					setIsExpanded(true);
+				} else if (!isClicked && currentScrollPos > 50) {
+					setIsExpanded(false);
+				}
+			} else {
+				setIsExpanded(false);
+			}
+		}, 100);
+
 		if (location.pathname === '/' && window.scrollY <= 50) {
 			setIsExpanded(true);
 		} else {
 			setIsExpanded(false);
 		}
 
-		const debouncedHandleScroll = debounce(handleScroll, 100);
-		window.addEventListener('scroll', debouncedHandleScroll);
+		window.addEventListener('scroll', handleScroll);
 
 		return () => {
-			window.removeEventListener('scroll', debouncedHandleScroll);
+			window.removeEventListener('scroll', handleScroll);
 		};
-	}, [location]);
-
-	function handleScroll() {
-		const currentScrollPos = window.scrollY;
-		if (location.pathname === '/') {
-			if (isClicked && Math.abs(currentScrollPos - initialScrollPos) > 50) {
-				setIsClicked(false);
-				setIsExpanded(false);
-			} else if (!isClicked && currentScrollPos <= 50) {
-				setIsExpanded(true);
-			} else if (!isClicked && currentScrollPos > 50) {
-				setIsExpanded(false);
-			}
-		} else {
-			setIsExpanded(false);
-		}
-	}
+	}, [location, isClicked, initialScrollPos]);
 
 	function handleFilterClick() {
 		setIsClicked(true);

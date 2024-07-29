@@ -147,6 +147,7 @@ export function StayDetails() {
 
   return (
     <section className="stay-details ">
+      {console.log('stay', stay)}
 
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}

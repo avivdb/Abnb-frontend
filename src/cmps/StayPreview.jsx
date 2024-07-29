@@ -5,7 +5,7 @@ import { useState } from 'react'
 import heartempty from "../assets/img/icons/heartempty.svg"
 import heartfull from "../assets/img/icons/heartfull.svg"
 import { stayService } from '../services/stay'
-import { getRandomDistance, formatDateRange } from '../services/util.service.js'
+import { formatDateRange, getDistanceBetweenLocations } from '../services/util.service.js'
 
 
 export default function StayPreview({ stay }) {
@@ -23,11 +23,9 @@ export default function StayPreview({ stay }) {
 
     return (
         <Link to={`/stay/${_id}`}>
-            {/* return <Link to={`/stay/${_id}`} target='_blank'> */}
+
             <article className="stay-preview">
-                {/* <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
-                    <img src={stay.isWishlist ? heartfull : heartempty} />
-                </button> */}
+
                 <div className="preview-img-container">
                     {stay.imgUrls && stay.imgUrls.length > 0 && <ImgCarousel stay={stay} />}
                 </div>
@@ -35,7 +33,7 @@ export default function StayPreview({ stay }) {
                     <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
                     <p>&#9733; {rating || "4.3"}</p>
                 </section>
-                <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
+                <p className="secondary-content">{`${getDistanceBetweenLocations(32.0853, 34.7818, loc.lat, loc.lan)} kilometers away`}</p>
                 <p className="secondary-content">{formatDateRange(stay.defaultCheckin, stay.defaultCheckout)}</p>
                 <p className="stay-preview-price" ><span>{`₪${price || ""}`}</span>night</p>
             </article>
