@@ -25,9 +25,9 @@ export default function StayPreview({ stay }) {
         <Link to={`/stay/${_id}`}>
             {/* return <Link to={`/stay/${_id}`} target='_blank'> */}
             <article className="stay-preview">
-                <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
+                {/* <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
                     <img src={stay.isWishlist ? heartfull : heartempty} />
-                </button>
+                </button> */}
                 <div className="preview-img-container">
                     {stay.imgUrls && stay.imgUrls.length > 0 && <ImgCarousel stay={stay} />}
                 </div>

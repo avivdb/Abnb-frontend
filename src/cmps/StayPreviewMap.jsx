@@ -19,19 +19,24 @@ export default function StayPreviewMap({ stay }) {
 
     return (
         <article className="stay-preview">
-            <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
+            {/* <button className="stay-preview-heart" onClick={(event) => onToggleWishlist(event, stay)}>
                 <img src={stay.isWishlist ? heartfull : heartempty} />
-            </button>
+            </button> */}
             <div className="preview-img-container">
                 {stay.imgUrls && stay.imgUrls.length > 0 && <ImgCarousel stay={stay} />}
             </div>
-            <section className="stay-preview-top">
-                <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
-                <p>&#9733; {rating || "4.3"}</p>
+            <section className="stay-preview-map-text">
+                <section className="stay-preview-top">
+                    <h2>{(loc && loc.city) || ""}, {(loc && loc.country) || ""}</h2>
+                    <p>&#9733; {rating || "4.3"}</p>
+                </section>
+                <p>{stay.name}</p>
+                <section className="stay-preview-map-bottom">
+                    <p className="stay-preview-price"><span>{`₪${price || ""}`}</span>night</p>
+                    <p>·</p>
+                    <p className="secondary-content">{getRandomDate()}</p>
+                </section>
             </section>
-            <p className="secondary-content">{`${getRandomDistance()} kilometers away`}</p>
-            <p className="secondary-content">{getRandomDate()}</p>
-            <p className="stay-preview-price"><span>{`₪${price || ""}`}</span>night</p>
         </article>
     );
 }
