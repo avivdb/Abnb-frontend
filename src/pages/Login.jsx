@@ -1,51 +1,44 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { GoogleLogin } from '@react-oauth/google';
+import { login } from '../store/actions/user.actions';
+import { AbnbGradientBtn } from '../cmps/AbnbGradientBtn';
+import { handleGoogleResponse, handleGoogleError } from '../services/util.service';
 
-import { userService } from '../services/user'
-import { login } from '../store/actions/user.actions'
-import { AbnbGradientBtn } from '../cmps/AbnbGradientBtn'
+// const clientId = "645691889779-la8vv9598g6t4qhg7k12quiil6cqa4uq.apps.googleusercontent.com"; // Replace with your actual Google Client ID
 
 export function Login() {
+    const [credentials, setCredentials] = useState({ username: '', password: '' });
+    const navigate = useNavigate();
 
-    const [credentials, setCredentials] = useState({ username: '', password: '', fullname: '' })
-    const [users, setUsers] = useState([])
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        loadUsers()
-    }, [])
-
-    async function loadUsers() {
-        const users = await userService.getUsers()
-        setUsers(users)
-    }
-
-    async function onLogin(ev = null) {
-        if (ev) ev.preventDefault()
-
-        if (!credentials.username) return
-        await login(credentials)
-        navigate('/')
+    async function onLogin(ev) {
+        if (ev) ev.preventDefault();
+        if (!credentials.username || !credentials.password) return;
+        await login(credentials);
+        navigate('/');
     }
 
     function handleChange(ev) {
-        const field = ev.target.name
-        const value = ev.target.value
-        setCredentials({ ...credentials, [field]: value })
+        const { name, value } = ev.target;
+        setCredentials({ ...credentials, [name]: value });
     }
 
     return (
         <section className="login-form">
             <h1>Log in</h1>
             <h2>Welcome back</h2>
-            
+
             <section className="user-info-login">
-            <input name="username" value={credentials.username} onChange={handleChange} placeholder="Username"/>
-            <input name="password" value={credentials.password} onChange={handleChange} placeholder="Password"/>
+                <input name="username" value={credentials.username} onChange={handleChange} placeholder="Username" />
+                <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" />
             </section>
 
-            <AbnbGradientBtn handleClick={onLogin} text={"Login"}/>
+            <AbnbGradientBtn handleClick={onLogin} text={"Login"} />
+
+            <GoogleLogin
+                onSuccess={(response) => handleGoogleResponse(response, navigate, login)}
+                onError={handleGoogleError}
+            />
         </section>
-    )
+    );
 }

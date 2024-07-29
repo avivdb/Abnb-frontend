@@ -18,14 +18,14 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, s
         const [start, end] = dates
 
         setStartDate(start)
-        if(start !== null) setActiveModal("checkOut")
+        if (start !== null) setActiveModal("checkOut")
 
         setEndDate(end)
         setFilterToEdit({ ...filterToEdit, checkIn: start, checkOut: end })
         console.log('startDate', startDate)
         console.log('endDate', endDate)
         console.log(filterToEdit)
-        if(end !== null) setActiveModal("guest")
+        if (end !== null) setActiveModal("guest")
     };
 
     return (

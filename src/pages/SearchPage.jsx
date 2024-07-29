@@ -9,12 +9,12 @@ export function SearchPage() {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
     useEffect(() => {
-        loadStays(filterBy, 0)
+        loadStays(filterBy, 0, true)
     }, [filterBy])
 
     return (
         <section className="search-page">
-            <section className="searc-page-list">
+            <section className="search-page-list">
 
                 <StayList stays={stays} />
             </section>

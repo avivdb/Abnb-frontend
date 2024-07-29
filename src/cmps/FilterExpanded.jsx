@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import { FilterWhereModal } from "./FilterWhereModal";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ export function FilterExpanded({ setClass }) {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
     const [filterToEdit, setFilterToEdit] = useState({ ...filterBy })
     const [activeModal, setActiveModal] = useState(null)
+    const [shouldNavigate, setShouldNavigate] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -26,7 +27,17 @@ export function FilterExpanded({ setClass }) {
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (shouldNavigate) {
+            const params = getParams(filterBy)
+            if (params) {
+                navigate(`/s/${params}`)
+            }
+            setShouldNavigate(false)
+        }
+    }, [filterBy, shouldNavigate, navigate])
 
     const handleClick = (field) => {
         setActiveModal(field === activeModal ? null : field)
@@ -34,11 +45,11 @@ export function FilterExpanded({ setClass }) {
 
     const getModalClassName = () => {
         let filterModalClass = 'filter-modal';
-        if (activeModal === 'where') filterModalClass += ' is-where'
-        if (activeModal === 'checkIn') filterModalClass += ' is-check-in'
-        if (activeModal === 'checkOut') filterModalClass += ' is-check-out'
-        if (activeModal === 'guest') filterModalClass += ' is-guest'
-        return filterModalClass;
+        if (activeModal === 'where') filterModalClass += ' is-where';
+        if (activeModal === 'checkIn') filterModalClass += ' is-check-in';
+        if (activeModal === 'checkOut') filterModalClass += ' is-check-out';
+        if (activeModal === 'guest') filterModalClass += ' is-guest';
+        return filterModalClass
     }
 
     const handleSearch = (ev) => {
@@ -46,10 +57,7 @@ export function FilterExpanded({ setClass }) {
         ev.stopPropagation()
         setActiveModal(null)
         setFilterBy(filterToEdit)
-        const params = getParams(filterToEdit);
-        if (params) {
-            navigate(`/s/${params}`);
-        }
+        setShouldNavigate(true)
     }
 
     return (
@@ -97,7 +105,7 @@ export function FilterExpanded({ setClass }) {
 
             {activeModal && (
                 <section className={getModalClassName()}>
-                    {activeModal === 'where' && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} setActiveModal={setActiveModal}/>}
+                    {activeModal === 'where' && <FilterWhereModal filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} setActiveModal={setActiveModal} />}
                     {(activeModal === 'checkIn' || activeModal === 'checkOut') && <FilterDateRangePicker filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} setActiveModal={setActiveModal} />}
                     {activeModal === 'guest' && <FilterAddGuest filterToEdit={filterToEdit} setFilterToEdit={setFilterToEdit} />}
                 </section>

@@ -37,7 +37,7 @@ export function UserMenu({ setUserMenu, user }) {
             {user ?
                 <>
                     <Link to={`stay/trips`}><button onClick={() => setUserMenu(false)}>Trips</button></Link>
-                    <Link to={`stay/wishlists`}><button onClick={() => setUserMenu(false)}>Wishlist</button></Link>
+                    {/* <Link to={`stay/wishlists`}><button onClick={() => setUserMenu(false)}>Wishlist</button></Link> */}
                     <Link to={`stay/orders`}><button onClick={() => setUserMenu(false)}>Orders</button></Link>
                     <hr />
                     <button className="btn-log-out" onClick={onLogout}>Log out</button>

@@ -62,6 +62,23 @@ export function getRandomDistance() {
     return [randomNumber.toLocaleString()]
 }
 
+export function getDistanceBetweenLocations(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = toRadians(lat2 - lat1)
+    const dLon = toRadians(lon2 - lon1)
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance.toFixed(0)
+}
+
+function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
 export function getMonthName(month) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return monthNames[month]
@@ -176,26 +193,27 @@ export function getGuestsTitle(filterToEdit) {
 }
 
 
+import { format } from 'date-fns';
+
 export function getParams(obj) {
     const params = new URLSearchParams(
         Object.keys(obj).reduce((acc, key) => {
             const value = obj[key];
-            if (typeof value === 'object' && value !== null) {
+            if (typeof value === 'object' && value !== null && !(value instanceof Date)) {
                 Object.keys(value).forEach(subKey => {
                     acc[subKey] = value[subKey] || '';
                 });
             } else if (value instanceof Date) {
-                acc[key] = value.toDateString() || '';
+                acc[key] = format(value, 'yyyy-MM-dd') || '';
             } else {
                 acc[key] = value || '';
             }
             return acc;
         }, {})
     ).toString();
-
     return params;
-
 }
+
 
 export function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -223,3 +241,19 @@ export function timeSince(dateString) {
         return `${diffDays} day${diffDays > 1 ? 's' : ''}`;
     }
 }
+
+export const handleGoogleResponse = async (response, navigate, action) => {
+    console.log("Google Auth Success: currentUser:", response);
+    const googleUser = {
+        username: response.email,
+        password: response.sub, // You may want to handle this differently
+        fullname: response.name,
+        imgUrl: response.picture,
+    };
+    await action(googleUser);
+    navigate('/');
+};
+
+export const handleGoogleError = (error) => {
+    console.log("Google Auth failed: error:", error);
+};

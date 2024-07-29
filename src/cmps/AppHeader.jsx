@@ -1,98 +1,113 @@
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { FilterFocused } from './FilterFocused'
-import { FilterExpanded } from './FilterExpanded'
-import { useEffect, useState } from 'react'
-import { UserMenu } from './UserMenu'
-import { FilterLabel } from './FilterLabel'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { FilterFocused } from './FilterFocused';
+import { FilterExpanded } from './FilterExpanded';
+import { UserMenu } from './UserMenu';
+import { FilterLabel } from './FilterLabel';
 import { setFilterBy } from "../store/actions/stay.actions";
-import menu from "../assets/img/icons/menu.svg"
-import userimg from "../assets/img/icons/user.svg"
-import { debounce } from '../services/util.service'
-import { stayService } from '../services/stay/index';
+import menu from "../assets/img/icons/menu.svg";
+import userimg from "../assets/img/icons/user.svg";
+import { stayService } from '../services/stay';
+
+
 const { getDefaultFilter } = stayService;
+
 export function AppHeader() {
+	const [userMenu, setUserMenu] = useState(false);
+	const filterBy = useSelector(storeState => storeState.stayModule.filterBy);
+	const user = useSelector(storeState => storeState.userModule.user);
+	const [isExpanded, setIsExpanded] = useState(false);
+	const location = useLocation();
 
-	const [userMenu, setUserMenu] = useState(false)
-	const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
-	const user = useSelector(storeState => storeState.userModule.user)
-	const [isExpanded, setIsExpanded] = useState(true)
-	let location = useLocation()
-	const navigate = useNavigate()
+	const [allowScroll, setAllowScroll] = useState(true);
 
 	useEffect(() => {
-		handleScroll()
-		const debouncedHandleScroll = debounce(handleScroll, 100);
+		let lastScrollTop = 0;
+		const handleScroll = () => {
+			if (!allowScroll) return;
+			const scrollTop = window.scrollY;
 
-		window.addEventListener('scroll', debouncedHandleScroll);
-		return () => {
-			window.removeEventListener('scroll', debouncedHandleScroll);
+			if (scrollTop < 50 && location.pathname === '/') {
+				setIsExpanded(true);
+			} else if (scrollTop > lastScrollTop) {
+				setIsExpanded(false);
+			}
+			lastScrollTop = scrollTop;
 		};
 
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, [allowScroll, location]);
 
-	}, [])
-
-	function handleScroll() {
-		if (window.scrollY > 50) {
-			setIsExpanded(false)
+	useEffect(() => {
+		if (location.pathname === '/' && window.scrollY < 50) {
+			setIsExpanded(true);
 		} else {
-			setIsExpanded(true)
+			setIsExpanded(false);
 		}
-	}
+	}, [location]);
 
-	function handleFilterClick() {
-		setIsExpanded(true)
-	}
+	const handleFilterClick = () => {
+		setAllowScroll(false);
+		setIsExpanded(state => !state);
+		setTimeout(() => {
+			setAllowScroll(true);
+		}, 500)
+	};
 
-	function handleLogoClick() {
-		console.log('filterBy', filterBy)
+	const handleLogoClick = () => {
+		setIsExpanded(false);
 		setFilterBy(getDefaultFilter())
-		navigate('/')
-		console.log('filterBy', filterBy)
-
-	}
+		navigate('/');
+	};
 
 	return (
-		<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`} >
-
-			<NavLink to="/" onClick={() => handleLogoClick()} className="logo fa brand airbnb ">
+		<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
+			<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">
 				<h1>bnb</h1>
 			</NavLink>
 
-			{location.pathname === ('/') && <h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`} >Stays</h1>}
-			{location.pathname === ('/') && <FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />}
-			{location.pathname === ('/') && <FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />}
-			{location.pathname !== ('/') && <FilterFocused setClass={`filter-focused visible`} handleFilterClick={handleFilterClick} />}
+			{location.pathname === '/' && (
+				<>
+					<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`}>Stays</h1>
+					<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
+					<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+				</>
+			)}
+
+			{location.pathname !== '/' && (
+				<>
+					<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+					{isExpanded && <FilterExpanded setClass="filter-expanded visible" />}
+				</>
+			)}
 
 			<section className="header-user">
-				<Link to={`stay/edit`}>
-					<button className='btn-add-stay'>Abnb your home</button>
+				<Link to="stay/edit">
+					<button className="btn-add-stay">Abnb your home</button>
 				</Link>
-				{/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>} */}
 
-				{!user ?
-					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
-						<img className="user-menu-img" src={menu} />
-						<img className="user-img" src={userimg} />
-					</div> :
-					<div className={`header-login ${userMenu ? "active" : ""}`} onClick={() => setUserMenu(userMenu ? false : true)}>
-						<img src={menu} />
-						{user.imgUrl ?
-							<img src={user.imgUrl} /> :
-							<div className="div-user-img">{user.fullname.charAt(0)}<div />
+				<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
+					<img className="user-menu-img" src={menu} alt="Menu" />
+					{user ? (
+						user.imgUrl ? (
+							<img src={user.imgUrl} alt="User" />
+						) : (
+							<div className="div-user-img">
+								{user.fullname.charAt(0)}
 							</div>
-						}
-					</div>
-				}
+						)
+					) : (
+						<img className="user-img" src={userimg} alt="User" />
+					)}
+				</div>
 
 				{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
-
 			</section>
 
 			{(location.pathname === "/stay" || location.pathname === "/" || location.pathname.startsWith("/s/")) && <FilterLabel />}
 		</div>
-
-
-	)
+	);
 }
