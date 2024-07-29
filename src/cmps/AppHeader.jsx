@@ -19,7 +19,7 @@ export function AppHeader() {
 	const user = useSelector(storeState => storeState.userModule.user);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const location = useLocation();
-	const navigate = useNavigate();
+
 
 	const [allowScroll, setAllowScroll] = useState(true);
 
@@ -29,7 +29,7 @@ export function AppHeader() {
 			if (!allowScroll) return;
 			const scrollTop = window.scrollY;
 
-			if (scrollTop === 0 && location.pathname === '/') {
+			if (scrollTop < 50 && location.pathname === '/') {
 				setIsExpanded(true);
 			} else if (scrollTop > lastScrollTop) {
 				setIsExpanded(false);
@@ -42,7 +42,7 @@ export function AppHeader() {
 	}, [allowScroll, location]);
 
 	useEffect(() => {
-		if (location.pathname === '/' && window.scrollY === 0) {
+		if (location.pathname === '/' && window.scrollY < 50) {
 			setIsExpanded(true);
 		} else {
 			setIsExpanded(false);
@@ -54,7 +54,7 @@ export function AppHeader() {
 		setIsExpanded(state => !state);
 		setTimeout(() => {
 			setAllowScroll(true);
-		}, 500); // Adjust timeout duration as needed
+		}, 500)
 	};
 
 	const handleLogoClick = () => {

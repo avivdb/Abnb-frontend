@@ -3,7 +3,7 @@ import { addStay } from "../store/actions/stay.actions"
 import { Link, useNavigate } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { AbnbGradientBtn } from "./AbnbGradientBtn"
-
+import { userService } from "../services/user"
 
 export function StayEdit({ setEditModal }) {
 
