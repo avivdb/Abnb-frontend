@@ -122,11 +122,11 @@ export function StayReviews({ stay }) {
                     </div>
                 ))}
             </section>
-            {/* {visibleReviews < reviews.length && ( */}
-            <button className="show-all-reviews-btn" onClick={handleShowMore}>
-                {visibleReviews === reviews.length ? `Show less` : `Show all ${reviews.length} reviews`}
-            </button>
-            {/* )} */}
+            {reviews.length > 6 && (
+                <button className="show-all-reviews-btn" onClick={handleShowMore}>
+                    {visibleReviews === reviews.length ? `Show less` : `Show all ${reviews.length} reviews`}
+                </button>
+            )}
             {showModal && (
                 <div className="stay-reviews-modal">
                     <span className="stay-reviews-modal-close" onClick={onCloseModal}>&times;</span>

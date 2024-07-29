@@ -16,6 +16,7 @@
   &.expanded {
     grid-template-rows: auto auto auto;
   }
+
   &.focused {
     grid-template-rows: auto 0px auto;
   }
@@ -27,9 +28,11 @@
     text-align: center;
     font-size: 1rem;
     color: black;
+
     &.visible {
       opacity: 1;
     }
+
     &.hidden {
       display: none;
     }
@@ -39,6 +42,7 @@
     display: flex;
     align-items: center;
     font-size: 2.3rem;
+
     &:hover {
       cursor: pointer;
     }
@@ -105,17 +109,15 @@
     }
 
     img {
-      max-height: 2.3rem;
-      &:first-of-type {
-        height: 1.2rem;
-      }
-    }
+      height: 1.5rem;
+      border-radius: 0;
 
-    .user-img {
-      width: 2rem;
-      height: 2rem;
-      object-fit: cover;
-      border-radius: 50%;
+      &:last-of-type {
+        width: 2rem;
+        height: 2rem;
+        object-fit: cover;
+        border-radius: 50%;
+      }
     }
 
     .div-user-img {
