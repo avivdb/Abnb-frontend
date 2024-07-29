@@ -110,29 +110,28 @@
       }
     }
 
-      &:last-of-type {
-        width: 2rem;
-        height: 2rem;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-    }
-
-    .div-user-img {
-      display: flex;
-      place-content: center;
-      align-items: center;
+    &:last-of-type {
       width: 2rem;
       height: 2rem;
-      background-color: black;
+      object-fit: cover;
       border-radius: 50%;
-      color: #fff;
-      font-size: 0.7rem;
     }
+  }
 
-    &.active {
-      box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
-    }
+  .div-user-img {
+    display: flex;
+    place-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: black;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 0.7rem;
+  }
+
+  &.active {
+    box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
   }
 
   .btn-add-stay {
