@@ -1,39 +1,37 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { GoogleLogin } from '@react-oauth/google';
+import { signup } from '../store/actions/user.actions';
+import { ImgUploader } from '../cmps/ImgUploader';
+import { userService } from '../services/user';
+import { AbnbGradientBtn } from '../cmps/AbnbGradientBtn';
+import { handleGoogleResponse, handleGoogleError } from '../services/util.service';
 
-import { signup } from '../store/actions/user.actions'
-
-import { ImgUploader } from '../cmps/ImgUploader'
-import { userService } from '../services/user'
-import { AbnbGradientBtn } from '../cmps/AbnbGradientBtn'
+const clientId = "645691889779-la8vv9598g6t4qhg7k12quiil6cqa4uq.apps.googleusercontent.com"; // Replace with your actual Google Client ID
 
 export function Signup() {
-    const [credentials, setCredentials] = useState(userService.getEmptyUser())
-    const navigate = useNavigate()
+    const [credentials, setCredentials] = useState(userService.getEmptyUser());
+    const navigate = useNavigate();
 
     function clearState() {
-        setCredentials({ username: '', password: '', fullname: '', imgUrl: '' })
+        setCredentials({ username: '', password: '', fullname: '', imgUrl: '' });
     }
 
     function handleChange(ev) {
-        const type = ev.target.type
-
-        const field = ev.target.name
-        const value = ev.target.value
-        setCredentials({ ...credentials, [field]: value })
+        const { name, value } = ev.target;
+        setCredentials({ ...credentials, [name]: value });
     }
 
-    async function onSignup(ev = null) {
-        if (ev) ev.preventDefault()
-
-        if (!credentials.username || !credentials.password || !credentials.fullname) return
-        await signup(credentials)
-        clearState()
-        navigate('/')
+    async function onSignup(ev) {
+        if (ev) ev.preventDefault();
+        if (!credentials.username || !credentials.password || !credentials.fullname) return;
+        await signup(credentials);
+        clearState();
+        navigate('/');
     }
 
     function onUploaded(imgUrl) {
-        setCredentials({ ...credentials, imgUrl })
+        setCredentials({ ...credentials, imgUrl });
     }
 
     return (
@@ -67,6 +65,11 @@ export function Signup() {
             <ImgUploader onUploaded={onUploaded} />
 
             <AbnbGradientBtn handleClick={onSignup} text={"Sign up"} />
+
+            <GoogleLogin
+                onSuccess={(response) => handleGoogleResponse(response, navigate, signup)}
+                onError={handleGoogleError}
+            />
         </section>
-    )
+    );
 }
