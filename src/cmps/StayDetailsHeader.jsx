@@ -44,7 +44,7 @@ export function StayDetailsHeader({ stay, handleReserve }) {
                 <section className="stay-details-header-reserve">
                     <section>
                         <p>₪{stay.price}<span>night</span></p>
-                        <p><span>&#9733; {stay.rating}</span>·<span>16 reviews</span></p>
+                        <p><span>&#9733; {stay.rating}</span>·<span>{stay.reviews.length} reviews</span></p>
                     </section>
                     <AbnbGradientBtn text={"Reserve"} handleClick={handleReserve}/>
                 </section>
