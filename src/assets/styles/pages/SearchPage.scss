@@ -1,5 +1,17 @@
 .search-page {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  display: flex;
+}
+
+.search-page-list {
+  // flex: 1;
+  // overflow-y: auto;
+  // padding-right: 1rem;
+  width: 49%;
+}
+
+.search-page-map {
+  position: fixed;
+  // top: var(--header-height); /* Adjust based on your header height */
+  right: 0;
+  width: 49%;
 }

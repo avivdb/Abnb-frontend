@@ -1,30 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Loader } from "@googlemaps/js-api-loader";
 
 export function FilterLocation({ filterToEdit, setFilterToEdit }) {
+    const inputRef = useRef(null);
+
     useEffect(() => {
         const loader = new Loader({
-            apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
+            apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE", // Replace with your actual Google API key
             version: "weekly",
             libraries: ["places"],
         });
 
         loader.load().then(() => {
-            const input = document.getElementById("location-input");
-            // Initialize AutocompleteService instead of Autocomplete to prevent default dropdown
-            const autocompleteService = new google.maps.places.AutocompleteService();
+            const input = inputRef.current;
 
-            // Fetch predictions manually when needed
-            input.addEventListener('input', () => {
-                if (input.value) {
-                    autocompleteService.getPlacePredictions({ input: input.value }, (predictions, status) => {
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            console.log("Predictions: ", predictions);
-                            // Handle predictions as needed
-                        }
-                    });
-                }
-            });
+            if (input) {
+                // Initialize AutocompleteService instead of Autocomplete to prevent default dropdown
+                const autocompleteService = new google.maps.places.AutocompleteService();
+
+                // Fetch predictions manually when needed
+                input.addEventListener('input', () => {
+                    if (input.value) {
+                        autocompleteService.getPlacePredictions({ input: input.value }, (predictions, status) => {
+                            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                console.log("Predictions: ", predictions);
+                                // Handle predictions as needed
+                            }
+                        });
+                    }
+                });
+            }
         });
     }, []);
 
@@ -36,6 +41,7 @@ export function FilterLocation({ filterToEdit, setFilterToEdit }) {
     return (
         <form autoComplete='off'>
             <input
+                ref={inputRef}
                 id="location-input"
                 name="txt"
                 placeholder="Search destinations"

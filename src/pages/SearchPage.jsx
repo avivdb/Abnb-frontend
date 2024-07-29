@@ -14,7 +14,7 @@ export function SearchPage() {
 
     return (
         <section className="search-page">
-            <section className="searc-page-list">
+            <section className="search-page-list">
 
                 <StayList stays={stays} />
             </section>

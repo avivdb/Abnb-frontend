@@ -176,26 +176,27 @@ export function getGuestsTitle(filterToEdit) {
 }
 
 
+import { format } from 'date-fns';
+
 export function getParams(obj) {
     const params = new URLSearchParams(
         Object.keys(obj).reduce((acc, key) => {
             const value = obj[key];
-            if (typeof value === 'object' && value !== null) {
+            if (typeof value === 'object' && value !== null && !(value instanceof Date)) {
                 Object.keys(value).forEach(subKey => {
                     acc[subKey] = value[subKey] || '';
                 });
             } else if (value instanceof Date) {
-                acc[key] = value.toDateString() || '';
+                acc[key] = format(value, 'yyyy-MM-dd') || '';
             } else {
                 acc[key] = value || '';
             }
             return acc;
         }, {})
     ).toString();
-
     return params;
-
 }
+
 
 export function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -204,3 +205,19 @@ export function capitalize(string) {
 export function removeSpaces(str) {
     return str.replace(/ /g, ''); // Removes all space characters from the string
 }
+
+export const handleGoogleResponse = async (response, navigate, action) => {
+    console.log("Google Auth Success: currentUser:", response);
+    const googleUser = {
+        username: response.email,
+        password: response.sub, // You may want to handle this differently
+        fullname: response.name,
+        imgUrl: response.picture,
+    };
+    await action(googleUser);
+    navigate('/');
+};
+
+export const handleGoogleError = (error) => {
+    console.log("Google Auth failed: error:", error);
+};
