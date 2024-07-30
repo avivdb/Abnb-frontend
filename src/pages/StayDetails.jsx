@@ -77,6 +77,8 @@ export function StayDetails() {
 
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
+  const user = useSelector(storeState => storeState.userModule.user)
+
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -88,6 +90,10 @@ export function StayDetails() {
 
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    })
     loadStay(stayId)
     console.log('searchparams', searchParams)
   }, [stayId, searchParams])
@@ -104,24 +110,27 @@ export function StayDetails() {
   }, [])
 
   function handleReserve() {
-    console.log('handleReserve called');
-    const params = new URLSearchParams({
-      startDate: orderToEdit.startDate,
-      endDate: orderToEdit.endDate,
-      totalPrice: orderToEdit.totalPrice,
-      adults: orderToEdit.guestCounts.adults,
-      children: orderToEdit.guestCounts.children,
-      infants: orderToEdit.guestCounts.infants,
-      pets: orderToEdit.guestCounts.pets,
-      guests: orderToEdit.guests,
-    }).toString()
+    if (user === null) navigate(`/login`)
+    else {
+      console.log('handleReserve called');
+      const params = new URLSearchParams({
+        startDate: orderToEdit.startDate,
+        endDate: orderToEdit.endDate,
+        totalPrice: orderToEdit.totalPrice,
+        adults: orderToEdit.guestCounts.adults,
+        children: orderToEdit.guestCounts.children,
+        infants: orderToEdit.guestCounts.infants,
+        pets: orderToEdit.guestCounts.pets,
+        guests: orderToEdit.guests,
+      }).toString()
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    });
-    console.log('Navigating with params:', params);
-    navigate(`/stay/${stay._id}/checkout?${params}`)
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+      console.log('Navigating with params:', params);
+      navigate(`/stay/${stay._id}/checkout?${params}`)
+    }
   }
 
 
@@ -168,7 +177,7 @@ export function StayDetails() {
                 `${stay.capacity} ${stay.capacity === 1 ? "guest" : "guests"} • 
               ${stay.bedrooms.length} ${stay.bedrooms.length === 1 ? "bedroom" : "bedrooms"} • 
               ${stay.beds} ${(stay.beds) === 1 ? "bed" : "beds"} •
-              ${stay.baths} ${stay.baths === 1 ? "bath" : "baths"}`
+              ${stay.bathrooms} ${stay.bathrooms === 1 ? "bath" : "baths"}`
               }
             </h3>
 

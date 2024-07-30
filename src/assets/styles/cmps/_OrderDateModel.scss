@@ -3,21 +3,24 @@
     position: relative;
     display: flex;
     width: 100%;
-    margin: 0px;
-    // border: none transparent;
+
     color: black;
     background-color: transparent;
-    border-radius: 0px;
-    box-shadow: none;
+
+    h2 {
+        margin: 0;
+    }
+
+
     cursor: pointer;
-    padding: 0px;
+    // padding: 1rem;
     text-align: left;
     border: 1 px solid $clr15;
     border-top-left-radius: 8px;
     border-top-right-radius:8px;
 
     .odm-booking-dates {
-        margin-block-end: rem(16px);
+        // margin-block-end: rem(16px);
         display: flex;
 
         .odm-booking-date {
@@ -75,6 +78,9 @@
 }
 
 .odm-close {
+    position: relative;
+    left: calc(100% - 5.5rem);
+
     background-color: $clr8;
     color: $clr12;
     border-radius: 8px;

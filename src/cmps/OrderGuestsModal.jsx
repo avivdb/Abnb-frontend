@@ -66,7 +66,8 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuest
                     <h2>Ages 2-12</h2>
                 </div>
                 <div className="ogm-add-children-counter ogm-add-counter">
-                    <button onClick={() => handleClick('-', childrenCounter, setChildrenCounter, 'children')}>-</button>
+                    <button onClick={() => handleClick('-', childrenCounter, setChildrenCounter, 'children')}
+                    className={childrenCounter === 0? "off" : ""} >-</button>
                     {childrenCounter}
                     <button onClick={() => handleClick('+', childrenCounter, setChildrenCounter, 'children')}>+</button>
                 </div>
@@ -79,7 +80,8 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuest
                     <h2>Under 2</h2>
                 </div>
                 <div className="ogm-add-infant-counter ogm-add-counter">
-                    <button onClick={() => handleClick('-', infantCounter, setInfantCounter, 'infant')}>-</button>
+                    <button onClick={() => handleClick('-', infantCounter, setInfantCounter, 'infant')} 
+                    className={infantCounter === 0? "off" : ""}>-</button>
                     {infantCounter}
                     <button onClick={() => handleClick('+', infantCounter, setInfantCounter, 'infant')}>+</button>
                 </div>
@@ -93,7 +95,8 @@ export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuest
                 </div>
                 <div className="ogm-add-pet-counter ogm-add-counter">
                     <button
-                        onClick={() => handleClick('-', petCounter, setPetCounter, 'pet')}>-</button>
+                        onClick={() => handleClick('-', petCounter, setPetCounter, 'pet')}
+                        className={petCounter === 0? "off" : ""}>-</button>
                     {petCounter}
                     <button onClick={() => handleClick('+', petCounter, setPetCounter, 'pet')}>+</button>
                 </div>
