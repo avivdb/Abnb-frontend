@@ -3,11 +3,11 @@ import { store } from '../store'
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG, SET_FILTER_BY } from '../reducers/stay.reducer'
 import { SET_IS_LOADING } from '../reducers/system.reducer'
 
-export async function loadStays(filterBy, page) {
+export async function loadStays(filterBy, page = 0, paginate = true) {
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
 
     try {
-        const stays = await stayService.query(filterBy, page)
+        const stays = await stayService.query(filterBy, page, paginate)
         store.dispatch(getCmdSetStays(stays, page))
     } catch (err) {
         console.log('Cannot load stays', err)
@@ -16,7 +16,6 @@ export async function loadStays(filterBy, page) {
         store.dispatch({ type: SET_IS_LOADING, isLoading: false })
     }
 }
-
 
 export async function loadStay(stayId) {
     try {
@@ -27,7 +26,6 @@ export async function loadStay(stayId) {
         throw err
     }
 }
-
 
 export async function removeStay(stayId) {
     try {
@@ -86,35 +84,38 @@ function getCmdSetStays(stays, page) {
         stays: updatedStays,
     };
 }
+
 function getCmdSetStay(stay) {
     return {
         type: SET_STAY,
         stay
     }
 }
+
 function getCmdRemoveStay(stayId) {
     return {
         type: REMOVE_STAY,
         stayId
     }
 }
+
 function getCmdAddStay(stay) {
     return {
         type: ADD_STAY,
         stay
     }
 }
+
 function getCmdUpdateStay(stay) {
     return {
         type: UPDATE_STAY,
         stay
     }
 }
+
 function getCmdAddStayMsg(msg) {
     return {
         type: ADD_STAY_MSG,
         msg
     }
 }
-
-

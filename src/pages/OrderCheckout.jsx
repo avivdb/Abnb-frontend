@@ -49,7 +49,8 @@ export function OrderCheckout() {
                 host: {
                     _id: stay.host._id,
                     fullname: stay.host.fullname,
-                    imgUrl: stay.host.pictureUrl
+                    pictureUrl: stay.host.pictureUrl,
+                    years: stay.host.years
                 },
                 guest: { 
                     _id: userService.getLoggedinUser()._id,
@@ -62,20 +63,20 @@ export function OrderCheckout() {
     }, [stay])
 
     function onShowCountries() {
-        setCountryModal(true);
+        setCountryModal(true)
     }
 
     async function onAddOrder() {
         if (!order.startDate || !order.endDate || !order.stay || !order.stay._id) {
-            return alert('All fields are required');
+            return alert('All fields are required')
         }
         try {
-            await addOrder(order);
-            showSuccessMsg('Order added');
+            await addOrder(order)
+            // showSuccessMsg('Order added');
             setReservedModal(true)
             // navigate('/stay/trips');
         } catch (err) {
-            showErrorMsg('Cannot add order');
+            // showErrorMsg('Cannot add order');
         }
     }
 

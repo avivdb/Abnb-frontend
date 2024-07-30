@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { orderService } from "../services/order"
 
 
-import { getRandomIntInclusive, calculateNights, removeSpaces } from '../services/util.service.js'
+import { calculateNights, removeSpaces } from '../services/util.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
@@ -156,6 +156,7 @@ export function StayDetails() {
 
   return (
     <section className="stay-details ">
+      {console.log('stay', stay)}
 
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
@@ -195,7 +196,7 @@ export function StayDetails() {
               )}
               <section>
                 <h3>Hosted by {stay.host.fullname}</h3>
-                <p>{getRandomIntInclusive(2, 12)} years hosting</p>
+                <p>{stay.host.years} years hosting</p>
               </section>
             </div>
             <hr />

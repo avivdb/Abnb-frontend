@@ -21,7 +21,7 @@ export function CheckoutStayModal({ stay, order }) {
                 <section>
                     <p>{stay.name}</p>
                     <p>{stay.type}</p>
-                    <p>&#9733; {stay.rating}<span> (17 reviews)</span></p>
+                    <p>&#9733; {stay.rating.toFixed(1)}<span> (17 reviews)</span></p>
                 </section>
             </section>
             <hr />

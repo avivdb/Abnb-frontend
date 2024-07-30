@@ -201,21 +201,23 @@ export function FilterLabel() {
     }
 
     return (
-        <section className="filter-label full">
-            <ul className="label-list">
-                {currentItems.map((icon, index) => (
-                    <li className={`label ${selectedLabel === icon.label ? "selected" : ""}`} key={index} onClick={() => handleChange(icon.label)}>
-                        <img className="label-img" src={icon.src} alt={icon.label} />
-                        <p className="label-name">{icon.label}</p>
-                    </li>
-                ))}
-            </ul>
-            {(currentPage < totalPages - 1) && <button className="pagination next-page-btn" onClick={handleNextPage}><img src={arrowForward} alt="Next" /></button>}
-            {(currentPage !== 0) && <button className="pagination prev-page-btn" onClick={handlePrevPage}><img src={arrowBack} alt="Back" /></button>}
-            {location.pathname.startsWith('/s/') && <button className='filter-advanced-btn' onClick={openModal}><img src={iconFilterAdvanced} alt="" /> Filters</button>}
-            <ModalComponent isOpen={isModalOpen} onRequestClose={closeModal}>
-                <FilterAdvanced />
-            </ModalComponent>
+        <section className="filter-label-container full main-container">
+            <section className="filter-label">
+                <ul className="label-list">
+                    {currentItems.map((icon, index) => (
+                        <li className={`label ${selectedLabel === icon.label ? "selected" : ""}`} key={index} onClick={() => handleChange(icon.label)}>
+                            <img className="label-img" src={icon.src} alt={icon.label} />
+                            <p className="label-name">{icon.label}</p>
+                        </li>
+                    ))}
+                </ul>
+                {(currentPage < totalPages - 1) && <button className="pagination next-page-btn" onClick={handleNextPage}><img src={arrowForward} alt="Next" /></button>}
+                {(currentPage !== 0) && <button className="pagination prev-page-btn" onClick={handlePrevPage}><img src={arrowBack} alt="Back" /></button>}
+                {location.pathname.startsWith('/s/') && <button className='filter-advanced-btn' onClick={openModal}><img src={iconFilterAdvanced} alt="" /> Filters</button>}
+                <ModalComponent isOpen={isModalOpen} onRequestClose={closeModal}>
+                    <FilterAdvanced />
+                </ModalComponent>
+            </section>
         </section>
     )
 }

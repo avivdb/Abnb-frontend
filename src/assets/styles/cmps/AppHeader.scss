@@ -1,20 +1,23 @@
+.app-header-container {
+  border-bottom: 1px solid rgba($clr8, 0.1);
+}
+
 .app-header {
   position: sticky;
   z-index: 100;
   top: 0;
 
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding-block-start: 1rem;
   color: $clr1;
   background-color: $clr12;
-  transition: grid-template-rows 0.3s ease-in-out;
+  transition: all 0.3s ease-in;
 
   &.expanded {
     grid-template-rows: auto auto auto;
   }
-
 
   &.focused {
     grid-template-rows: auto 0px auto;
@@ -27,13 +30,14 @@
     text-align: center;
     font-size: 1rem;
     color: black;
+    transition: opacity 0.5s ease-in-out;
 
     &.visible {
       opacity: 1;
     }
 
     &.hidden {
-      display: none;
+      opacity: 0;
     }
   }
 
@@ -60,16 +64,12 @@
     opacity: 0;
     visibility: hidden;
     justify-self: center;
-    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: visibility 0.3s ease-in, opacity 0.3s ease-in;
 
     &.visible {
       opacity: 1;
       visibility: visible;
     }
-  }
-
-  .filter-focused {
-    grid-row: 1;
   }
 
   .filter-expanded {
@@ -110,6 +110,12 @@
         height: 1.2rem;
       }
     }
+
+    &:last-of-type {
+      height: 2rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
 
   .div-user-img {
@@ -140,16 +146,5 @@
     &:hover {
       background-color: #f5f4f4;
     }
-  }
-
-  &::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    width: 100vw;
-    background-color: rgba($clr8, 0.1);
   }
 }

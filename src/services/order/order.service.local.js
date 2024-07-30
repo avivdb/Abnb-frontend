@@ -1,5 +1,6 @@
 import { storageService } from '../async-storage.service'
 import { stayService } from '../stay'
+import { userService } from '../user'
 // import { userService } from '../user'
 import { saveToStorage, loadFromStorage } from '../util.service'
 
@@ -58,7 +59,8 @@ async function save(order) {
 			host: {
 				_id: stay.host._id,
 				fullname: stay.host.fullname,
-				imgUrl: stay.host.pictureUrl
+				pictureUrl: stay.host.pictureUrl,
+				years: stay.host.years
 			},
 			guest: { //user or mini user???
 				_id: userService.getLoggedinUser()._id,
@@ -142,7 +144,7 @@ function _createOrders() {
 		orders = [
 			{
 				_id: 'o1225',
-				host: { _id: 'u101', fullname: "Jessy Pinkman", imgUrl: "..." },
+				host: { _id: 'u101', fullname: "Jessy Pinkman", pictureUrl: "...", years: 3 },
 				guest: {
 					_id: 'u101',
 					fullname: 'Walter White',
@@ -168,7 +170,7 @@ function _createOrders() {
 			},
 			{
 				_id: 'o1226',
-				host: { _id: 'u102', fullname: "Hank Shrader", imgUrl: "..." },
+				host: { _id: 'u102', fullname: "Hank Shrader", pictureUrl: "...", years: 2},
 				guest: {
 					_id: 'u102',
 					fullname: 'Skyler White',
@@ -194,7 +196,7 @@ function _createOrders() {
 			},
 			{
 				_id: 'o1227',
-				host: { _id: 'u103', fullname: "Skyler White", imgUrl: "..." },
+				host: { _id: 'u103', fullname: "Skyler White", pictureUrl: "...", years: 5},
 				guest: {
 					_id: 'u103',
 					fullname: 'Hank Shrader',
@@ -220,7 +222,7 @@ function _createOrders() {
 			},
 			{
 				_id: 'o1228',
-				host: { _id: 'u104', fullname: "Walter white", imgUrl: "..." },
+				host: { _id: 'u104', fullname: "Walter white", pictureUrl: "...", years: 4 },
 				guest: {
 					_id: 'u104',
 					fullname: 'Jessy Pinkman',

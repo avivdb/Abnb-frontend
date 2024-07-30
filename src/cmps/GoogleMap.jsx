@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import StayPreviewMap from './StayPreviewMap';
 import iconHouse from '../assets/img/icons/house.svg';
@@ -17,6 +17,7 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
     const googleMapRef = useRef(null);
     const markersRef = useRef([]);
     const infoWindowRef = useRef(null);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchAllCoords = async () => {
@@ -99,7 +100,7 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
                         const contentElement = document.createElement('div');
                         contentElement.className = 'stay-preview-map'; // Add a custom class
                         const root = createRoot(contentElement); // create a root
-                        root.render(<StayPreviewMap stay={stay} />);
+                        root.render(<StayPreviewMap stay={stay} onClick={() => navigate(`/stay/${stay._id}`)} />);
 
                         if (!infoWindowRef.current) {
                             infoWindowRef.current = new window.google.maps.InfoWindow();

@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { getRandomIntInclusive } from "../services/util.service.js"
-import userimg from "../assets/img/icons/user.svg"
 
 export function StayReviews({ stay }) {
     const [curReview, setCurReview] = useState(null)
@@ -19,6 +17,7 @@ export function StayReviews({ stay }) {
                     "id": "10711825"
                 },
                 "rating": 5,
+                "years": 5,
                 "txt": "I had a great experience working with Patty and Peter.  Both were very attentive in sorting out the booking details and following up directly when I had questions.  I rented a unit at the Westin Villas  in Maui and both the unit and property was absolutely amazing.  I think we had the best unit on the resort complete with 2 outdoor patios with direct access  to  the  beach.  I would HIGHLY recommend renting with Patty and Peter."
             },
             {
@@ -30,6 +29,7 @@ export function StayReviews({ stay }) {
                     "id": "70072865"
                 },
                 "rating": 4,
+                "years": 3,
                 "txt": "Peter quickly responded to any questions I had before, and during the trip. Will use again, highly recommend. "
             },
             {
@@ -41,6 +41,7 @@ export function StayReviews({ stay }) {
                     "id": "71179725"
                 },
                 "rating": 5,
+                "years": 2,
                 "txt": "We had the perfect location for a room, first floor right in front of the pool. The resort is beautiful, and the staff is so friendly! I enjoyed it so much, we talked about buying a timeshare ourselves."
             },
             {
@@ -52,6 +53,7 @@ export function StayReviews({ stay }) {
                     "id": "65593239"
                 },
                 "rating": 5,
+                "years": 5,
                 "txt": "Beautiful location. Patty & Peter were super helpful and easy to work with!"
             }
         ]
@@ -93,7 +95,7 @@ export function StayReviews({ stay }) {
 
     return (
         <section className="stay-reviews">
-            <h2 className="stay-reviews-title">&#9733; {stay.rating} · {reviews.length} reviews</h2>
+            <h2 className="stay-reviews-title">&#9733; {stay.rating.toFixed(1)} · {reviews.length} reviews</h2>
             <section className="stay-reviews-list">
                 {reviews.slice(0, visibleReviews).map((review, index) => (
                     <div key={index} className="review">
@@ -109,7 +111,7 @@ export function StayReviews({ stay }) {
                             )}
                             <section>
                                 <p>{review.by.fullname}</p>
-                                <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
+                                <p>{review.years} years on Abnb</p>
                             </section>
                         </section>
                         <p className="stay-reviews-sum">
@@ -142,11 +144,11 @@ export function StayReviews({ stay }) {
                         )}
                         <section>
                             <p>{curReview.by.fullname}</p>
-                            <p>{getRandomIntInclusive(2, 15)} years on Abnb</p>
+                            <p>{curReview.years} years on Abnb</p>
                         </section>
                     </section>
                     <p className="stay-reviews-sum">
-                        <span className="stay-review-stars">{renderRatingStars(curReview.rating)}</span>
+                        <span className="stay-review-stars">{renderRatingStars(curReview.rating.toFixed(1))}</span>
                         <span>·</span>
                         {formatDate(curReview.at)}
                     </p>

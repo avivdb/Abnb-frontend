@@ -10,14 +10,13 @@ export function StayList() {
     const [page, setPage] = useState(0)
 
     useEffect(() => {
-        loadStays(filterBy, page)
+        loadStays(filterBy, page, true)
     }, [filterBy, page])
 
     const fetchMoreData = () => {
         setPage(prevPage => prevPage + 1)
     }
 
-    // Remove duplicates based on _id
     const uniqueStays = [...new Map(stays.map(stay => [stay._id, stay])).values()]
 
     if (stays === null || stays === undefined || stays.length === 0) {

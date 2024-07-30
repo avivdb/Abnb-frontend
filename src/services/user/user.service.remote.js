@@ -67,6 +67,7 @@ function saveLoggedinUser(user) {
         // score: user.score, 
         // isAdmin: user.isAdmin 
     }
+
 	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
 	return user
 }

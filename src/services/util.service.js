@@ -62,6 +62,23 @@ export function getRandomDistance() {
     return [randomNumber.toLocaleString()]
 }
 
+export function getDistanceBetweenLocations(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = toRadians(lat2 - lat1)
+    const dLon = toRadians(lon2 - lon1)
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance.toFixed(0)
+}
+
+function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
 export function getMonthName(month) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return monthNames[month]
@@ -204,6 +221,25 @@ export function capitalize(string) {
 
 export function removeSpaces(str) {
     return str.replace(/ /g, ''); // Removes all space characters from the string
+}
+
+
+export function timeSince(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
+
+    if (diffYears >= 1) {
+        return `${diffYears} year${diffYears > 1 ? 's' : ''}`;
+    } else if (diffMonths >= 1) {
+        return `${diffMonths} month${diffMonths > 1 ? 's' : ''}`;
+    } else {
+        return `${diffDays} day${diffDays > 1 ? 's' : ''}`;
+    }
 }
 
 export const handleGoogleResponse = async (response, navigate, action) => {

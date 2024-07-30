@@ -18,7 +18,8 @@ function getEmptyStay() {
         host: {
             _id: "",
             fullname: "",
-            imgUrl: ""
+            pictureUrl: "",
+            years: 1
         },
         loc: {
             country: "",
