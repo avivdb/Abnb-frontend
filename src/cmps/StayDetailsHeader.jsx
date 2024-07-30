@@ -33,22 +33,24 @@ export function StayDetailsHeader({ stay, handleReserve }) {
     }
 
     return (
-        <div className="stay-details-header">
-            <section className="stay-details-header-links">
-                <button onClick={() => goto('photos')}>Photos</button>
-                <button onClick={() => goto('amenities')}>Amenities</button>
-                <button onClick={() => goto('reviews')}>Reviews</button>
-                <button onClick={() => goto('location')}>Location</button>
-            </section>
-            {reserveBtn &&
-                <section className="stay-details-header-reserve">
-                    <section>
-                        <p>₪{stay.price}<span>night</span></p>
-                        {/* <p><span>&#9733; {stay.rating.toFixed(1)}</span>·<span>{stay.reviews.length || ''} reviews</span></p> */}
-                    </section>
-                    <AbnbGradientBtn text={"Reserve"} handleClick={handleReserve}/>
+        <div className="main-container">
+            <section className="stay-details-header" >
+                <section className="stay-details-header-links">
+                    <button onClick={() => goto('photos')}>Photos</button>
+                    <button onClick={() => goto('amenities')}>Amenities</button>
+                    <button onClick={() => goto('reviews')}>Reviews</button>
+                    <button onClick={() => goto('location')}>Location</button>
                 </section>
-            }
+                {reserveBtn &&
+                    <section className="stay-details-header-reserve">
+                        <section>
+                            <p>₪{stay.price}<span>night</span></p>
+                            <p><span>&#9733; {stay.rating.toFixed(1)}</span>·<span>{stay.reviews? stay.reviews.length : ''} reviews</span></p>
+                        </section>
+                        <AbnbGradientBtn text={"Reserve"} handleClick={handleReserve} />
+                    </section>
+                }
+            </section>
         </div>
     );
 }

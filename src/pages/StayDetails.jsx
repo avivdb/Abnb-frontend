@@ -44,6 +44,9 @@ import Washer from "../assets/img/icons/Washer.svg"
 import Wifi from "../assets/img/icons/Wifi.svg"
 import Wineglasses from "../assets/img/icons/Wineglasses.svg"
 
+import gallerydots from "../assets/img/icons/gallerydots.svg"
+
+
 
 const amenitiesUrl = {
   "Airconditioning": Airconditioning,
@@ -155,18 +158,18 @@ export function StayDetails() {
   }
 
   return (
-    <section className="stay-details ">
+    <section className="stay-details main-container">
       {console.log('stay', stay)}
 
-      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
       {stay && <div className='stay-details-content stay-details-layout'>
         <h1 className='stay-details-name'>{stay.name}</h1>
 
         <section id="photos" className='gallery'>
-          {stay.imgUrls.map((imgUrl, idx) => (
+          {stay.imgUrls.slice(0, 5).map((imgUrl, idx) => (
             <img key={idx} src={imgUrl} className={idx === 0 ? 'main-img' : ''} />))}
+            {stay.imgUrls.length > 5 && <button onClick={() => navigate(`/stay/gallery/${stay._id}/`)}><img src={gallerydots}/>Show all photos</button>}
         </section>
 
         <section className='details-content'>

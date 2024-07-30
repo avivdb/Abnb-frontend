@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useNavigate } from "react-router"
+
 import globe from "../assets/img/icons/globe.svg"
 
 import heartgrey from "../assets/img/icons/heartgrey.svg"
@@ -11,15 +13,6 @@ import messagesgrey from "../assets/img/icons/messagesgrey.svg"
 import messagespink from "../assets/img/icons/messagespink.svg"
 import profilegrey from "../assets/img/icons/profilegrey.svg"
 import profilepink from "../assets/img/icons/profilepink.svg"
-import { useNavigate } from "react-router"
-
-
-
-
-
-
-
-
 
 
 export function AppFooter() {
@@ -37,19 +30,21 @@ export function AppFooter() {
 	}
 
 	return (
-		<footer className="app-footer main-container full">
+		<footer className="app-footer">
 
-			<footer className="app-footer-desktop">
-				<p>&copy; 2024 Abnb, Inc</p>
-				{import.meta.env.VITE_LOCAL ?
-					<span className="local-services">Local Services</span> :
-					<span className="remote-services"></span>}
+			<section className="main-container">
+				<footer className="app-footer-desktop">
+					<p>&copy; 2024 Abnb, Inc</p>
+					{import.meta.env.VITE_LOCAL ?
+						<span className="local-services">Local Services</span> :
+						<span className="remote-services"></span>}
 
-				<section className="footer-app-settings">
-					<p><img src={globe} />English (US)</p>
-					<p><span>₪</span>ILS</p>
-				</section>
-			</footer>
+					<section className="footer-app-settings">
+						<p><img src={globe} />English (US)</p>
+						<p><span>₪</span>ILS</p>
+					</section>
+				</footer>
+			</section>
 
 			<footer className="app-footer-mobile">
 				<div onClick={() => handleClick("explore")} className="app-footer-mobile-icon">

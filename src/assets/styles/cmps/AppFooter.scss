@@ -5,6 +5,7 @@
     width: 100%;
     background-color: #fff;
     border-top: 1px solid rgb(224, 224, 224);
+    padding-block: 1rem;
 
 
     .app-footer-desktop {
@@ -16,7 +17,6 @@
         height: 3rem;
         // width: 100%;
 
-        padding-block: 1rem;
         // padding-inline: 2.5rem;
 
         font-size: 0.8rem;
@@ -48,10 +48,9 @@
     }
 
     .app-footer-mobile {
-        margin-block: 0.5rem;
         display: none;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         color: #545454;
 
 
@@ -68,7 +67,7 @@
 
             p {
                 margin: 0;
-                font-size: 0.8rem;
+                font-size: 1rem;
 
                 &.selected {
                     color: $clr1;
@@ -76,7 +75,7 @@
             }
 
             img {
-                max-width: 1.5rem;
+                max-width: 2rem;
 
             }
         }
@@ -93,6 +92,6 @@
             display: none;
         }
     }
-     
+
 
 }
