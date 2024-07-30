@@ -3,7 +3,7 @@
     margin-block-end: 5rem;
 
     h2 {
-        margin-block-end: 2rem;
+        margin-block: 2rem;
     }
 
     hr {
@@ -22,7 +22,7 @@
 
     .user-trips-list {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 2rem;
     }
 

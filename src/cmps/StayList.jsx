@@ -28,7 +28,7 @@ export function StayList() {
             dataLength={uniqueStays.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={<h4>Loading...</h4>}
+            loader={<div className="loader loader-infinity-scroll"></div>}
         >
             <div className="stay-list">
                 {uniqueStays.map(stay => (
