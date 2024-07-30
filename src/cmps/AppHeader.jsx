@@ -64,50 +64,55 @@ export function AppHeader() {
 	};
 
 	return (
-		<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
-			<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">
-				<h1>bnb</h1>
-			</NavLink>
+		<>
+			<div className='app-header-container full main-container'>
+				<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
 
-			{location.pathname === '/' && (
-				<>
-					<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`}>Stays</h1>
-					<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
-					<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
-				</>
-			)}
+					<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">
+						<h1>bnb</h1>
+					</NavLink>
 
-			{location.pathname !== '/' && (
-				<>
-					<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
-					{isExpanded && <FilterExpanded setClass="filter-expanded visible" />}
-				</>
-			)}
-
-			<section className="header-user">
-				<Link to="stay/edit">
-					<button className="btn-add-stay">Abnb your home</button>
-				</Link>
-
-				<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
-					<img className="user-menu-img" src={menu} alt="Menu" />
-					{user ? (
-						user.imgUrl ? (
-							<img src={user.imgUrl} alt="User" />
-						) : (
-							<div className="div-user-img">
-								{user.fullname.charAt(0)}
-							</div>
-						)
-					) : (
-						<img className="user-img" src={userimg} alt="User" />
+					{location.pathname === '/' && (
+						<>
+							<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`}>Stays</h1>
+							<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
+							<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+						</>
 					)}
+
+					{location.pathname !== '/' && (
+						<>
+							<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+							{isExpanded && <FilterExpanded setClass="filter-expanded visible" />}
+						</>
+					)}
+
+					<section className="header-user">
+						<Link to="stay/edit">
+							<button className="btn-add-stay">Abnb your home</button>
+						</Link>
+
+						<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
+							<img className="user-menu-img" src={menu} alt="Menu" />
+							{user ? (
+								user.imgUrl ? (
+									<img src={user.imgUrl} alt="User" />
+								) : (
+									<div className="div-user-img">
+										{user.fullname.charAt(0)}
+									</div>
+								)
+							) : (
+								<img className="user-img" src={userimg} alt="User" />
+							)}
+						</div>
+
+						{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
+					</section>
+
 				</div>
-
-				{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
-			</section>
-
+			</div>
 			{(location.pathname === "/stay" || location.pathname === "/" || location.pathname.startsWith("/s/")) && <FilterLabel />}
-		</div>
+		</>
 	);
 }

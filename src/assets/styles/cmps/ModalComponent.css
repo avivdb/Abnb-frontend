@@ -9,13 +9,14 @@
   justify-content: center;
   align-items: center;
   z-index: 3000;
+  overflow-y: auto;
 }
 
 .custom-modal {
   position: relative;
   background: white;
   border-radius: 12px;
-  width: 50%;
+  /* width: 50%; */
   /* height: 100%; */
 }
 
