@@ -50,9 +50,13 @@ export function UserOrders() {
         } 
     }
 
-    if (stays === null || stays === undefined || stays.length === 0 ||
-        orders === null || orders === undefined || orders.length === 0) {
+    if (stays === null || stays === undefined ||
+        orders === null || orders === undefined) {
         return <div className="loader"></div>
+    }
+
+    if (orders.length === 0 || stays.length === 0 ) {
+        return <div >no orders yet</div>
     }
 
     return (

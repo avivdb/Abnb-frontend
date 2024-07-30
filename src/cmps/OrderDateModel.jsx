@@ -53,7 +53,7 @@ export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen
         <>
             <button className="odm-btn-booking-dates">
                 <div className="odm-booking-dates">
-                    <div className="odm-booking-date">
+                    {/* <div className="odm-booking-date">
                         <span className="odm-check">CHECK-IN</span>
                         <input
                             className="odm-date"
@@ -72,7 +72,7 @@ export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen
                             value={displayDate(endDate)}
                             readOnly
                         />
-                    </div>
+                    </div> */}
                 </div>
             </button>
             <div className="date-range-wrapper">

@@ -91,9 +91,9 @@
   .header-login {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     padding: 0.5rem;
-    padding-block: 0.3rem;
+    padding-block: 0.4rem;
     border: 1px solid $gray1;
     border-radius: 30px;
     transition: 0.2s;
@@ -103,18 +103,12 @@
     }
 
     img {
-      max-height: 2.3rem;
+      max-height: 2rem;
+        border-radius: 50%;
 
       &:first-of-type {
         height: 1.2rem;
       }
-    }
-
-    &:last-of-type {
-      width: 2rem;
-      height: 2rem;
-      object-fit: cover;
-      border-radius: 50%;
     }
   }
 

@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux'
 
 export function UserTrips() {
     const user = useSelector(storeState => storeState.userModule.user)
-    const [orders, setOrders] = useState([])
-    const [stays, setStays] = useState({})
+    const [orders, setOrders] = useState(null)
+    const [stays, setStays] = useState(null)
 
     useEffect(() => {
         async function fetchOrders() {
@@ -36,9 +36,13 @@ export function UserTrips() {
     }, [])
 
 
-    if (stays === null || stays === undefined || stays.length === 0 ||
-        orders === null || orders === undefined || orders.length === 0) {
+    if (stays === null || stays === undefined ||
+        orders === null || orders === undefined) {
         return <div className="loader"></div>
+    }
+
+    if (orders.length === 0 || stays.length === 0) {
+        return <div >no trips yet</div>
     }
 
 
