@@ -29,7 +29,7 @@ export function AppHeader() {
 			if (!allowScroll) return;
 			const scrollTop = window.scrollY;
 
-			if (scrollTop < 50 && location.pathname === '/') {
+			if (scrollTop === 0 && location.pathname === '/') {
 				setIsExpanded(true);
 			} else if (scrollTop > lastScrollTop) {
 				setIsExpanded(false);
@@ -42,7 +42,7 @@ export function AppHeader() {
 	}, [allowScroll, location]);
 
 	useEffect(() => {
-		if (location.pathname === '/' && window.scrollY < 50) {
+		if (location.pathname === '/' && window.scrollY === 0) {
 			setIsExpanded(true);
 		} else {
 			setIsExpanded(false);
