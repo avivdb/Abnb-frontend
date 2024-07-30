@@ -1,13 +1,13 @@
 
-export function StayRating({stay}) {
- 
+export function StayRating({ stay }) {
+
   const gfLeft = stay.rating === 5.0 ? 'gold-left.png' : 'left.svg'
   const gfRight = stay.rating === 5.0 ? 'gold-right.png' : 'right.svg'
 
   return (
     <>
       {stay.rating < 4.5 && (
-          <h3>&#9733; {stay.rating.toFixed(1)}</h3>
+        <h3>&#9733; {stay.rating.toFixed(1)}</h3>
       )}
       {stay.rating >= 4.5 && (
         <section className='stay-rating'>
@@ -27,7 +27,7 @@ export function StayRating({stay}) {
             </div> */}
           </div>
           <div className='stay-rating-reviews'>
-            {/* <h2>{stay.reviews.length || ''}</h2> */}
+            <h2>{stay.reviews? stay.reviews.length : ''}</h2>
             <h4>Reviews</h4>
           </div>
 

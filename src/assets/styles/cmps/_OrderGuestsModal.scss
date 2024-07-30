@@ -1,16 +1,13 @@
 .ogm-add-guest {
     display: grid;
-    height: 434px;
-    width: 405px;
-    padding: 16px 32px;
 
-    // right: 0;
+    padding: 1rem 2rem;
+
     .ogm-add-field {
         display: flex;
         justify-content: space-between;
         padding: 14px 0;
         padding-right: 4px;
-        // height: 50px;
 
         .ogm-add-txt {
             display: grid;
@@ -18,7 +15,7 @@
             h1 {
                 margin: 0;
                 padding: 0;
-                font-size: em(20px);
+                font-size: 1rem;
                 font-family: cereal-medium;
                 line-height: em(25px);
                 letter-spacing: normal;
@@ -27,7 +24,7 @@
             }
 
             h2 {
-                font-size: em(17.5px);
+                font-size: 1rem;
                 line-height: em(22.5px);
                 font-weight: 400;
                 letter-spacing: normal;
@@ -39,7 +36,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: em(20px);
+            font-size: 1rem;
             width: 100px;
 
             button {
@@ -47,10 +44,16 @@
                 aspect-ratio: 1;
                 background-color: inherit;
                 border: 0.5px solid $clr9;
-                font-size: 1em;
+                font-size: 1rem;
                 font-weight: 400;
                 border-radius: 50%;
+
+                &.off {
+                    border: 0.5px solid rgb(218, 218, 218);
+                    color: rgb(218, 218, 218);
+                }
             }
         }
     }
+
 }

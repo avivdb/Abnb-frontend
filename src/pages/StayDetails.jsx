@@ -44,6 +44,9 @@ import Washer from "../assets/img/icons/Washer.svg"
 import Wifi from "../assets/img/icons/Wifi.svg"
 import Wineglasses from "../assets/img/icons/Wineglasses.svg"
 
+import gallerydots from "../assets/img/icons/gallerydots.svg"
+
+
 
 const amenitiesUrl = {
   "Airconditioning": Airconditioning,
@@ -77,6 +80,8 @@ export function StayDetails() {
 
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
+  const user = useSelector(storeState => storeState.userModule.user)
+
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -88,6 +93,10 @@ export function StayDetails() {
 
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    })
     loadStay(stayId)
     console.log('searchparams', searchParams)
   }, [stayId, searchParams])
@@ -104,24 +113,27 @@ export function StayDetails() {
   }, [])
 
   function handleReserve() {
-    console.log('handleReserve called');
-    const params = new URLSearchParams({
-      startDate: orderToEdit.startDate,
-      endDate: orderToEdit.endDate,
-      totalPrice: orderToEdit.totalPrice,
-      adults: orderToEdit.guestCounts.adults,
-      children: orderToEdit.guestCounts.children,
-      infants: orderToEdit.guestCounts.infants,
-      pets: orderToEdit.guestCounts.pets,
-      guests: orderToEdit.guests,
-    }).toString()
+    if (user === null) navigate(`/login`)
+    else {
+      console.log('handleReserve called');
+      const params = new URLSearchParams({
+        startDate: orderToEdit.startDate,
+        endDate: orderToEdit.endDate,
+        totalPrice: orderToEdit.totalPrice,
+        adults: orderToEdit.guestCounts.adults,
+        children: orderToEdit.guestCounts.children,
+        infants: orderToEdit.guestCounts.infants,
+        pets: orderToEdit.guestCounts.pets,
+        guests: orderToEdit.guests,
+      }).toString()
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    });
-    console.log('Navigating with params:', params);
-    navigate(`/stay/${stay._id}/checkout?${params}`)
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+      console.log('Navigating with params:', params);
+      navigate(`/stay/${stay._id}/checkout?${params}`)
+    }
   }
 
 
@@ -146,18 +158,18 @@ export function StayDetails() {
   }
 
   return (
-    <section className="stay-details ">
+    <section className="stay-details main-container">
       {console.log('stay', stay)}
 
-      {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
       {stay && <div className='stay-details-content stay-details-layout'>
         <h1 className='stay-details-name'>{stay.name}</h1>
 
         <section id="photos" className='gallery'>
-          {stay.imgUrls.map((imgUrl, idx) => (
+          {stay.imgUrls.slice(0, 5).map((imgUrl, idx) => (
             <img key={idx} src={imgUrl} className={idx === 0 ? 'main-img' : ''} />))}
+            {stay.imgUrls.length > 5 && <button onClick={() => navigate(`/stay/gallery/${stay._id}/`)}><img src={gallerydots}/>Show all photos</button>}
         </section>
 
         <section className='details-content'>
@@ -168,7 +180,7 @@ export function StayDetails() {
                 `${stay.capacity} ${stay.capacity === 1 ? "guest" : "guests"} • 
               ${stay.bedrooms.length} ${stay.bedrooms.length === 1 ? "bedroom" : "bedrooms"} • 
               ${stay.beds} ${(stay.beds) === 1 ? "bed" : "beds"} •
-              ${stay.baths} ${stay.baths === 1 ? "bath" : "baths"}`
+              ${stay.bathrooms} ${stay.bathrooms === 1 ? "bath" : "baths"}`
               }
             </h3>
 

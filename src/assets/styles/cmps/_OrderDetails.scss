@@ -138,9 +138,10 @@
 
         position: absolute;
         right: -3%;
-        top: 28%;
+        top: 27%;
 
-        padding: 0.5rem;
+        padding: 2rem;
+        padding-top: 3rem;
         background: rgb(255, 255, 255);
         border-radius: 16px;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
@@ -159,8 +160,9 @@
         z-index: 3000;
 
         position: absolute;
-        right: 100%;
-        top: 0;
+        right: 0;
+        top: 38%;
+        width: 100%;
 
         background: rgb(255, 255, 255);
         border-radius: 10px;
