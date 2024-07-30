@@ -72,11 +72,10 @@ export function OrderCheckout() {
         }
         try {
             await addOrder(order)
-            // showSuccessMsg('Order added');
+            showSuccessMsg('Order added')
             setReservedModal(true)
-            // navigate('/stay/trips');
         } catch (err) {
-            // showErrorMsg('Cannot add order');
+            showErrorMsg('Cannot add order')
         }
     }
 

@@ -27,7 +27,7 @@ export function StayRating({stay}) {
             </div> */}
           </div>
           <div className='stay-rating-reviews'>
-            <h2>{stay.reviews.length || ''}</h2>
+            {/* <h2>{stay.reviews.length || ''}</h2> */}
             <h4>Reviews</h4>
           </div>
 

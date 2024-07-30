@@ -1,40 +1,50 @@
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { updateOrder } from '../store/actions/order.action'
+import { useDispatch, useSelector } from 'react-redux'
+import { getActionAddOrder, updateOrder } from '../store/actions/order.action'
 import { formatDateRange, capitalize } from "../services/util.service"
+import { SOCKET_EVENT_ORDER_ADDED, socketService } from '../services/socket.service'
 
 export function UserOrders() {
-    const user = useSelector(storeState => storeState.userModule.user)
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
     const [orders, setOrders] = useState([])
     const [stays, setStays] = useState({})
     // const [isLoading, setIsLoading] = useState(true)
 
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        async function fetchOrders() {
-            try {
-                // const fetchedOrders = await orderService.query()
-                const filterBy = { hostId: user._id }
-                const fetchedOrders = await orderService.query(filterBy)
-
-
-                const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
-                const fetchedStays = await Promise.all(stayPromises)
-
-                const staysLookup = fetchedStays.reduce((acc, stay) => {
-                    acc[stay._id] = stay
-                    return acc
-                }, {})
-
-                setOrders(fetchedOrders)
-                setStays(staysLookup)
-            } catch (error) {
-                console.error('Error fetching orders or stays:', error)
-            }
-        }
-
         fetchOrders()
+
+        socketService.on(SOCKET_EVENT_ORDER_ADDED, order => {
+			console.log('GOT from socket', order)
+			dispatch(getActionAddOrder(order))
+		})
+        return () => {
+            socketService.off(SOCKET_EVENT_ORDER_ADDED)
+        }
     }, [])
+
+    async function fetchOrders() {
+        try {
+            // const fetchedOrders = await orderService.query()
+            const filterBy = { hostId: loggedInUser._id }
+            const fetchedOrders = await orderService.query(filterBy)
+
+
+            const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
+            const fetchedStays = await Promise.all(stayPromises)
+
+            const staysLookup = fetchedStays.reduce((acc, stay) => {
+                acc[stay._id] = stay
+                return acc
+            }, {})
+
+            setOrders(fetchedOrders)
+            setStays(staysLookup)
+        } catch (error) {
+            console.error('Error fetching orders or stays:', error)
+        }
+    }
 
     async function handleStatusChange(order, newStatus) {
         try {
