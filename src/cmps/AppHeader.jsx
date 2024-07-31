@@ -10,19 +10,10 @@ import menu from "../assets/img/icons/menu.svg";
 import userimg from "../assets/img/icons/user.svg";
 import { stayService } from '../services/stay';
 import search from '../assets/img/icons/search.svg';
-
+import { useMediaQuery } from '@mui/material';
+import { debounce } from '../services/util.service';
 
 const { getDefaultFilter } = stayService;
-
-// Debounce function to limit how often the scroll event handler runs
-const debounce = (func, wait) => {
-	let timeout;
-	return function (...args) {
-		const context = this;
-		clearTimeout(timeout);
-		timeout = setTimeout(() => func.apply(context, args), wait);
-	};
-};
 
 export function AppHeader() {
 	const [userMenu, setUserMenu] = useState(false);
@@ -33,6 +24,7 @@ export function AppHeader() {
 	const navigate = useNavigate();
 	const [allowScroll, setAllowScroll] = useState(true);
 	const lastScrollTop = useRef(0);
+	const isSmallScreen = useMediaQuery('(max-width:600px)');
 
 	useEffect(() => {
 		const handleScroll = debounce(() => {
@@ -45,7 +37,7 @@ export function AppHeader() {
 				setIsExpanded(false);
 			}
 			lastScrollTop.current = scrollTop;
-		}, 100); // Adjust debounce delay as necessary
+		}, 100);
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
@@ -76,66 +68,70 @@ export function AppHeader() {
 		navigate('/');
 	};
 
+	if (isSmallScreen && location.pathname !== '/') {
+		return null; // No header on non-home pages for small screens
+	}
+
 	return (
 		<>
 			<div className={`app-header-container full main-container ${location.pathname.startsWith('/stay') ? 'stay-details-layout' : ''}`}>
+				{isSmallScreen ? (
+					<div className='app-header-mobile'>
+						<div className="mobile-header-btn-search">
+							<img src={search} alt="Search" />
+							<section>
+								<p>Where to?</p>
+								<p>Anywhere · Any week · Add guests</p>
+							</section>
+						</div>
+					</div>
+				) : (
+					<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
+						<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">
+							<h1>bnb</h1>
+						</NavLink>
 
-				<div className='app-header-mobile'>
-					<div className="mobile-header-btn-search">
-						<img src={search} />
-						<section>
-							<p>Where to?</p>
-							<p>Anywhere · Any week · Add guests</p>
+						{location.pathname === '/' && (
+							<>
+								<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`}>Stays</h1>
+								<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
+								<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+							</>
+						)}
+
+						{location.pathname !== '/' && (
+							<>
+								<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
+								{isExpanded && <FilterExpanded setClass="filter-expanded visible" />}
+							</>
+						)}
+
+						<section className="header-user">
+							<Link to="stay/edit">
+								<button className="btn-add-stay">Abnb your home</button>
+							</Link>
+
+							<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
+								<img className="user-menu-img" src={menu} alt="Menu" />
+								{user ? (
+									user.imgUrl ? (
+										<img src={user.imgUrl} alt="User" />
+									) : (
+										<div className="div-user-img">
+											{user.fullname.charAt(0)}
+										</div>
+									)
+								) : (
+									<img className="user-img" src={userimg} alt="User" />
+								)}
+							</div>
+
+							{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
 						</section>
 					</div>
-				</div>
-
-				<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
-
-					<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">
-						<h1>bnb</h1>
-					</NavLink>
-
-					{location.pathname === '/' && (
-						<>
-							<h1 className={`header-stay-title ${isExpanded ? 'visible' : 'hidden'}`}>Stays</h1>
-							<FilterExpanded setClass={`filter-expanded ${isExpanded ? 'visible' : 'hidden'}`} />
-							<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
-						</>
-					)}
-
-					{location.pathname !== '/' && (
-						<>
-							<FilterFocused setClass={`filter-focused ${!isExpanded ? 'visible' : 'hidden'}`} handleFilterClick={handleFilterClick} />
-							{isExpanded && <FilterExpanded setClass="filter-expanded visible" />}
-						</>
-					)}
-
-					<section className="header-user">
-						<Link to="stay/edit">
-							<button className="btn-add-stay">Abnb your home</button>
-						</Link>
-
-						<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
-							<img className="user-menu-img" src={menu} alt="Menu" />
-							{user ? (
-								user.imgUrl ? (
-									<img src={user.imgUrl} alt="User" />
-								) : (
-									<div className="div-user-img">
-										{user.fullname.charAt(0)}
-									</div>
-								)
-							) : (
-								<img className="user-img" src={userimg} alt="User" />
-							)}
-						</div>
-
-						{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
-					</section>
-
-				</div>
+				)}
 			</div>
+
 			{(location.pathname === "/stay" || location.pathname === "/" || location.pathname.startsWith("/s/")) && <FilterLabel />}
 		</>
 	);

@@ -1,5 +1,5 @@
 .stay-details-header {
-  z-index: 500;
+  z-index: 200;
   position: sticky;
   top: 0;
   left: 0;
@@ -10,9 +10,7 @@
   width: 100%;
   min-height: rem(81px);
 
-  // padding-inline: 8.5rem;
   background-color: #fff;
-  // border-bottom: 1px solid #ddd;
 
   .stay-details-header-links {
     display: flex;
