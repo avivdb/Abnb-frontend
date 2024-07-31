@@ -15,8 +15,8 @@ export function FilterPriceRange({ minPrice, maxPrice, setMinPrice, setMaxPrice 
             <Slider
                 range
                 min={40}
-                max={13000}
-                defaultValue={[40, 13000]}
+                max={3500}
+                defaultValue={[40, 3500]}
                 onChange={handleSliderChange}
                 trackStyle={[{ backgroundColor: 'black' }]}
                 handleStyle={[{ backgroundColor: 'white', borderColor: 'black' }]}

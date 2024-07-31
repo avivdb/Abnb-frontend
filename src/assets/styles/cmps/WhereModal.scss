@@ -33,7 +33,8 @@
       font-weight: 400;
 
       .prediction-item {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto 1fr;
         align-items: center;
         column-gap: 16px;
         padding: em(8px, 20px) em(16px, 20px);

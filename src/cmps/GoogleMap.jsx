@@ -35,7 +35,7 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
 
         const initializeMap = async () => {
             const loader = new Loader({
-                apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
+                apiKey: "AIzaSyDVyEl9QJubnu5MQfBLuhU49rPOFKof1lU",
                 version: "weekly",
                 libraries: ["places"],
             });
@@ -123,7 +123,7 @@ export function GoogleMap({ stays, mapHeight, mapBorderRadius }) {
             const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
                 params: {
                     address: address,
-                    key: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE",
+                    key: "AIzaSyDVyEl9QJubnu5MQfBLuhU49rPOFKof1lU",
                 }
             });
             if (response.data.status === 'OK') {

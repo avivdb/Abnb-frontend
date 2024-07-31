@@ -41,7 +41,12 @@ function getDefaultFilter() {
         label: '',
         type: '',
         minPrice: 0,
-        maxPrice: 200000
+        maxPrice: 200000,
+        amenities: [],
+        rooms: 0,
+        bathrooms: 0,
+        beds: 0,
+
     };
 }
 

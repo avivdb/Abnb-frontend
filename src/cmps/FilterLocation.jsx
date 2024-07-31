@@ -6,7 +6,7 @@ export function FilterLocation({ filterToEdit, setFilterToEdit }) {
 
     useEffect(() => {
         const loader = new Loader({
-            apiKey: "AIzaSyBmTIFX2iCfPx5yMBY1_x3A9-5_eT7wQZE", // Replace with your actual Google API key
+            apiKey: "AIzaSyDVyEl9QJubnu5MQfBLuhU49rPOFKof1lU", // Replace with your actual Google API key
             version: "weekly",
             libraries: ["places"],
         });
