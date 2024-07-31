@@ -70,8 +70,10 @@ export function OrderCheckout() {
         }
         try {
             await addOrder(order)
+            // showSuccessMsg('Order added')
             setReservedModal(true)
         } catch (err) {
+            // showErrorMsg('Cannot add order')
         }
     }
 
