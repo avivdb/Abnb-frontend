@@ -2,48 +2,42 @@ import { useState, useEffect } from 'react'
 import { orderService } from "../services/order/"
 import { stayService } from '../services/stay/'
 import { formatDateRangeObject, capitalize } from "../services/util.service"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getActionUpdateOrder, loadOrders } from "../store/actions/order.action"
+import { SOCKET_EVENT_ORDER_UPDATED } from '../services/socket.service'
+
 
 
 export function UserTrips() {
-    const user = useSelector(storeState => storeState.userModule.user)
-    const [orders, setOrders] = useState(null)
-    const [stays, setStays] = useState(null)
+
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+    const orders = useSelector(storeState => storeState.orderModule.orders)
+
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
-        async function fetchOrders() {
-            try {
-                // const fetchedOrders = await orderService.query()
-                const filterBy = { guestId: user._id }
-                const fetchedOrders = await orderService.query(filterBy)
+        loadOrders({ guestId: loggedInUser._id })
 
-                const stayPromises = fetchedOrders.map(order => stayService.getById(order.stay._id))
-                const fetchedStays = await Promise.all(stayPromises)
+        socketService.on(SOCKET_EVENT_ORDER_UPDATED, order => {
+            console.log('GOT from socket', order)
+            dispatch(getActionUpdateOrder(order))
+        })
 
-                const staysLookup = fetchedStays.reduce((acc, stay) => {
-                    acc[stay._id] = stay
-                    return acc
-                }, {})
-
-                setOrders(fetchedOrders)
-                setStays(staysLookup)
-            } catch (error) {
-                console.error('Error fetching orders or stays:', error)
-            }
+        return () => {
+            socketService.off(SOCKET_EVENT_ORDER_UPDATED)
         }
-
-        fetchOrders()
     }, [])
 
 
-    if (stays === null || stays === undefined ||
-        orders === null || orders === undefined) {
+
+    if (orders === null || orders === undefined || orders.length === 0) {
         return <div className="loader"></div>
     }
 
-    if (orders.length === 0 || stays.length === 0) {
-        return <div >no trips yet</div>
-    }
+    // if (orders.length === 0) {
+    //     return <div >no trips yet</div>
+    // }
 
 
     return (
@@ -52,10 +46,8 @@ export function UserTrips() {
             <hr />
             <ul className="user-trips-list">
                 {orders.map(order => {
-                    const stay = stays[order.stay._id]
                     return (
                         <li className="user-trip" key={order._id}>
-                            {stay ? (
                                 <>
                                     <div
                                         className="trip-order-status"
@@ -67,10 +59,10 @@ export function UserTrips() {
                                                     : '#fff'
                                         }}>
                                         {capitalize(order.status)}</div>
-                                    <img src={stay.imgUrls[0]} alt={stay.name} />
+                                    <img src={order.stay.img} />
                                     <section className="trip-top-info">
-                                        <p>{stay.loc.city}</p>
-                                        <p>{stay.type} hosted by {stay.host.fullname.split(" ")[0]}</p>
+                                        <p>{order.stay.loc.city}</p>
+                                        <p>Hosted by {order.host.fullname.split(" ")[0]}</p>
                                         <hr />
                                     </section>
                                     <section className="trip-main-info">
@@ -80,15 +72,12 @@ export function UserTrips() {
                                             <p>{order.startDate.slice(-4)}</p>
                                         </section>
                                         <section>
-                                            <p>{stay.name}</p>
-                                            <p>{stay.loc.city}</p>
-                                            <p>{stay.loc.country}</p>
+                                            <p>{order.stay.name}</p>
+                                            <p>{order.stay.loc.city}</p>
+                                            <p>{order.stay.loc.country}</p>
                                         </section>
                                     </section>
                                 </>
-                            ) : (
-                                <p>Trip information not available</p>
-                            )}
                         </li>
                     )
                 })}

@@ -42,7 +42,12 @@ export function OrderCheckout() {
                 stay: {
                     _id: stay._id,
                     name: stay.name,
-                    price: stay.price
+                    price: stay.price,
+                    img: stay.imgUrls[0],
+                    loc: {
+                        city: stay.loc.city,
+                        country: stay.loc.country
+                    }
                 },
                 host: {
                     _id: stay.host._id,
