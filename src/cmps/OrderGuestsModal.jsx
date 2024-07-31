@@ -1,11 +1,18 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function OrderGuestsModal({ orderToEdit, setOrderToEdit, stay, setIsGuestsModalOpen }) {
     const [adultCounter, setAdultCounter] = useState(1)
     const [childrenCounter, setChildrenCounter] = useState(0)
     const [infantCounter, setInfantCounter] = useState(0)
     const [petCounter, setPetCounter] = useState(0)
+
+    useEffect(() => {
+        setAdultCounter(orderToEdit.guestCounts.adults || 1)
+        setChildrenCounter(orderToEdit.guestCounts.children || 0)
+        setInfantCounter(orderToEdit.guestCounts.infants || 0)
+        setPetCounter(orderToEdit.guestCounts.pets || 0)
+    }, [orderToEdit])
 
     function handleClick(operator, counter, setCounter, type) {
         let newCounter = counter

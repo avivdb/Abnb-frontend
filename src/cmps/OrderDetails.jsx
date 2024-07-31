@@ -5,48 +5,23 @@ import { OrderDateModel } from "./OrderDateModel"
 import { OrderGuestsModal } from "./OrderGuestsModal"
 import dayjs from 'dayjs'
 import { AbnbGradientBtn } from "./AbnbGradientBtn"
-import { calculateNights } from '../services/util.service.js'
+import { calculateNights, transformDate } from '../services/util.service.js'
 
 
 import arrowdown from "../assets/img/icons/arrowdown.svg"
 import { useSelector } from "react-redux"
 
-export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParams, handleReserve }) {
+export function OrderDetails({ stay, orderToEdit, setOrderToEdit, handleReserve }) {
     const [numberOfNights, setNumberOfNights] = useState(1)
     const [isDateModalOpen, setIsDateModalOpen] = useState(false)
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const user = useSelector(storeState => storeState.userModule.user)
-
-    console.log(user)
     const navigate = useNavigate()
-
-    useEffect(() => {
-        setOrderToEdit(prevOrder => {
-            const newOrder = { ...prevOrder }
-            if (!newOrder.startDate) newOrder.startDate = stay.defaultCheckin
-            if (!newOrder.endDate) newOrder.endDate = stay.defaultCheckout
-            return newOrder
-        })
-    }, [])
-
-
-    useEffect(() => {
-        setSearchParams({
-            startDate: orderToEdit.startDate,
-            endDate: orderToEdit.endDate,
-            totalPrice: orderToEdit.totalPrice,
-            adults: orderToEdit.guestCounts.adults,
-            children: orderToEdit.guestCounts.children,
-            infants: orderToEdit.guestCounts.infants,
-            pets: orderToEdit.guestCounts.pets,
-            capacity: orderToEdit.capacity,
-
-        })
-    }, [orderToEdit])
 
     useEffect(() => {
         updateBookingDetails()
     }, [orderToEdit.startDate, orderToEdit.endDate])
+
 
     function updateBookingDetails() {
         if (orderToEdit.startDate && orderToEdit.startDate) {
@@ -61,10 +36,10 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
         }
     }
 
-
     function handleReserve() {
-        if (user === null) navigate(`/login`)
-        else {
+        if (user === null) {
+            navigate(`/login`)
+        } else {
             const params = new URLSearchParams({
                 startDate: orderToEdit.startDate,
                 endDate: orderToEdit.endDate,
@@ -75,7 +50,7 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
                 pets: orderToEdit.guestCounts.pets,
                 capacity: orderToEdit.capacity,
             }).toString()
-
+    
             navigate(`/stay/${stay._id}/checkout?${params}`)
         }
     }
@@ -97,14 +72,6 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, setSearchParam
         }
 
         return guestSummary.join(', ')
-    }
-
-    function transformDate(dateStr) {
-
-        const [day, month, year] = dateStr.split('-');
-        const newDateStr = `${day}/${month}/${year}`;
-
-        return newDateStr;
     }
 
     return (

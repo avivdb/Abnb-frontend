@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -25,14 +25,27 @@ function displayDate(date) {
 }
 
 export function OrderDateModel({ orderToEdit, setOrderToEdit, setIsDateModalOpen }) {
-    const [startDate, setStartDate] = useState(() => {
-        const parsedDate = parseDate(orderToEdit.startDate)
-        return parsedDate instanceof Date && !isNaN(parsedDate) ? parsedDate : null
-    })
-    const [endDate, setEndDate] = useState(() => {
-        const parsedDate = parseDate(orderToEdit.endDate)
-        return parsedDate instanceof Date && !isNaN(parsedDate) ? parsedDate : null
-    })
+    // const [startDate, setStartDate] = useState(() => {
+    //     const parsedDate = parseDate(orderToEdit.startDate)
+    //     return parsedDate instanceof Date && !isNaN(parsedDate) ? parsedDate : null
+    // })
+    // const [endDate, setEndDate] = useState(() => {
+    //     const parsedDate = parseDate(orderToEdit.endDate)
+    //     return parsedDate instanceof Date && !isNaN(parsedDate) ? parsedDate : null
+    // })
+
+    // const [startDate, setStartDate] = useState(parseDate(orderToEdit.startDate))
+    // const [endDate, setEndDate] = useState(parseDate(orderToEdit.endDate))
+    const [startDate, setStartDate] = useState(() => parseDate(orderToEdit.startDate))
+    const [endDate, setEndDate] = useState(() => parseDate(orderToEdit.endDate))
+
+    useEffect(() => {
+        setStartDate(parseDate(orderToEdit.startDate))
+        setEndDate(parseDate(orderToEdit.endDate))
+    // }, [orderToEdit])
+    console.log('orderToEdit:', orderToEdit)
+    }, [orderToEdit.startDate, orderToEdit.endDate])
+
 
     function handleSelect(dates) {
         const [start, end] = dates;

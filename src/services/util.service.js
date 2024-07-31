@@ -127,6 +127,7 @@ export function formatDateRangeObject(date1, date2) {
 
 export function calculateNights(checkIn, checkOut) {
     function parseDate(dateString) {
+        if (!dateString) return null
         const [day, month, year] = dateString.split('-').map(Number)
         return new Date(year, month - 1, day)
     }
@@ -134,12 +135,24 @@ export function calculateNights(checkIn, checkOut) {
     const checkInDate = parseDate(checkIn)
     const checkOutDate = parseDate(checkOut)
 
+    if (!checkInDate || !checkOutDate) return 0
+
     const differenceInMilliseconds = checkOutDate - checkInDate
 
     const millisecondsPerDay = 24 * 60 * 60 * 1000
     const nights = differenceInMilliseconds / millisecondsPerDay
 
     return Math.floor(nights)
+}
+
+export function transformDate(dateStr) {
+    if (!dateStr) return ''
+
+   const [day, month, year] = dateStr.split('-')
+   if (!day || !month || !year) return ''
+   const newDateStr = `${day}/${month}/${year}`
+
+   return newDateStr;
 }
 
 export function getDateTwoWeeksBefore(dateString, weeks) {
@@ -170,6 +183,13 @@ export function formatDate(inputDate) {
     return `${day}/${month}/${year}`
 }
 
+export function formatDateToHyphen(date) {
+    if (!date) return ''
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+}
 
 
 
