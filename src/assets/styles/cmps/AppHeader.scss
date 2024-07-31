@@ -1,8 +1,57 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 .app-header-container {
   border-bottom: 1px solid rgba($clr8, 0.1);
   position: sticky;
   top: 0;
   z-index: 102;
+  animation: fadeIn 0.2s cubic-bezier(0.42, 0, 1, 1);
 }
 
 .app-header {
@@ -12,7 +61,8 @@
   padding-block: 1rem;
   color: $clr1;
   background-color: $clr12;
-  transition: all 0.3s ease-in;
+  transition: grid-template-rows 0.3s cubic-bezier(0.42, 0, 1, 1);
+  animation: slideIn 0.3s cubic-bezier(0.42, 0, 1, 1);
 
   &.expanded {
     grid-template-rows: auto auto auto;
@@ -29,14 +79,20 @@
     text-align: center;
     font-size: 1rem;
     color: black;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.3s cubic-bezier(0.42, 0, 1, 1),
+      visibility 0.3s cubic-bezier(0.42, 0, 1, 1);
+    animation: fadeIn 0.5s cubic-bezier(0.42, 0, 1, 1);
 
     &.visible {
       opacity: 1;
+      visibility: visible;
+      animation: fadeIn 0.3s cubic-bezier(0.42, 0, 1, 1);
     }
 
     &.hidden {
       opacity: 0;
+      visibility: hidden;
+      animation: fadeOut 0.3s cubic-bezier(0.42, 0, 1, 1);
     }
   }
 
@@ -55,6 +111,7 @@
       color: $clr1;
       font-family: cereal-bold;
       font-size: 1.5rem;
+      animation: fadeIn 0.3s cubic-bezier(0.42, 0, 1, 1);
     }
   }
 
@@ -63,17 +120,33 @@
     opacity: 0;
     visibility: hidden;
     justify-self: center;
-    transition: visibility 0.3s ease-in, opacity 0.3s ease-in;
+    transition: visibility 0.3s cubic-bezier(0.42, 0, 1, 1),
+      opacity 0.3s cubic-bezier(0.42, 0, 1, 1);
 
     &.visible {
       opacity: 1;
       visibility: visible;
+      animation: fadeIn 0.3s cubic-bezier(0.42, 0, 1, 1);
     }
   }
 
   .filter-expanded {
     grid-column: -1/1;
     grid-row: 2;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: max-height 0.2s cubic-bezier(0.42, 0, 1, 1),
+      opacity 0.3s cubic-bezier(0.42, 0, 1, 1) visibility 0.3
+        cubic-bezier(0.42, 0, 1, 1);
+    animation: slideIn 0.3s cubic-bezier(0.42, 0, 1, 1);
+    &.visible {
+      max-height: 500px;
+      opacity: 1;
+      visibility: visible;
+      animation: fadeIn 0.3s cubic-bezier(0.42, 0, 1, 1);
+    }
   }
 
   .filter-label {
@@ -94,7 +167,7 @@
     padding: 0.5rem;
     border: 1px solid $gray1;
     border-radius: 30px;
-    transition: 0.2s;
+    transition: 0.5s cubic-bezier(0.42, 0, 1, 1);
 
     &:hover {
       box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.56);
@@ -102,7 +175,7 @@
 
     img {
       max-height: 2rem;
-        border-radius: 50%;
+      border-radius: 50%;
 
       &:first-of-type {
         height: 1.2rem;
@@ -110,9 +183,7 @@
     }
 
     &:last-of-type {
-      // height: 2rem;
       object-fit: cover;
-      // border-radius: 50%;
     }
   }
 

@@ -161,7 +161,7 @@ export function StayDetails() {
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
       {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
-      {stay && <div className='stay-details-content stay-details-layout'>
+      {stay && <div className='stay-details-content'>
         <h1 className='stay-details-name'>{stay.name}</h1>
 
         <section id="photos" className='gallery'>

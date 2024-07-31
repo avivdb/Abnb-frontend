@@ -1,159 +1,163 @@
 .stay-details-header {
-    z-index: 500;
-    position: fixed;
-    top: 0;
-    left: 0;
+  z-index: 500;
+  position: sticky;
+  top: 0;
+  left: 0;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-    width: 100%;
-    min-height: rem(81px);
+  width: 100%;
+  min-height: rem(81px);
 
-    padding-inline: 8.5rem;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
+  // padding-inline: 8.5rem;
+  background-color: #fff;
+  // border-bottom: 1px solid #ddd;
 
-    .stay-details-header-links {
-        display: flex;
-        gap: 1.5rem;
+  .stay-details-header-links {
+    display: flex;
+    gap: 1.5rem;
 
-        button {
-            position: relative;
-            background-color: #fff;
-            font-size: 0.85rem;
-            font-family: cereal-medium;
+    button {
+      position: relative;
+      background-color: #fff;
+      font-size: 0.85rem;
+      font-family: cereal-medium;
 
-            &::after {
-                z-index: 700;
-                content: "";
-                position: relative;
-                display: block;
-                left: 0;
-                top: 1.8rem;
-                width: 100%;
-                height: 5px;
-                background-color: transparent;
-            }
-
-            &:hover::after {
-                background-color: black;
-            }
-        }
-    }
-
-    .stay-details-header-reserve {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        gap: 1rem;
-
-        p {
-            margin: 0;
-        }
-
-        section {
-            display: flex;
-            flex-direction: column;
-
-            &>* {
-                display: flex;
-                gap: 0.3rem;
-                align-items: center;
-            }
-
-            &>*:first-child {
-                font-family: cereal-medium;
-
-                span {
-                    font-family: cereal-light;
-                    font-size: 0.9rem;
-                }
-            }
-
-            &>*:last-child {
-                font-family: cereal-medium;
-                font-size: 0.7rem;
-
-                &>*:last-child {
-                    font-family: cereal-regular;
-                    color: grey;
-                    // text-decoration: underline;
-                }
-            }
-        }
-    }
-
-    .btn-container {
+      &::after {
+        z-index: 700;
+        content: "";
         position: relative;
-        justify-self: end;
-        grid-column: 2;
-        width: 10rem;
-        height: 48px;
-        padding: 0 0;
-        margin-block: 1rem;
-        cursor: pointer;
-        border: none;
-        display: grid;
-        grid-template: repeat(10, 1fr) / repeat(10, 1fr);
-    
-        @for $i from 0 to 10 {
-          .cell:nth-child(10n + #{$i + 1}):hover~.content {
-            --positionX: #{$i};
-          }
-    
-          .cell:nth-child(n + #{10 * $i + 1}):nth-child(-n + #{10 * ($i + 1)}):hover~.content {
-            --positionY: #{$i};
-          }
-        }
-        
-        .cell {
-          width: 100%;
-          height: 100%;
-          z-index: 1;
-        }
-        
-        .content {
-          --positionX: 0;
-          --positionY: 5;
-          
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-          border-radius: 8px;
-          
-          background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),
-          rgb(241, 37, 75) 0%,
-          rgb(230, 30, 77) 27.5%,
-          rgb(227, 28, 95) 40%,
-          rgb(215, 4, 102) 57.5%,
-          rgb(189, 30, 89) 75%,
-          rgb(189, 30, 89) 100%);
-        }
-        
-        .action-btn {
-          padding: 0 0;
-          margin: 0 0;
+        display: block;
+        left: 0;
+        top: 1.8rem;
         width: 100%;
-        height: 100%;
+        height: 5px;
         background-color: transparent;
-        border: none;
       }
-    
-      span {
-        padding: 0 0;
-        margin: 0 0;
-        color: white;
-        font-size: 16px;
-        line-height: 20px;
-        font-weight: 600;
-        font-family: cereal-medium;
+
+      &:hover::after {
+        background-color: black;
       }
     }
+  }
+
+  .stay-details-header-reserve {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+
+    p {
+      margin: 0;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+
+      & > * {
+        display: flex;
+        gap: 0.3rem;
+        align-items: center;
+      }
+
+      & > *:first-child {
+        font-family: cereal-medium;
+
+        span {
+          font-family: cereal-light;
+          font-size: 0.9rem;
+        }
+      }
+
+      & > *:last-child {
+        font-family: cereal-medium;
+        font-size: 0.7rem;
+
+        & > *:last-child {
+          font-family: cereal-regular;
+          color: grey;
+          // text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .btn-container {
+    position: relative;
+    justify-self: end;
+    grid-column: 2;
+    width: 10rem;
+    height: 48px;
+    padding: 0 0;
+    margin-block: 1rem;
+    cursor: pointer;
+    border: none;
+    display: grid;
+    grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+
+    @for $i from 0 to 10 {
+      .cell:nth-child(10n + #{$i + 1}):hover ~ .content {
+        --positionX: #{$i};
+      }
+
+      .cell:nth-child(n + #{10 * $i + 1}):nth-child(-n + #{10 * ($i + 1)}):hover
+        ~ .content {
+        --positionY: #{$i};
+      }
+    }
+
+    .cell {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .content {
+      --positionX: 0;
+      --positionY: 5;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      border-radius: 8px;
+
+      background-image: radial-gradient(
+        circle at calc((0 + var(--positionX, 0)) * 10%)
+          calc((0 + var(--positionY, 0)) * 5%),
+        rgb(241, 37, 75) 0%,
+        rgb(230, 30, 77) 27.5%,
+        rgb(227, 28, 95) 40%,
+        rgb(215, 4, 102) 57.5%,
+        rgb(189, 30, 89) 75%,
+        rgb(189, 30, 89) 100%
+      );
+    }
+
+    .action-btn {
+      padding: 0 0;
+      margin: 0 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      border: none;
+    }
+
+    span {
+      padding: 0 0;
+      margin: 0 0;
+      color: white;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 600;
+      font-family: cereal-medium;
+    }
+  }
 }

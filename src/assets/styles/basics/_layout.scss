@@ -40,25 +40,32 @@
       minmax(auto, $wide-breakpoint)
       minmax($layoutPadding, 1fr);
   }
-}
 
-.stay-details-layout {
-  position: relative;
-  display: grid;
-  justify-content: center;
-  grid-template-columns:
-    minmax($layoutPadding, 1fr)
-    minmax(auto, 1200px)
-    minmax($layoutPadding, 1fr);
-
-  > *:not(.full) {
-    grid-column: 2;
-
-    > *.full {
-      grid-column: 1 / -1;
-    }
+  &.stay-details-layout {
+    grid-template-columns:
+      minmax($layoutPadding, 1fr)
+      minmax(auto, $normal-breakpoint)
+      minmax($layoutPadding, 1fr);
   }
 }
+
+// .stay-details-layout {
+//   // position: relative;
+//   display: grid;
+//   justify-content: center;
+//   grid-template-columns:
+//     minmax($layoutPadding, 1fr)
+//     minmax(auto, 1200px)
+//     minmax($layoutPadding, 1fr);
+
+//   > *:not(.full) {
+//     grid-column: 2;
+
+//     > *.full {
+//       grid-column: 1 / -1;
+//     }
+//   }
+// }
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

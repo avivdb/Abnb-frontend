@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FilterFocused } from './FilterFocused';
 import { FilterExpanded } from './FilterExpanded';
 import { UserMenu } from './UserMenu';
@@ -10,8 +10,17 @@ import menu from "../assets/img/icons/menu.svg";
 import userimg from "../assets/img/icons/user.svg";
 import { stayService } from '../services/stay';
 
-
 const { getDefaultFilter } = stayService;
+
+// Debounce function to limit how often the scroll event handler runs
+const debounce = (func, wait) => {
+	let timeout;
+	return function (...args) {
+		const context = this;
+		clearTimeout(timeout);
+		timeout = setTimeout(() => func.apply(context, args), wait);
+	};
+};
 
 export function AppHeader() {
 	const [userMenu, setUserMenu] = useState(false);
@@ -19,23 +28,22 @@ export function AppHeader() {
 	const user = useSelector(storeState => storeState.userModule.user);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const location = useLocation();
-
-
+	const navigate = useNavigate();
 	const [allowScroll, setAllowScroll] = useState(true);
+	const lastScrollTop = useRef(0);
 
 	useEffect(() => {
-		let lastScrollTop = 0;
-		const handleScroll = () => {
+		const handleScroll = debounce(() => {
 			if (!allowScroll) return;
 			const scrollTop = window.scrollY;
 
 			if (scrollTop === 0 && location.pathname === '/') {
 				setIsExpanded(true);
-			} else if (scrollTop > lastScrollTop) {
+			} else if (scrollTop > lastScrollTop.current) {
 				setIsExpanded(false);
 			}
-			lastScrollTop = scrollTop;
-		};
+			lastScrollTop.current = scrollTop;
+		}, 100); // Adjust debounce delay as necessary
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
@@ -52,20 +60,23 @@ export function AppHeader() {
 	const handleFilterClick = () => {
 		setAllowScroll(false);
 		setIsExpanded(state => !state);
+
+		const timeoutDuration = 1000; // 1-second delay to prevent immediate closing
+
 		setTimeout(() => {
 			setAllowScroll(true);
-		}, 500)
+		}, timeoutDuration);
 	};
 
 	const handleLogoClick = () => {
 		setIsExpanded(false);
-		setFilterBy(getDefaultFilter())
+		setFilterBy(getDefaultFilter());
 		navigate('/');
 	};
 
 	return (
 		<>
-			<div className='app-header-container full main-container'>
+			<div className={`app-header-container full main-container ${location.pathname.startsWith('/stay') ? 'stay-details-layout' : ''}`}>
 				<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
 
 					<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router'
+import { Routes, Route, useLocation } from 'react-router'
 
 import { StayIndex } from './pages/StayIndex.jsx'
 // import { AdminIndex } from './pages/AdminIndex.jsx'
@@ -23,9 +23,10 @@ import { SearchPage } from './pages/SearchPage.jsx'
 
 
 export function RootCmp() {
+    const location = useLocation()
     return (
 
-        <div className="main-container">
+        <div className={`main-container ${location.pathname.startsWith('/stay') ? 'stay-details-layout' : ''} `}>
             <AppHeader />
             <UserMsg />
 
