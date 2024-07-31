@@ -173,13 +173,14 @@ export function StayDetails() {
         return <div className="loader"></div>
     }
 
-    return (
-        <section className="stay-details main-container">
+  return (
+    <section className="stay-details">
+      {console.log('stay', stay)}
 
             {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
-            {stay && <div className='stay-details-content stay-details-layout'>
-                <h1 className='stay-details-name'>{stay.name}</h1>
+      {stay && <div className='stay-details-content'>
+        <h1 className='stay-details-name'>{stay.name}</h1>
 
                 <section id="photos" className='gallery'>
                     {stay.imgUrls.slice(0, 5).map((imgUrl, idx) => (

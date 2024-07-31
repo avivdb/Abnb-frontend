@@ -67,7 +67,11 @@
 
             p {
                 margin: 0;
-                font-size: 1rem;
+                font-size: 0.7rem;
+
+                &:last-of-type {
+                    color: rgb(117, 117, 117);
+                }
 
                 &.selected {
                     color: $clr1;
@@ -75,7 +79,7 @@
             }
 
             img {
-                max-width: 2rem;
+                max-width: 1.4rem;
 
             }
         }

@@ -3,7 +3,8 @@
     margin-block-end: 5rem;
 
     h2 {
-        margin-block: 2rem;
+        margin-block-start: 2rem;
+        margin-block-end: 1rem;
     }
 
     hr {
@@ -76,16 +77,21 @@
 
                 &>*:last-child {
                     font-size: 0.9rem;
+
                 }
             }
-
+            
             &>*:last-child {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-
+                
                 font-family: cereal-light;
                 padding-inline-start: 1rem;
+
+                p:first-of-type {
+                   font-family: cereal-medium; 
+                }
 
                 &>*:last-child {
                     font-size: 0.9rem;
@@ -94,4 +100,5 @@
         }
 
     }
+
 }

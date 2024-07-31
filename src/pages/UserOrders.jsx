@@ -6,8 +6,8 @@ import { SOCKET_EVENT_ORDER_ADDED, socketService } from '../services/socket.serv
 
 export function UserOrders() {
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const [orders, setOrders] = useState([])
-    const [stays, setStays] = useState({})
+    const [orders, setOrders] = useState(null)
+    const [stays, setStays] = useState(null)
     // const [isLoading, setIsLoading] = useState(true)
 
     const dispatch = useDispatch()
@@ -72,6 +72,7 @@ export function UserOrders() {
     return (
         <section className="user-orders">
             <h2>Incoming orders</h2>
+            <hr />
             <ul className="user-orders-list">
                 {orders.map(order => {
                     const stay = stays[order.stay._id];
