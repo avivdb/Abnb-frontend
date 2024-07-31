@@ -1,6 +1,6 @@
 .filter-label-container {
   position: sticky;
-  top: 83px;
+  top: 82px;
   z-index: 101;
   padding-block-start: 0.5rem;
   background-color: $clr12;
@@ -79,6 +79,7 @@
 
         &.selected {
           filter: invert(0%);
+
           &::after {
             display: block;
           }
@@ -156,4 +157,30 @@
       }
     }
   }
+
+  @include for-mobile-layout {
+    // .filter-label-container {
+    //   position: sticky;
+    //   top: 50px;
+    // }
+
+    // .label-img {
+    //   width: rem(18px);
+    // }
+
+    // .label-name {
+    //   font-size: 0.6rem;
+    // }
+  }
+
+  @include for-narrow-layout {
+    // .label-img {
+    //   width: rem(24px);
+    // }
+
+    // .label-name {
+    //   font-size: 0.8rem;
+    // }
+  }
+
 }

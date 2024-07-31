@@ -7,7 +7,7 @@ import arrowBack from "../assets/img/icons/arrowback.svg"
 
 export function ImgCarousel({ stay }) {
 
-  const images = stay.imgUrls;
+  const images = stay.imgUrls.slice(0, 5);
 
   const handlePrevClick = (e, clickHandler) => {
     e.stopPropagation()

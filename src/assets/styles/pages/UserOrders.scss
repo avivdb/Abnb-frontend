@@ -8,11 +8,16 @@
     }
 
     h2 {
-        margin-block-end: 2rem;
+        margin-block-start: 2rem;
+        margin-block-end: 1rem;
     }
 
     img {
         width: 10rem;
+    }
+
+    hr {
+        border: 0.7px solid rgb(221, 221, 221);
     }
 
     .user-orders-list {

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
-import { stayService } from "../services/stay/stay.service.local";
-import { formatDate, formatDateRange, getDateTwoWeeksBefore, calculateNights } from '../services/util.service.js'
+import { formatDateRange, getDateTwoWeeksBefore } from '../services/util.service.js'
 
 import { CountrySelectModal } from "../cmps/CountrySelectModal";
 import { CheckoutStayModal } from "../cmps/CheckoutStayModal";
@@ -12,7 +11,6 @@ import arrowBack from "../assets/img/icons/arrowback.svg";
 import SelectDropdown from "../cmps/SelectDropdown";
 import { addOrder } from "../store/actions/order.action";
 import { orderService } from "../services/order";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import "../assets/styles/cmps/AbnbGradientBtn.scss";
 import { AbnbGradientBtn } from "../cmps/AbnbGradientBtn";
 
@@ -72,11 +70,10 @@ export function OrderCheckout() {
         }
         try {
             await addOrder(order)
-            // showSuccessMsg('Order added');
+            // showSuccessMsg('Order added')
             setReservedModal(true)
-            // navigate('/stay/trips');
         } catch (err) {
-            // showErrorMsg('Cannot add order');
+            // showErrorMsg('Cannot add order')
         }
     }
 
@@ -87,8 +84,7 @@ export function OrderCheckout() {
 
     return (
         <section className="order-checkout">
-            <button className="back"><img src={arrowBack} alt="Back" /></button>
-            <h2 className="order-checkout-title">Request to book</h2>
+            <button className="back order-checkout-title"><div onClick={() => navigate(`/stay/${stay._id}`)}><img src={arrowBack} alt="Back" /></div><h2>Request to book</h2></button>
             <section className="checkout-main-content">
                 <section className="checkout-your-trip">
                     <section className="order-checkout-top-content">

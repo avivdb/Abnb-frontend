@@ -9,6 +9,8 @@ import { setFilterBy } from "../store/actions/stay.actions";
 import menu from "../assets/img/icons/menu.svg";
 import userimg from "../assets/img/icons/user.svg";
 import { stayService } from '../services/stay';
+import search from '../assets/img/icons/search.svg';
+
 
 const { getDefaultFilter } = stayService;
 
@@ -77,6 +79,17 @@ export function AppHeader() {
 	return (
 		<>
 			<div className={`app-header-container full main-container ${location.pathname.startsWith('/stay') ? 'stay-details-layout' : ''}`}>
+
+				<div className='app-header-mobile'>
+					<div className="mobile-header-btn-search">
+						<img src={search} />
+						<section>
+							<p>Where to?</p>
+							<p>Anywhere · Any week · Add guests</p>
+						</section>
+					</div>
+				</div>
+
 				<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
 
 					<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">

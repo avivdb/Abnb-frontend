@@ -49,6 +49,7 @@ export function UserTrips() {
     return (
         <section className="user-trips">
             <h2>Trips</h2>
+            <hr />
             <ul className="user-trips-list">
                 {orders.map(order => {
                     const stay = stays[order.stay._id]
@@ -79,7 +80,7 @@ export function UserTrips() {
                                             <p>{order.startDate.slice(-4)}</p>
                                         </section>
                                         <section>
-                                            <p>{stay.loc.address}</p>
+                                            <p>{stay.name}</p>
                                             <p>{stay.loc.city}</p>
                                             <p>{stay.loc.country}</p>
                                         </section>
