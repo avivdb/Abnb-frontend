@@ -5,8 +5,8 @@ import { formatDateRange, capitalize } from "../services/util.service"
 
 export function UserOrders() {
     const user = useSelector(storeState => storeState.userModule.user)
-    const [orders, setOrders] = useState([])
-    const [stays, setStays] = useState({})
+    const [orders, setOrders] = useState(null)
+    const [stays, setStays] = useState(null)
     // const [isLoading, setIsLoading] = useState(true)
 
 
@@ -62,6 +62,7 @@ export function UserOrders() {
     return (
         <section className="user-orders">
             <h2>Incoming orders</h2>
+            <hr />
             <ul className="user-orders-list">
                 {orders.map(order => {
                     const stay = stays[order.stay._id];
