@@ -109,7 +109,7 @@ export function StayDetails() {
                     pets: filterBy.guest.pet || 0,
                 }
                 orderFromFilterBy.capacity = filterBy.guest.capacity || 1,
-                orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
+                    orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
                 orderFromFilterBy.endDate = formatDateToHyphen(filterBy.checkOut) || stay.defaultCheckout
 
                 return orderFromFilterBy
@@ -132,7 +132,7 @@ export function StayDetails() {
     function handleReserve() {
         if (user === null) navigate(`/login`)
         else {
-              const params = new URLSearchParams({
+            const params = new URLSearchParams({
                 startDate: orderToEdit.startDate,
                 endDate: orderToEdit.endDate,
                 totalPrice: orderToEdit.totalPrice,
@@ -141,21 +141,24 @@ export function StayDetails() {
                 infants: orderToEdit.guestCounts.infants,
                 pets: orderToEdit.guestCounts.pets,
                 guests: orderToEdit.guests,
-              }).toString()
+            }).toString()
 
             window.scrollTo({
                 top: 0,
                 behavior: 'instant'
             })
-              navigate(`/stay/${stay._id}/checkout?${params}`)
+            navigate(`/stay/${stay._id}/checkout?${params}`)
         }
     }
 
 
     function handleScroll() {
+        console.log('scrollY:', window.scrollY) // Log the current scroll position
         if (window.scrollY > 545) {
+            console.log('Setting header to true')
             setHeader(true)
         } else {
+            console.log('Setting header to false')
             setHeader(false)
         }
     }
@@ -173,14 +176,14 @@ export function StayDetails() {
         return <div className="loader"></div>
     }
 
-  return (
-    <section className="stay-details">
-      {console.log('stay', stay)}
+    return (
+        <section className="stay-details">
+            {console.log('stay', stay)}
 
             {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
-      {stay && <div className='stay-details-content'>
-        <h1 className='stay-details-name'>{stay.name}</h1>
+            {stay && <div className='stay-details-content'>
+                <h1 className='stay-details-name'>{stay.name}</h1>
 
                 <section id="photos" className='gallery'>
                     {stay.imgUrls.slice(0, 5).map((imgUrl, idx) => (
