@@ -37,9 +37,8 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, handleReserve 
     }
 
     function handleReserve() {
-        if (user === null) {
-            navigate(`/login`)
-        } else {
+        if (user === null) navigate(`/login`)
+        else {
             const params = new URLSearchParams({
                 startDate: orderToEdit.startDate,
                 endDate: orderToEdit.endDate,
@@ -50,7 +49,7 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, handleReserve 
                 pets: orderToEdit.guestCounts.pets,
                 capacity: orderToEdit.capacity,
             }).toString()
-    
+
             navigate(`/stay/${stay._id}/checkout?${params}`)
         }
     }
