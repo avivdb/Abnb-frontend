@@ -32,7 +32,11 @@ export function UserTrips() {
 
 
     if (orders === null || orders === undefined || orders.length === 0) {
-        return <div className="loader"></div>
+        return (
+            <div className='loader-wrapper'>
+                <div className="loader"></div>
+            </div>
+        )
     }
 
     // if (orders.length === 0) {
@@ -48,36 +52,36 @@ export function UserTrips() {
                 {orders.map(order => {
                     return (
                         <li className="user-trip" key={order._id}>
-                                <>
-                                    <div
-                                        className="trip-order-status"
-                                        style={{
-                                            backgroundColor: order.status === 'approved'
-                                                ? '#c8e6c9'
-                                                : order.status === 'declined'
-                                                    ? '#ef9a9a'
-                                                    : '#fff'
-                                        }}>
-                                        {capitalize(order.status)}</div>
-                                    <img src={order.stay.img} />
-                                    <section className="trip-top-info">
+                            <>
+                                <div
+                                    className="trip-order-status"
+                                    style={{
+                                        backgroundColor: order.status === 'approved'
+                                            ? '#c8e6c9'
+                                            : order.status === 'declined'
+                                                ? '#ef9a9a'
+                                                : '#fff'
+                                    }}>
+                                    {capitalize(order.status)}</div>
+                                <img src={order.stay.img} />
+                                <section className="trip-top-info">
+                                    <p>{order.stay.loc.city}</p>
+                                    <p>Hosted by {order.host.fullname.split(" ")[0]}</p>
+                                    <hr />
+                                </section>
+                                <section className="trip-main-info">
+                                    <section>
+                                        <p>{formatDateRangeObject(order.startDate, order.endDate).month}</p>
+                                        <p>{formatDateRangeObject(order.startDate, order.endDate).dates}</p>
+                                        <p>{order.startDate.slice(-4)}</p>
+                                    </section>
+                                    <section>
+                                        <p>{order.stay.name}</p>
                                         <p>{order.stay.loc.city}</p>
-                                        <p>Hosted by {order.host.fullname.split(" ")[0]}</p>
-                                        <hr />
+                                        <p>{order.stay.loc.country}</p>
                                     </section>
-                                    <section className="trip-main-info">
-                                        <section>
-                                            <p>{formatDateRangeObject(order.startDate, order.endDate).month}</p>
-                                            <p>{formatDateRangeObject(order.startDate, order.endDate).dates}</p>
-                                            <p>{order.startDate.slice(-4)}</p>
-                                        </section>
-                                        <section>
-                                            <p>{order.stay.name}</p>
-                                            <p>{order.stay.loc.city}</p>
-                                            <p>{order.stay.loc.country}</p>
-                                        </section>
-                                    </section>
-                                </>
+                                </section>
+                            </>
                         </li>
                     )
                 })}

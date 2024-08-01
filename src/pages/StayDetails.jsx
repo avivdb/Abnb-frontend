@@ -173,7 +173,11 @@ export function StayDetails() {
 
 
     if (!stay) {
-        return <div className="loader"></div>
+        return (
+            <div className='loader-wrapper'>
+                <div className="loader"></div>
+            </div>
+        )
     }
 
     return (

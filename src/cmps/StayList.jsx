@@ -20,7 +20,11 @@ export function StayList() {
     const uniqueStays = [...new Map(stays.map(stay => [stay._id, stay])).values()]
 
     if (stays === null || stays === undefined || stays.length === 0) {
-        return <div className="loader"></div>
+        return (
+            <div className='loader-wrapper'>
+                <div className="loader"></div>
+            </div>
+        )
     }
 
     return (
@@ -28,7 +32,7 @@ export function StayList() {
             dataLength={uniqueStays.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={<div className="loader loader-infinity-scroll"></div>}
+        // loader={<div className="loader loader-infinity-scroll"></div>}
         >
             <div className="stay-list">
                 {uniqueStays.map(stay => (

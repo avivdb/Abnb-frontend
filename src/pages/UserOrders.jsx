@@ -34,11 +34,15 @@ export function UserOrders() {
             await updateOrder(updatedOrder)
         } catch (error) {
             console.error('Error updating order status:', error)
-        } 
+        }
     }
 
     if (orders === null || orders === undefined || orders.length === 0) {
-        return <div className="loader"></div>
+        return (
+            <div className='loader-wrapper'>
+                <div className="loader"></div>
+            </div>
+        )
     }
 
     // if (orders.length === 0) {
