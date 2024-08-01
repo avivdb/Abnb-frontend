@@ -109,7 +109,6 @@ export function StayDetails() {
                     pets: filterBy.guest.pet || 0,
                 }
                 orderFromFilterBy.capacity = filterBy.guest.capacity || 1,
-                orderFromFilterBy.capacity = filterBy.guest.capacity,
                 orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
                 orderFromFilterBy.endDate = formatDateToHyphen(filterBy.checkOut) || stay.defaultCheckout
 

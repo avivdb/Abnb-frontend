@@ -36,6 +36,23 @@ export function OrderDetails({ stay, orderToEdit, setOrderToEdit, handleReserve 
         }
     }
 
+    function handleReserve() {
+        if (user === null) navigate(`/login`)
+        else {
+            const params = new URLSearchParams({
+                startDate: orderToEdit.startDate,
+                endDate: orderToEdit.endDate,
+                totalPrice: orderToEdit.totalPrice,
+                adults: orderToEdit.guestCounts.adults,
+                children: orderToEdit.guestCounts.children,
+                infants: orderToEdit.guestCounts.infants,
+                pets: orderToEdit.guestCounts.pets,
+                capacity: orderToEdit.capacity,
+            }).toString()
+
+            navigate(`/stay/${stay._id}/checkout?${params}`)
+        }
+    }
 
     function getGuestSummary() {
         const { guestCounts } = orderToEdit
