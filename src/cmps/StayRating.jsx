@@ -1,8 +1,14 @@
+import goldLeft from "../assets/img/icons/gf-gold-left.png"
+import left from "../assets/img/icons/gf-left.svg"
+import goldRight from "../assets/img/icons/gf-gold-right.png"
+import right from "../assets/img/icons/gf-right.svg"
+
 
 export function StayRating({ stay }) {
+  console.log(stay)
 
-  const gfLeft = stay.rating === 5.0 ? 'gold-left.png' : 'left.svg'
-  const gfRight = stay.rating === 5.0 ? 'gold-right.png' : 'right.svg'
+  const gfLeft = stay.rating === 5 ? goldLeft : left
+  const gfRight = stay.rating === 5 ? goldRight : right
 
   return (
     <>
@@ -12,9 +18,9 @@ export function StayRating({ stay }) {
       {stay.rating >= 4.5 && (
         <section className='stay-rating'>
           <div className='stay-rating-icon'>
-            <img src={`../src/assets/img/icons/gf-${gfLeft}`} />
+            <img src={gfLeft} />
             <h3>Guest favorite</h3>
-            <img src={`../src/assets/img/icons/gf-${gfRight}`} />
+            <img src={gfRight} />
           </div>
           <p>One of the most loved homes on Abnb, according to guests</p>
           <div className="stay-rating-rating">
