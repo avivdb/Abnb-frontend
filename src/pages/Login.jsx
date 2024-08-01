@@ -40,5 +40,5 @@ export function Login() {
                 onError={handleGoogleError}
             />
         </section>
-    );
+    )
 }

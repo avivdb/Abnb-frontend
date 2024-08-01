@@ -1,16 +1,3 @@
-//Frontend
-useEffect(() => {
-    loadOrders({ guestId: loggedInUser._id })
-
-    socketService.on(SOCKET_EVENT_ORDER_UPDATED, order => {
-        dispatch(getActionUpdateOrder(order))
-    })
-
-    return () => {
-        socketService.off(SOCKET_EVENT_ORDER_UPDATED)
-    }
-}, [])
-
 
 //Backend
 export async function updateOrder(req, res) {
@@ -25,3 +12,16 @@ export async function updateOrder(req, res) {
         res.status(400).send({ err: 'Failed to update order' })
     }
 }
+
+//Frontend
+useEffect(() => {
+    loadOrders({ guestId: loggedInUser._id })
+
+    socketService.on(SOCKET_EVENT_ORDER_UPDATED, order => {
+        dispatch(getActionUpdateOrder(order))
+    })
+
+    return () => {
+        socketService.off(SOCKET_EVENT_ORDER_UPDATED)
+    }
+}, [])
