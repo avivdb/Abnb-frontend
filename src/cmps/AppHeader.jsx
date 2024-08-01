@@ -111,22 +111,25 @@ export function AppHeader() {
 								<button className="btn-add-stay">Abnb your home</button>
 							</Link>
 
-							<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
-								<img className="user-menu-img" src={menu} alt="Menu" />
-								{user ? (
-									user.imgUrl ? (
-										<img src={user.imgUrl} alt="User" />
+							<div className='header-login-wrapper'>
+
+								<div className={`header-login ${userMenu ? 'active' : ''}`} onClick={() => setUserMenu(!userMenu)}>
+									<img className="user-menu-img" src={menu} alt="Menu" />
+									{user ? (
+										user.imgUrl ? (
+											<img src={user.imgUrl} alt="User" />
+										) : (
+											<div className="div-user-img">
+												{user.fullname.charAt(0)}
+											</div>
+										)
 									) : (
-										<div className="div-user-img">
-											{user.fullname.charAt(0)}
-										</div>
-									)
-								) : (
-									<img className="user-img" src={userimg} alt="User" />
-								)}
+										<img className="user-img" src={userimg} alt="User" />
+									)}
+								</div>
+								{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
 							</div>
 
-							{userMenu && <UserMenu setUserMenu={setUserMenu} user={user} />}
 						</section>
 					</div>
 				)}

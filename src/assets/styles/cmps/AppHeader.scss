@@ -159,6 +159,11 @@
     gap: 1rem;
     align-items: center;
     justify-self: end;
+
+    .header-login-wrapper {
+      position: relative;
+      display: grid;
+    }
   }
 
   .header-login {
