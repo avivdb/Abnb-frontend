@@ -13,45 +13,47 @@ export function FilterWhereModal({ filterToEdit, setFilterToEdit, setActiveModal
     const [predictions, setPredictions] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
     const [recentSearches, setRecentSearches] = useState([]);
-    const searchQuery = filterToEdit.txt;
+    const searchQuery = filterToEdit.txt
 
-    const randomLocations = ["Paris", "New York", "Tokyo", "Sydney", "Cape Town", "Moscow", "Rio de Janeiro", "Toronto", "Berlin", "Dubai"];
+    const randomLocations = ["Paris", "New York", "Tokyo", "Sydney", "Cape Town", "Moscow", "Rio de Janeiro", "Toronto", "Berlin", "Dubai"]
 
     useEffect(() => {
-        setIsTyping(searchQuery.length > 0);
-    }, [searchQuery]);
+        setIsTyping(searchQuery.length > 0)
+    }, [searchQuery])
+
+    useEffect(() => {
+        const storedSearches = JSON.parse(localStorage.getItem('recentSearches')) || []
+        // console.log('storedSearches', storedSearches)
+        setRecentSearches(storedSearches)
+    }, [])
 
     useEffect(() => {
         if (window.google && searchQuery) {
             const service = new window.google.maps.places.AutocompleteService();
             service.getPlacePredictions({ input: searchQuery, language: 'en' }, (predictions, status) => {
                 if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-                    setPredictions(predictions.map(prediction => prediction.description));
+                    setPredictions(predictions.map(prediction => prediction.description))
                 } else {
-                    setPredictions([]);
+                    setPredictions([])
                 }
-            });
+            })
         }
-    }, [searchQuery]);
+    }, [searchQuery])
 
     const handleSearchClick = (searchText) => {
         if (searchText === "I'm flexible") {
-            searchText = randomLocations[Math.floor(Math.random() * randomLocations.length)];
+            searchText = randomLocations[Math.floor(Math.random() * randomLocations.length)]
         }
 
-        setFilterToEdit({ ...filterToEdit, txt: searchText });
+        setFilterToEdit({ ...filterToEdit, txt: searchText })
         setActiveModal("checkIn")
         setRecentSearches(prev => {
-            const updatedSearches = [searchText, ...prev.filter(item => item !== searchText)].slice(0, 5);
-            localStorage.setItem('recentSearches', JSON.stringify(updatedSearches));
-            return updatedSearches;
-        });
-    };
+            const updatedSearches = [searchText, ...prev.filter(item => item !== searchText)].slice(0, 5)
+            localStorage.setItem('recentSearches', JSON.stringify(updatedSearches))
+            return updatedSearches
+        })
+    }
 
-    useEffect(() => {
-        const storedSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
-        setRecentSearches(storedSearches);
-    }, []);
 
     return (
         <section className={`where-modal ${isTyping ? 'is-typing' : ''}`}>
