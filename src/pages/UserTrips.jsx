@@ -4,7 +4,7 @@ import { stayService } from '../services/stay/'
 import { formatDateRangeObject, capitalize } from "../services/util.service"
 import { useDispatch, useSelector } from 'react-redux'
 import { getActionUpdateOrder, loadOrders } from "../store/actions/order.action"
-import { SOCKET_EVENT_ORDER_UPDATED } from '../services/socket.service'
+import { SOCKET_EVENT_ORDER_ADDED, SOCKET_EVENT_ORDER_UPDATED } from '../services/socket.service'
 
 
 
@@ -24,8 +24,14 @@ export function UserTrips() {
             dispatch(getActionUpdateOrder(order))
         })
 
+        // socketService.on(SOCKET_EVENT_ORDER_ADDED, order => {
+        //     console.log('GOT from socket', order)
+        //     dispatch(getActionAddOrder(order))
+        // })
+
         return () => {
             socketService.off(SOCKET_EVENT_ORDER_UPDATED)
+            // socketService.off(SOCKET_EVENT_ORDER_ADDED)
         }
     }, [])
 

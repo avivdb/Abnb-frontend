@@ -109,7 +109,7 @@ export function StayDetails() {
                     pets: filterBy.guest.pet || 0,
                 }
                 orderFromFilterBy.capacity = filterBy.guest.capacity || 1,
-                    orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
+                orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
                 orderFromFilterBy.endDate = formatDateToHyphen(filterBy.checkOut) || stay.defaultCheckout
 
                 return orderFromFilterBy
@@ -129,6 +129,7 @@ export function StayDetails() {
 
     }, [])
 
+    
     function handleReserve() {
         if (user === null) navigate(`/login`)
         else {
@@ -140,20 +141,20 @@ export function StayDetails() {
                 children: orderToEdit.guestCounts.children,
                 infants: orderToEdit.guestCounts.infants,
                 pets: orderToEdit.guestCounts.pets,
-                guests: orderToEdit.guests,
+                capacity: orderToEdit.capacity,
             }).toString()
 
             window.scrollTo({
                 top: 0,
                 behavior: 'instant'
             })
+          
             navigate(`/stay/${stay._id}/checkout?${params}`)
         }
     }
 
 
     function handleScroll() {
-        console.log('scrollY:', window.scrollY) // Log the current scroll position
         if (window.scrollY > 545) {
             console.log('Setting header to true')
             setHeader(true)
@@ -182,7 +183,6 @@ export function StayDetails() {
 
     return (
         <section className="stay-details">
-            {console.log('stay', stay)}
 
             {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
 
