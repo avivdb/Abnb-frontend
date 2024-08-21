@@ -5,14 +5,20 @@ import image3 from '../assets/img/icons/asset3.webp';
 import image4 from '../assets/img/icons/asset4.webp';
 import image5 from '../assets/img/icons/asset5.webp';
 
+import search from '../assets/img/icons/search.svg';
+
+
 import { useEffect, useState } from "react";
 import iconLocation from '../assets/img/icons/location-2952.svg';
+import { useMediaQuery } from '@mui/material';
 
 export function FilterWhereModal({ filterToEdit, setFilterToEdit, setActiveModal }) {
 
     const [predictions, setPredictions] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
     const [recentSearches, setRecentSearches] = useState([]);
+
+    const isSmallScreen = useMediaQuery('(max-width:600px)');
     const searchQuery = filterToEdit.txt
 
     const randomLocations = ["Paris", "New York", "Tokyo", "Sydney", "Cape Town", "Moscow", "Rio de Janeiro", "Toronto", "Berlin", "Dubai"]
@@ -56,8 +62,8 @@ export function FilterWhereModal({ filterToEdit, setFilterToEdit, setActiveModal
 
 
     return (
-        <section className={`where-modal ${isTyping ? 'is-typing' : ''}`}>
-            <div className="recent-search">
+        <section className={`where-modal ${isTyping ? 'is-typing' : ''}`} style={isSmallScreen ? { display: 'flex', flexDirection: 'column' } : { display: 'grid' }}>
+            {!isSmallScreen && <div className="recent-search">
                 <h1>Recent searches</h1>
                 <ul className='prediction-list'>
                     {predictions.length > 0 ? (
@@ -78,9 +84,15 @@ export function FilterWhereModal({ filterToEdit, setFilterToEdit, setActiveModal
                         ))
                     )}
                 </ul>
-            </div>
+            </div>}
+            {isSmallScreen &&
+                <section className="sect-mobile-destination-input">
+                    <label htmlFor="mobile-destination-input"><img src={search} alt="Search" /></label>
+                    <input id="mobile-destination-input" className="mobile-destination-input" placeholder='Search destinations' onChange={(event) => { handleSearchClick(event.target.value) }} />
+                </section>
+            }
             <div className={`search-by-region ${isTyping ? 'is-typing' : ''}`}>
-                <h1>Search by region</h1>
+                {!isSmallScreen && <h1>Search by region</h1>}
                 <div className="regions">
                     <div className="where-card" onClick={() => handleSearchClick("I'm flexible")}>
                         <img src={image0} alt="I'm flexible" />

@@ -1,5 +1,5 @@
 .where-modal {
-  display: grid;
+  // display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
 
@@ -14,6 +14,17 @@
   .recent-search {
     padding: 0 16px;
     position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-right: 1px solid rgba($clr8, 0.1);
+      pointer-events: none;
+    }
 
     h1 {
       font-size: 1rem;
@@ -54,6 +65,7 @@
           aspect-ratio: 1;
           background-color: $clr11;
         }
+
         img {
           color: $clr8;
           width: 22px;
@@ -66,23 +78,23 @@
   .search-by-region {
     position: relative;
     grid-column: 2;
-    padding-left: 8px;
-    padding-right: 24px;
+    // padding-left: 8px;
+    // padding-right: 24px;
 
     &.is-typing {
       display: none;
     }
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-left: 1px solid rgba($clr8, 0.1);
-      pointer-events: none;
-    }
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: 0;
+    //   bottom: 0;
+    //   left: 0;
+    //   right: 0;
+    //   border-left: 1px solid rgba($clr8, 0.1);
+    //   pointer-events: none;
+    // }
 
     h1 {
       margin-bottom: 16px;
@@ -95,11 +107,19 @@
 
     .regions {
       display: grid;
-      grid-template-columns: repeat(3, minmax(100px, 200px));
+      grid-template-columns: repeat(3, minmax(80px, 200px));
       row-gap: em(6px);
       font-family: cereal-light;
       // padding: em(8px);
       z-index: 2;
+
+      // @media (max-width: 600px) {
+      //   grid-auto-flow: row;
+      // }
+  
+      // @media (min-width: 600px) {
+      //   grid-auto-flow: column;
+      // }
 
       .where-card {
         display: grid;
@@ -113,6 +133,7 @@
           background-color: $clr11;
           cursor: pointer;
         }
+
         img {
           border-radius: em(16px);
         }
@@ -130,6 +151,28 @@
           text-overflow: ellipsis;
         }
       }
+    }
+  }
+
+  .sect-mobile-destination-input {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    gap: 0.5rem;
+
+    border-radius: 15px;
+    border: 1px solid #e9e9e9;
+    margin-block: 1rem;
+    margin-inline: 1rem;
+    padding: 1rem;
+    
+    input {
+      all: undet;
+      font-family: cereal-regular;
+      border: none;
+    }
+
+    img {
+      max-height: 1.2rem;
     }
   }
 }

@@ -2,9 +2,9 @@
   display: grid;
   gap: 2rem;
   justify-items: center;
-  padding-inline: 2rem;
-  padding-block-end: 2.5rem;
-  padding-block-start: 1rem;
+  // padding-inline: 2rem;
+  // padding-block-end: 2.5rem;
+  // padding-block-start: 1rem;
 
   .date-range-btns {
     font-family: cereal-regular;
@@ -27,7 +27,7 @@
 
   .react-datepicker {
     display: grid;
-    grid-auto-flow: column;
+    // grid-auto-flow: column;
     justify-content: center;
 
     font-family: cereal-regular;
@@ -36,6 +36,14 @@
     border-radius: 10px;
     border: none;
     padding: 0;
+
+    @media (max-width: 600px) {
+      grid-auto-flow: row;
+    }
+
+    @media (min-width: 600px) {
+      grid-auto-flow: column;
+    }
   }
 
   .react-datepicker__day--end {

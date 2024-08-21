@@ -12,6 +12,7 @@ import { stayService } from '../services/stay';
 import search from '../assets/img/icons/search.svg';
 import { useMediaQuery } from '@mui/material';
 import { debounce } from '../services/util.service';
+import { MobileFilterModal } from './MobileFilterModal';
 
 const { getDefaultFilter } = stayService;
 
@@ -23,6 +24,7 @@ export function AppHeader() {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [allowScroll, setAllowScroll] = useState(true);
+	const [activePhoneModal, setActivePhoneModal] = useState(false);
 	const lastScrollTop = useRef(0);
 	const isSmallScreen = useMediaQuery('(max-width:600px)');
 
@@ -68,7 +70,7 @@ export function AppHeader() {
 		navigate('/');
 	};
 
-	if (isSmallScreen && location.pathname !== '/') {
+	if (isSmallScreen && location.pathname !== '/' && location.pathname !== '/stay') {
 		return null; // No header on non-home pages for small screens
 	}
 
@@ -76,15 +78,18 @@ export function AppHeader() {
 		<>
 			<div className={`app-header-container full main-container ${location.pathname.startsWith('/stay') ? 'stay-details-layout' : ''}`}>
 				{isSmallScreen ? (
-					<div className='app-header-mobile'>
-						<div className="mobile-header-btn-search">
-							<img src={search} alt="Search" />
-							<section>
-								<p>Where to?</p>
-								<p>Anywhere · Any week · Add guests</p>
-							</section>
+					<>
+						<div className='app-header-mobile'>
+							<div className="mobile-header-btn-search" onClick={() => { setActivePhoneModal(true) }}>
+								<img src={search} alt="Search" />
+								<section>
+									<p>Where to?</p>
+									<p>Anywhere · Any week · Add guests</p>
+								</section>
+							</div>
 						</div>
-					</div>
+						{activePhoneModal && <MobileFilterModal setActivePhoneModal={setActivePhoneModal} activePhoneModal={activePhoneModal} />}
+					</>
 				) : (
 					<div className={`app-header ${isExpanded ? 'expanded' : 'focused'}`}>
 						<NavLink to="/" onClick={handleLogoClick} className="logo fa brand airbnb">

@@ -10,8 +10,8 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, s
     const [endDate, setEndDate] = useState(null)
 
     useEffect(() => {
-        console.log('startDate:', startDate)
-        console.log('endDate:', endDate)
+        // console.log('startDate:', startDate)
+        // console.log('endDate:', endDate)
     }, [startDate, endDate])
 
     function handleSelect(dates) {
@@ -30,11 +30,11 @@ export default function FilterDateRangePicker({ filterToEdit, setFilterToEdit, s
 
     return (
         <div className="date-range-wrapper">
-            <div className='date-range-btns'>
+            {/* <div className='date-range-btns'>
                 <button>Dates</button>
                 <button>Month</button>
                 <button>Flexible</button>
-            </div>
+            </div> */}
             <DatePicker
                 selected={startDate}
                 onChange={handleSelect}
