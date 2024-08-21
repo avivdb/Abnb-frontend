@@ -57,7 +57,7 @@ export function AppHeader() {
 		setAllowScroll(false);
 		setIsExpanded(state => !state);
 
-		const timeoutDuration = 1000; // 1-second delay to prevent immediate closing
+		const timeoutDuration = 1000
 
 		setTimeout(() => {
 			setAllowScroll(true);
@@ -71,7 +71,7 @@ export function AppHeader() {
 	};
 
 	if (isSmallScreen && location.pathname !== '/' && location.pathname !== '/stay') {
-		return null; // No header on non-home pages for small screens
+		return null
 	}
 
 	return (

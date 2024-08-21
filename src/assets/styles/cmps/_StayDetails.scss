@@ -2,6 +2,10 @@
   color: $clr7;
   margin-block: 1rem;
 
+  @media (max-width: 600px) {
+    padding-inline: 1rem;
+  }
+
   hr {
     margin-block: 2rem;
     width: 100%;
@@ -140,9 +144,16 @@
 
   .details-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
     gap: 7rem;
     margin-block-start: 2rem;
+
+    // @media (max-width: 600px) {
+    //   grid-auto-flow: row;
+    // }
+
+    @media (min-width: 600px) {
+      grid-template-columns: 2fr 1fr;
+    }
 
     .detail-content-top {
       grid-column: 1 / 2;

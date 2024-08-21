@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { orderService } from '../services/order/'
+import { useMediaQuery } from '@mui/material'
 
+import { orderService } from '../services/order/'
 import { calculateNights, formatDateToHyphen, removeSpaces } from '../services/util.service.js'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayRating } from '../cmps/StayRating'
 import { BedroomsCarousel } from '../cmps/BedroomsCarousel'
@@ -44,6 +44,9 @@ import Wifi from "../assets/img/icons/Wifi.svg"
 import Wineglasses from "../assets/img/icons/Wineglasses.svg"
 
 import gallerydots from "../assets/img/icons/gallerydots.svg"
+import bed from "../assets/img/icons/bed.svg"
+import { ImgCarousel } from '../cmps/ImgCarousel.jsx'
+import { StayDetailsMobileFooter } from '../cmps/StayDetailsMobileFooter.jsx'
 
 
 
@@ -83,6 +86,7 @@ export function StayDetails() {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
     const navigate = useNavigate()
+    const isSmallScreen = useMediaQuery('(max-width:600px)');
 
     const [orderToEdit, setOrderToEdit] = useState(orderService.getEmptyOrder())
     const [amenitiesModal, setAmenitiesModal] = useState(false)
@@ -109,7 +113,7 @@ export function StayDetails() {
                     pets: filterBy.guest.pet || 0,
                 }
                 orderFromFilterBy.capacity = filterBy.guest.capacity || 1,
-                orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
+                    orderFromFilterBy.startDate = formatDateToHyphen(filterBy.checkIn) || stay.defaultCheckin
                 orderFromFilterBy.endDate = formatDateToHyphen(filterBy.checkOut) || stay.defaultCheckout
 
                 return orderFromFilterBy
@@ -129,7 +133,7 @@ export function StayDetails() {
 
     }, [])
 
-    
+
     function handleReserve() {
         if (user === null) navigate(`/login`)
         else {
@@ -148,7 +152,7 @@ export function StayDetails() {
                 top: 0,
                 behavior: 'instant'
             })
-          
+
             navigate(`/stay/${stay._id}/checkout?${params}`)
         }
     }
@@ -156,10 +160,10 @@ export function StayDetails() {
 
     function handleScroll() {
         if (window.scrollY > 545) {
-            console.log('Setting header to true')
+            // console.log('Setting header to true')
             setHeader(true)
         } else {
-            console.log('Setting header to false')
+            // console.log('Setting header to false')
             setHeader(false)
         }
     }
@@ -184,16 +188,21 @@ export function StayDetails() {
     return (
         <section className="stay-details">
 
-            {header && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
+            {header && !isSmallScreen && <StayDetailsHeader stay={stay} handleReserve={handleReserve} />}
+            {isSmallScreen && <StayDetailsMobileFooter stay={stay} handleReserve={handleReserve} />}
+
 
             {stay && <div className='stay-details-content'>
                 <h1 className='stay-details-name'>{stay.name}</h1>
 
-                <section id="photos" className='gallery'>
-                    {stay.imgUrls.slice(0, 5).map((imgUrl, idx) => (
-                        <img key={idx} src={imgUrl} className={idx === 0 ? 'main-img' : ''} />))}
-                    {stay.imgUrls.length > 5 && <button onClick={() => navigate(`/stay/gallery/${stay._id}/`)}><img src={gallerydots} />Show all photos</button>}
-                </section>
+                {isSmallScreen ?
+                    <ImgCarousel stay={stay} /> :
+                    <section id="photos" className='gallery'>
+                        {stay.imgUrls.slice(0, 5).map((imgUrl, idx) => (
+                            <img key={idx} src={imgUrl} className={idx === 0 ? 'main-img' : ''} />))}
+                        {stay.imgUrls.length > 5 && <button onClick={() => navigate(`/stay/gallery/${stay._id}/`)}><img src={gallerydots} />Show all photos</button>}
+                    </section>
+                }
 
                 <section className='details-content'>
                     <div className='detail-content-top'>
@@ -233,7 +242,22 @@ export function StayDetails() {
                         <div className='stay-bedroom-display'>
                             <h4>Where you'll sleep</h4>
                             <section className='stay-bedroom-list'>
-                                <BedroomsCarousel stay={stay} />
+                                {!isSmallScreen ?
+                                    <BedroomsCarousel stay={stay} /> :
+                                    <>
+                                        {stay.bedrooms.map((bedroom, index) => (
+                                            <div key={index} className='stay-bedroom-display-card'>
+                                                <section className='bed-imgs'>
+                                                    {Array.from({ length: bedroom.beds }).map((_, index) => (
+                                                        <img key={index} src={bed} alt={`Bed ${index + 1}`} />
+                                                    ))}
+                                                </section>
+                                                <h1>Bedroom {index + 1}</h1>
+                                                <p>{bedroom.beds} Bed{bedroom.beds > 1 ? 's' : ''}</p>
+                                            </div>
+                                        ))}
+                                    </>
+                                }
                             </section>
                         </div>
                         <hr />
@@ -258,29 +282,35 @@ export function StayDetails() {
                         </section>
                         <hr />
 
-                        <h2 className="details-dates-picker-title">{calculateNights(orderToEdit.startDate, orderToEdit.endDate)} nights in {stay.loc.city}</h2>
-                        <section className="details-dates-picker">
-                            <OrderDateModel
+                        {!isSmallScreen &&
+                            <>
+                                <h2 className="details-dates-picker-title">{calculateNights(orderToEdit.startDate, orderToEdit.endDate)} nights in {stay.loc.city}</h2>
+                                <section className="details-dates-picker">
+                                    <OrderDateModel
+                                        orderToEdit={orderToEdit}
+                                        setOrderToEdit={setOrderToEdit}
+                                        setIsDateModalOpen={null}
+                                    />
+                                </section>
+                            </>
+                        }
+
+
+                    </div>
+
+                    {!isSmallScreen &&
+                        <div className="order-details-container">
+                            <OrderDetails
+                                stay={stay}
                                 orderToEdit={orderToEdit}
                                 setOrderToEdit={setOrderToEdit}
-                                setIsDateModalOpen={null}
-                            />
-                        </section>
-
-
-                    </div>
-
-                    <div className="order-details-container">
-                        <OrderDetails
-                            stay={stay}
-                            orderToEdit={orderToEdit}
-                            setOrderToEdit={setOrderToEdit}
-                            handleReserve={handleReserve} />
-                    </div>
+                                handleReserve={handleReserve} />
+                        </div>
+                    }
 
                 </section>
 
-                <hr />
+                {!isSmallScreen && <hr />}
                 <section id="reviews">
                     <StayReviews stay={stay} />
                 </section>

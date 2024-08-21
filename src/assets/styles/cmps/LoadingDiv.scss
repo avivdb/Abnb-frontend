@@ -1,8 +1,9 @@
 .loader-wrapper {
   display: grid;
-  height: 67vh;
-  width: 67vh;
+  // height: 67vh;
+  // width: 67vh;
   margin: auto auto;
+  margin-block-start: 3rem;
 
   .loader {
     // margin-block-start: 3rem;

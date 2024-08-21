@@ -17,21 +17,15 @@ export function UserTrips() {
 
 
     useEffect(() => {
-        loadOrders({ guestId: loggedInUser._id })
+        if(loggedInUser) loadOrders({ guestId: loggedInUser._id })
 
         socketService.on(SOCKET_EVENT_ORDER_UPDATED, order => {
             console.log('GOT from socket', order)
             dispatch(getActionUpdateOrder(order))
         })
 
-        // socketService.on(SOCKET_EVENT_ORDER_ADDED, order => {
-        //     console.log('GOT from socket', order)
-        //     dispatch(getActionAddOrder(order))
-        // })
-
         return () => {
             socketService.off(SOCKET_EVENT_ORDER_UPDATED)
-            // socketService.off(SOCKET_EVENT_ORDER_ADDED)
         }
     }, [])
 

@@ -24,6 +24,8 @@ export function AppFooter() {
 		setActiveLabel(label)
 		if (label === 'explore') {
 			navigate(`/stay`)
+		} else if (label === 'profile') {
+			navigate(`/stay/orders`)
 		} else {
 			navigate(`/stay/${label}`)
 		}
